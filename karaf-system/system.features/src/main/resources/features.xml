@@ -22,7 +22,4 @@
         <bundle start="true" dependency="false" start-level="80">mvn:patlego.vm.github.io/system.dao/${project.version}</bundle>
     </feature>
 
-    <feature name="patlego-vm-logging" version="${project.version}">
-        <bundle start="true" dependency="false" start-level="80">mvn:patlego.vm.github.io/system.log/${project.version}</bundle>
-    </feature>
 </features>

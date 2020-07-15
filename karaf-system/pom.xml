@@ -7,7 +7,6 @@
   <version>1.0-SNAPSHOT</version>
   <name>Karaf System</name>
   <modules>
-    <module>system.log</module>
     <module>system.dao</module>
     <module>system.features</module>
     <module>system.core</module>
@@ -119,10 +118,18 @@
         <artifactId>postgresql</artifactId>
         <version>42.2.8</version>
       </dependency> <!-- https://mvnrepository.com/artifact/org.ops4j.pax.logging/pax-logging-log4j2 -->
+      <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
       <dependency>
-        <groupId>org.ops4j.pax.logging</groupId>
-        <artifactId>pax-logging-log4j2</artifactId>
-        <version>2.0.4</version>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.30</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>1.7.30</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>

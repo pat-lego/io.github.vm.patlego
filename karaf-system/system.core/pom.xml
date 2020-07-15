@@ -71,8 +71,6 @@
             <feature>pax-jdbc-postgresql</feature>
             <feature>pax-jdbc-pool-dbcp2</feature>
             <feature>patlego-vm-jdbc</feature>
-
-            <feature>patlego-vm-logging</feature>
           </bootFeatures>
           <workDirectory>${project.build.directory}/assembly/patlego.vm</workDirectory>
           <pathPrefix>patlego.vm</pathPrefix>
