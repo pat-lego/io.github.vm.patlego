@@ -8,14 +8,11 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import patlego.vm.github.io.utils.DataResource;
 
 public class DataResourceImpl implements DataResource {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
     private DataSource ds;
 
     public DataResourceImpl(DataSource ds) {
@@ -38,5 +35,5 @@ public class DataResourceImpl implements DataResource {
 
         return list;
     }
-    
+
 }

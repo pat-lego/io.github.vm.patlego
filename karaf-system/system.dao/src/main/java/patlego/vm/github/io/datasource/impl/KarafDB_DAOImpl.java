@@ -1,7 +1,5 @@
 package patlego.vm.github.io.datasource.impl;
 
-import java.sql.Connection;
-
 import javax.sql.DataSource;
 
 import org.osgi.service.component.annotations.Activate;
