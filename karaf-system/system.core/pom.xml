@@ -63,6 +63,7 @@
             <feature>http</feature>
             <feature>http-whiteboard</feature>
 
+            <feature>jdbc</feature>
             <feature>pax-jdbc</feature>
             <feature>pax-jdbc-spec</feature>
             <feature>transaction</feature>
