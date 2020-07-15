@@ -1,9 +1,9 @@
 package patlego.vm.github.io.datasource;
 
-import java.sql.Connection;
+import patlego.vm.github.io.utils.DataResource;
 
 public interface KarafDB_DAO {
 
-    public Connection getConnection();
+    public DataResource getDataResource();
     
 }

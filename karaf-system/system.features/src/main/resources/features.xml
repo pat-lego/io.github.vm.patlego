@@ -20,6 +20,7 @@
 
     <feature name="patlego-vm-jdbc" version="${project.version}">
         <bundle start="true" dependency="false" start-level="80">mvn:patlego.vm.github.io/system.dao/${project.version}</bundle>
+        <bundle start="true" dependency="false" start-level="80">mvn:commons-dbutils/commons-dbutils/1.7</bundle>
     </feature>
 
 </features>
