@@ -67,8 +67,8 @@
             <feature>pax-jdbc-spec</feature>
             <feature>transaction</feature>
             <feature>pax-jdbc-config</feature>
+            <feature>pax-jdbc-postgresql</feature>
             <feature>pax-jdbc-pool-dbcp2</feature>
-            <feature>jdbc-postgresql</feature>
           </bootFeatures>
           <workDirectory>${project.build.directory}/assembly/pat-lego.vm</workDirectory>
           <pathPrefix>pat-lego.vm</pathPrefix>
@@ -86,9 +86,9 @@
             <artifactId>maven-resources-plugin</artifactId>
             <executions>
               <execution>
-                <id>copy-resources</id>
+                <id>copy-docker</id>
                 <!-- here the phase you need -->
-                <phase>validate</phase>
+                <phase>verify</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
@@ -96,7 +96,24 @@
                   <outputDirectory>${basedir}/target/assembly</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/main/resources/docker/dev</directory>
+                      <directory>src/main/resources/dev/docker</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-features</id>
+                <!-- here the phase you need -->
+                <phase>verify</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${basedir}/target/assembly/pat-lego.vm/etc</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>src/main/resources/dev/features</directory>
                       <filtering>true</filtering>
                     </resource>
                   </resources>
@@ -146,13 +163,6 @@
       <classifier>features</classifier>
       <scope>runtime</scope>
       <version>3.3.3</version>
-    </dependency>
-    <dependency>
-      <groupId>pat-lego.vm.github.io</groupId>
-      <artifactId>system.features</artifactId>
-      <type>xml</type>
-      <scope>runtime</scope>
-      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>

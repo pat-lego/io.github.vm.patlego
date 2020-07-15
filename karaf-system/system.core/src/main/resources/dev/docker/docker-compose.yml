@@ -3,7 +3,7 @@ services:
   karaf:
      environment:
        - TZ=America/Montreal
-     build: ./images/karaf 
+     build: ./karaf 
      restart: always
      ports:
          - "5005:5005"
@@ -12,7 +12,7 @@ services:
          - "1099:1099"
          - "44444:44444"
      volumes: 
-         - ./pat-lego.vm/:/opt/karaf
+      - ./pat-lego.vm/:/opt/karaf
      depends_on: 
       - postgres-db
      links: 
@@ -33,4 +33,4 @@ services:
       - backend
 networks:
   backend:
-    driver: "bridge"
+    driver: bridge
