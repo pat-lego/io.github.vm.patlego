@@ -33,8 +33,8 @@ Users can SSH into the server and create a test datasource to validate its integ
 In order to create a new submodule open a terminal and run the following command in the karaf-system folder 
 
 ```
-mvn archetype:generate -DgroupId=pat-lego.vm.github.io -DartifactId=system.features -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn archetype:generate -DgroupId=patlego.vm.github.io -DartifactId=system.[__module-name__] -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 ```
 
 # Contributors
-- [Patrique Legault](https://github.com/pat-lego)
+- [Patrique Legault](https://github.com/patlego)

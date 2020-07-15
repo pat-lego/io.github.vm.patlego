@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y tesseract-ocr-all
 RUN apt-get update && apt-get install -y openjdk-11-jdk
 
 RUN mkdir -p /opt/karaf
+RUN mkdir -p /home/root/.m2/repository
 WORKDIR /opt/karaf
 
 ENV KARAF_DEBUG true

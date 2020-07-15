@@ -2,13 +2,13 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>pat-lego.vm.github.io</groupId>
+    <groupId>patlego.vm.github.io</groupId>
     <artifactId>karaf-system</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
   <packaging>karaf-assembly</packaging>
-  <groupId>pat-lego.vm.github.io</groupId>
+  <groupId>patlego.vm.github.io</groupId>
   <artifactId>system.core</artifactId>
 
   <name>System Kernel</name>
@@ -70,9 +70,12 @@
             <feature>pax-jdbc-config</feature>
             <feature>pax-jdbc-postgresql</feature>
             <feature>pax-jdbc-pool-dbcp2</feature>
+            <feature>patlego-vm-jdbc</feature>
+
+            <feature>patlego-vm-logging</feature>
           </bootFeatures>
-          <workDirectory>${project.build.directory}/assembly/pat-lego.vm</workDirectory>
-          <pathPrefix>pat-lego.vm</pathPrefix>
+          <workDirectory>${project.build.directory}/assembly/patlego.vm</workDirectory>
+          <pathPrefix>patlego.vm</pathPrefix>
         </configuration>
       </plugin>
     </plugins>
@@ -111,7 +114,7 @@
                   <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${basedir}/target/assembly/pat-lego.vm/etc</outputDirectory>
+                  <outputDirectory>${basedir}/target/assembly/patlego.vm/etc</outputDirectory>
                   <resources>
                     <resource>
                       <directory>src/main/resources/dev/features</directory>
@@ -164,6 +167,13 @@
       <classifier>features</classifier>
       <scope>runtime</scope>
       <version>3.3.3</version>
+    </dependency>
+    <dependency>
+      <groupId>patlego.vm.github.io</groupId>
+      <artifactId>system.features</artifactId>
+      <type>xml</type>
+      <scope>runtime</scope>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>

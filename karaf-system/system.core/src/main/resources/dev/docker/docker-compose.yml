@@ -12,7 +12,8 @@ services:
          - "1099:1099"
          - "44444:44444"
      volumes: 
-      - ./pat-lego.vm/:/opt/karaf
+      - ./patlego.vm/:/opt/karaf
+      - ~/.m2/repository:/home/root/.m2/repository
      depends_on: 
       - postgres-db
      links: 
