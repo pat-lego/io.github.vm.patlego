@@ -27,7 +27,10 @@ Start the docker server and open a command prompt, once open execute the followi
 ## How to create a new submodule
 
 In order to create a new submodule open a terminal and run the following command in the karaf-system folder 
-```mvn archetype:generate -DgroupId=pat-lego.vm.github.io -DartifactId=system.features -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false```
+
+```
+mvn archetype:generate -DgroupId=pat-lego.vm.github.io -DartifactId=system.features -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+```
 
 # Contributors
 - [Patrique Legault](https://github.com/pat-lego)
