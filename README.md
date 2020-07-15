@@ -24,6 +24,10 @@ To validate that the server is active nagivate to the following URL: `http://loc
 
 Start the docker server and open a command prompt, once open execute the following command `ssh -p 8101 karaf@localhost`
 
+## Create a new DataSource
+
+Users can SSH into the server and create a test datasource to validate its integrity. Follow the JDBC article [here](https://svn.apache.org/repos/asf/karaf/site/production/manual/latest/jdbc.html) to do so.
+
 ## How to create a new submodule
 
 In order to create a new submodule open a terminal and run the following command in the karaf-system folder 
