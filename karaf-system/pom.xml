@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>patlego.vm.github.io</groupId>
   <artifactId>karaf-system</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Karaf System</name>
+  <name>KarafSystem</name>
   <modules>
     <module>system.dao</module>
+    <module>system.workflow</module>
     <module>system.features</module>
     <module>system.core</module>
   </modules>
@@ -117,21 +118,18 @@
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
         <version>42.2.8</version>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.ops4j.pax.logging/pax-logging-log4j2 -->
-      <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+      </dependency> <!--https://mvnrepository.com/artifact/org.ops4j.pax.logging/pax-logging-log4j2--> <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-api-->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>1.7.30</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+      </dependency> <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-simple-->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
         <version>1.7.30</version>
         <scope>test</scope>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
+      </dependency> <!--https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils-->
       <dependency>
         <groupId>commons-dbutils</groupId>
         <artifactId>commons-dbutils</artifactId>
@@ -139,4 +137,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-</project> 
+</project>
