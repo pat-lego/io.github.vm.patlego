@@ -20,7 +20,7 @@ import patlego.vm.github.io.datasource.utils.impl.DataResourceImpl;
 	service = KarafDB_DAO.class,
 	immediate = true,
 	property = {
-		"DATAOURCE_NAME=karafdb"
+		"DATASOURCE_NAME=karafdb"
 	}
 )
 public class KarafDB_DAOImpl implements KarafDB_DAO {
