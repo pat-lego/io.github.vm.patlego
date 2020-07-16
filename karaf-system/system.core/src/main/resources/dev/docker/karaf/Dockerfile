@@ -12,7 +12,7 @@ RUN mkdir -p /opt/karaf
 RUN mkdir -p /home/root/.m2/repository
 WORKDIR /opt/karaf
 
-ENV KARAF_DEBUG true
+ENV EXTRA_JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
 ENV KARAF_HOME /opt/karaf
 ENV JAVA_HOME /usr
 ENV PATH $PATH:$KARAF_HOME/bin
