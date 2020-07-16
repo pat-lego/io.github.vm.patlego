@@ -23,7 +23,7 @@ import patlego.vm.github.io.workflow.enums.ParamType;
 )
 public class WorkItemImpl2 implements WorkItem {
 
-    private final static String hasRun = "hasRun";
+    public final static String hasRun = "hasRun";
 
     @Override
     public WorkResult execute(WorkObject workObject) {
