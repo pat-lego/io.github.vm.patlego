@@ -1,5 +1,6 @@
 # Compiled class file
 *.class
+.classpath
 
 # BlueJ files
 *.ctxt
@@ -24,3 +25,5 @@ target/
 .project
 org.eclipse.core.resources.prefs
 org.eclipse.m2e.core.prefs
+org.eclipse.jdt.apt.core.prefs
+org.eclipse.jdt.core.prefs
