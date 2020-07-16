@@ -18,17 +18,17 @@ import patlego.vm.github.io.workflow.enums.ParamType;
     service = WorkItem.class,
     property = { 
         "workflowName=testWorkflow1", 
-        "sequenceNumber=1" 
+        "sequenceNumber=2" 
     }
 )
-public class WorkItemImpl1 implements WorkItem {
+public class WorkItemImpl2 implements WorkItem {
 
     private final static String hasRun = "hasRun";
 
     @Override
     public WorkResult execute(WorkObject workObject) {
         Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put(WorkItemImpl1.hasRun, true);
+        parameters.put(WorkItemImpl2.hasRun, true);
 
         WorkResult result = new WorkResultImpl(true, parameters);
 
@@ -45,7 +45,7 @@ public class WorkItemImpl1 implements WorkItem {
     public Map<String, WorkType> getOutputParameters() {
         WorkType type = new WorkTypeImpl(ParamType.BOOLEAN, Boolean.class.getName());
         Map<String, WorkType> output = new HashMap<String, WorkType>();
-        output.put(WorkItemImpl1.hasRun, type);
+        output.put(WorkItemImpl2.hasRun, type);
         
         return output;
     }

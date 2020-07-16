@@ -13,7 +13,7 @@ import org.osgi.service.component.annotations.Modified;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import patlego.vm.github.io.utils.WorkflowResult;
+import patlego.vm.github.io.workflow.utils.WorkflowResult;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.WorkflowExecutor;
 

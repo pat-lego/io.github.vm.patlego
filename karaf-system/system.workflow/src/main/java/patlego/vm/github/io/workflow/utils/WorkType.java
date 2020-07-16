@@ -1,6 +1,6 @@
-package patlego.vm.github.io.utils;
+package patlego.vm.github.io.workflow.utils;
 
-import patlego.vm.github.io.enums.ParamType;
+import patlego.vm.github.io.workflow.enums.ParamType;
 
 public interface WorkType {
     /**

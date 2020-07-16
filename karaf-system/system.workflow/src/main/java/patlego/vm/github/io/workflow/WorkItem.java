@@ -2,9 +2,9 @@ package patlego.vm.github.io.workflow;
 
 import java.util.Map;
 
-import patlego.vm.github.io.utils.WorkObject;
-import patlego.vm.github.io.utils.WorkResult;
-import patlego.vm.github.io.utils.WorkType;
+import patlego.vm.github.io.workflow.utils.WorkObject;
+import patlego.vm.github.io.workflow.utils.WorkResult;
+import patlego.vm.github.io.workflow.utils.WorkType;
 
 public interface WorkItem {
 

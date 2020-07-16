@@ -1,4 +1,4 @@
-package patlego.vm.github.io.utils;
+package patlego.vm.github.io.workflow.utils;
 
 import java.util.Map;
 

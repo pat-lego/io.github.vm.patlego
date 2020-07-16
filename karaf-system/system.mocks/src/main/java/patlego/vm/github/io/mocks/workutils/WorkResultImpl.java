@@ -1,0 +1,33 @@
+package patlego.vm.github.io.mocks.workutils;
+
+import java.util.Map;
+
+import patlego.vm.github.io.workflow.utils.WorkResult;
+
+public class WorkResultImpl implements WorkResult {
+
+    private Boolean hasSucceedeed = true;
+    private Map<String, Object> parameters;
+
+    public WorkResultImpl(Boolean success, Map<String, Object> parameters) {
+        this.hasSucceedeed = success;
+        this.parameters = parameters;
+    }
+
+    @Override
+    public Boolean haSucceeded() {
+       return this.hasSucceedeed;
+    }
+
+    @Override
+    public Exception getException() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getParameters() {
+       return this.parameters;
+    }
+    
+}

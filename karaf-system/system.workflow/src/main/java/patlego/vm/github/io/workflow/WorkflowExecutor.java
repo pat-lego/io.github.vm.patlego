@@ -2,7 +2,7 @@ package patlego.vm.github.io.workflow;
 
 import java.util.Map;
 
-import patlego.vm.github.io.utils.WorkflowResult;
+import patlego.vm.github.io.workflow.utils.WorkflowResult;
 
 public interface WorkflowExecutor {
 

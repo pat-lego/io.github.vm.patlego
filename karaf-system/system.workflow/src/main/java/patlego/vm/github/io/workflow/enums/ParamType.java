@@ -1,4 +1,4 @@
-package patlego.vm.github.io.enums;
+package patlego.vm.github.io.workflow.enums;
 
 public enum ParamType {
     STRING,
