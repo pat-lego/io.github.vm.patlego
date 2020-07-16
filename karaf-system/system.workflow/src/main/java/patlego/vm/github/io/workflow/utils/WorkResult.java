@@ -2,6 +2,9 @@ package patlego.vm.github.io.workflow.utils;
 
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public interface WorkResult {
 
     /**
@@ -9,18 +12,18 @@ public interface WorkResult {
      * Return false otherwise
      * @return True -> WorkItem completed successsfully, False -> An exception was caught
      */
-    public Boolean haSucceeded();
+    public @Nonnull Boolean haSucceeded();
 
     /**
      * If an exception has occured then it will be stored in here and can be referred to upon a later time
      * @return Exception
      */
-    public Exception getException();
+    public @Nullable Exception getException();
 
     /**
      * Returns the parameters that are part of the map upon completion of the WorkItem
      * @return Map
      */
-    public Map<String, Object> getParameters();
+    public @Nonnull Map<String, Object> getParameters();
     
 }

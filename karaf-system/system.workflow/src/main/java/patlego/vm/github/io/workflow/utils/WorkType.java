@@ -1,5 +1,7 @@
 package patlego.vm.github.io.workflow.utils;
 
+import javax.annotation.Nonnull;
+
 import patlego.vm.github.io.workflow.enums.ParamType;
 
 public interface WorkType {
@@ -8,18 +10,18 @@ public interface WorkType {
      * what the element is
      * @return ParamType
      */
-    public ParamType getType();
+    public @Nonnull ParamType getType();
 
     /**
      * Returns a string containing the java classpath of the object.
      * If it in an int then Integer will be returned
      * @return
      */
-    public String getClassName();
+    public @Nonnull String getClassName();
 
     /**
      * Returns a string representation of this object
      * @return String representation of this object
      */
-    public String toString();
+    public @Nonnull String toString();
 }

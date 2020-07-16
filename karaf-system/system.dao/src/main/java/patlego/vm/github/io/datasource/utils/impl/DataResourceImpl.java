@@ -1,4 +1,4 @@
-package patlego.vm.github.io.utils.impl;
+package patlego.vm.github.io.datasource.utils.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import patlego.vm.github.io.utils.DataResource;
+import patlego.vm.github.io.datasource.utils.DataResource;
 
 public class DataResourceImpl implements DataResource {
 

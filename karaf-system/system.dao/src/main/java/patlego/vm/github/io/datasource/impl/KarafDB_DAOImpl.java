@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import patlego.vm.github.io.datasource.KarafDB_DAO;
-import patlego.vm.github.io.utils.DataResource;
-import patlego.vm.github.io.utils.impl.DataResourceImpl;
+import patlego.vm.github.io.datasource.utils.DataResource;
+import patlego.vm.github.io.datasource.utils.impl.DataResourceImpl;
 
 
 
@@ -20,7 +20,7 @@ import patlego.vm.github.io.utils.impl.DataResourceImpl;
 	service = KarafDB_DAO.class,
 	immediate = true,
 	property = {
-		"dataSourceName=karafdb"
+		"DATAOURCE_NAME=karafdb"
 	}
 )
 public class KarafDB_DAOImpl implements KarafDB_DAO {

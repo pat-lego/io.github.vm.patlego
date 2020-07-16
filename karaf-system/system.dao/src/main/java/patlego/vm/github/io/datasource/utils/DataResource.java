@@ -1,4 +1,4 @@
-package patlego.vm.github.io.utils;
+package patlego.vm.github.io.datasource.utils;
 
 import java.sql.SQLException;
 import java.util.List;

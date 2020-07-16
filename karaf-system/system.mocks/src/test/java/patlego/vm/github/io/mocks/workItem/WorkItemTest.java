@@ -31,16 +31,16 @@ public class WorkItemTest {
         context.registerInjectActivateService(workItem_1);
         context.registerInjectActivateService(workItem_2);
         
-        List<WorkItem> workItems = Arrays.asList(context.getServices(WorkItem.class, "(workflowName=testWorkflow1)"));
+        List<WorkItem> workItems = Arrays.asList(context.getServices(WorkItem.class, "(WORKFLOW_NAME=testWorkflow1)"));
         assertEquals(2, workItems.size());
 
-        Collection<ServiceReference<WorkItem>> serviceReferenceList = context.bundleContext().getServiceReferences(WorkItem.class, "(workflowName=testWorkflow1)");
+        Collection<ServiceReference<WorkItem>> serviceReferenceList = context.bundleContext().getServiceReferences(WorkItem.class, "(WORKFLOW_NAME=testWorkflow1)");
         Iterator<ServiceReference<WorkItem>> it = serviceReferenceList.iterator();
 
         int i = 1;
         while(it.hasNext()) {
             ServiceReference<WorkItem> serviceReference = it.next();
-            assertEquals(i, Integer.parseInt((String) serviceReference.getProperty("sequenceNumber")));
+            assertEquals(i, Integer.parseInt((String) serviceReference.getProperty("SEQUENCE_NUMBER")));
 
             i = i + 1;
         }
@@ -54,7 +54,7 @@ public class WorkItemTest {
         context.registerInjectActivateService(workItem_1);
         context.registerInjectActivateService(workItem_2);
         
-        List<WorkItem> workItems = Arrays.asList(context.getServices(WorkItem.class, "(workflowName=testWorkflow1)"));
+        List<WorkItem> workItems = Arrays.asList(context.getServices(WorkItem.class, "(WORKFLOW_NAME=testWorkflow1)"));
         assertEquals(2, workItems.size());
 
         WorkResult workResult_1 = workItems.get(0).execute(null);

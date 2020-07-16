@@ -17,8 +17,8 @@ import patlego.vm.github.io.workflow.enums.ParamType;
     immediate = true,
     service = WorkItem.class,
     property = { 
-        "workflowName=testWorkflow1", 
-        "sequenceNumber=2" 
+        "WORKFLOW_NAME=testWorkflow1", 
+        "SEQUENCE_NUMBER=2" 
     }
 )
 public class WorkItemImpl2 implements WorkItem {
@@ -56,7 +56,7 @@ public class WorkItemImpl2 implements WorkItem {
     }
 
     @Override
-    public String gtWorkItemDescription() {
+    public String getWorkItemDescription() {
         return this.getClass().getName();
     }
 

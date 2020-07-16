@@ -2,8 +2,20 @@ package patlego.vm.github.io.workflow;
 
 import java.util.Map;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import patlego.vm.github.io.workflow.utils.WorkflowResult;
 
+/**
+ * This interface is used to execute Workflows
+ * This WorkflowExecutor interface has OSSGi properties that are required to be set prior to be deploying it to the 
+ * felix console.
+ * 
+ * 1. executionType Which defines the type of execution that the Workflow will perform these are defined within the WorkflowExecutionType Enum
+ * 2. synchronous Which defines if the workflow executor will render the workflow asynchronously or not
+ */
 public interface WorkflowExecutor {
 
     /**
@@ -14,10 +26,10 @@ public interface WorkflowExecutor {
      * with the given error. 
      * 
      * The workflow will not continue to run WorkItems if one of them fail during the execution
-     * @param workflowName The name of the Workflow to be retrieved from the OSGi framework and executed
+     * @param WORKFLOW_NAME The name of the Workflow to be retrieved from the OSGi framework and executed
      * @return WorkflowResult
      */
-    public WorkflowResult run(String workflowName);
+    public @Nonnull WorkflowResult run(@Nonnull String WORKFLOW_NAME);
 
     /**
      * Executes the Workflow in a synchronous fashion.
@@ -27,39 +39,39 @@ public interface WorkflowExecutor {
      * with the given error. 
      * 
      * The workflow will not continue to run WorkItems if one of them fail during the execution
-     * @param workflowName The name of the Workflow to be retrieved from the OSGi framework and executed
+     * @param WORKFLOW_NAME The name of the Workflow to be retrieved from the OSGi framework and executed
      * @param parameters Default parameters to pass into the Workflow
      * @return WorkflowResult
      */
-    public WorkflowResult run(String workflowName, Map<String, Object> parameters);
+    public @Nonnull WorkflowResult run(@Nonnull String WORKFLOW_NAME, @Nullable Map<String, Object> parameters);
 
     /**
      * Returns the length of the Workflow which is measured by counting the number of WorkItems in the Workflow
-     * @param workflowName The name of the Workflow to be retrieved from the OSGi framework 
+     * @param WORKFLOW_NAME The name of the Workflow to be retrieved from the OSGi framework 
      * @return Integer, returns -1 if Workflow could not be found
      */
-    public Integer getLength(String workflowName);
+    public @Nonnull @Nonnegative Integer getLength(@Nonnull String WORKFLOW_NAME);
 
     /**
      * Checks to see if the Workflow is registered within the OSGi framework
-     * @param workflowName The name of the Workflow to be retrieved from the OSGi framework 
+     * @param WORKFLOW_NAME The name of the Workflow to be retrieved from the OSGi framework 
      * @return Returns True if the Workflow can be found, False if the Workflow cannot be found
      */
-    public Boolean doesExist(String workflowName);
+    public @Nonnull Boolean doesExist(@Nonnull String WORKFLOW_NAME);
     
     /**
      * Returns the WorkItem from the Workflow
-     * @param workflowName The name of the Workflow to be retrieved within the OSGi framework
+     * @param WORKFLOW_NAME The name of the Workflow to be retrieved within the OSGi framework
      * @param index The index representing the WorkItem
      * @return WorkItem, null if the WorkItem index is not found
      */
-    public WorkItem getWorkItem(String workflowName, Integer index);
+    public @Nullable WorkItem getWorkItem(@Nonnull String WORKFLOW_NAME, @Nonnull @Nonnegative Integer index);
 
     /**
      * Returns the WorkItem from the Workflow
-     * @param workflowName The name of the Workflow to be retrieved within the OSGi framework
+     * @param WORKFLOW_NAME The name of the Workflow to be retrieved within the OSGi framework
      * @param workItemName The name of the WorkItem to be returned from the Workflow
      * @return WorkItem, null if the WorkItem name is not found
      */
-    public WorkItem getWorkItem(String workflowName, String workItemName);
+    public @Nullable WorkItem getWorkItem(@Nonnull String WORKFLOW_NAME, @Nonnull String workItemName);
 }

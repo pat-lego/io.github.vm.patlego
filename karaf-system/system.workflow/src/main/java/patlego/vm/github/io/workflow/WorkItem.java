@@ -2,10 +2,19 @@ package patlego.vm.github.io.workflow;
 
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import patlego.vm.github.io.workflow.utils.WorkObject;
 import patlego.vm.github.io.workflow.utils.WorkResult;
 import patlego.vm.github.io.workflow.utils.WorkType;
 
+/**
+ * WorkItems must be registered with properties enabled on them
+ * 
+ * 1. WORKFLOW_NAME String representing the workflow that the workitem belongs too
+ * 2. SEQUENCE_NUMBER Integer -1 * INTEGER.MAX_INT to INTEGER.MAX_INT defining the execution order of the workflow
+ * for instance if this SEQUENCE_NUMBER is set to 3 then it will be third item to be executed in the workflow
+ */
 public interface WorkItem {
 
     /**
@@ -18,36 +27,36 @@ public interface WorkItem {
      * @param workObject WorkObject 
      * @return WorkResult
      */
-    public WorkResult execute(WorkObject workObject);
+    public @Nonnull WorkResult execute(@Nonnull WorkObject workObject);
     
     /**
      * Get the input parameters required to perform this action
      * @return Map<String, WorkType>
      */
-    public Map<String, WorkType> getInputParameters();
+    public @Nonnull Map<String, WorkType> getInputParameters();
 
     /**
      * Get the output parameters required to perform this action
      * @return Map<String, WorkType>
      */
-    public Map<String, WorkType> getOutputParameters();
+    public @Nonnull Map<String, WorkType> getOutputParameters();
 
     /**
      * Returns the name of the WorkItem
      * @return String
      */
-    public String getWorkItemName();
+    public @Nonnull String getWorkItemName();
 
     /**
      * Returns a description of the WorkItem
      * @return String
      */
-    public String gtWorkItemDescription();
+    public @Nonnull String getWorkItemDescription();
 
     /**
      * Returns the versison of the WorkItem
      * @return Returns the current version of the given WorkItem
      */
-    public String getWorkItemVersion();
+    public @Nonnull String getWorkItemVersion();
     
 }
