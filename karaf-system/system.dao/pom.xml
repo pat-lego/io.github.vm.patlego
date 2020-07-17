@@ -56,6 +56,39 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>dev-build</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-features</id>
+                <!-- here the phase you need -->
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${basedir}/src/main/resources/META-INF</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>src/main/resources/dev</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                  <overwrite>true</overwrite>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <dependencies>
     <dependency>
       <groupId>org.osgi</groupId>

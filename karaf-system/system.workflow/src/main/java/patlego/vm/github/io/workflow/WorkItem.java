@@ -17,6 +17,9 @@ import patlego.vm.github.io.workflow.utils.WorkType;
  */
 public interface WorkItem {
 
+    public final static String SEQUENCE_NUMBER = "SEQUENCE_NUMBER";
+    public final static String WORKFLOW_NAME = "WORKFLOW_NAME";
+
     /**
      * This is a method that accept a WorkObject which contains the elements required to perform 
      * the necessary activities defined within this class.

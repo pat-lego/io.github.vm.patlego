@@ -2,10 +2,14 @@ package patlego.vm.github.io.workflow.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
@@ -24,12 +28,11 @@ import patlego.vm.github.io.workflow.utils.impl.SimpleWorkflowResult;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.WorkflowExecutor;
 import patlego.vm.github.io.workflow.comparators.SequenceNumberComparator;
+import patlego.vm.github.io.workflow.exceptions.DuplicateSequenceNumberException;
+import patlego.vm.github.io.workflow.exceptions.InvalidSequenceNumberException;
 
-@Component(immediate = true, service = WorkflowExecutor.class,
-property = {
-    "EXECUTION_TYPE=LINEAR",
-    "SYNCHRONOUS=TRUE"
-})
+@Component(immediate = true, service = WorkflowExecutor.class, property = { "EXECUTION_TYPE=LINEAR",
+        "SYNCHRONOUS=TRUE" })
 public class SimpleWorkflowExecutor implements WorkflowExecutor {
 
     private BundleContext context;
@@ -57,13 +60,29 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
 
             simpleWorkflowResult = new SimpleWorkflowResult(true, result.getParameters(), id);
             return simpleWorkflowResult;
-        } catch(InvalidSyntaxException e) {
+        } catch (DuplicateSequenceNumberException e) {
+            logger.error(String.format(
+                    "Could not retrieve the Workflow %s from the OSGi framework, duplicate sequence number located",
+                    workflowName), e);
+            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
+            simpleWorkflowResult.setException(e);
+            simpleWorkflowResult.setFailedWorkItemName(null);
+            return simpleWorkflowResult;
+        } catch (InvalidSequenceNumberException e) {
+            logger.error(String.format(
+                    "Could not retrieve the Workflow %s from the OSGi framework, invalid sequence number located",
+                    workflowName), e);
+            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
+            simpleWorkflowResult.setException(e);
+            simpleWorkflowResult.setFailedWorkItemName(null);
+            return simpleWorkflowResult;
+        } catch (InvalidSyntaxException e) {
             logger.error(String.format("Could not retrieve the Workflow %s from the OSGi framework", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
             return simpleWorkflowResult;
-        } catch(Exception e) {
+        } catch (Exception e) {
             logger.error(String.format("Failed to execute workflow %s", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
@@ -76,7 +95,7 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     public WorkflowResult run(String workflowName, Map<String, Object> parameters) {
         if (parameters == null) {
             return this.run(workflowName);
-        } 
+        }
 
         SimpleWorkflowResult simpleWorkflowResult = null;
         WorkResult result = null;
@@ -97,13 +116,29 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
 
             simpleWorkflowResult = new SimpleWorkflowResult(true, result.getParameters(), id);
             return simpleWorkflowResult;
-        } catch(InvalidSyntaxException e) {
+        } catch (DuplicateSequenceNumberException e) {
+            logger.error(String.format(
+                    "Could not retrieve the Workflow %s from the OSGi framework, duplicate sequence number located",
+                    workflowName), e);
+            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
+            simpleWorkflowResult.setException(e);
+            simpleWorkflowResult.setFailedWorkItemName(null);
+            return simpleWorkflowResult;
+        } catch (InvalidSequenceNumberException e) {
+            logger.error(String.format(
+                    "Could not retrieve the Workflow %s from the OSGi framework, invalid sequence number located",
+                    workflowName), e);
+            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
+            simpleWorkflowResult.setException(e);
+            simpleWorkflowResult.setFailedWorkItemName(null);
+            return simpleWorkflowResult;
+        } catch (InvalidSyntaxException e) {
             logger.error(String.format("Could not retrieve the Workflow %s from the OSGi framework", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
             return simpleWorkflowResult;
-        } catch(Exception e) {
+        } catch (Exception e) {
             logger.error(String.format("Failed to execute workflow %s", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
@@ -138,36 +173,36 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     }
 
     @Override
-    public WorkItem getWorkItem(String WORKFLOW_NAME, Integer index) throws IllegalArgumentException {
+    public WorkItem getWorkItem(String workflowName, Integer index) throws IllegalArgumentException {
         try {
-            int workflowLength = this.getLength(WORKFLOW_NAME);
+            int workflowLength = this.getLength(workflowName);
             if (index >= workflowLength) {
-                throw new IllegalArgumentException("Requesting an index that is bigger then the workflow length failing to retrieve WorkItem");
+                throw new IllegalArgumentException(
+                        "Requesting an index that is bigger then the workflow length failing to retrieve WorkItem");
             }
 
-            return this.getWorkflow(WORKFLOW_NAME).get(index);
-        } catch(InvalidSyntaxException e) {
-            logger.error(String.format("Could not locate Workflow with name %s", WORKFLOW_NAME), e);
-            throw new IllegalArgumentException(String.format("Could not locate Workflow with name %s", WORKFLOW_NAME), e);
+            return this.getWorkflow(workflowName).get(index);
+        } catch (InvalidSyntaxException e) {
+            logger.error(String.format("Could not locate Workflow with name %s", workflowName), e);
+            throw new IllegalArgumentException(String.format("Could not locate Workflow with name %s", workflowName),
+                    e);
         }
     }
 
     @Override
-    public WorkItem getWorkItem(String WORKFLOW_NAME, String workItemName) {
+    public WorkItem getWorkItem(String workflowName, String workItemName) {
         if (workItemName == null) {
             return null;
         }
 
         try {
-            return this.getWorkflow(WORKFLOW_NAME)
-                                .stream()
-                                .filter(w -> w.getWorkItemName().equals(workItemName))
-                                .findFirst()
-                                .orElse(null);
+            return this.getWorkflow(workflowName).stream().filter(w -> w.getWorkItemName().equals(workItemName))
+                    .findFirst().orElse(null);
 
-        } catch(InvalidSyntaxException e) {
-            logger.error(String.format("Could not locate Workflow with name %s", WORKFLOW_NAME), e);
-            throw new IllegalArgumentException(String.format("Could not locate Workflow with name %s", WORKFLOW_NAME), e);
+        } catch (InvalidSyntaxException e) {
+            logger.error(String.format("Could not locate Workflow with name %s", workflowName), e);
+            throw new IllegalArgumentException(String.format("Could not locate Workflow with name %s", workflowName),
+                    e);
         }
     }
 
@@ -190,45 +225,152 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     }
 
     /**
-     * Get the Workflow from the OSGi framework as a ServiceReference and unsorted
-     * @param WORKFLOW_NAME The name of the Workflow to retrieve
-     * @return Collection<ServiceReference<WorkItem>> 
-     * @throws InvalidSyntaxException WORKFLOW_NAME does not exist
+     * Used to determine if a Workflow has a duplicate Sequence number loaded, if so this will cause the workflow to fail since the order cannot be preserved since
+     * they have the same runtime
+     * @param serviceReferences Collection<ServiceReference<WorkItem>>
+     * @return True -> Duplicate sequence number was located, False -> All sequence numbers are unique
      */
-    private Collection<ServiceReference<WorkItem>> getWorkflowAsServiceReference(String WORKFLOW_NAME) throws InvalidSyntaxException {
-        return this.context.getServiceReferences(WorkItem.class, String.format("(WORKFLOW_NAME=%s)", WORKFLOW_NAME));
+    private Boolean hasDuplicateWorkItem(Collection<ServiceReference<WorkItem>> serviceReferences) {
+        try {
+            List<Integer> sequenceNumberList = this.getSequenceNumberAsList(serviceReferences);
+
+            return !sequenceNumberList.stream().filter(i -> Collections.frequency(sequenceNumberList, i) > 1)
+                    .collect(Collectors.toSet()).isEmpty();
+
+        } catch (Exception e) {
+            return true;
+        }
+
     }
 
     /**
-     * Get the Workflow from the OSGi framework as WorkItems sorted by the SEQUENCE_NUMBER
-     * @param WORKFLOW_NAME The name of the Workflow to retrieve
-     * @return List<WorkItem>
-     * @throws InvalidSyntaxException WORKFLOW_NAME does not exist
+     * Used to create a list of sequence numbers from the service references
+     * @param serviceReferences Collection<ServiceReference<WorkItem>> 
+     * @return List<Integer>
+     * @throws InvalidSequenceNumberException If parsing the sequence number then this exception will be returned
      */
-    private List<WorkItem> getWorkflow(String WORKFLOW_NAME) throws InvalidSyntaxException {
+    private List<Integer> getSequenceNumberAsList(Collection<ServiceReference<WorkItem>> serviceReferences)
+            throws InvalidSequenceNumberException {
+        if (serviceReferences == null) {
+            return null;
+        }
 
-        Collection<ServiceReference<WorkItem>> serviceReferences = this.context.getServiceReferences(WorkItem.class, String.format("(WORKFLOW_NAME=%s)", WORKFLOW_NAME));
-        
+        try {
+            List<Integer> sequenceNumber = new ArrayList<Integer>();
+            Iterator<ServiceReference<WorkItem>> iterator = serviceReferences.iterator();
+
+            while (iterator.hasNext()) {
+                Integer serviceNumber = Integer
+                        .parseInt(iterator.next().getProperty(WorkItem.SEQUENCE_NUMBER).toString());
+                sequenceNumber.add(serviceNumber);
+            }
+
+            return sequenceNumber;
+        } catch (Exception e) {
+            throw new InvalidSequenceNumberException(
+                    "Invalid Sequence Number found when parsing sequence number as list");
+        }
+    }
+
+    /**
+     * Validates that all of the sequence numbers are valid parameters to be passed
+     * into the workflow
+     * 
+     * @param serviceReferences ServiceReference<WorkItem>
+     * @return True -> All valid, False -> One of the ServiceReferences are invalid
+     */
+    private Boolean validateSequenceNumber(Collection<ServiceReference<WorkItem>> serviceReferences) {
+        if (serviceReferences == null) {
+            return false;
+        }
+
+        if (serviceReferences.isEmpty()) {
+            return true;
+        }
+
+        try {
+            Iterator<ServiceReference<WorkItem>> iterator = serviceReferences.iterator();
+
+            while (iterator.hasNext()) {
+                String serviceNumber = iterator.next().getProperty(WorkItem.SEQUENCE_NUMBER).toString();
+
+                // Must exist
+                if (serviceNumber == null) {
+                    return false;
+                }
+                // Check if can be a number
+                if (!NumberUtils.isCreatable(serviceNumber)) {
+                    return false;
+                }
+                // Must be an int
+                if (serviceNumber.contains(".")) {
+                    return false;
+                }
+
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get the Workflow from the OSGi framework as a ServiceReference and unsorted
+     * 
+     * @param workflowName The name of the Workflow to retrieve
+     * @return Collection<ServiceReference<WorkItem>>
+     * @throws InvalidSyntaxException workflowName does not exist
+     */
+    private Collection<ServiceReference<WorkItem>> getWorkflowAsServiceReference(String workflowName)
+            throws InvalidSyntaxException {
+        return this.context.getServiceReferences(WorkItem.class, String.format("(WORKFLOW_NAME=%s)", workflowName));
+    }
+
+    /**
+     * Get the Workflow from the OSGi framework as WorkItems sorted by the
+     * SEQUENCE_NUMBER
+     * 
+     * @param workflowName The name of the Workflow to retrieve
+     * @return List<WorkItem>
+     * @throws InvalidSyntaxException workflowName does not exist
+     * @throws DuplicateSequenceNumberException workflowName does not exist
+     */
+    private List<WorkItem> getWorkflow(String workflowName)
+            throws InvalidSyntaxException, InvalidSequenceNumberException, DuplicateSequenceNumberException {
+
+        Collection<ServiceReference<WorkItem>> serviceReferences = this.context.getServiceReferences(WorkItem.class,
+                String.format("(WORKFLOW_NAME=%s)", workflowName));
+        if (!this.validateSequenceNumber(serviceReferences)) {
+            throw new InvalidSequenceNumberException(
+                    String.format("Invalid sequence number in Workflow %s", workflowName));
+        }
+
+        if (this.hasDuplicateWorkItem(serviceReferences)) {
+            throw new DuplicateSequenceNumberException(
+                    String.format("Duplicate sequence number found in linear workflow %s", workflowName));
+        }
         return this.sortWorkflowBySequenceNumber(serviceReferences);
     }
 
     /**
      * Sorts the WorkItems by the sequence number
+     * 
      * @param serviceReferences ServiceReference<WorkItem>
-     * @return List<WorkItem> Sorted by the WorkItemProperties.SEQUENCE_NUMBER property
+     * @return List<WorkItem> Sorted by the WorkItem.SEQUENCE_NUMBER property
      */
     private List<WorkItem> sortWorkflowBySequenceNumber(Collection<ServiceReference<WorkItem>> serviceReferences) {
         if (serviceReferences == null || serviceReferences.isEmpty()) {
-            throw new IllegalArgumentException("Failed to sort the WorkItems since the provided list is either null or empty");
+            throw new IllegalArgumentException(
+                    "Failed to sort the WorkItems since the provided list is either null or empty");
         }
         List<WorkItem> sortedWorkflow = new ArrayList<WorkItem>();
 
-        serviceReferences
-                .stream()
-                .sorted(new SequenceNumberComparator())
+        serviceReferences.stream().sorted(new SequenceNumberComparator())
                 .forEach(s -> sortedWorkflow.add(context.getService(s)));
-        
-        return sortedWorkflow;        
+
+        return sortedWorkflow;
     }
-    
+
 }

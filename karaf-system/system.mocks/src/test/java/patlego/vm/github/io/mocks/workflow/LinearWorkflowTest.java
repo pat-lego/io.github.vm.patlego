@@ -24,7 +24,7 @@ import patlego.vm.github.io.workflow.utils.WorkflowResult;
 @ExtendWith(OsgiContextExtension.class)
 public class LinearWorkflowTest {
 
-    final static String WORKFLOW_NAME = "testWorkflow1";
+    final static String workflowName = "testWorkflow1";
     
     @Test
     public void testLinearWorkflowRegistration(OsgiContext context) {
@@ -53,15 +53,15 @@ public class LinearWorkflowTest {
         assertEquals(1, workflowExecutorList.size());
 
         linearWorkflow = workflowExecutorList.get(0);
-        assertEquals(5, linearWorkflow.getLength(WORKFLOW_NAME));
+        assertEquals(5, linearWorkflow.getLength(workflowName));
 
-        assertEquals(w1.getClass().getName(), linearWorkflow.getWorkItem(WORKFLOW_NAME, 0).getWorkItemName());
-        assertEquals(w2.getClass().getName(), linearWorkflow.getWorkItem(WORKFLOW_NAME, 1).getWorkItemName());
-        assertEquals(w3.getClass().getName(), linearWorkflow.getWorkItem(WORKFLOW_NAME, 2).getWorkItemName());
-        assertEquals(w4.getClass().getName(), linearWorkflow.getWorkItem(WORKFLOW_NAME, 3).getWorkItemName());
-        assertEquals(w5.getClass().getName(), linearWorkflow.getWorkItem(WORKFLOW_NAME, 4).getWorkItemName());
+        assertEquals(w1.getClass().getName(), linearWorkflow.getWorkItem(workflowName, 0).getWorkItemName());
+        assertEquals(w2.getClass().getName(), linearWorkflow.getWorkItem(workflowName, 1).getWorkItemName());
+        assertEquals(w3.getClass().getName(), linearWorkflow.getWorkItem(workflowName, 2).getWorkItemName());
+        assertEquals(w4.getClass().getName(), linearWorkflow.getWorkItem(workflowName, 3).getWorkItemName());
+        assertEquals(w5.getClass().getName(), linearWorkflow.getWorkItem(workflowName, 4).getWorkItemName());
 
-        WorkflowResult result = linearWorkflow.run(WORKFLOW_NAME);
+        WorkflowResult result = linearWorkflow.run(workflowName);
         assertEquals(true, result.hasSucceeded());
         assertNotNull(result.getId());
     }

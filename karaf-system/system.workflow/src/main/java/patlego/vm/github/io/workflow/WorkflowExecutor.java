@@ -19,6 +19,18 @@ import patlego.vm.github.io.workflow.utils.WorkflowResult;
 public interface WorkflowExecutor {
 
     /**
+     * The exection types
+     */
+    public static final String LINEAR = "LINEAR";
+
+    /**
+     * Synchronous Types
+     */
+    public static final String SYNCHRONOUS = "TRUE";
+    public static final String ASYNCHRONOUS = "TRUE";
+
+
+    /**
      * Executes the Workflow in a EXECUTION_TYPE fashion.
      * 
      * Workflows are not meant to throw errors they will be caught internally and then marked as failed.

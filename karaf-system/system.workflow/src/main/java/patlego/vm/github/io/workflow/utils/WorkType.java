@@ -5,6 +5,7 @@ import javax.annotation.Nonnull;
 import patlego.vm.github.io.workflow.enums.ParamType;
 
 public interface WorkType {
+
     /**
      * Defines the enum type that will be returned giving a high level explanation of
      * what the element is
