@@ -22,15 +22,7 @@
         <!-- Only used when transaction-type=JTA -->
         <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=karafdb)</jta-data-source>
 
-<!-- 
-        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=karafdb)</non-jta-data-source>
-        <class>patlego.vm.github.io.datasource.pojo.Booking</class> -->
         <properties>
-            <!-- <property name="openjpa.jdbc.DBDictionary" value="postgres"/>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(foreignKeys=true)" />
-            <property name="openjpa.Log" value="DefaultLevel=TRACE,SQL=TRACE" /> -->
-
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>
