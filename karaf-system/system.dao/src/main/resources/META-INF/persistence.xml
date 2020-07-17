@@ -16,17 +16,21 @@
         limitations under the License.
     -->
 
-    <persistence-unit name="booking-openjpa" transaction-type="JTA">
+    <persistence-unit name="karafdb-openjpa" transaction-type="JTA">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
 
         <!-- Only used when transaction-type=JTA -->
         <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=karafdb)</jta-data-source>
 
-        <class>patlego.vm.github.io.datasource.pojo.Booking</class>
+<!-- 
+        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=karafdb)</non-jta-data-source>
+        <class>patlego.vm.github.io.datasource.pojo.Booking</class> -->
         <properties>
-            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(foreignKeys=true,schemaAction='dropDB,add')" />
-            <property name="openjpa.jdbc.SchemaFactory" value="native(foreignKeys=true)" />
-            <property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict, JoinForeignKeyDeleteAction=restrict" />
+            <property name="openjpa.jdbc.DBDictionary" value="postgres"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(foreignKeys=true)" />
+            <!--  <property name="openjpa.jdbc.SchemaFactory" value="native(foreignKeys=true)" />
+            <property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict, JoinForeignKeyDeleteAction=restrict" /> -->
             <property name="openjpa.Log" value="DefaultLevel=TRACE,SQL=TRACE" />
         </properties>
     </persistence-unit>

@@ -105,8 +105,8 @@
       <artifactId>javax.persistence-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>biz.aQute.bnd</groupId>
-      <artifactId>biz.aQute.bndlib</artifactId>
+      <groupId>org.apache.aries.jpa</groupId>
+      <artifactId>org.apache.aries.jpa.api</artifactId>
     </dependency>
   </dependencies>
 </project>

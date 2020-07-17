@@ -181,12 +181,11 @@
         <artifactId>javax.persistence-api</artifactId>
         <version>2.2</version>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/biz.aQute.bnd/biz.aQute.bndlib -->
+      <!-- https://mvnrepository.com/artifact/org.apache.aries.jpa/org.apache.aries.jpa.api -->
       <dependency>
-        <groupId>biz.aQute.bnd</groupId>
-        <artifactId>biz.aQute.bndlib</artifactId>
-        <version>5.1.1</version>
-        <scope>provided</scope>
+        <groupId>org.apache.aries.jpa</groupId>
+        <artifactId>org.apache.aries.jpa.api</artifactId>
+        <version>2.7.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
