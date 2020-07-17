@@ -1,4 +1,4 @@
-package patlego.vm.github.io.datasource.pojo;
+package patlego.vm.github.io.datasource.tables;
 
 import java.io.Serializable;
 import java.util.Objects;

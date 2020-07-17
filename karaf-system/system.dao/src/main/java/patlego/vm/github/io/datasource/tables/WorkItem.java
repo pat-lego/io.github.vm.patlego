@@ -1,4 +1,4 @@
-package patlego.vm.github.io.datasource.pojo;
+package patlego.vm.github.io.datasource.tables;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
