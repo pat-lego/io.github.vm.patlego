@@ -41,7 +41,11 @@
         <configuration>
           <exportScr>true</exportScr>
           <instructions>
-            <Import-Package>!javax.annotation, *</Import-Package>
+            <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+            <Import-Package>
+              !javax.annotation, 
+              javax.persistence;version="[2,3)",
+              *</Import-Package>
             <!-- Enable processing of OSGI DS component annotations -->
             <_dsannotations>*</_dsannotations>
             <!-- Enable processing of OSGI metatype annotations -->
@@ -86,6 +90,19 @@
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.transaction</groupId>
+      <artifactId>javax.transaction-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.interceptor</groupId>
+      <artifactId>javax.interceptor-api</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>javax.persistence-api</artifactId>
     </dependency>
   </dependencies>
 </project>
