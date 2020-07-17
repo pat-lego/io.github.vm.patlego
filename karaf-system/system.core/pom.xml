@@ -70,7 +70,7 @@
             <feature>pax-jdbc-spec</feature>
             <feature>pax-jdbc-config</feature>
             <feature>pax-jdbc-pool-dbcp2</feature>
-            <feature >aries-blueprint</feature>
+            <feature dependency="true">aries-blueprint</feature>
             <feature version="[2,3)">jpa</feature>
             <feature version="[3,4)">openjpa3</feature>
             <feature>pax-jdbc-postgresql</feature>
