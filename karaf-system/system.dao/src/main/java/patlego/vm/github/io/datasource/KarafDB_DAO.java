@@ -8,7 +8,7 @@ import patlego.vm.github.io.datasource.utils.DataResource;
  * This class allows users to retrieve a data resource which can be used to retrieve data.
  * This interface when implemented in an OSGi framework requires the following properties to be added
  * 
- * 1. DATASOURCE_NAME Which defines the name of the datasource to be retrieved
+ * 1. DATASOURCE_NAME Which defines the name of the datasource to be retrieved. These properties are listed in the DAOProperties enum class
  */
 public interface KarafDB_DAO {
 

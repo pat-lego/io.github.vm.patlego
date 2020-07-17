@@ -2,10 +2,13 @@ package patlego.vm.github.io.workflow.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
@@ -24,6 +27,7 @@ import patlego.vm.github.io.workflow.utils.impl.SimpleWorkObject;
 import patlego.vm.github.io.workflow.utils.impl.SimpleWorkflowResult;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.WorkflowExecutor;
+import patlego.vm.github.io.workflow.comparators.SequenceNumberComparator;
 
 @Component(immediate = true, service = WorkflowExecutor.class,
 property = {
@@ -208,21 +212,27 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     private List<WorkItem> getWorkflow(String WORKFLOW_NAME) throws InvalidSyntaxException {
 
         Collection<ServiceReference<WorkItem>> serviceReferences = this.context.getServiceReferences(WorkItem.class, String.format("(WORKFLOW_NAME=%s)", WORKFLOW_NAME));
-        List<WorkItem> workflow = new ArrayList<WorkItem>();
-        serviceReferences.forEach(s -> workflow.add(context.getService(s)));
-
-        return workflow;
+        
+        return this.sortWorkflowBySequenceNumber(serviceReferences);
     }
 
+    /**
+     * Sorts the WorkItems by the sequence number
+     * @param serviceReferences ServiceReference<WorkItem>
+     * @return List<WorkItem> Sorted by the WorkItemProperties.SEQUENCE_NUMBER property
+     */
     private List<WorkItem> sortWorkflowBySequenceNumber(Collection<ServiceReference<WorkItem>> serviceReferences) {
         if (serviceReferences == null || serviceReferences.isEmpty()) {
             throw new IllegalArgumentException("Failed to sort the WorkItems since the provided list is either null or empty");
         }
+        List<WorkItem> sortedWorkflow = new ArrayList<WorkItem>();
 
         serviceReferences
-                    .stream()
-                    .sorted(Comparator.comparingInt(ServiceReference::getProperty("")))
-
+                .stream()
+                .sorted(new SequenceNumberComparator())
+                .forEach(s -> sortedWorkflow.add(context.getService(s)));
+        
+        return sortedWorkflow;        
     }
     
 }
