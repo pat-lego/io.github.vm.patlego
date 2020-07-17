@@ -13,65 +13,65 @@ import patlego.vm.github.io.workflow.utils.WorkflowResult;
  * This WorkflowExecutor interface has OSSGi properties that are required to be set prior to be deploying it to the 
  * felix console.
  * 
- * 1. executionType Which defines the type of execution that the Workflow will perform these are defined within the WorkflowExecutionType Enum
- * 2. synchronous Which defines if the workflow executor will render the workflow asynchronously or not
+ * 1. EXECUTIONTYPE Which defines the type of execution that the Workflow will perform these are defined within the WorkflowExecutionType Enum
+ * 2. SYNCHRONOUS Which defines if the workflow executor will render the workflow asynchronously or not
  */
 public interface WorkflowExecutor {
 
     /**
-     * Executes the Workflow in a synchronous fashion.
+     * Executes the Workflow in a EXECUTION_TYPE fashion.
      * 
      * Workflows are not meant to throw errors they will be caught internally and then marked as failed.
      * The result will be placed within the WorkflowResult object and then the end user can review what to do
      * with the given error. 
      * 
      * The workflow will not continue to run WorkItems if one of them fail during the execution
-     * @param WORKFLOW_NAME The name of the Workflow to be retrieved from the OSGi framework and executed
+     * @param workflowName The name of the Workflow to be retrieved from the OSGi framework and executed
      * @return WorkflowResult
      */
-    public @Nonnull WorkflowResult run(@Nonnull String WORKFLOW_NAME);
+    public @Nonnull WorkflowResult run(@Nonnull String workflowName);
 
     /**
-     * Executes the Workflow in a synchronous fashion.
+     * Executes the Workflow in a EXECUTION_TYPE fashion.
      * 
      * Workflows are not meant to throw errors they will be caught internally and then marked as failed.
      * The result will be placed within the WorkflowResult object and then the end user can review what to do
      * with the given error. 
      * 
      * The workflow will not continue to run WorkItems if one of them fail during the execution
-     * @param WORKFLOW_NAME The name of the Workflow to be retrieved from the OSGi framework and executed
+     * @param workflowName The name of the Workflow to be retrieved from the OSGi framework and executed
      * @param parameters Default parameters to pass into the Workflow
      * @return WorkflowResult
      */
-    public @Nonnull WorkflowResult run(@Nonnull String WORKFLOW_NAME, @Nullable Map<String, Object> parameters);
+    public @Nonnull WorkflowResult run(@Nonnull String workflowName, @Nullable Map<String, Object> parameters);
 
     /**
      * Returns the length of the Workflow which is measured by counting the number of WorkItems in the Workflow
-     * @param WORKFLOW_NAME The name of the Workflow to be retrieved from the OSGi framework 
+     * @param workflowName The name of the Workflow to be retrieved from the OSGi framework 
      * @return Integer, returns -1 if Workflow could not be found
      */
-    public @Nonnull @Nonnegative Integer getLength(@Nonnull String WORKFLOW_NAME);
+    public @Nonnull @Nonnegative Integer getLength(@Nonnull String workflowName);
 
     /**
      * Checks to see if the Workflow is registered within the OSGi framework
-     * @param WORKFLOW_NAME The name of the Workflow to be retrieved from the OSGi framework 
+     * @param workflowName The name of the Workflow to be retrieved from the OSGi framework 
      * @return Returns True if the Workflow can be found, False if the Workflow cannot be found
      */
-    public @Nonnull Boolean doesExist(@Nonnull String WORKFLOW_NAME);
+    public @Nonnull Boolean doesExist(@Nonnull String workflowName);
     
     /**
      * Returns the WorkItem from the Workflow
-     * @param WORKFLOW_NAME The name of the Workflow to be retrieved within the OSGi framework
+     * @param workflowName The name of the Workflow to be retrieved within the OSGi framework
      * @param index The index representing the WorkItem
      * @return WorkItem, null if the WorkItem index is not found
      */
-    public @Nullable WorkItem getWorkItem(@Nonnull String WORKFLOW_NAME, @Nonnull @Nonnegative Integer index);
+    public @Nullable WorkItem getWorkItem(@Nonnull String workflowName, @Nonnull @Nonnegative Integer index);
 
     /**
      * Returns the WorkItem from the Workflow
-     * @param WORKFLOW_NAME The name of the Workflow to be retrieved within the OSGi framework
+     * @param workflowName The name of the Workflow to be retrieved within the OSGi framework
      * @param workItemName The name of the WorkItem to be returned from the Workflow
      * @return WorkItem, null if the WorkItem name is not found
      */
-    public @Nullable WorkItem getWorkItem(@Nonnull String WORKFLOW_NAME, @Nonnull String workItemName);
+    public @Nullable WorkItem getWorkItem(@Nonnull String workflowName, @Nonnull String workItemName);
 }

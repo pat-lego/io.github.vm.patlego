@@ -18,7 +18,7 @@ import patlego.vm.github.io.workflow.utils.WorkType;
 public interface WorkItem {
 
     /**
-     * This is a synchronous method that accept a WorkObject which contains the elements required to perform 
+     * This is a method that accept a WorkObject which contains the elements required to perform 
      * the necessary activities defined within this class.
      * 
      * This class does not throw any errors instead it can log them but it will fail the WorkItem and store the error

@@ -2,13 +2,9 @@ package patlego.vm.github.io.workflow.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
@@ -31,8 +27,8 @@ import patlego.vm.github.io.workflow.comparators.SequenceNumberComparator;
 
 @Component(immediate = true, service = WorkflowExecutor.class,
 property = {
-    "executionType=linear",
-    "synchronous=true"
+    "EXECUTION_TYPE=LINEAR",
+    "SYNCHRONOUS=TRUE"
 })
 public class SimpleWorkflowExecutor implements WorkflowExecutor {
 
@@ -41,12 +37,12 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
-    public WorkflowResult run(String WORKFLOW_NAME) {
+    public WorkflowResult run(String workflowName) {
         SimpleWorkflowResult simpleWorkflowResult = null;
         WorkResult result = null;
         String id = getId();
         try {
-            List<WorkItem> workflow = this.getWorkflow(WORKFLOW_NAME);
+            List<WorkItem> workflow = this.getWorkflow(workflowName);
             for (WorkItem workItem : workflow) {
                 WorkObject simpleWorkObject = new SimpleWorkObject();
                 result = workItem.execute(simpleWorkObject);
@@ -62,13 +58,13 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
             simpleWorkflowResult = new SimpleWorkflowResult(true, result.getParameters(), id);
             return simpleWorkflowResult;
         } catch(InvalidSyntaxException e) {
-            logger.error(String.format("Could not retrieve the Workflow %s from the OSGi framework", WORKFLOW_NAME), e);
+            logger.error(String.format("Could not retrieve the Workflow %s from the OSGi framework", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
             return simpleWorkflowResult;
         } catch(Exception e) {
-            logger.error(String.format("Failed to execute workflow %s", WORKFLOW_NAME), e);
+            logger.error(String.format("Failed to execute workflow %s", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
@@ -77,16 +73,16 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     }
 
     @Override
-    public WorkflowResult run(String WORKFLOW_NAME, Map<String, Object> parameters) {
+    public WorkflowResult run(String workflowName, Map<String, Object> parameters) {
         if (parameters == null) {
-            return this.run(WORKFLOW_NAME);
+            return this.run(workflowName);
         } 
 
         SimpleWorkflowResult simpleWorkflowResult = null;
         WorkResult result = null;
         String id = getId();
         try {
-            List<WorkItem> workflow = this.getWorkflow(WORKFLOW_NAME);
+            List<WorkItem> workflow = this.getWorkflow(workflowName);
             for (WorkItem workItem : workflow) {
                 WorkObject simpleWorkObject = new SimpleWorkObject(parameters);
                 result = workItem.execute(simpleWorkObject);
@@ -102,13 +98,13 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
             simpleWorkflowResult = new SimpleWorkflowResult(true, result.getParameters(), id);
             return simpleWorkflowResult;
         } catch(InvalidSyntaxException e) {
-            logger.error(String.format("Could not retrieve the Workflow %s from the OSGi framework", WORKFLOW_NAME), e);
+            logger.error(String.format("Could not retrieve the Workflow %s from the OSGi framework", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
             return simpleWorkflowResult;
         } catch(Exception e) {
-            logger.error(String.format("Failed to execute workflow %s", WORKFLOW_NAME), e);
+            logger.error(String.format("Failed to execute workflow %s", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
@@ -121,22 +117,22 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     }
 
     @Override
-    public Integer getLength(String WORKFLOW_NAME) {
+    public Integer getLength(String workflowName) {
         try {
-            return getWorkflow(WORKFLOW_NAME).size();
+            return getWorkflow(workflowName).size();
         } catch (Exception e) {
-            logger.error(String.format("Could not locate WorkFlow with name %s", WORKFLOW_NAME), e);
+            logger.error(String.format("Could not locate WorkFlow with name %s", workflowName), e);
             return -1;
         }
     }
 
     @Override
-    public Boolean doesExist(String WORKFLOW_NAME) {
+    public Boolean doesExist(String workflowName) {
         try {
-            Collection<ServiceReference<WorkItem>> workItems = getWorkflowAsServiceReference(WORKFLOW_NAME);
+            Collection<ServiceReference<WorkItem>> workItems = getWorkflowAsServiceReference(workflowName);
             return ((workItems != null) && (workItems.size() > 0));
         } catch (Exception e) {
-            logger.error(String.format("Could not locate Workflow with name %s", WORKFLOW_NAME), e);
+            logger.error(String.format("Could not locate Workflow with name %s", workflowName), e);
             return false;
         }
     }
@@ -194,7 +190,7 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     }
 
     /**
-     * Get the Workflow from the OSGi framework as a ServiceReference
+     * Get the Workflow from the OSGi framework as a ServiceReference and unsorted
      * @param WORKFLOW_NAME The name of the Workflow to retrieve
      * @return Collection<ServiceReference<WorkItem>> 
      * @throws InvalidSyntaxException WORKFLOW_NAME does not exist
@@ -204,7 +200,7 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     }
 
     /**
-     * Get the Workflow from the OSGi framework as WorkItems
+     * Get the Workflow from the OSGi framework as WorkItems sorted by the SEQUENCE_NUMBER
      * @param WORKFLOW_NAME The name of the Workflow to retrieve
      * @return List<WorkItem>
      * @throws InvalidSyntaxException WORKFLOW_NAME does not exist
