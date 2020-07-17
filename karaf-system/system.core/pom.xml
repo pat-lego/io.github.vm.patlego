@@ -63,13 +63,16 @@
             <feature>http</feature>
             <feature>http-whiteboard</feature>
 
+            <feature>transaction</feature>
+            <feature>jndi</feature>
             <feature>jdbc</feature>
             <feature>pax-jdbc</feature>
             <feature>pax-jdbc-spec</feature>
-            <feature>transaction</feature>
             <feature>pax-jdbc-config</feature>
-            <feature>pax-jdbc-postgresql</feature>
             <feature>pax-jdbc-pool-dbcp2</feature>
+            <feature dependency="true">aries-blueprint</feature>
+            <feature version="[2,3)">jpa</feature>
+            <feature version="[3,4)">openjpa3</feature>
             <feature>patlego-vm-jdbc</feature>
           </bootFeatures>
           <workDirectory>${project.build.directory}/assembly/patlego.vm</workDirectory>
