@@ -74,6 +74,7 @@
             <feature version="[2,3)">jpa</feature>
             <feature version="[3,4)">openjpa3</feature>
             <feature>pax-jdbc-postgresql</feature>
+            <feature>patlego-vm-jdbc-datasource</feature>
             <feature>patlego-vm-jdbc</feature>
           </bootFeatures>
           <workDirectory>${project.build.directory}/assembly/patlego.vm</workDirectory>

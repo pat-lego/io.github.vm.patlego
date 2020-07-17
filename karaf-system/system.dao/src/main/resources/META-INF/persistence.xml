@@ -22,12 +22,12 @@
         <!-- Only used when transaction-type=JTA -->
         <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=karafdb)</jta-data-source>
 
+        <class>patlego.vm.github.io.datasource.pojo.Booking</class>
         <properties>
-            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
-            <!-- <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(foreignKeys=true,schemaAction='dropDB,add')" />
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(foreignKeys=true,schemaAction='dropDB,add')" />
             <property name="openjpa.jdbc.SchemaFactory" value="native(foreignKeys=true)" />
             <property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict, JoinForeignKeyDeleteAction=restrict" />
-            <property name="openjpa.Log" value="DefaultLevel=TRACE,SQL=TRACE" /> -->
+            <property name="openjpa.Log" value="DefaultLevel=TRACE,SQL=TRACE" />
         </properties>
     </persistence-unit>
 

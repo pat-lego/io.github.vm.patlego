@@ -21,11 +21,13 @@ package patlego.vm.github.io.datasource.pojo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A regular JPA entity, using JPA annotations.
  */
 @Entity
+@Table(name = "Test")
 public class Booking {
 
     @Id

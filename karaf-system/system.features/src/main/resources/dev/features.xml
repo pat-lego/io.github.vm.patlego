@@ -18,7 +18,7 @@
 -->
 <features name="patlego.vm.github.io-{project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
 
-    <feature name="patlego-vm-jdbc-datasource" version="1.0-SNAPSHOT">
+    <feature name="patlego-vm-jdbc-datasource" version="${project.version}">
         <config name="org.ops4j.datasource-karafdb">
             osgi.jdbc.driver.class=org.postgresql.Driver
             password=karaf_pwd
@@ -32,8 +32,8 @@
         </capability>
     </feature>
 
-    <feature name="patlego-vm-jdbc" version="1.0-SNAPSHOT">
-        <bundle>mvn:patlego.vm.github.io/system.dao/1.0-SNAPSHOT</bundle>
+    <feature name="patlego-vm-jdbc" version="${project.version}">
+        <bundle>mvn:patlego.vm.github.io/system.dao/${project.version}</bundle>
         <bundle>mvn:commons-dbutils/commons-dbutils/1.7</bundle>
     </feature>
 
