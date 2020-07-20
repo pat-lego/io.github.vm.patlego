@@ -16,6 +16,8 @@ import patlego.vm.github.io.mocks.workitem.WorkItemImpl2;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl3;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl4;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl5;
+import patlego.vm.github.io.mocks.workitem.WorkItemImpl6;
+import patlego.vm.github.io.mocks.workitem.WorkItemImpl7;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.WorkflowExecutor;
 import patlego.vm.github.io.workflow.impl.SimpleWorkflowExecutor;
@@ -63,6 +65,86 @@ public class LinearWorkflowTest {
 
         WorkflowResult result = linearWorkflow.run(workflowName);
         assertEquals(true, result.hasSucceeded());
+        assertNotNull(result.getId());
+    }
+
+    @Test
+    public void validateInvalidSequenceNumber_1(OsgiContext context) {
+        WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
+        context.registerInjectActivateService(linearWorkflow);
+
+        WorkItem w1 = new WorkItemImpl1();
+        WorkItem w2 = new WorkItemImpl2();
+
+        // Invalid sequence nunmber
+        WorkItem w6 = new WorkItemImpl6();
+
+        context.registerInjectActivateService(w2);
+        context.registerInjectActivateService(w1);
+        context.registerInjectActivateService(w6);
+
+        List<WorkflowExecutor> workflowExecutorList = Arrays.asList(context.getServices(WorkflowExecutor.class, "(&(EXECUTION_TYPE=LINEAR)(SYNCHRONOUS=TRUE))"));
+        assertEquals(1, workflowExecutorList.size());
+
+        linearWorkflow = workflowExecutorList.get(0);
+        assertEquals(-1, linearWorkflow.getLength(workflowName));
+
+
+        WorkflowResult result = linearWorkflow.run(workflowName);
+        assertEquals(false, result.hasSucceeded());
+        assertNotNull(result.getId());
+    }
+
+    @Test
+    public void validateInvalidSequenceNumber_2(OsgiContext context) {
+        WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
+        context.registerInjectActivateService(linearWorkflow);
+
+        WorkItem w1 = new WorkItemImpl1();
+        WorkItem w2 = new WorkItemImpl2();
+
+        // Invalid sequence nunmber
+        WorkItem w7 = new WorkItemImpl7();
+
+        context.registerInjectActivateService(w2);
+        context.registerInjectActivateService(w1);
+        context.registerInjectActivateService(w7);
+
+        List<WorkflowExecutor> workflowExecutorList = Arrays.asList(context.getServices(WorkflowExecutor.class, "(&(EXECUTION_TYPE=LINEAR)(SYNCHRONOUS=TRUE))"));
+        assertEquals(1, workflowExecutorList.size());
+
+        linearWorkflow = workflowExecutorList.get(0);
+        assertEquals(-1, linearWorkflow.getLength(workflowName));
+
+
+        WorkflowResult result = linearWorkflow.run(workflowName);
+        assertEquals(false, result.hasSucceeded());
+        assertNotNull(result.getId());
+    }
+
+    @Test
+    public void validateNoDupsInSequence_1(OsgiContext context) {
+        WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
+        context.registerInjectActivateService(linearWorkflow);
+
+        WorkItem w1 = new WorkItemImpl1();
+        WorkItem w2 = new WorkItemImpl2();
+        WorkItem w3 = new WorkItemImpl3();
+
+        context.registerInjectActivateService(w2);
+        context.registerInjectActivateService(w1);
+        context.registerInjectActivateService(w3);
+        context.registerInjectActivateService(w3);
+
+        List<WorkflowExecutor> workflowExecutorList = Arrays.asList(context.getServices(WorkflowExecutor.class, "(&(EXECUTION_TYPE=LINEAR)(SYNCHRONOUS=TRUE))"));
+        assertEquals(1, workflowExecutorList.size());
+
+        linearWorkflow = workflowExecutorList.get(0);
+        assertEquals(-1, linearWorkflow.getLength(workflowName));
+
+
+        WorkflowResult result = linearWorkflow.run(workflowName);
+        assertEquals(false, result.hasSucceeded());
         assertNotNull(result.getId());
     }
 }
