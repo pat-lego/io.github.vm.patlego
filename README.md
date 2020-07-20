@@ -1,3 +1,7 @@
+Master Build Status 
+
+[![Build Status](https://travis-ci.com/pat-lego/pat-lego.vm.github.io.svg?branch=master)](https://travis-ci.com/pat-lego/pat-lego.vm.github.io)
+
 # My VM
 
 This a server that contains API's and systems that I always wanted to work with.
