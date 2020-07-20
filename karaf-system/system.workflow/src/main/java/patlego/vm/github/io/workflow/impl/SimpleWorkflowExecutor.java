@@ -65,12 +65,15 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
             for (WorkItem workItem : workflow) {
                 WorkObject simpleWorkObject = new SimpleWorkObject(parameters);
 
-                // Track the execution
-                this.workflowManager.addWorkItemResult(id, 
-                    new SimpleWorkItemManagerResult(workItem.getSequenceNumber(), workItem.getWorkItemName(), workflowName));
-                
                 // Execute the WorkItem
                 result = workItem.execute(simpleWorkObject);
+
+                // Track the execution
+                this.workflowManager.addWorkItemResult(id, 
+                    new SimpleWorkItemManagerResult(workItem.getSequenceNumber(), 
+                            workItem.getWorkItemName(), 
+                            workflowName,
+                            result.hasSucceeded()));
 
                 if (!result.hasSucceeded()) {
                     // Let the work manager know that the process failed

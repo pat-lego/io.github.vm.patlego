@@ -20,4 +20,10 @@ public interface WorkItemManagerResult {
      * @return String - Workflow name
      */
     public @Nonnull String getWorkflowName();
+
+    /**
+     * Used to determine if the WorkItem has succedded
+     * @return Boolean
+     */
+    public @Nonnull Boolean hasSuccedded();
 }

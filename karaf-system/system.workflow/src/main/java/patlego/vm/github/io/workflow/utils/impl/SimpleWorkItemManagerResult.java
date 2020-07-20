@@ -7,11 +7,13 @@ public class SimpleWorkItemManagerResult implements WorkItemManagerResult {
     private Integer sequenceNumber;
     private String workflowName;
     private String workItemName;
+    private Boolean hasSuccedded;
 
-    public SimpleWorkItemManagerResult(Integer sequenceNumber, String workItemName, String workflowName) {
+    public SimpleWorkItemManagerResult(Integer sequenceNumber, String workItemName, String workflowName, Boolean hasSuccedded) {
         this.sequenceNumber = sequenceNumber;
         this.workItemName = workItemName;
         this.workflowName = workflowName;
+        this.hasSuccedded = hasSuccedded;
     }
 
     @Override
@@ -27,6 +29,11 @@ public class SimpleWorkItemManagerResult implements WorkItemManagerResult {
     @Override
     public final String getWorkflowName() {
        return this.workflowName;
+    }
+
+    @Override
+    public Boolean hasSuccedded() {
+       return this.hasSuccedded;
     }
 
 }
