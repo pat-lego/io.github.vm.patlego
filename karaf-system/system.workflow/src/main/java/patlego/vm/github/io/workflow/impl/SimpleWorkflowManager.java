@@ -1,3 +1,13 @@
+/*
+ * Created on Mon Jul 20 2020
+ *
+ * @author Patrique Legault
+ * @version 1.0
+ * @since Mon Jul 20 2020
+ *
+ * Copyright (c) 2020 LegoTech
+ */
+
 package patlego.vm.github.io.workflow.impl;
 
 import java.time.LocalDateTime;
@@ -51,7 +61,6 @@ public class SimpleWorkflowManager implements WorkflowManager {
             logger.error(String.format("Failed to remove workflow using id %s", id), e);
             throw new FailedWorfklowRemovalException(String.format("Failed to remove workflow using id %s", id), e);
         }
-
     }
 
     @Override
