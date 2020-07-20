@@ -60,7 +60,7 @@ public interface WorkflowExecutor {
     /**
      * Returns the length of the Workflow which is measured by counting the number of WorkItems in the Workflow
      * @param workflowName The name of the Workflow to be retrieved from the OSGi framework 
-     * @return Integer, returns -1 if Workflow could not be found
+     * @return Integer, returns -1 if Workflow could not be found or if the sequence nunmbers are invalid
      */
     public @Nonnull @Nonnegative Integer getLength(@Nonnull String workflowName);
 
