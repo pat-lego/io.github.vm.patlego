@@ -69,4 +69,16 @@ public interface WorkflowManagerResult {
      */
     public void addWorkItemManagerResult(@Nonnull WorkItemManagerResult workItemManagerResult);
 
+    /**
+     * Returns True if the workflow had completed successfully, False otherwise
+     * @return Boolean
+     */
+    public @Nonnull Boolean getWorkflowSucceddedStatus();
+
+    /**
+     * Sets True if the workflow had completed successfully, False otherwise
+     * @param successStatus - Boolean
+     */
+    public void setWorkflowSucceddedStatus(@Nonnull Boolean successStatus);
+
 }

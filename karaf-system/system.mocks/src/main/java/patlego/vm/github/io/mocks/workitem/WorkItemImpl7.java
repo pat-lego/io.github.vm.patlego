@@ -13,14 +13,8 @@ import patlego.vm.github.io.mocks.workutils.WorkTypeImpl;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.enums.ParamType;
 
-@Component(
-    immediate = true,
-    service = WorkItem.class,
-    property = { 
-        "WORKFLOW_NAME=testWorkflow1", 
-        "SEQUENCE_NUMBER=-5.2" 
-    }
-)
+@Component(immediate = true, service = WorkItem.class, property = { "WORKFLOW_NAME=testWorkflow1",
+        "SEQUENCE_NUMBER=-5.2" })
 public class WorkItemImpl7 implements WorkItem {
 
     public final static String hasRun = "hasRun";
@@ -46,7 +40,7 @@ public class WorkItemImpl7 implements WorkItem {
         WorkType type = new WorkTypeImpl(ParamType.BOOLEAN, Boolean.class.getName());
         Map<String, WorkType> output = new HashMap<String, WorkType>();
         output.put(WorkItemImpl2.hasRun, type);
-        
+
         return output;
     }
 
@@ -62,7 +56,13 @@ public class WorkItemImpl7 implements WorkItem {
 
     @Override
     public String getWorkItemVersion() {
-       return "v1.0";
+        return "v1.0";
     }
-    
+
+    @Override
+    public Integer getSequenceNumber() {
+        // For testing purposes only
+        return 5;
+    }
+
 }

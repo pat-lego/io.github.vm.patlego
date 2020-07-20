@@ -58,11 +58,11 @@ public class WorkItemTest {
         assertEquals(2, workItems.size());
 
         WorkResult workResult_1 = workItems.get(0).execute(null);
-        assertTrue(workResult_1.haSucceeded());
+        assertTrue(workResult_1.hasSucceeded());
         assertEquals(true, workResult_1.getParameters().get(WorkItemImpl1.hasRun));
 
         WorkResult workResult_2 = workItems.get(0).execute(null);
-        assertTrue(workResult_2.haSucceeded());
+        assertTrue(workResult_2.hasSucceeded());
         assertEquals(true, workResult_2.getParameters().get(WorkItemImpl2.hasRun));
     }   
 }

@@ -61,5 +61,11 @@ public interface WorkItem {
      * @return Returns the current version of the given WorkItem
      */
     public @Nonnull String getWorkItemVersion();
+
+    /**
+     * Retrieves the sequence number on the WorkItem
+     * @return Integer
+     */
+    public @Nonnull Integer getSequenceNumber();
     
 }

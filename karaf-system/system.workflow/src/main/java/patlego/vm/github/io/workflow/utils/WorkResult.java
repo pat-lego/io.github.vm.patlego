@@ -12,7 +12,7 @@ public interface WorkResult {
      * Return false otherwise
      * @return True -> WorkItem completed successsfully, False -> An exception was caught
      */
-    public @Nonnull Boolean haSucceeded();
+    public @Nonnull Boolean hasSucceeded();
 
     /**
      * If an exception has occured then it will be stored in here and can be referred to upon a later time

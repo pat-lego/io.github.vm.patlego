@@ -16,6 +16,7 @@ import patlego.vm.github.io.workflow.exceptions.FailedWorfklowAdditonException;
 import patlego.vm.github.io.workflow.exceptions.FailedWorfklowRemovalException;
 import patlego.vm.github.io.workflow.utils.WorkItemManagerResult;
 import patlego.vm.github.io.workflow.utils.WorkflowManagerResult;
+import patlego.vm.github.io.workflow.utils.impl.SimpleWorkflowManagerResult;
 
 @Component(service = WorkflowManager.class, immediate = true)
 public class SimpleWorkflowManager implements WorkflowManager {
@@ -30,7 +31,7 @@ public class SimpleWorkflowManager implements WorkflowManager {
             throw new FailedWorfklowAdditonException("Failed to add a workflow to the Workflow Manager since the id provided is null");
         }
         try {
-            this.map.put(id, null);
+            this.map.put(id, new SimpleWorkflowManagerResult(id));
         } catch (Exception e) {
             logger.error(String.format("Failed to add workflow using id %s", id), e);
             throw new FailedWorfklowAdditonException(String.format("Failed to add workflow using id %s", id), e);
@@ -86,6 +87,30 @@ public class SimpleWorkflowManager implements WorkflowManager {
     @Deactivate
     protected void deactivate() throws Exception {
         this.map = null;
+    }
+
+    @Override
+    public void addWorkItemResult(final String id, final WorkItemManagerResult workItemManagerResult) {
+       if (id == null || workItemManagerResult == null) {
+        throw new IllegalArgumentException("Cannot have a null id or a nulll Work Item Manager Result");
+       }
+
+       this.map.get(id).addWorkItemManagerResult(workItemManagerResult);
+
+    }
+
+    @Override
+    public void setWorkflowSucceddedStatus(String id, Boolean succedded) {
+        this.map.get(id).setWorkflowSucceddedStatus(succedded);
+    }
+
+    @Override
+    public final Map<String, WorkflowManagerResult> getAllWorkflowManagerResult() {
+        if (this.map == null) {
+            return new HashMap<String, WorkflowManagerResult>();
+        }
+
+        return this.map;
     }
 
 }

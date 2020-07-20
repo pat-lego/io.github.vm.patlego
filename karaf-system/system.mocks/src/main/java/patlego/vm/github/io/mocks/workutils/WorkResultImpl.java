@@ -15,7 +15,7 @@ public class WorkResultImpl implements WorkResult {
     }
 
     @Override
-    public Boolean haSucceeded() {
+    public Boolean hasSucceeded() {
        return this.hasSucceedeed;
     }
 

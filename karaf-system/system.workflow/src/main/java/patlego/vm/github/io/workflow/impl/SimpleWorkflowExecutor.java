@@ -1,5 +1,6 @@
 package patlego.vm.github.io.workflow.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,18 +18,23 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import patlego.vm.github.io.workflow.utils.WorkObject;
 import patlego.vm.github.io.workflow.utils.WorkResult;
 import patlego.vm.github.io.workflow.utils.WorkflowResult;
+import patlego.vm.github.io.workflow.utils.impl.SimpleWorkItemManagerResult;
 import patlego.vm.github.io.workflow.utils.impl.SimpleWorkObject;
 import patlego.vm.github.io.workflow.utils.impl.SimpleWorkflowResult;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.WorkflowExecutor;
+import patlego.vm.github.io.workflow.WorkflowManager;
 import patlego.vm.github.io.workflow.comparators.SequenceNumberComparator;
 import patlego.vm.github.io.workflow.exceptions.DuplicateSequenceNumberException;
+import patlego.vm.github.io.workflow.exceptions.FailedWorfklowAdditonException;
+import patlego.vm.github.io.workflow.exceptions.FailedWorfklowRemovalException;
 import patlego.vm.github.io.workflow.exceptions.InvalidSequenceNumberException;
 
 @Component(immediate = true, service = WorkflowExecutor.class, property = { "EXECUTION_TYPE=LINEAR",
@@ -36,77 +42,41 @@ import patlego.vm.github.io.workflow.exceptions.InvalidSequenceNumberException;
 public class SimpleWorkflowExecutor implements WorkflowExecutor {
 
     private BundleContext context;
-
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Reference
+    private WorkflowManager workflowManager;
 
     @Override
     public WorkflowResult run(String workflowName) {
-        SimpleWorkflowResult simpleWorkflowResult = null;
-        WorkResult result = null;
-        String id = getId();
-        try {
-            List<WorkItem> workflow = this.getWorkflow(workflowName);
-            for (WorkItem workItem : workflow) {
-                WorkObject simpleWorkObject = new SimpleWorkObject();
-                result = workItem.execute(simpleWorkObject);
-
-                if (!result.haSucceeded()) {
-                    simpleWorkflowResult = new SimpleWorkflowResult(false, result.getParameters(), id);
-                    simpleWorkflowResult.setException(result.getException());
-                    simpleWorkflowResult.setFailedWorkItemName(workItem.getWorkItemName());
-                    return simpleWorkflowResult;
-                }
-            }
-
-            simpleWorkflowResult = new SimpleWorkflowResult(true, result.getParameters(), id);
-            return simpleWorkflowResult;
-        } catch (DuplicateSequenceNumberException e) {
-            logger.error(String.format(
-                    "Could not retrieve the Workflow %s from the OSGi framework, duplicate sequence number located",
-                    workflowName), e);
-            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
-            simpleWorkflowResult.setException(e);
-            simpleWorkflowResult.setFailedWorkItemName(null);
-            return simpleWorkflowResult;
-        } catch (InvalidSequenceNumberException e) {
-            logger.error(String.format(
-                    "Could not retrieve the Workflow %s from the OSGi framework, invalid sequence number located",
-                    workflowName), e);
-            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
-            simpleWorkflowResult.setException(e);
-            simpleWorkflowResult.setFailedWorkItemName(null);
-            return simpleWorkflowResult;
-        } catch (InvalidSyntaxException e) {
-            logger.error(String.format("Could not retrieve the Workflow %s from the OSGi framework", workflowName), e);
-            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
-            simpleWorkflowResult.setException(e);
-            simpleWorkflowResult.setFailedWorkItemName(null);
-            return simpleWorkflowResult;
-        } catch (Exception e) {
-            logger.error(String.format("Failed to execute workflow %s", workflowName), e);
-            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
-            simpleWorkflowResult.setException(e);
-            simpleWorkflowResult.setFailedWorkItemName(null);
-            return simpleWorkflowResult;
-        }
+        return this.run(workflowName, null);
     }
 
     @Override
     public WorkflowResult run(String workflowName, Map<String, Object> parameters) {
-        if (parameters == null) {
-            return this.run(workflowName);
-        }
-
         SimpleWorkflowResult simpleWorkflowResult = null;
         WorkResult result = null;
         String id = getId();
+        this.workflowManager.addWorkflowName(id, workflowName);
+        this.workflowManager.addWorkflowStartTime(id, LocalDateTime.now());
+
         try {
             List<WorkItem> workflow = this.getWorkflow(workflowName);
             for (WorkItem workItem : workflow) {
                 WorkObject simpleWorkObject = new SimpleWorkObject(parameters);
+
+                // Track the execution
+                this.workflowManager.addWorkItemResult(id, 
+                    new SimpleWorkItemManagerResult(workItem.getSequenceNumber(), workItem.getWorkItemName(), workflowName));
+                
+                // Execute the WorkItem
                 result = workItem.execute(simpleWorkObject);
 
-                if (!result.haSucceeded()) {
+                if (!result.hasSucceeded()) {
+                    // Let the work manager know that the process failed
+                    this.workflowManager.setWorkflowSucceddedStatus(id, false);
+
+                    // Set the result object
                     simpleWorkflowResult = new SimpleWorkflowResult(false, result.getParameters(), id);
                     simpleWorkflowResult.setException(result.getException());
                     simpleWorkflowResult.setFailedWorkItemName(workItem.getWorkItemName());
@@ -114,6 +84,8 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
                 }
             }
 
+            this.workflowManager.addWorkflowEndTime(id, LocalDateTime.now());
+            this.workflowManager.setWorkflowSucceddedStatus(id, true);
             simpleWorkflowResult = new SimpleWorkflowResult(true, result.getParameters(), id);
             return simpleWorkflowResult;
         } catch (DuplicateSequenceNumberException e) {
@@ -123,6 +95,7 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
+            this.workflowManager.setWorkflowSucceddedStatus(id, false);
             return simpleWorkflowResult;
         } catch (InvalidSequenceNumberException e) {
             logger.error(String.format(
@@ -131,24 +104,48 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
+            this.workflowManager.setWorkflowSucceddedStatus(id, false);
             return simpleWorkflowResult;
         } catch (InvalidSyntaxException e) {
             logger.error(String.format("Could not retrieve the Workflow %s from the OSGi framework", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
+            this.workflowManager.setWorkflowSucceddedStatus(id, false);
+            return simpleWorkflowResult;
+        } catch  (FailedWorfklowAdditonException e) {
+            logger.error(String.format("Could not add workflow %s to the Workflow Manager result service", workflowName), e);
+            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
+            simpleWorkflowResult.setException(e);
+            simpleWorkflowResult.setFailedWorkItemName(null);
+            this.workflowManager.setWorkflowSucceddedStatus(id, false);
+            return simpleWorkflowResult;
+        } catch  (FailedWorfklowRemovalException e) {
+            logger.error(String.format("Could not remove workflow %s to the Workflow Manager result service", workflowName), e);
+            simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
+            simpleWorkflowResult.setException(e);
+            simpleWorkflowResult.setFailedWorkItemName(null);
+            this.workflowManager.setWorkflowSucceddedStatus(id, false);
             return simpleWorkflowResult;
         } catch (Exception e) {
             logger.error(String.format("Failed to execute workflow %s", workflowName), e);
             simpleWorkflowResult = new SimpleWorkflowResult(false, null, id);
             simpleWorkflowResult.setException(e);
             simpleWorkflowResult.setFailedWorkItemName(null);
+            this.workflowManager.setWorkflowSucceddedStatus(id, false);
             return simpleWorkflowResult;
         }
     }
 
+    /**
+     * Retrieves a new Id for the workflow and also logs it into the WorkflowManager Service
+     * @return String - Id
+     */
     public String getId() {
-        return UUID.randomUUID().toString();
+        String id = UUID.randomUUID().toString();
+        this.workflowManager.addWorkflow(id);
+
+        return id;
     }
 
     @Override

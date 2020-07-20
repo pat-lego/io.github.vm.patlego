@@ -23,6 +23,7 @@ import patlego.vm.github.io.workflow.enums.ParamType;
 )
 public class WorkItemImpl1 implements WorkItem {
 
+    final static String properties = "1";
     public final static String hasRun = "hasRun";
 
     @Override
@@ -63,6 +64,11 @@ public class WorkItemImpl1 implements WorkItem {
     @Override
     public String getWorkItemVersion() {
        return "v1.0";
+    }
+
+    @Override
+    public Integer getSequenceNumber() {
+        return 1;
     }
     
 }

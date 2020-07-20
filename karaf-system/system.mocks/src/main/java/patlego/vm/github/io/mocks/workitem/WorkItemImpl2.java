@@ -64,5 +64,10 @@ public class WorkItemImpl2 implements WorkItem {
     public String getWorkItemVersion() {
        return "v1.0";
     }
+
+    @Override
+    public Integer getSequenceNumber() {
+       return 2;
+    }
     
 }

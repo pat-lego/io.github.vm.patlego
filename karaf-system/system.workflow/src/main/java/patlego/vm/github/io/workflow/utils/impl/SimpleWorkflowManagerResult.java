@@ -13,6 +13,7 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String id;
+    private Boolean successStatus;
 
     private List<WorkItemManagerResult> workItemResultList;
 
@@ -82,6 +83,20 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     @Override
     public String getId() {
         return this.id;
+    }
+
+    @Override
+    public Boolean getWorkflowSucceddedStatus() {
+       return this.successStatus;
+    }
+
+    @Override
+    public void setWorkflowSucceddedStatus(Boolean successStatus) {
+       if (successStatus == null) {
+           throw new IllegalArgumentException("Cannot have a nulll success status in the workflow");
+       }
+
+       this.successStatus = successStatus;
     }
     
 }

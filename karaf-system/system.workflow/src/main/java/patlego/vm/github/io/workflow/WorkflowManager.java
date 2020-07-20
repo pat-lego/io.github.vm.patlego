@@ -2,6 +2,7 @@ package patlego.vm.github.io.workflow;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -40,6 +41,13 @@ public interface WorkflowManager {
      * @return List<WorkItemManagerResult>
      */
     public @Nonnull List<WorkItemManagerResult> getWorkItemResult(@Nonnull String id);
+
+    /**
+     * Returns the WorkItems that were invoked during the workkflow execution
+     * @param id String id representing the invocation of the workflow
+     * @param workItemManagerResult - WorkItemManagerResult
+     */
+    public void addWorkItemResult(@Nonnull String id, @Nonnull WorkItemManagerResult workItemManagerResult);
     
     /**
      * Defines the start time of the workflow
@@ -61,4 +69,17 @@ public interface WorkflowManager {
      * @param name The name of the workflow
      */
     public void addWorkflowName(@Nonnull String id, @Nonnull String name);
+
+    /**
+     * Sets the succeeded status of the Workflow
+     * @param id String - The workflow id
+     * @param succedded Boolean - succedded status
+     */
+    public void setWorkflowSucceddedStatus(@Nonnull String id, @Nonnull Boolean succedded);
+
+    /**
+     * Returns all executed Workflows
+     * @return Map<String, WorkflowManagerResult>
+     */
+    public @Nonnull Map<String, WorkflowManagerResult> getAllWorkflowManagerResult();
 }

@@ -1,13 +1,16 @@
 package patlego.vm.github.io.mocks.workflow;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.sling.testing.mock.osgi.junit5.OsgiContext;
 import org.apache.sling.testing.mock.osgi.junit5.OsgiContextExtension;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -20,22 +23,36 @@ import patlego.vm.github.io.mocks.workitem.WorkItemImpl6;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl7;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.WorkflowExecutor;
+import patlego.vm.github.io.workflow.WorkflowManager;
 import patlego.vm.github.io.workflow.impl.SimpleWorkflowExecutor;
+import patlego.vm.github.io.workflow.impl.SimpleWorkflowManager;
+import patlego.vm.github.io.workflow.utils.WorkflowManagerResult;
 import patlego.vm.github.io.workflow.utils.WorkflowResult;
 
 @ExtendWith(OsgiContextExtension.class)
 public class LinearWorkflowTest {
 
+    WorkflowManager wfManager;
+
     final static String workflowName = "testWorkflow1";
+
+    @BeforeEach
+    public void setUp() {
+        this.wfManager = new SimpleWorkflowManager();
+    }
     
     @Test
     public void testLinearWorkflowRegistration(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManager);
+
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
         context.registerInjectActivateService(linearWorkflow);
     }
 
     @Test
     public void validateOrdering(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManager);
+
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
         context.registerInjectActivateService(linearWorkflow);
 
@@ -66,10 +83,28 @@ public class LinearWorkflowTest {
         WorkflowResult result = linearWorkflow.run(workflowName);
         assertEquals(true, result.hasSucceeded());
         assertNotNull(result.getId());
+
+        this.wfManager = context.getService(WorkflowManager.class);
+        WorkflowManagerResult workflowManagerResult = this.wfManager.getWorklowInstanceInformation(result.getId());
+        
+        assertNotNull(workflowManagerResult);
+        assertEquals(workflowManagerResult.getId(), result.getId());
+        assertNotNull(workflowManagerResult.getStartTime());
+        assertNotNull(workflowManagerResult.getEndTime());
+        assertEquals(workflowName, workflowManagerResult.getWorkflowName());
+        assertEquals(5, workflowManagerResult.getWorkItemResult().size());
+
+        assertEquals(1, workflowManagerResult.getWorkItemResult().get(0).getSequenceNumber());
+        assertEquals(workflowName, workflowManagerResult.getWorkItemResult().get(0).getWorkflowName());
+        assertEquals(WorkItemImpl1.class.getName(), workflowManagerResult.getWorkItemResult().get(0).getName());
+
+        assertTrue(workflowManagerResult.getWorkflowSucceddedStatus());
     }
 
     @Test
     public void validateInvalidSequenceNumber_1(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManager);
+
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
         context.registerInjectActivateService(linearWorkflow);
 
@@ -93,10 +128,16 @@ public class LinearWorkflowTest {
         WorkflowResult result = linearWorkflow.run(workflowName);
         assertEquals(false, result.hasSucceeded());
         assertNotNull(result.getId());
+
+        this.wfManager = context.getService(WorkflowManager.class);
+        WorkflowManagerResult workflowManagerResult = this.wfManager.getWorklowInstanceInformation(result.getId());
+        assertFalse(workflowManagerResult.getWorkflowSucceddedStatus());
     }
 
     @Test
     public void validateInvalidSequenceNumber_2(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManager);
+
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
         context.registerInjectActivateService(linearWorkflow);
 
@@ -120,10 +161,16 @@ public class LinearWorkflowTest {
         WorkflowResult result = linearWorkflow.run(workflowName);
         assertEquals(false, result.hasSucceeded());
         assertNotNull(result.getId());
+
+        this.wfManager = context.getService(WorkflowManager.class);
+        WorkflowManagerResult workflowManagerResult = this.wfManager.getWorklowInstanceInformation(result.getId());
+        assertFalse(workflowManagerResult.getWorkflowSucceddedStatus());
     }
 
     @Test
     public void validateNoDupsInSequence_1(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManager);
+
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
         context.registerInjectActivateService(linearWorkflow);
 
@@ -146,5 +193,9 @@ public class LinearWorkflowTest {
         WorkflowResult result = linearWorkflow.run(workflowName);
         assertEquals(false, result.hasSucceeded());
         assertNotNull(result.getId());
+
+        this.wfManager = context.getService(WorkflowManager.class);
+        WorkflowManagerResult workflowManagerResult = this.wfManager.getWorklowInstanceInformation(result.getId());
+        assertFalse(workflowManagerResult.getWorkflowSucceddedStatus());
     }
 }
