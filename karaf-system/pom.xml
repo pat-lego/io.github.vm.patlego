@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>patlego.vm.github.io</groupId>
   <artifactId>karaf-system</artifactId>
@@ -7,7 +7,9 @@
   <version>1.0-SNAPSHOT</version>
   <name>Karaf System</name>
   <modules>
+    <module>system.mocks</module>
     <module>system.dao</module>
+    <module>system.workflow</module>
     <module>system.features</module>
     <module>system.core</module>
   </modules>
@@ -24,7 +26,7 @@
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
           <version>4.2.1</version>
-          <extensions>true</extensions>
+          <inherited>true</inherited>
         </plugin>
         <plugin>
           <groupId>org.apache.karaf.tooling</groupId>
@@ -34,6 +36,18 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.junit.platform</groupId>
+              <artifactId>junit-platform-surefire-provider</artifactId>
+              <version>1.2.0</version>
+            </dependency>
+          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -100,13 +114,25 @@
         <artifactId>cxf-rt-frontend-jaxrs</artifactId>
         <version>3.3.2</version>
         <scope>provided</scope>
+      </dependency> <!--https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine-->
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.6.2</version>
+        <scope>test</scope>
+      </dependency> <!--https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.testing.osgi-mock.junit5-->
+      <dependency>
+        <groupId>org.apache.sling</groupId>
+        <artifactId>org.apache.sling.testing.osgi-mock.junit5</artifactId>
+        <version>2.4.16</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.11</version>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-junit-jupiter</artifactId>
+        <version>2.25.1</version>
         <scope>test</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/javax.servlet/servlet-api-->
+      </dependency>
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>
@@ -117,26 +143,64 @@
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
         <version>42.2.8</version>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.ops4j.pax.logging/pax-logging-log4j2 -->
-      <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <scope>provided</scope>
+      </dependency> <!--https://mvnrepository.com/artifact/org.ops4j.pax.logging/pax-logging-log4j2--> <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-api-->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>1.7.30</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+        <scope>provided</scope>
+      </dependency> <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-simple-->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
         <version>1.7.30</version>
         <scope>test</scope>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
+      </dependency> <!--https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils-->
       <dependency>
         <groupId>commons-dbutils</groupId>
         <artifactId>commons-dbutils</artifactId>
         <version>1.7</version>
+        <scope>provided</scope>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305 -->
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>jsr305</artifactId>
+        <version>3.0.2</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.transaction</groupId>
+        <artifactId>javax.transaction-api</artifactId>
+        <version>1.2</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.interceptor</groupId>
+        <artifactId>javax.interceptor-api</artifactId>
+        <version>1.2</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.persistence</groupId>
+        <artifactId>javax.persistence-api</artifactId>
+        <version>2.2</version>
+        <scope>provided</scope>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.aries.jpa/org.apache.aries.jpa.api -->
+      <dependency>
+        <groupId>org.apache.aries.jpa</groupId>
+        <artifactId>org.apache.aries.jpa.api</artifactId>
+        <version>2.7.2</version>
+        <scope>provided</scope>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.9</version>
+        <scope>provided</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-</project> 
+</project>
