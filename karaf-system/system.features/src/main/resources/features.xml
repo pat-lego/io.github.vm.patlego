@@ -32,13 +32,17 @@
         </capability>
     </feature>
 
-    <feature name="patlego-vm-jdbc" version="1.0-SNAPSHOT">
-        <bundle>mvn:patlego.vm.github.io/system.dao/1.0-SNAPSHOT</bundle>
+    <feature name="patlego-vm-jdbc" version="${project.version}">
+        <bundle>mvn:patlego.vm.github.io/system.dao/${project.version}</bundle>
         <bundle>mvn:commons-dbutils/commons-dbutils/1.7</bundle>
     </feature>
 
-    <feature name="patlego-vm-client" version="1.0-SNAPSHOT">
-        <bundle>mvn:patlego.vm.github.io/system.client/1.0-SNAPSHOT</bundle>
+    <feature name="patlego-vm-client" version="${project.version}">
+        <bundle>mvn:patlego.vm.github.io/system.client/${project.version}</bundle>
+    </feature>
+
+    <feature name="patlego-vm-tesseract" version="${project.version}">
+        <bundle>mvn:patlego.vm.github.io/system.ocr/${project.version}</bundle>
     </feature>
 
 </features>
