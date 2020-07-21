@@ -14,6 +14,9 @@ In order to start the system you will require the following
 2. Maven 3.6.3
 3. Docker 19
 4. Docker Compose 1.25.5
+5. Node 12.x
+6. vue cli 4.x
+7. Visual Studio Code
 
 ## How to start the server
 
@@ -24,9 +27,17 @@ Build the project using `mvn clean install -Pdev-build` and navigate to the `kar
 
 To validate that the server is active nagivate to the following URL: `http://localhost:8181/system/console`
 
+## Debug Karaf
+
+The Karaf server has a debug profile setup in the Docker container over port 5005. Using Visual Studio Code make sure to have the Java development package installed and click on the debugger tab. Then select the `Debug (Attach) - Karaf` mode in order to step through code.
+
 ## SSH into server
 
-Start the docker server and open a command prompt, once open execute the following command `ssh -p 8101 karaf@localhost`
+Start the docker server and open a command prompt, once open execute the following command 
+
+```
+ssh -p 8101 karaf@localhost
+```
 
 ## Create a new DataSource
 
