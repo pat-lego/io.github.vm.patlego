@@ -24,7 +24,7 @@ import patlego.vm.github.io.tesseract.TesseractThreadPoolService;
 import patlego.vm.github.io.tesseract.utils.TesseractConversionResult;
 import patlego.vm.github.io.tesseract.utils.TesseractThread;
 
-@Component(service = TesseractThreadPoolService.class)
+@Component(immediate = true, service = TesseractThreadPoolService.class)
 public class SimpleTesseractThreadPoolService implements TesseractThreadPoolService {
 
     private ExecutorService exec;

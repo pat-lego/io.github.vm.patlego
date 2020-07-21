@@ -8,6 +8,7 @@
   </parent>
   <groupId>patlego.vm.github.io</groupId>
   <artifactId>system.ocr</artifactId>
+  <packaging>bundle</packaging>
   <name>System OCR</name>
 
   <build>

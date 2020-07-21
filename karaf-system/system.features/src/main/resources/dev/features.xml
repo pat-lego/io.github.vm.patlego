@@ -41,4 +41,13 @@
         <bundle>mvn:patlego.vm.github.io/system.client/${project.version}</bundle>
     </feature>
 
+    <feature name="patlego-vm-ocr" version="${project.version}">
+        <bundle>mvn:patlego.vm.github.io/system.ocr/${project.version}</bundle>
+        <bundle>mvn:commons-io/commons-io/2.7</bundle>
+    </feature>
+
+    <feature name="patlego-vm-workflow" version="${project.version}">
+        <bundle>mvn:patlego.vm.github.io/system.workflow/${project.version}</bundle>
+    </feature>
+
 </features>
