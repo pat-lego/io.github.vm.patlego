@@ -37,4 +37,8 @@
         <bundle>mvn:commons-dbutils/commons-dbutils/1.7</bundle>
     </feature>
 
+    <feature name="patlego-vm-client" version="${project.version}">
+        <bundle>mvn:patlego.vm.github.io/system.client/${project.version}</bundle>
+    </feature>
+
 </features>
