@@ -8,7 +8,7 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.tesseract.impl;
+package patlego.vm.github.io.ocr.impl;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,9 +20,9 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import patlego.vm.github.io.tesseract.TesseractThreadPoolService;
-import patlego.vm.github.io.tesseract.utils.TesseractConversionResult;
-import patlego.vm.github.io.tesseract.utils.TesseractThread;
+import patlego.vm.github.io.ocr.TesseractThreadPoolService;
+import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
+import patlego.vm.github.io.ocr.utils.TesseractThread;
 
 @Component(immediate = true, service = TesseractThreadPoolService.class)
 public class SimpleTesseractThreadPoolService implements TesseractThreadPoolService {

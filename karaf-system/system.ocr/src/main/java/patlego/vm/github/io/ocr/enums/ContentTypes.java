@@ -1,4 +1,4 @@
-package patlego.vm.github.io.tesseract.enums;
+package patlego.vm.github.io.ocr.enums;
 
 public enum ContentTypes {
     PDF,

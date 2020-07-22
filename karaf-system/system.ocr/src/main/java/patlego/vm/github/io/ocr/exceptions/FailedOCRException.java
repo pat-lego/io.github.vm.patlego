@@ -8,7 +8,7 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.tesseract.exceptions;
+package patlego.vm.github.io.ocr.exceptions;
 
 public class FailedOCRException extends Exception {
     

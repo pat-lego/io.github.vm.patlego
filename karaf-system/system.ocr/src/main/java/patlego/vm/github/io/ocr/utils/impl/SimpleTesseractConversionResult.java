@@ -8,11 +8,11 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.tesseract.utils.impl;
+package patlego.vm.github.io.ocr.utils.impl;
 
 import java.io.InputStream;
 
-import patlego.vm.github.io.tesseract.utils.TesseractConversionResult;
+import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
 
 public class SimpleTesseractConversionResult implements TesseractConversionResult {
 

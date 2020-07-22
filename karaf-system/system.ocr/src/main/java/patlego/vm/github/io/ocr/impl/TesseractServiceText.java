@@ -8,7 +8,7 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.tesseract.impl;
+package patlego.vm.github.io.ocr.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +22,16 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import patlego.vm.github.io.tesseract.TesseractService;
-import patlego.vm.github.io.tesseract.TesseractThreadPoolService;
-import patlego.vm.github.io.tesseract.exceptions.FailedOCRException;
-import patlego.vm.github.io.tesseract.utils.TesseractConversionInput;
-import patlego.vm.github.io.tesseract.utils.TesseractConversionResult;
-import patlego.vm.github.io.tesseract.utils.TesseractThread;
-import patlego.vm.github.io.tesseract.utils.impl.SimpleTesseractThread;
+import patlego.vm.github.io.ocr.OCRService;
+import patlego.vm.github.io.ocr.TesseractThreadPoolService;
+import patlego.vm.github.io.ocr.exceptions.FailedOCRException;
+import patlego.vm.github.io.ocr.utils.TesseractConversionInput;
+import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
+import patlego.vm.github.io.ocr.utils.TesseractThread;
+import patlego.vm.github.io.ocr.utils.impl.SimpleTesseractThread;
 
-@Component(immediate = true, service = TesseractService.class, property = { "OCR_TYPE=TXT" })
-public class TesseractServiceText implements TesseractService {
+@Component(immediate = true, service = OCRService.class, property = { "OCR_TYPE=TXT" })
+public class TesseractServiceText implements OCRService {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -55,14 +55,14 @@ public class TesseractServiceText implements TesseractService {
     private List<String> getCommands(TesseractConversionInput input) {
         List<String> command = new ArrayList<String>();
 
-        command.add(TesseractService.TESSERACT_CMD);
+        command.add(OCRService.TESSERACT_CMD);
         command.add("--dpi");
         command.add(input.getDPI().toString());
-		command.add(TesseractService.TESSERACT_STDIN);
-		command.add(TesseractService.TESSERACT_STDOUT);
+		command.add(OCRService.TESSERACT_STDIN);
+		command.add(OCRService.TESSERACT_STDOUT);
 		command.add("-l");
 		command.add(input.getLang().name());
-        command.add(TesseractService.TXT.toLowerCase());	
+        command.add(OCRService.TXT.toLowerCase());	
 
         return command;
     }

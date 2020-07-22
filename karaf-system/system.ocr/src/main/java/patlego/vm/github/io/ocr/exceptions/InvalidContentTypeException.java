@@ -1,4 +1,4 @@
-package patlego.vm.github.io.tesseract.exceptions;
+package patlego.vm.github.io.ocr.exceptions;
 
 public class InvalidContentTypeException extends Exception {
     

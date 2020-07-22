@@ -8,7 +8,7 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.tesseract.utils;
+package patlego.vm.github.io.ocr.utils;
 
 import java.io.InputStream;
 
@@ -16,8 +16,8 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import patlego.vm.github.io.tesseract.enums.ContentTypes;
-import patlego.vm.github.io.tesseract.enums.TesseractLangs;
+import patlego.vm.github.io.ocr.enums.ContentTypes;
+import patlego.vm.github.io.ocr.enums.TesseractLangs;
 
 public interface TesseractConversionInput {
 

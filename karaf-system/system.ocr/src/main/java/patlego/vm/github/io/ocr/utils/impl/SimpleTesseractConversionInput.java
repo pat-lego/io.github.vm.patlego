@@ -9,13 +9,13 @@
  */
 
 
-package patlego.vm.github.io.tesseract.utils.impl;
+package patlego.vm.github.io.ocr.utils.impl;
 
 import java.io.InputStream;
 
-import patlego.vm.github.io.tesseract.enums.ContentTypes;
-import patlego.vm.github.io.tesseract.enums.TesseractLangs;
-import patlego.vm.github.io.tesseract.utils.TesseractConversionInput;
+import patlego.vm.github.io.ocr.enums.ContentTypes;
+import patlego.vm.github.io.ocr.enums.TesseractLangs;
+import patlego.vm.github.io.ocr.utils.TesseractConversionInput;
 
 public class SimpleTesseractConversionInput implements TesseractConversionInput {
 

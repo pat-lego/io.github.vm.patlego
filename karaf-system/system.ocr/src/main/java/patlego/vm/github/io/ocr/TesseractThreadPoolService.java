@@ -8,14 +8,14 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.tesseract;
+package patlego.vm.github.io.ocr;
 
 import java.util.concurrent.FutureTask;
 
 import javax.annotation.Nonnull;
 
-import patlego.vm.github.io.tesseract.utils.TesseractConversionResult;
-import patlego.vm.github.io.tesseract.utils.TesseractThread;
+import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
+import patlego.vm.github.io.ocr.utils.TesseractThread;
 
 public interface TesseractThreadPoolService {
 

@@ -1,11 +1,11 @@
-package patlego.vm.github.io.tesseract;
+package patlego.vm.github.io.ocr;
 
 import java.io.InputStream;
 
 import javax.annotation.Nonnull;
 
-import patlego.vm.github.io.tesseract.enums.ContentTypes;
-import patlego.vm.github.io.tesseract.exceptions.InvalidContentTypeException;
+import patlego.vm.github.io.ocr.enums.ContentTypes;
+import patlego.vm.github.io.ocr.exceptions.InvalidContentTypeException;
 
 public interface ContentTypeService {
     /**

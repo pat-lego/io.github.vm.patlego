@@ -1,6 +1,5 @@
-package patlego.vm.github.io.tesseract.impl;
+package patlego.vm.github.io.ocr.impl;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
@@ -11,9 +10,9 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import patlego.vm.github.io.tesseract.ContentTypeService;
-import patlego.vm.github.io.tesseract.enums.ContentTypes;
-import patlego.vm.github.io.tesseract.exceptions.InvalidContentTypeException;
+import patlego.vm.github.io.ocr.ContentTypeService;
+import patlego.vm.github.io.ocr.enums.ContentTypes;
+import patlego.vm.github.io.ocr.exceptions.InvalidContentTypeException;
 
 @Component(immediate = true, service = ContentTypeService.class)
 public class TikaContentTypeService implements ContentTypeService {

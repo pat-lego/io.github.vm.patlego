@@ -8,7 +8,7 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.tesseract.enums;
+package patlego.vm.github.io.ocr.enums;
 
 public enum TesseractLangs {
     eng

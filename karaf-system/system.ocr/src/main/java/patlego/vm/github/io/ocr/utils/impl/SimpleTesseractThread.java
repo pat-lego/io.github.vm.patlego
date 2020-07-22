@@ -8,16 +8,16 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.tesseract.utils.impl;
+package patlego.vm.github.io.ocr.utils.impl;
 
 import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 
-import patlego.vm.github.io.tesseract.utils.TesseractConversionInput;
-import patlego.vm.github.io.tesseract.utils.TesseractConversionResult;
-import patlego.vm.github.io.tesseract.utils.TesseractThread;
+import patlego.vm.github.io.ocr.utils.TesseractConversionInput;
+import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
+import patlego.vm.github.io.ocr.utils.TesseractThread;
 
 public class SimpleTesseractThread extends TesseractThread {
 

@@ -8,15 +8,15 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.tesseract;
+package patlego.vm.github.io.ocr;
 
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.Nonnull;
 
-import patlego.vm.github.io.tesseract.exceptions.FailedOCRException;
-import patlego.vm.github.io.tesseract.utils.TesseractConversionInput;
-import patlego.vm.github.io.tesseract.utils.TesseractConversionResult;
+import patlego.vm.github.io.ocr.exceptions.FailedOCRException;
+import patlego.vm.github.io.ocr.utils.TesseractConversionInput;
+import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
 
 /**
  * Class used to perform OCR operations
@@ -24,7 +24,7 @@ import patlego.vm.github.io.tesseract.utils.TesseractConversionResult;
  * OCR_TYPE is an OSGi property on the class used to define which type of OCR
  * rendering we will perform
  */
-public interface TesseractService {
+public interface OCRService {
 
     /**
      * Sets the HOCR flag to be used when performing the OCR transaction
