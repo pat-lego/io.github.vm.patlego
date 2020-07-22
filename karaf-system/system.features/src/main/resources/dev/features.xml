@@ -44,6 +44,10 @@
     <feature name="patlego-vm-ocr" version="${project.version}">
         <bundle>mvn:patlego.vm.github.io/system.ocr/${project.version}</bundle>
         <bundle>mvn:commons-io/commons-io/2.7</bundle>
+        <bundle>mvn:org.apache.tika/tika-core/1.24.1</bundle>
+        <bundle>mvn:org.apache.pdfbox/pdfbox/2.0.20</bundle>
+        <bundle>mvn:org.apache.pdfbox/fontbox/2.0.20</bundle>
+        <bundle>wrap:mvn:org.apache.pdfbox/pdfbox-tools/2.0.20</bundle>
     </feature>
 
     <feature name="patlego-vm-workflow" version="${project.version}">

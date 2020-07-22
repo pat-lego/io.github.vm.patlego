@@ -18,6 +18,7 @@ public class SimpleTesseractConversionResult implements TesseractConversionResul
 
     private InputStream in;
     private Integer exitCode;
+    private String exitError;
 
     public SimpleTesseractConversionResult(InputStream in, Integer exitCode) {
         this.in = in;
@@ -32,6 +33,16 @@ public class SimpleTesseractConversionResult implements TesseractConversionResul
     @Override
     public Integer getExitCode() {
         return this.exitCode;
+    }
+
+    @Override
+    public String getExitError() {
+       return this.exitError;
+    }
+
+    @Override
+    public void setExitError(String exitError) {
+       this.exitError = exitError;
     }
 
     

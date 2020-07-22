@@ -12,8 +12,11 @@ package patlego.vm.github.io.tesseract.utils;
 
 import java.io.InputStream;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
+import patlego.vm.github.io.tesseract.enums.ContentTypes;
 import patlego.vm.github.io.tesseract.enums.TesseractLangs;
 
 public interface TesseractConversionInput {
@@ -29,5 +32,23 @@ public interface TesseractConversionInput {
      * @return TesseractLangs
      */
     public @Nonnull TesseractLangs getLang();
+
+    /**
+     * Set the DPI for the conversion
+     * @return Integer - DPI
+     */
+    public @Nullable Integer getDPI();
+
+    /**
+     * Set the DPI for the conversion
+     * @param dpi - Nonnegative integer
+     */
+    public void setDPI(@Nonnegative Integer dpi);
+
+    /**
+     * Retrieve the content type of the document
+     * @return ContentTypes
+     */
+    public @Nonnull ContentTypes getContentType();
     
 }

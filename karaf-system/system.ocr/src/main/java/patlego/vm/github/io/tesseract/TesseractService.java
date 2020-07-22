@@ -57,7 +57,7 @@ public interface TesseractService {
     public final static String TESSERACT_STDOUT = "stdout";
 
     /**
-     * Used to convert an input stream into a Tesseract Result
+     * Used to convert an Tesseract Conversion Input object stream into a Tesseract Conversion Result
      * 
      * @param document TesseractConversionInput
      * @return TesseractConversionResult

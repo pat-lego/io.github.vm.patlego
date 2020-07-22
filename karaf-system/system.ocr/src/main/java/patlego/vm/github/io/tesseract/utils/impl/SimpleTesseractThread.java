@@ -44,16 +44,24 @@ public class SimpleTesseractThread extends TesseractThread {
         Process process = processBuilder.start();
         // Get the process streams
         OutputStream procIn = process.getOutputStream();
-        
+
         IOUtils.copy(this.tesseractConversionInput.getInputStream(), procIn);
 
         // Close stream before waiting on the process
         procIn.close();
 
+        // Get the exit code
         int exitCode = process.waitFor();
 
-        // Return the result from the process to the calling application
-        return new SimpleTesseractConversionResult(process.getInputStream(), exitCode);
+        // Create the result object
+        TesseractConversionResult result = new SimpleTesseractConversionResult(process.getInputStream(), exitCode);
+
+        // Set the error reason if one exists
+        if (exitCode != 0) {
+            result.setExitError(IOUtils.toString(process.getErrorStream(), "UTF-8"));
+        }
+
+        return result;
     }
 
     @Override

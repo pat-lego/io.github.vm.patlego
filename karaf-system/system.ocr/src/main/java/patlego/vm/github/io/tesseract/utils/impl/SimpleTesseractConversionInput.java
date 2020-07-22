@@ -13,6 +13,7 @@ package patlego.vm.github.io.tesseract.utils.impl;
 
 import java.io.InputStream;
 
+import patlego.vm.github.io.tesseract.enums.ContentTypes;
 import patlego.vm.github.io.tesseract.enums.TesseractLangs;
 import patlego.vm.github.io.tesseract.utils.TesseractConversionInput;
 
@@ -20,8 +21,10 @@ public class SimpleTesseractConversionInput implements TesseractConversionInput 
 
     private InputStream in;
     private TesseractLangs lang;
+    private Integer dpi;
+    private ContentTypes contentType;
 
-    public SimpleTesseractConversionInput(InputStream in, TesseractLangs lang) {
+    public SimpleTesseractConversionInput(InputStream in, TesseractLangs lang, ContentTypes contentType) {
         if (in == null) {
             throw new IllegalArgumentException(String.format("Cannot supply a null or empty document to be OCR in %s", this.getClass().getName()));
         }
@@ -30,8 +33,13 @@ public class SimpleTesseractConversionInput implements TesseractConversionInput 
             throw new IllegalArgumentException(String.format("Cannot supply a null or empty language to OCR in %s", this.getClass().getName()));
         }
 
+        if (contentType == null) {
+            throw new IllegalArgumentException(String.format("Cannot supply a null or empty content type to OCR in %s", this.getClass().getName()));
+        }
+
         this.in = in;
         this.lang = lang;
+        this.contentType = contentType;
     }
 
     @Override
@@ -42,6 +50,25 @@ public class SimpleTesseractConversionInput implements TesseractConversionInput 
     @Override
     public TesseractLangs getLang() {
        return this.lang;
+    }
+
+    @Override
+    public void setDPI(Integer dpi) {
+        if (dpi == null || dpi < 0) {
+            this.dpi = 70;
+        } else {
+            this.dpi = dpi;
+        }
+    }
+
+    @Override
+    public Integer getDPI() {
+        return this.dpi;
+    }
+
+    @Override
+    public ContentTypes getContentType() {
+       return this.contentType;
     }
     
 }
