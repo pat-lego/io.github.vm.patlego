@@ -109,5 +109,9 @@
       <groupId>org.apache.pdfbox</groupId>
       <artifactId>pdfbox-tools</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-parsers</artifactId>
+    </dependency>
   </dependencies>
 </project>

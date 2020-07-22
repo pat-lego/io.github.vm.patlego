@@ -54,16 +54,18 @@ public class SimpleTesseractConversionInput implements TesseractConversionInput 
 
     @Override
     public void setDPI(Integer dpi) {
-        if (dpi == null || dpi < 0) {
-            this.dpi = 70;
-        } else {
-            this.dpi = dpi;
-        }
+        this.dpi = dpi;
     }
 
     @Override
     public Integer getDPI() {
-        return this.dpi;
+        if (this.dpi == null) {
+            return 70;
+        } else if (this.dpi <= 0) {
+            return 70;
+        } else {
+            return this.dpi;
+        }
     }
 
     @Override
