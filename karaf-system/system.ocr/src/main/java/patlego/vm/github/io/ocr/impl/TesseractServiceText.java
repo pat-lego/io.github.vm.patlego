@@ -30,7 +30,7 @@ import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
 import patlego.vm.github.io.ocr.utils.TesseractThread;
 import patlego.vm.github.io.ocr.utils.impl.SimpleTesseractThread;
 
-@Component(immediate = true, service = OCRService.class, property = { "OCR_TYPE=TXT" })
+@Component(immediate = true, service = OCRService.class, property = { "OCR_TYPE=TXT", "RENDERER=TESSERACT" })
 public class TesseractServiceText implements OCRService {
 
     Logger logger = LoggerFactory.getLogger(getClass());

@@ -21,7 +21,10 @@ import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
 /**
  * Class used to perform OCR operations
  * 
- * OCR_TYPE is an OSGi property on the class used to define which type of OCR
+ * OCR_TYPE is an OSGi property on the class used to define how the output of the OCR is to be returned
+ * 
+ * RENDERER is an OSGi property on the class used to define which rendering engine to use when performing OCR
+ * 
  * rendering we will perform
  */
 public interface OCRService {
