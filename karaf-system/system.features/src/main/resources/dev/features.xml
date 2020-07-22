@@ -48,6 +48,17 @@
         <bundle>mvn:org.apache.pdfbox/pdfbox/2.0.20</bundle>
         <bundle>mvn:org.apache.pdfbox/fontbox/2.0.20</bundle>
         <bundle>wrap:mvn:org.apache.pdfbox/pdfbox-tools/2.0.20</bundle>
+        <bundle>mvn:org.apache.tika/tika-parsers/1.24.1</bundle>
+        <bundle>mvn:org.apache.pdfbox/jempbox/1.8.16</bundle>
+        <bundle>mvn:org.apache.pdfbox/preflight/2.0.20</bundle>
+        <bundle>mvn:org.apache.pdfbox/xmpbox/2.0.20</bundle>
+        <bundle>mvn:org.apache.commons/commons-compress/1.20</bundle>
+        <bundle>mvn:org.apache.commons/commons-csv/1.8</bundle>
+        <bundle>wrap:mvn:org.apache.poi/poi/4.1.2</bundle>
+        <bundle>mvn:org.apache.commons/commons-collections4/4.4</bundle>
+        <bundle>mvn:org.apache.commons/commons-math3/3.6.1</bundle>
+        <bundle>mvn:org.apache.commons/commons-math3/3.6.1</bundle>
+        <bundle>wrap:mvn:xerces/xercesImpl/2.12.0</bundle>
     </feature>
 
     <feature name="patlego-vm-workflow" version="${project.version}">
