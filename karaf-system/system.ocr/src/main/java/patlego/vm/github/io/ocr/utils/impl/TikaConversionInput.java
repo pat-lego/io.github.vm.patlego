@@ -8,23 +8,22 @@
  * Copyright (c) 2020 LegoTech
  */
 
-
 package patlego.vm.github.io.ocr.utils.impl;
 
 import java.io.InputStream;
 
 import patlego.vm.github.io.ocr.enums.ContentTypes;
 import patlego.vm.github.io.ocr.enums.TesseractLangs;
-import patlego.vm.github.io.ocr.utils.TesseractConversionInput;
+import patlego.vm.github.io.ocr.utils.OCRConversionInput;
 
-public class SimpleTesseractConversionInput implements TesseractConversionInput {
+public class TikaConversionInput implements OCRConversionInput {
 
     private InputStream in;
     private TesseractLangs lang;
     private Integer dpi;
     private ContentTypes contentType;
 
-    public SimpleTesseractConversionInput(InputStream in, TesseractLangs lang, ContentTypes contentType) {
+    public TikaConversionInput(InputStream in, TesseractLangs lang, ContentTypes contentType) {
         if (in == null) {
             throw new IllegalArgumentException(String.format("Cannot supply a null or empty document to be OCR in %s", this.getClass().getName()));
         }

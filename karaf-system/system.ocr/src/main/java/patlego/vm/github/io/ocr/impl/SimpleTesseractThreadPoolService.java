@@ -21,8 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import patlego.vm.github.io.ocr.TesseractThreadPoolService;
-import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
-import patlego.vm.github.io.ocr.utils.TesseractThread;
+import patlego.vm.github.io.ocr.utils.OCRConversionResult;
+import patlego.vm.github.io.ocr.utils.OCRThread;
 
 @Component(immediate = true, service = TesseractThreadPoolService.class)
 public class SimpleTesseractThreadPoolService implements TesseractThreadPoolService {
@@ -33,8 +33,8 @@ public class SimpleTesseractThreadPoolService implements TesseractThreadPoolServ
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
-    public FutureTask<TesseractConversionResult> executeThread(TesseractThread t) {
-        FutureTask<TesseractConversionResult> ft = new FutureTask<TesseractConversionResult>(t);
+    public FutureTask<OCRConversionResult> executeThread(OCRThread t) {
+        FutureTask<OCRConversionResult> ft = new FutureTask<OCRConversionResult>(t);
 
         this.exec.submit(ft);
 
@@ -42,18 +42,17 @@ public class SimpleTesseractThreadPoolService implements TesseractThreadPoolServ
     }
 
     @Activate
-    protected void activate() throws Exception  {
+    protected void activate() throws Exception {
         this.exec = Executors.newFixedThreadPool(numThreads);
         this.logger.info(String.format("%s is now active", this.getClass().getName()));
     }
 
     @Deactivate
-    protected void deactivate() throws Exception  {
-        if(this.exec != null) {
+    protected void deactivate() throws Exception {
+        if (this.exec != null) {
             this.exec.shutdown();
             logger.info(String.format("Thread pool in %s is now shutdown", this.getClass().getName()));
         }
         this.logger.info(String.format("%s has been deactivated", this.getClass().getName()));
-    }
-    
+    }   
 }

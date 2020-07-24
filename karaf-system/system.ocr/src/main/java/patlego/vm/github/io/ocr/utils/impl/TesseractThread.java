@@ -15,16 +15,18 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 
-import patlego.vm.github.io.ocr.utils.TesseractConversionInput;
-import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
-import patlego.vm.github.io.ocr.utils.TesseractThread;
+import patlego.vm.github.io.ocr.enums.CharacterEncoding;
+import patlego.vm.github.io.ocr.utils.OCRConversionInput;
+import patlego.vm.github.io.ocr.utils.OCRConversionResult;
+import patlego.vm.github.io.ocr.utils.OCRThread;
 
-public class SimpleTesseractThread extends TesseractThread {
+
+public class TesseractThread extends OCRThread {
 
     private List<String> commands;
-    private TesseractConversionInput tesseractConversionInput;
+    private OCRConversionInput tesseractConversionInput;
 
-    public SimpleTesseractThread(List<String> commands, TesseractConversionInput input) {
+    public TesseractThread(List<String> commands, OCRConversionInput input) {
         if (commands == null || commands.isEmpty()) {
             throw new IllegalArgumentException("Cannot have an empty or null list of commands");
         }
@@ -39,7 +41,7 @@ public class SimpleTesseractThread extends TesseractThread {
     }
 
     @Override
-    public TesseractConversionResult call() throws Exception {
+    public OCRConversionResult call() throws Exception {
         ProcessBuilder processBuilder = new ProcessBuilder(this.commands);
         Process process = processBuilder.start();
         // Get the process streams
@@ -52,14 +54,15 @@ public class SimpleTesseractThread extends TesseractThread {
 
         // Get the exit code
         int exitCode = process.waitFor();
-
-        // Create the result object
-        TesseractConversionResult result = new SimpleTesseractConversionResult(process.getInputStream(), exitCode);
+        String exitError = null;
 
         // Set the error reason if one exists
         if (exitCode != 0) {
-            result.setExitError(IOUtils.toString(process.getErrorStream(), "UTF-8"));
+            exitError = IOUtils.toString(process.getErrorStream(), CharacterEncoding.UTF8);
         }
+
+        // Create the result object
+        OCRConversionResult result = new TesseractConversionResult(process.getInputStream(), exitCode, exitError);
 
         return result;
     }

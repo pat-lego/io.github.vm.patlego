@@ -15,7 +15,7 @@ import java.io.InputStream;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public interface TesseractConversionResult {
+public interface OCRConversionResult {
     
     /**
      * Retrieves the input stream which represents the converted result
@@ -35,9 +35,4 @@ public interface TesseractConversionResult {
      */
     public @Nullable String getExitError();
 
-    /**
-     * String that represents the exit error
-     * @param exitError - String that represents the exit error. Should only be set if the exit code is other then 0
-     */
-    public void setExitError(@Nonnull String exitError);
 }

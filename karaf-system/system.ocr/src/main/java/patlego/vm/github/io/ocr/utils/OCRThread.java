@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 
 import javax.annotation.Nonnull;
 
-public abstract class TesseractThread implements Callable<TesseractConversionResult> {
+public abstract class OCRThread implements Callable<OCRConversionResult> {
     
     /**
      * Returns the commands to perform within the Process Builder

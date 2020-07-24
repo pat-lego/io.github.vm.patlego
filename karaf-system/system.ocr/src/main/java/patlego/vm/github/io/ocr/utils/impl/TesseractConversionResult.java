@@ -12,17 +12,18 @@ package patlego.vm.github.io.ocr.utils.impl;
 
 import java.io.InputStream;
 
-import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
+import patlego.vm.github.io.ocr.utils.OCRConversionResult;
 
-public class SimpleTesseractConversionResult implements TesseractConversionResult {
+public class TesseractConversionResult implements OCRConversionResult {
 
     private InputStream in;
     private Integer exitCode;
     private String exitError;
 
-    public SimpleTesseractConversionResult(InputStream in, Integer exitCode) {
+    public TesseractConversionResult(InputStream in, Integer exitCode, String exitError) {
         this.in = in;
         this.exitCode = exitCode;
+        this.exitError = exitError;
     }
 
     @Override
@@ -39,11 +40,5 @@ public class SimpleTesseractConversionResult implements TesseractConversionResul
     public String getExitError() {
        return this.exitError;
     }
-
-    @Override
-    public void setExitError(String exitError) {
-       this.exitError = exitError;
-    }
-
     
 }

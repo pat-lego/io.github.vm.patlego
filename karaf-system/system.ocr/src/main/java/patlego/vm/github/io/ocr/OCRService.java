@@ -15,8 +15,8 @@ import java.util.concurrent.ExecutionException;
 import javax.annotation.Nonnull;
 
 import patlego.vm.github.io.ocr.exceptions.FailedOCRException;
-import patlego.vm.github.io.ocr.utils.TesseractConversionInput;
-import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
+import patlego.vm.github.io.ocr.utils.OCRConversionInput;
+import patlego.vm.github.io.ocr.utils.OCRConversionResult;
 
 /**
  * Class used to perform OCR operations
@@ -62,12 +62,19 @@ public interface OCRService {
     /**
      * Used to convert an Tesseract Conversion Input object stream into a Tesseract Conversion Result
      * 
-     * @param document TesseractConversionInput
-     * @return TesseractConversionResult
+     * @param document OCRConversionInput
+     * @return OCRConversionResult
      * @throws FailedOCRException
      * @throws InterruptedException
      * @throws ExecutionException
      */
-    public @Nonnull TesseractConversionResult performOCR(@Nonnull TesseractConversionInput document)
+    public @Nonnull OCRConversionResult performOCR(@Nonnull OCRConversionInput document)
             throws FailedOCRException, InterruptedException, ExecutionException;
+
+    /**
+     * This is used to validate that the parameters to perform OCR are valid and if not then an error 
+     * @param document
+     * @return Boolean - True if it can be rendered, False - If it cannot be rendered
+     */
+    public @Nonnull Boolean validateParameters(@Nonnull OCRConversionInput document);
 }

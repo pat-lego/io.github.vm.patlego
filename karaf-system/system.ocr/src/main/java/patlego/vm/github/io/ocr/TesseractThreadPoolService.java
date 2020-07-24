@@ -14,8 +14,8 @@ import java.util.concurrent.FutureTask;
 
 import javax.annotation.Nonnull;
 
-import patlego.vm.github.io.ocr.utils.TesseractConversionResult;
-import patlego.vm.github.io.ocr.utils.TesseractThread;
+import patlego.vm.github.io.ocr.utils.OCRConversionResult;
+import patlego.vm.github.io.ocr.utils.OCRThread;
 
 public interface TesseractThreadPoolService {
 
@@ -25,6 +25,6 @@ public interface TesseractThreadPoolService {
      * @param t TesseractThread
      * @return FutureTask<TesseractConversionResult>
      */
-    public @Nonnull FutureTask<TesseractConversionResult> executeThread(@Nonnull TesseractThread t);
+    public @Nonnull FutureTask<OCRConversionResult> executeThread(@Nonnull OCRThread t);
 
 }

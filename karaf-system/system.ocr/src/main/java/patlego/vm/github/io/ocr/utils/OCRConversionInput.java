@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import patlego.vm.github.io.ocr.enums.ContentTypes;
 import patlego.vm.github.io.ocr.enums.TesseractLangs;
 
-public interface TesseractConversionInput {
+public interface OCRConversionInput {
 
     /**
      * Used to retrieve the document to OCR
