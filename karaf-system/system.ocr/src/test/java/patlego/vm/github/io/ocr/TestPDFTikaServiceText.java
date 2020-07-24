@@ -4,17 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.sling.testing.mock.osgi.junit5.OsgiContext;
 import org.apache.sling.testing.mock.osgi.junit5.OsgiContextExtension;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.mp4parser.aj.lang.annotation.Before;
 
 import patlego.vm.github.io.ocr.impl.PDFTikaServiceText;
 import patlego.vm.github.io.ocr.utils.OCRConversionInput;
@@ -36,37 +37,46 @@ public class TestPDFTikaServiceText {
 
     @Test
     public void testContentType(OsgiContext context) {
-        OCRService ocrService = Mockito.mock(PDFTikaServiceText.class); 
+        OCRService ocrService = Mockito.mock(PDFTikaServiceText.class);
         Mockito.when(ocrService.validateParameters(Mockito.any())).thenCallRealMethod();
-        
+
         context.registerInjectActivateService(ocrService);
 
-        List<OCRService> contextService = Arrays.asList(context.getServices(OCRService.class, String.format("(&(%s=%s)(%s=%s)(%s=%s))", 
-                    OCRService.OCR_INPUT_TYPE, ContentTypes.PDF.name(),
-                    OCRService.OCR_OUTPUT_TYPE, ContentTypes.TXT.name(),
-                    OCRService.RENDERER, OCRRenderer.TIKA)));
+        List<OCRService> contextService = Arrays.asList(context.getServices(OCRService.class,
+                String.format("(&(%s=%s)(%s=%s)(%s=%s))", OCRService.OCR_INPUT_TYPE, ContentTypes.PDF.name(),
+                        OCRService.OCR_OUTPUT_TYPE, ContentTypes.TXT.name(), OCRService.RENDERER, OCRRenderer.TIKA)));
 
         assertEquals(1, contextService.size());
-        
+
         OCRConversionInput input = new SimpleConversionInput(this.pdfDoc, ContentTypes.PDF);
         assertTrue(contextService.get(0).validateParameters(input));
     }
 
     @Test
     public void testInvalidContentType(OsgiContext context) {
-        OCRService ocrService = Mockito.mock(PDFTikaServiceText.class); 
+        OCRService ocrService = Mockito.mock(PDFTikaServiceText.class);
         Mockito.when(ocrService.validateParameters(Mockito.any())).thenCallRealMethod();
-        
+
         context.registerInjectActivateService(ocrService);
 
-        List<OCRService> contextService = Arrays.asList(context.getServices(OCRService.class, String.format("(&(%s=%s)(%s=%s)(%s=%s))", 
-                    OCRService.OCR_INPUT_TYPE, ContentTypes.PDF.name(),
-                    OCRService.OCR_OUTPUT_TYPE, ContentTypes.TXT.name(),
-                    OCRService.RENDERER, OCRRenderer.TIKA)));
+        List<OCRService> contextService = Arrays.asList(context.getServices(OCRService.class,
+                String.format("(&(%s=%s)(%s=%s)(%s=%s))", OCRService.OCR_INPUT_TYPE, ContentTypes.PDF.name(),
+                        OCRService.OCR_OUTPUT_TYPE, ContentTypes.TXT.name(), OCRService.RENDERER, OCRRenderer.TIKA)));
 
         assertEquals(1, contextService.size());
-        
+
         OCRConversionInput input = new SimpleConversionInput(this.jpegDoc, ContentTypes.JPEG);
         assertFalse(contextService.get(0).validateParameters(input));
+    }
+
+    @AfterEach
+    public void destroy() throws IOException {
+        if (this.jpegDoc != null) {
+            this.jpegDoc.close();
+        }
+        
+        if (this.pdfDoc != null) {
+            this.pdfDoc.close();
+        }
     }
 }

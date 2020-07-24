@@ -2,7 +2,6 @@ package patlego.vm.github.io.ocr;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +9,7 @@ import java.io.InputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.sling.testing.mock.osgi.junit5.OsgiContext;
 import org.apache.sling.testing.mock.osgi.junit5.OsgiContextExtension;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -63,5 +63,16 @@ public class TestTikaContentTypeService {
         assertThrows(InvalidContentTypeException.class, () -> {
             service.getContentType(IOUtils.toInputStream(new String("This is Path"), CharacterEncoding.UTF8));
         });
+    }
+
+    @AfterEach
+    public void destroy() throws IOException {
+        if (this.jpegDoc != null) {
+            this.jpegDoc.close();
+        }
+
+        if (this.pdfDoc != null) {
+            this.pdfDoc.close();
+        }
     }
 }
