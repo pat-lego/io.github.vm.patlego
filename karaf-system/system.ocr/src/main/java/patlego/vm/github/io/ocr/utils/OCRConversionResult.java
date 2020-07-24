@@ -11,6 +11,7 @@
 package patlego.vm.github.io.ocr.utils;
 
 import java.io.InputStream;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 
@@ -21,5 +22,12 @@ public interface OCRConversionResult {
      * @return InputStream - Result of the conversion
      */
     public @Nonnull InputStream getInputStream();
+    
+
+    /**
+     * Retrieves any additional metadata parameters defined in the class
+     * @return Map<String, Object> Representing metadata retrieved from the document during runtime
+     */
+    public @Nonnull Map<String, Object> getMetadataParameters();
 
 }

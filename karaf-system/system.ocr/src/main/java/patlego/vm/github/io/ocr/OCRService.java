@@ -33,34 +33,19 @@ import patlego.vm.github.io.ocr.utils.OCRConversionResult;
 public interface OCRService {
 
     /**
-     * Sets the HOCR flag to be used when performing the OCR transaction
+     * Sets the MIME Type for input documents
      */
-    public final static String HOCR = "HOCR";
+    public final static String OCR_INPUT_TYPE = "OCR_INPUT_TYPE";
 
     /**
-     * Sets the TXT flag to be used when performing the OCR transaction
+     * Sets the MIME Type flag for output documents
      */
-    public final static String TXT = "TXT";
+    public final static String OCR_OUTPUT_TYPE = "OCR_OUTPUT_TYPE";
 
     /**
-     * Sets the PDF flag to be used when performing the OCR transaction
+     * Sets the Renderer Type for the documents
      */
-    public final static String PDF = "PDF";
-
-    /**
-     * Get the CLI comamnd
-     */
-    public final static String TESSERACT_CMD = "tesseract";
-
-    /**
-     * Sets the STDIN param for tesseract
-     */
-    public final static String TESSERACT_STDIN = "stdin";
-
-    /**
-     * Sets the STDOUT param for tesseract
-     */
-    public final static String TESSERACT_STDOUT = "stdout";
+    public final static String RENDERER = "RENDERER";
 
     /**
      * Used to convert an Tesseract Conversion Input object stream into a Tesseract Conversion Result

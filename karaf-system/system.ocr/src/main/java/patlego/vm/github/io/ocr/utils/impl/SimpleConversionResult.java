@@ -12,6 +12,8 @@ package patlego.vm.github.io.ocr.utils.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import patlego.vm.github.io.ocr.exceptions.FailedOCRException;
 import patlego.vm.github.io.ocr.utils.OCRConversionResult;
@@ -19,6 +21,7 @@ import patlego.vm.github.io.ocr.utils.OCRConversionResult;
 public class SimpleConversionResult implements OCRConversionResult {
 
     private InputStream in;
+    private Map<String, Object> metadata;
 
     public SimpleConversionResult(InputStream in) throws IOException, FailedOCRException {
         if (in == null) {
@@ -26,11 +29,25 @@ public class SimpleConversionResult implements OCRConversionResult {
         }
 
         this.in = in;
+        this.metadata = new HashMap<String, Object>();
     }
 
     @Override
     public InputStream getInputStream() {
-       return this.in;
+        return this.in;
+    }
+
+    @Override
+    public Map<String, Object> getMetadataParameters() {
+        return this.metadata;
+    }
+
+    public void addMetadaParam(String name, Object value) {
+        if (name == null || value == null) {
+            return;
+        }
+
+        this.metadata.put(name, value);
     }
     
 }

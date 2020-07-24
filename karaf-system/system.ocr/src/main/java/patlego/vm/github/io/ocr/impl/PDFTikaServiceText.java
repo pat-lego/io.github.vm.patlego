@@ -25,13 +25,13 @@ import patlego.vm.github.io.ocr.utils.impl.SimpleConversionResult;
 public class PDFTikaServiceText implements OCRService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final static String TIKA_METADATA = "TIKA_METADATA"; 
 
     @Override
     public OCRConversionResult performOCR(OCRConversionInput input)
             throws FailedOCRException, InterruptedException, ExecutionException {
         BodyContentHandler handler = new BodyContentHandler();
 
-        // TODO do something with the metadata
         Metadata metadata = new Metadata();
         ParseContext pcontext = new ParseContext();
 
@@ -40,8 +40,9 @@ public class PDFTikaServiceText implements OCRService {
 
         try {
             pdfparser.parse(input.getInputStream(), handler, metadata, pcontext);
-            OCRConversionResult result = new SimpleConversionResult(new ByteArrayInputStream(handler.toString().getBytes()));
-
+            SimpleConversionResult result = new SimpleConversionResult(new ByteArrayInputStream(handler.toString().getBytes()));
+            
+            result.addMetadaParam(PDFTikaServiceText.TIKA_METADATA, metadata);
             return result;
         } catch (IOException | SAXException | TikaException e) {
             logger.error(String.format("Caught a PDF Parsing exception when using Tika to parse incoming stream in %s",
