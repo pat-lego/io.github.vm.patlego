@@ -63,6 +63,7 @@ public class TestPDFTikaServiceText {
                 String.format("(&(%s=%s)(%s=%s)(%s=%s))", OCRService.OCR_INPUT_TYPE, ContentTypes.PDF.name(),
                         OCRService.OCR_OUTPUT_TYPE, ContentTypes.TXT.name(), OCRService.RENDERER, OCRRenderer.TIKA)));
 
+        // Should only be one of this type deployed
         assertEquals(1, contextService.size());
 
         OCRConversionInput input = new SimpleConversionInput(this.jpegDoc, ContentTypes.JPEG);

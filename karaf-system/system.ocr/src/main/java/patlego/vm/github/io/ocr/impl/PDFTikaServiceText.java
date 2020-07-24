@@ -25,7 +25,7 @@ import patlego.vm.github.io.ocr.utils.impl.SimpleConversionResult;
 public class PDFTikaServiceText implements OCRService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final static String TIKA_METADATA = "TIKA_METADATA"; 
+    private final static String TIKA_METADATA = "TIKA_PDF_METADATA"; 
 
     @Override
     public OCRConversionResult performOCR(OCRConversionInput input)
