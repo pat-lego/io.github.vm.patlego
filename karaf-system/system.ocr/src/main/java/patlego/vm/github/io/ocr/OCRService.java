@@ -21,9 +21,12 @@ import patlego.vm.github.io.ocr.utils.OCRConversionResult;
 /**
  * Class used to perform OCR operations
  * 
- * OCR_TYPE is an OSGi property on the class used to define how the output of the OCR is to be returned
+ * OCR_INPUT_TYPE is an OSGi property on the class is used to define what the expected mime type of the incoming document should 
+ * OCR_OUTPUT_TYPE is an OSGi property on the class is used to define what the mime type of the outputted document will be 
  * 
  * RENDERER is an OSGi property on the class used to define which rendering engine to use when performing OCR
+ * 
+ * Class implementations should be written with the following nomenclature [INPUT_MIMETYPE][RENDERER_TYPE]Service[OUTPUT_MIMETYPE].java
  * 
  * rendering we will perform
  */

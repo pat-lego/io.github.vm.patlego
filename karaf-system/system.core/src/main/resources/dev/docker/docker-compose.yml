@@ -3,7 +3,7 @@ services:
   karaf:
      environment:
        - TZ=America/Montreal
-     build: ./karaf 
+     build: .
      restart: always
      ports:
          - "5005:5005"

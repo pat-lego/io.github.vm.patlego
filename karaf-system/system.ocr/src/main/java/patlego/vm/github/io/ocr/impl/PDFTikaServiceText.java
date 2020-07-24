@@ -1,5 +1,6 @@
 package patlego.vm.github.io.ocr.impl;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
@@ -18,10 +19,10 @@ import patlego.vm.github.io.ocr.enums.ContentTypes;
 import patlego.vm.github.io.ocr.exceptions.FailedOCRException;
 import patlego.vm.github.io.ocr.utils.OCRConversionInput;
 import patlego.vm.github.io.ocr.utils.OCRConversionResult;
-import patlego.vm.github.io.ocr.utils.impl.TikaConversionResult;
+import patlego.vm.github.io.ocr.utils.impl.SimpleConversionResult;
 
-@Component(immediate = true, service = OCRService.class, property = { "OCR_TYPE=TXT", "RENDERER=TIKA" })
-public class TikaServiceText implements OCRService {
+@Component(immediate = true, service = OCRService.class, property = {"OCR_INPUT_TYPE=PDF", "OCR_OUTPUT_TYPE=TXT", "RENDERER=TIKA" })
+public class PDFTikaServiceText implements OCRService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -29,6 +30,8 @@ public class TikaServiceText implements OCRService {
     public OCRConversionResult performOCR(OCRConversionInput input)
             throws FailedOCRException, InterruptedException, ExecutionException {
         BodyContentHandler handler = new BodyContentHandler();
+
+        // TODO do something with the metadata
         Metadata metadata = new Metadata();
         ParseContext pcontext = new ParseContext();
 
@@ -37,7 +40,7 @@ public class TikaServiceText implements OCRService {
 
         try {
             pdfparser.parse(input.getInputStream(), handler, metadata, pcontext);
-            OCRConversionResult result = new TikaConversionResult(handler.toString());
+            OCRConversionResult result = new SimpleConversionResult(new ByteArrayInputStream(handler.toString().getBytes()));
 
             return result;
         } catch (IOException | SAXException | TikaException e) {
@@ -63,8 +66,7 @@ public class TikaServiceText implements OCRService {
         }
 
         if (!input.getContentType().equals(ContentTypes.PDF)) {
-            throw new FailedOCRException(String.format("Conversion Input can only be of type %s for images and text refer to %s %s", 
-                            TesseractServicePDF.class.getName(), TesseractServiceText.class.getName(), TikaServiceText.class.getName()));
+            throw new FailedOCRException(String.format("Conversion Input can only be of type PDF %s", PDFTikaServiceText.class.getName()));
         }
     }
     

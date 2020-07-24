@@ -13,7 +13,6 @@ package patlego.vm.github.io.ocr.utils;
 import java.io.InputStream;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public interface OCRConversionResult {
     
@@ -22,17 +21,5 @@ public interface OCRConversionResult {
      * @return InputStream - Result of the conversion
      */
     public @Nonnull InputStream getInputStream();
-
-    /**
-     * Returns the exit code of the process
-     * @return Integer
-     */
-    public @Nonnull Integer getExitCode();
-
-    /**
-     * String that represents the exit error
-     * @return String
-     */
-    public @Nullable String getExitError();
 
 }

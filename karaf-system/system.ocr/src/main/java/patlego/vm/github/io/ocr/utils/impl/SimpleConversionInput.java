@@ -13,23 +13,16 @@ package patlego.vm.github.io.ocr.utils.impl;
 import java.io.InputStream;
 
 import patlego.vm.github.io.ocr.enums.ContentTypes;
-import patlego.vm.github.io.ocr.enums.TesseractLangs;
 import patlego.vm.github.io.ocr.utils.OCRConversionInput;
 
-public class TikaConversionInput implements OCRConversionInput {
+public class SimpleConversionInput implements OCRConversionInput {
 
     private InputStream in;
-    private TesseractLangs lang;
-    private Integer dpi;
     private ContentTypes contentType;
 
-    public TikaConversionInput(InputStream in, TesseractLangs lang, ContentTypes contentType) {
+    public SimpleConversionInput(InputStream in, ContentTypes contentType) {
         if (in == null) {
             throw new IllegalArgumentException(String.format("Cannot supply a null or empty document to be OCR in %s", this.getClass().getName()));
-        }
-
-        if (lang == null) {
-            throw new IllegalArgumentException(String.format("Cannot supply a null or empty language to OCR in %s", this.getClass().getName()));
         }
 
         if (contentType == null) {
@@ -37,7 +30,6 @@ public class TikaConversionInput implements OCRConversionInput {
         }
 
         this.in = in;
-        this.lang = lang;
         this.contentType = contentType;
     }
 
@@ -46,26 +38,6 @@ public class TikaConversionInput implements OCRConversionInput {
        return this.in;
     }
 
-    @Override
-    public TesseractLangs getLang() {
-       return this.lang;
-    }
-
-    @Override
-    public void setDPI(Integer dpi) {
-        this.dpi = dpi;
-    }
-
-    @Override
-    public Integer getDPI() {
-        if (this.dpi == null) {
-            return 70;
-        } else if (this.dpi <= 0) {
-            return 70;
-        } else {
-            return this.dpi;
-        }
-    }
 
     @Override
     public ContentTypes getContentType() {
