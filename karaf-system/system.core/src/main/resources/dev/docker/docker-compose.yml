@@ -12,7 +12,7 @@ services:
          - "1099:1099"
          - "44444:44444"
      volumes: 
-      - ./patlego.vm/:/opt/karaf
+      - ./patlego.vm/:/opt/patlego.vm
       - ~/.m2/repository:/home/root/.m2/repository
      depends_on: 
       - postgres-db
