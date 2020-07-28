@@ -19,6 +19,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class WorkItemId implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 781601201317914017L;
+
     @Column(name = "work_item_name")
     private String workitemName;
 

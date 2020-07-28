@@ -76,8 +76,7 @@ public class TestPDFTikaServiceText {
 
         String data = IOUtils.toString(result.getInputStream(), "UTF-8");
         assertTrue(data.contains("This is a small demonstration .pdf file"));
-            
-
+        assertEquals(ContentTypes.TXT, result.getContentType());
     }
 
     @Test

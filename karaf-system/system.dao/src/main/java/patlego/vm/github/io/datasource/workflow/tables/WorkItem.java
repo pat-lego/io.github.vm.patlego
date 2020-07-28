@@ -26,6 +26,11 @@ import javax.persistence.Table;
 @Table(name = "work_item")
 public class WorkItem implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3999590215790515470L;
+
     @EmbeddedId
     private WorkItemId id;
 

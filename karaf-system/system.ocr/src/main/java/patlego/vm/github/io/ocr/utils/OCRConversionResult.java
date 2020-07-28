@@ -15,6 +15,8 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import patlego.vm.github.io.ocr.enums.ContentTypes;
+
 public interface OCRConversionResult {
     
     /**
@@ -22,6 +24,12 @@ public interface OCRConversionResult {
      * @return InputStream - Result of the conversion
      */
     public @Nonnull InputStream getInputStream();
+
+    /**
+     * Retrieves the content type of the outcoming OCR result
+     * @return ContentTypes 
+     */
+    public @Nonnull ContentTypes getContentType();
     
 
     /**

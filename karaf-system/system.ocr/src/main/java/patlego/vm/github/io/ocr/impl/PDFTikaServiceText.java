@@ -42,7 +42,10 @@ public class PDFTikaServiceText implements OCRService {
 
         try {
             pdfparser.parse(input.getInputStream(), handler, metadata, pcontext);
-            SimpleConversionResult result = new SimpleConversionResult(new ByteArrayInputStream(handler.toString().getBytes()));
+            SimpleConversionResult result = new SimpleConversionResult(
+                            new ByteArrayInputStream(
+                                handler.toString().getBytes()),
+                            ContentTypes.TXT);
             
             result.addMetadaParam(PDFTikaServiceText.TIKA_METADATA, metadata);
             return result;
