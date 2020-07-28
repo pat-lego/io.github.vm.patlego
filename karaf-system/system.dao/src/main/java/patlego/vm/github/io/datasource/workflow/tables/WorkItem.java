@@ -8,7 +8,7 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.datasource.tables;
+package patlego.vm.github.io.datasource.workflow.tables;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -22,17 +22,22 @@ import javax.persistence.Table;
 /**
  * A regular JPA entity, using JPA annotations.
  */
-@Entity(name = "WorkItem")
-@Table(name = "WorkItem")
+@Entity(name = "work_item")
+@Table(name = "work_item")
 public class WorkItem implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3999590215790515470L;
 
     @EmbeddedId
     private WorkItemId id;
 
-    @Column(name = "startTime")
+    @Column(name = "start_time")
     private Date startTime;
 
-    @Column(name = "endTime")
+    @Column(name = "end_time")
     private Date endTime;
 
     public Date getStartTime() {

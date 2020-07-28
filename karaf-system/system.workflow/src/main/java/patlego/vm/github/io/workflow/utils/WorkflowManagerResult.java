@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface WorkflowManagerResult {
 
@@ -26,9 +27,11 @@ public interface WorkflowManagerResult {
     /**
      * Returns the time when the workflow started executing
      * 
+     * This can also be null if the workflow has not started executing yet
+     * 
      * @return LocalDateTime
      */
-    public @Nonnull LocalDateTime getStartTime();
+    public @Nullable LocalDateTime getStartTime();
 
     /**
      * Sets the time when the workflow started executing
@@ -41,9 +44,11 @@ public interface WorkflowManagerResult {
     /**
      * Returns the time when the workflow finished executing
      * 
+     * This can be bull if the workflow has not completed excuting.
+     * 
      * @return LocalDateTime
      */
-    public @Nonnull LocalDateTime getEndTime();
+    public @Nullable LocalDateTime getEndTime();
 
     /**
      * Sets the time when the workflow finished executing
@@ -81,9 +86,12 @@ public interface WorkflowManagerResult {
 
     /**
      * Returns True if the workflow had completed successfully, False otherwise
+     * 
+     * The result can also be null if the workflow has not finished executing
+     * 
      * @return Boolean
      */
-    public @Nonnull Boolean getWorkflowSucceddedStatus();
+    public @Nullable Boolean getWorkflowSucceddedStatus();
 
     /**
      * Sets True if the workflow had completed successfully, False otherwise

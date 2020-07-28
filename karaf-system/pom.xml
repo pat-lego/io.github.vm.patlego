@@ -1,17 +1,17 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>patlego.vm.github.io</groupId>
   <artifactId>karaf-system</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>Karaf System</name>
-
   <modules>
-    <module>system.mocks</module>
     <module>system.dao</module>
     <module>system.workflow</module>
     <module>system.client</module>
+    <module>system.ocr</module>
+    <module>system.mocks</module>
     <module>system.features</module>
     <module>system.core</module>
   </modules>
@@ -137,7 +137,14 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-junit-jupiter</artifactId>
-        <version>2.25.1</version>
+        <version>3.4.4</version>
+        <scope>test</scope>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>3.4.4</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -204,6 +211,41 @@
         <artifactId>commons-lang3</artifactId>
         <version>3.9</version>
         <scope>provided</scope>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.7</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+      <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>pdfbox</artifactId>
+        <version>2.0.20</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+      <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>fontbox</artifactId>
+        <version>2.0.20</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
+      <dependency>
+        <groupId>org.apache.tika</groupId>
+        <artifactId>tika-core</artifactId>
+        <version>1.24.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>pdfbox-tools</artifactId>
+        <version>2.0.20</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
+      <dependency>
+        <groupId>org.apache.tika</groupId>
+        <artifactId>tika-parsers</artifactId>
+        <version>1.24.1</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

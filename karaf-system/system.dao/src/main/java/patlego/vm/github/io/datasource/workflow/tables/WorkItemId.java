@@ -8,7 +8,7 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.datasource.tables;
+package patlego.vm.github.io.datasource.workflow.tables;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -19,10 +19,15 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class WorkItemId implements Serializable {
 
-    @Column(name = "workItemName")
+    /**
+     *
+     */
+    private static final long serialVersionUID = 781601201317914017L;
+
+    @Column(name = "work_item_name")
     private String workitemName;
 
-    @Column(name = "workflowId")
+    @Column(name = "workflow_id")
     private String workflowId;
 
     public WorkItemId() {
