@@ -27,8 +27,8 @@ public class TestTikaContentTypeService {
 
     @BeforeEach
     public void setup() {
-        this.pdfDoc = TestPDFTikaServiceText.class.getResourceAsStream("/tesseract/sample.pdf");
-        this.jpegDoc = TestPDFTikaServiceText.class.getResourceAsStream("/tesseract/simple.jpeg");
+        this.pdfDoc = TestTikaContentTypeService.class.getResourceAsStream("/ocr/sample.pdf");
+        this.jpegDoc = TestTikaContentTypeService.class.getResourceAsStream("/ocr/simple.jpeg");
     }
 
     @Test

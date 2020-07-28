@@ -22,17 +22,17 @@ import javax.persistence.Table;
 /**
  * A regular JPA entity, using JPA annotations.
  */
-@Entity(name = "WorkItem")
-@Table(name = "WorkItem")
+@Entity(name = "work_item")
+@Table(name = "work_item")
 public class WorkItem implements Serializable {
 
     @EmbeddedId
     private WorkItemId id;
 
-    @Column(name = "startTime")
+    @Column(name = "start_time")
     private Date startTime;
 
-    @Column(name = "endTime")
+    @Column(name = "end_time")
     private Date endTime;
 
     public Date getStartTime() {

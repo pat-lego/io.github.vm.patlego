@@ -19,10 +19,10 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class WorkItemId implements Serializable {
 
-    @Column(name = "workItemName")
+    @Column(name = "work_item_name")
     private String workitemName;
 
-    @Column(name = "workflowId")
+    @Column(name = "workflow_id")
     private String workflowId;
 
     public WorkItemId() {

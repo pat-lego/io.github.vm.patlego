@@ -10,13 +10,10 @@ import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.pdf.PDFParser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
-import patlego.vm.github.io.datasource.ocr.tables.OCRInvocation;
-import patlego.vm.github.io.datasource.ocr.services.OCRRepository;
 import patlego.vm.github.io.ocr.OCRService;
 import patlego.vm.github.io.ocr.enums.ContentTypes;
 import patlego.vm.github.io.ocr.exceptions.FailedOCRException;
@@ -28,10 +25,9 @@ import patlego.vm.github.io.ocr.utils.impl.SimpleConversionResult;
 public class PDFTikaServiceText implements OCRService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final static String TIKA_METADATA = "TIKA_PDF_METADATA"; 
 
-    @Reference
-    private OCRRepository ocrRepository;
+    // This is the key used to store the document metadata within the map that represents the metadata from the OCR conversion
+    public final static String TIKA_METADATA = "TIKA_PDF_METADATA"; 
 
     @Override
     public OCRConversionResult performOCR(OCRConversionInput input)
@@ -48,7 +44,6 @@ public class PDFTikaServiceText implements OCRService {
             pdfparser.parse(input.getInputStream(), handler, metadata, pcontext);
             SimpleConversionResult result = new SimpleConversionResult(new ByteArrayInputStream(handler.toString().getBytes()));
             
-            insertInDB(handler.toString(), input.getContentType());
             result.addMetadaParam(PDFTikaServiceText.TIKA_METADATA, metadata);
             return result;
         } catch (IOException | SAXException | TikaException e) {
@@ -59,19 +54,6 @@ public class PDFTikaServiceText implements OCRService {
                             this.getClass().getName()),
                     e);
         }
-    }
-
-    /**
-     * Inserts the data within the database
-     * @param content PDF content
-     * @param type The content type of the document
-     */
-    private void insertInDB(String content, ContentTypes type) {
-        OCRInvocation invocation = new OCRInvocation();
-        invocation.setContentType(type.name());
-        invocation.setOcrData(content);
-
-        this.ocrRepository.createOCRInvocation(invocation);
     }
 
     /**

@@ -20,8 +20,8 @@ public class TestSimpleConversionInput {
 
     @BeforeEach
     public void setup() {
-        this.pdfDoc = TestPDFTikaServiceText.class.getResourceAsStream("/tesseract/sample.pdf");
-        this.jpegDoc = TestPDFTikaServiceText.class.getResourceAsStream("/tesseract/simple.jpeg");
+        this.pdfDoc = TestSimpleConversionInput.class.getResourceAsStream("/ocr/sample.pdf");
+        this.jpegDoc = TestSimpleConversionInput.class.getResourceAsStream("/ocr/simple.jpeg");
     }
 
     @Test

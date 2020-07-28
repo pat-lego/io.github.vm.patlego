@@ -16,7 +16,7 @@
         limitations under the License.
     -->
 
-    <persistence-unit name="karafdb-openjpa" transaction-type="JTA">
+    <persistence-unit name="karafdb-hibernate" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Only used when transaction-type=JTA -->
