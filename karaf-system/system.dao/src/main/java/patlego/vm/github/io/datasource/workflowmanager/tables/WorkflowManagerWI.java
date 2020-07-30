@@ -1,3 +1,13 @@
+/*
+ * Created on Thu Jul 30 2020
+ *
+ * @author Patrique Legault
+ * @version 1.0
+ * @since Thu Jul 30 2020
+ *
+ * Copyright (c) 2020 LegoTech
+ */
+
 package patlego.vm.github.io.datasource.workflowmanager.tables;
 
 import java.io.Serializable;
