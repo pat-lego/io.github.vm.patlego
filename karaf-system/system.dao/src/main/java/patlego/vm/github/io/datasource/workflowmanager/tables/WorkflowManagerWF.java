@@ -8,37 +8,46 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package patlego.vm.github.io.datasource.workflow.tables;
+package patlego.vm.github.io.datasource.workflowmanager.tables;
 
 import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
  * A regular JPA entity, using JPA annotations.
  */
-@Entity(name = "work_item")
-@Table(name = "work_item")
-public class WorkItem implements Serializable {
+@Entity(name = "workflow_manager_wf")
+@Table(name = "workflow_manager_wf", schema = "patlegovm")
+public class WorkflowManagerWF implements Serializable {
 
     /**
      *
      */
     private static final long serialVersionUID = -3999590215790515470L;
 
-    @EmbeddedId
-    private WorkItemId id;
-
-    @Column(name = "start_time")
+    @Id
+    @Column(name = "workflow_id")
+    private String workflowId;
+    
+    @Column(name = "start_time", nullable = true)
     private Date startTime;
 
-    @Column(name = "end_time")
+    @Column(name = "end_time", nullable = true)
     private Date endTime;
+
+    public WorkflowManagerWF(String id) {
+        if (id  == null || id.isEmpty()) {
+            throw new RuntimeException("Workflow ID cannot be null or empty");
+        }
+
+        this.workflowId = id;
+    }
 
     public Date getStartTime() {
         return startTime;
@@ -56,12 +65,11 @@ public class WorkItem implements Serializable {
         this.endTime = endTime;
     }
 
-    public WorkItemId getId() {
-        return id;
+    public String getWorkflowId() {
+        return workflowId;
     }
 
-    public void setId(WorkItemId id) {
-        this.id = id;
+    public void setWorkflowId(String workflowId) {
+        this.workflowId = workflowId;
     }
-
 }

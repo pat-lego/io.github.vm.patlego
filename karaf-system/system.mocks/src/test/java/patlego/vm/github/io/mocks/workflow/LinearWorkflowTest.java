@@ -13,7 +13,10 @@ import org.apache.sling.testing.mock.osgi.junit5.OsgiContextExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 
+import patlego.vm.github.io.datasource.workflowmanager.repo.WorkflowManagerDS;
+import patlego.vm.github.io.datasource.workflowmanager.repo.WorkflowManagerDSImpl;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl1;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl2;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl3;
@@ -34,16 +37,19 @@ import patlego.vm.github.io.workflow.utils.WorkflowResult;
 public class LinearWorkflowTest {
 
     WorkflowManager wfManager;
+    WorkflowManagerDSImpl wfManagerDS;
 
     final static String workflowName = "testWorkflow1";
 
     @BeforeEach
     public void setUp() {
+        this.wfManagerDS = Mockito.mock(WorkflowManagerDSImpl.class);
         this.wfManager = new SimpleWorkflowManager();
     }
     
     @Test
     public void testLinearWorkflowRegistration(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManagerDS);
         context.registerInjectActivateService(this.wfManager);
 
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
@@ -52,6 +58,7 @@ public class LinearWorkflowTest {
 
     @Test
     public void validateOrdering(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManagerDS);
         context.registerInjectActivateService(this.wfManager);
 
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
@@ -104,6 +111,7 @@ public class LinearWorkflowTest {
 
     @Test
     public void validateInvalidSequenceNumber_1(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManagerDS);
         context.registerInjectActivateService(this.wfManager);
 
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
@@ -137,6 +145,7 @@ public class LinearWorkflowTest {
 
     @Test
     public void validateInvalidSequenceNumber_2(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManagerDS);
         context.registerInjectActivateService(this.wfManager);
 
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
@@ -170,6 +179,7 @@ public class LinearWorkflowTest {
 
     @Test
     public void validateInvalidSequenceNumber_3(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManagerDS);
         context.registerInjectActivateService(this.wfManager);
 
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
@@ -203,6 +213,7 @@ public class LinearWorkflowTest {
 
     @Test
     public void validateNoDupsInSequence_1(OsgiContext context) {
+        context.registerInjectActivateService(this.wfManagerDS);
         context.registerInjectActivateService(this.wfManager);
 
         WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();

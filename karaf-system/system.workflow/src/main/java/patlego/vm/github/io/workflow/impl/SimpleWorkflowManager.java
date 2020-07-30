@@ -18,9 +18,11 @@ import java.util.Map;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import patlego.vm.github.io.datasource.workflowmanager.repo.WorkflowManagerDS;
 import patlego.vm.github.io.workflow.WorkflowManager;
 import patlego.vm.github.io.workflow.exceptions.FailedWorfklowAdditonException;
 import patlego.vm.github.io.workflow.exceptions.FailedWorfklowRemovalException;
@@ -30,6 +32,9 @@ import patlego.vm.github.io.workflow.utils.impl.SimpleWorkflowManagerResult;
 
 @Component(service = WorkflowManager.class, immediate = true)
 public class SimpleWorkflowManager implements WorkflowManager {
+
+    @Reference
+    private WorkflowManagerDS workflowManagerDS;
 
     private Map<String, WorkflowManagerResult> map;
 
