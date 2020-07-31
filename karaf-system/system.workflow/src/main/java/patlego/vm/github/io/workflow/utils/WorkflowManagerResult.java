@@ -71,20 +71,6 @@ public interface WorkflowManagerResult {
     public void addWorkflowName(@Nonnull String workflowName);
 
     /**
-     * Returns the WorkItems that were invoked during the workkflow execution
-     * 
-     * @return List<WorkItemManagerResult>
-     */
-    public @Nonnull List<WorkItemManagerResult> getWorkItemResult();
-
-
-    /**
-     * Adds a WorkItem Manager Result object to the Workflow
-     * @param workItemManagerResult - WorkItemManagerResult
-     */
-    public void addWorkItemManagerResult(@Nonnull WorkItemManagerResult workItemManagerResult);
-
-    /**
      * Returns True if the workflow had completed successfully, False otherwise
      * 
      * The result can also be null if the workflow has not finished executing

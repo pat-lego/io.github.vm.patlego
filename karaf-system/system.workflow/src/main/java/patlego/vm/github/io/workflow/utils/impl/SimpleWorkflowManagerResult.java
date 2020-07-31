@@ -26,11 +26,8 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     private String id;
     private Boolean successStatus;
 
-    private List<WorkItemManagerResult> workItemResultList;
-
     public SimpleWorkflowManagerResult(String id) {
         this.id = id;
-        this.workItemResultList = new ArrayList<WorkItemManagerResult>();
     }
 
     @Override
@@ -46,11 +43,6 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     @Override
     public String getWorkflowName() {
         return this.workflowName;
-    }
-
-    @Override
-    public List<WorkItemManagerResult> getWorkItemResult() {
-       return this.workItemResultList;
     }
 
     @Override
@@ -83,15 +75,6 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     }
 
     @Override
-    public void addWorkItemManagerResult(WorkItemManagerResult workItemManagerResult) {
-       if (workItemManagerResult == null) {
-           throw new IllegalArgumentException("Cannot have a null WorkItemManagerResult passed into the WorkItem Manager Result");
-       }
-
-       this.workItemResultList.add(workItemManagerResult);
-    }
-
-    @Override
     public String getId() {
         return this.id;
     }
@@ -116,8 +99,6 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
         result.addStartTime(entity.getStartTime().toLocalDateTime());
         result.addEndTime(entity.getEndTime().toLocalDateTime());
         result.addWorkflowName(entity.getWorkflowName());
-
-        result.addWorkItemManagerResult(null);
 
         return result;
     }
