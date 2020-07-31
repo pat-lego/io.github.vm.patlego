@@ -11,7 +11,6 @@
 package patlego.vm.github.io.datasource.workflowmanager.tables;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -30,27 +29,14 @@ public class WorkflowManagerWI implements Serializable {
     @EmbeddedId
     private WorkItemId id;
 
-    @Column(name = "start_time", nullable = true)
-    private Date startTime;
+    @Column(name = "sequence_number", nullable = true)
+    private Integer sequenceNumber;
 
-    @Column(name = "end_time", nullable = true)
-    private Date endTime;
+    @Column(name = "success", nullable = true)
+    private Boolean success;
 
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
+    @Column(name = "workflow_name", nullable = true)
+    private String workflowName;
 
     public WorkItemId getId() {
         return id;
@@ -59,5 +45,28 @@ public class WorkflowManagerWI implements Serializable {
     public void setId(WorkItemId id) {
         this.id = id;
     }
-    
+
+    public Integer getSequenceNumber() {
+        return sequenceNumber;
+    }
+
+    public void setSequenceNumber(Integer sequenceNumber) {
+        this.sequenceNumber = sequenceNumber;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public String getWorkflowName() {
+        return workflowName;
+    }
+
+    public void setWorkflowName(String workflowName) {
+        this.workflowName = workflowName;
+    }
 }

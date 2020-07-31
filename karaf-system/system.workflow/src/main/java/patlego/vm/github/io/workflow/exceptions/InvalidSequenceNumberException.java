@@ -15,8 +15,12 @@ public class InvalidSequenceNumberException extends RuntimeException {
     /**
      *
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4186792103950435085L;
 
+    /**
+     *
+     */
+    
     public InvalidSequenceNumberException(String msg, Throwable e) {
         super(msg, e);
     }

@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import patlego.vm.github.io.datasource.workflowmanager.tables.WorkflowManagerWF;
 import patlego.vm.github.io.workflow.utils.WorkItemManagerResult;
 import patlego.vm.github.io.workflow.utils.WorkflowManagerResult;
 
@@ -109,4 +110,15 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
        this.successStatus = successStatus;
     }
     
+    public static SimpleWorkflowManagerResult create(WorkflowManagerWF entity) {
+        SimpleWorkflowManagerResult result = new SimpleWorkflowManagerResult(entity.getWorkflowId());
+        result.setWorkflowSucceddedStatus(entity.getSuccess());
+        result.addStartTime(entity.getStartTime().toLocalDateTime());
+        result.addEndTime(entity.getEndTime().toLocalDateTime());
+        result.addWorkflowName(entity.getWorkflowName());
+
+        result.addWorkItemManagerResult(null);
+
+        return result;
+    }
 }

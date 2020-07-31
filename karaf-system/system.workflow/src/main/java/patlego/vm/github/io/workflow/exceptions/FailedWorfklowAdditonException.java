@@ -14,8 +14,12 @@ public class FailedWorfklowAdditonException extends RuntimeException {
     /**
      *
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2228402567660025616L;
 
+    /**
+     *
+     */
+    
     public FailedWorfklowAdditonException(String msg) {
         super(msg);
     }

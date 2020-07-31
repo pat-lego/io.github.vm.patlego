@@ -24,15 +24,12 @@ public class WorkItemId implements Serializable {
      */
     private static final long serialVersionUID = 781601201317914017L;
 
-    @Column(name = "work_item_name")
+    @Column(name = "workitem_name")
     private String workitemName;
 
     @Column(name = "workflow_id")
     private String workflowId;
 
-    public WorkItemId() {
-    }
- 
     public WorkItemId(String workitemName, String workflowId) {
         this.workitemName = workitemName;
         this.workflowId = workflowId;

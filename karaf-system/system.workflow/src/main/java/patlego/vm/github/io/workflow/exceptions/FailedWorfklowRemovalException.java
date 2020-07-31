@@ -14,8 +14,12 @@ public class FailedWorfklowRemovalException extends RuntimeException{
     /**
      *
      */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -905465075736621331L;
 
+    /**
+     *
+     */
+    
     public FailedWorfklowRemovalException(String msg) {
         super(msg);
     }

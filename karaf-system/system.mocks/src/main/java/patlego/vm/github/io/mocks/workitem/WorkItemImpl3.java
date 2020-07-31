@@ -37,7 +37,6 @@ public class WorkItemImpl3 implements WorkItem {
 
     @Override
     public Map<String, WorkType> getInputParameters() {
-        // TODO Auto-generated method stub
         return null;
     }
 

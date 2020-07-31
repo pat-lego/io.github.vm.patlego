@@ -11,7 +11,7 @@
 package patlego.vm.github.io.datasource.workflowmanager.tables;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 
@@ -34,12 +34,18 @@ public class WorkflowManagerWF implements Serializable {
     @Id
     @Column(name = "workflow_id")
     private String workflowId;
+
+    @Column(name = "workflow_name", columnDefinition = "varchar(255)")
+    private String workflowName;
+
+    @Column(name = "success")
+    private Boolean success;
     
     @Column(name = "start_time", nullable = true)
-    private Date startTime;
+    private Timestamp startTime;
 
     @Column(name = "end_time", nullable = true)
-    private Date endTime;
+    private Timestamp endTime;
 
     public WorkflowManagerWF(String id) {
         if (id  == null || id.isEmpty()) {
@@ -49,19 +55,19 @@ public class WorkflowManagerWF implements Serializable {
         this.workflowId = id;
     }
 
-    public Date getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
 
@@ -71,5 +77,21 @@ public class WorkflowManagerWF implements Serializable {
 
     public void setWorkflowId(String workflowId) {
         this.workflowId = workflowId;
+    }
+
+    public String getWorkflowName() {
+        return workflowName;
+    }
+
+    public void setWorkflowName(String workflowName) {
+        this.workflowName = workflowName;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 }

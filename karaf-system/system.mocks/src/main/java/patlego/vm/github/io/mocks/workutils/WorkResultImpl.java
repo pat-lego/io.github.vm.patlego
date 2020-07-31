@@ -21,7 +21,6 @@ public class WorkResultImpl implements WorkResult {
 
     @Override
     public Exception getException() {
-        // TODO Auto-generated method stub
         return null;
     }
 

@@ -10,6 +10,8 @@
 
 package patlego.vm.github.io.workflow.utils.impl;
 
+import patlego.vm.github.io.datasource.workflowmanager.tables.WorkItemId;
+import patlego.vm.github.io.datasource.workflowmanager.tables.WorkflowManagerWI;
 import patlego.vm.github.io.workflow.utils.WorkItemManagerResult;
 
 public class SimpleWorkItemManagerResult implements WorkItemManagerResult {
@@ -44,6 +46,23 @@ public class SimpleWorkItemManagerResult implements WorkItemManagerResult {
     @Override
     public Boolean hasSuccedded() {
        return this.hasSuccedded;
+    }
+
+    public static WorkflowManagerWI create(WorkItemManagerResult itemManagerResult, String workflowId) {
+        WorkflowManagerWI result = new WorkflowManagerWI();
+        result.setSequenceNumber(itemManagerResult.getSequenceNumber());
+        result.setSuccess(itemManagerResult.hasSuccedded());
+        result.setWorkflowName(itemManagerResult.getWorkflowName());
+        result.setId(new WorkItemId(itemManagerResult.getName(), workflowId));
+
+        return result;
+    }
+
+    public static WorkItemManagerResult create(WorkflowManagerWI itemManagerResult) {
+        return new SimpleWorkItemManagerResult(itemManagerResult.getSequenceNumber(),
+                                            itemManagerResult.getId().getWorkitemName(),
+                                            itemManagerResult.getWorkflowName(),
+                                            itemManagerResult.getSuccess());
     }
 
 }

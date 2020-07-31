@@ -15,8 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
-import patlego.vm.github.io.datasource.workflowmanager.repo.WorkflowManagerDS;
-import patlego.vm.github.io.datasource.workflowmanager.repo.WorkflowManagerDSImpl;
+import patlego.vm.github.io.datasource.workflowmanager.repo.impl.WorkflowManagerDSImpl;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl1;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl2;
 import patlego.vm.github.io.mocks.workitem.WorkItemImpl3;
