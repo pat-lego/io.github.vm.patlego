@@ -78,8 +78,15 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     public static WorkflowManagerResult create(WorkflowManagerWF entity) {
         SimpleWorkflowManagerResult result = new SimpleWorkflowManagerResult(entity.getWorkflowId());
         result.setWorkflowSucceddedStatus(entity.getSuccess());
-        result.addStartTime(entity.getStartTime().toLocalDateTime());
-        result.addEndTime(entity.getEndTime().toLocalDateTime());
+
+        if (entity.getStartTime() != null) {
+            result.addStartTime(entity.getStartTime().toLocalDateTime());
+        }
+
+        if (entity.getEndTime() != null) {
+            result.addEndTime(entity.getEndTime().toLocalDateTime());
+        }
+        
         result.addWorkflowName(entity.getWorkflowName());
 
         return result;
@@ -87,8 +94,15 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
 
     public static WorkflowManagerWF create(WorkflowManagerResult entity) {
         WorkflowManagerWF result = new WorkflowManagerWF(entity.getId());
-        result.setEndTime(Timestamp.valueOf(entity.getEndTime()));
-        result.setStartTime(Timestamp.valueOf(entity.getStartTime()));
+
+        if (entity.getEndTime() != null) {
+            result.setEndTime(Timestamp.valueOf(entity.getEndTime()));
+        }
+
+        if (entity.getStartTime() != null) {
+            result.setStartTime(Timestamp.valueOf(entity.getStartTime()));
+        }
+        
         result.setSuccess(entity.getWorkflowSucceddedStatus());
         result.setWorkflowName(entity.getWorkflowName());
 

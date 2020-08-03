@@ -1,4 +1,4 @@
-package patlego.vm.github.io.mocks.workitem;
+package patlego.vm.github.io.mocks.unittests.workitem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,8 +8,8 @@ import org.osgi.service.component.annotations.Component;
 import patlego.vm.github.io.workflow.utils.WorkObject;
 import patlego.vm.github.io.workflow.utils.WorkResult;
 import patlego.vm.github.io.workflow.utils.WorkType;
-import patlego.vm.github.io.mocks.workutils.WorkResultImpl;
-import patlego.vm.github.io.mocks.workutils.WorkTypeImpl;
+import patlego.vm.github.io.mocks.unittests.workutils.WorkResultImpl;
+import patlego.vm.github.io.mocks.unittests.workutils.WorkTypeImpl;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.enums.ParamType;
 

@@ -47,6 +47,10 @@ public class WorkflowManagerWF implements Serializable {
     @Column(name = "end_time", nullable = true)
     private Timestamp endTime;
 
+    public WorkflowManagerWF() {
+        // Required for Hibernate
+    }
+
     public WorkflowManagerWF(String id) {
         if (id  == null || id.isEmpty()) {
             throw new RuntimeException("Workflow ID cannot be null or empty");

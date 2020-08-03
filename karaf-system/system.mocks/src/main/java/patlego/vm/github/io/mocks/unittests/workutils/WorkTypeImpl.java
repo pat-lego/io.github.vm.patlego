@@ -1,4 +1,4 @@
-package patlego.vm.github.io.mocks.workutils;
+package patlego.vm.github.io.mocks.unittests.workutils;
 
 import patlego.vm.github.io.workflow.utils.WorkType;
 import patlego.vm.github.io.workflow.enums.ParamType;

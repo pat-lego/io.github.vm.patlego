@@ -15,8 +15,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 
-import patlego.vm.github.io.mocks.workitem.WorkItemImpl1;
-import patlego.vm.github.io.mocks.workitem.WorkItemImpl2;
+import patlego.vm.github.io.mocks.unittests.workitem.WorkItemImpl1;
+import patlego.vm.github.io.mocks.unittests.workitem.WorkItemImpl2;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.utils.WorkResult;
 

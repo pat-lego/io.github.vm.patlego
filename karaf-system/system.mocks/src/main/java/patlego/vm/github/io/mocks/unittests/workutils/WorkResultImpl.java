@@ -1,4 +1,4 @@
-package patlego.vm.github.io.mocks.workutils;
+package patlego.vm.github.io.mocks.unittests.workutils;
 
 import java.util.Map;
 

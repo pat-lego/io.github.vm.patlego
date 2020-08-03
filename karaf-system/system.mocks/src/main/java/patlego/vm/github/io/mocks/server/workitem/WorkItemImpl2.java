@@ -1,4 +1,4 @@
-package patlego.vm.github.io.mocks.workitem;
+package patlego.vm.github.io.mocks.server.workitem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,8 +8,8 @@ import org.osgi.service.component.annotations.Component;
 import patlego.vm.github.io.workflow.utils.WorkObject;
 import patlego.vm.github.io.workflow.utils.WorkResult;
 import patlego.vm.github.io.workflow.utils.WorkType;
-import patlego.vm.github.io.mocks.workutils.WorkResultImpl;
-import patlego.vm.github.io.mocks.workutils.WorkTypeImpl;
+import patlego.vm.github.io.mocks.unittests.workutils.WorkResultImpl;
+import patlego.vm.github.io.mocks.unittests.workutils.WorkTypeImpl;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.enums.ParamType;
 
@@ -17,11 +17,11 @@ import patlego.vm.github.io.workflow.enums.ParamType;
     immediate = true,
     service = WorkItem.class,
     property = { 
-        "WORKFLOW_NAME=testWorkflow1", 
-        "SEQUENCE_NUMBER=3" 
+        "WORKFLOW_NAME=serverWorkflow1", 
+        "SEQUENCE_NUMBER=2" 
     }
 )
-public class WorkItemImpl3 implements WorkItem {
+public class WorkItemImpl2 implements WorkItem {
 
     public final static String hasRun = "hasRun";
 
@@ -66,7 +66,7 @@ public class WorkItemImpl3 implements WorkItem {
 
     @Override
     public Integer getSequenceNumber() {
-        return 3;
+       return 2;
     }
     
 }

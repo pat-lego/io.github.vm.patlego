@@ -98,8 +98,8 @@
       <groupId>net.bytebuddy</groupId>
       <artifactId>byte-buddy</artifactId>
     </dependency>
-     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-     <dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
     </dependency>
@@ -109,8 +109,12 @@
       <artifactId>javax.persistence-api</artifactId>
     </dependency>
     <dependency>
-        <groupId>org.apache.aries.jpa</groupId>
-        <artifactId>org.apache.aries.jpa.api</artifactId>
+      <groupId>org.apache.aries.jpa</groupId>
+      <artifactId>org.apache.aries.jpa.api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
     </dependency>
     <dependency>
       <groupId>patlego.vm.github.io</groupId>
