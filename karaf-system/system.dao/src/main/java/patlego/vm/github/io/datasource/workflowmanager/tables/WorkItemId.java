@@ -15,6 +15,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -29,8 +30,8 @@ public class WorkItemId implements Serializable {
     @Column(name = "workitem_name")
     private String workitemName;
 
-    @ManyToOne
-    @JoinColumn(name = "workflow_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "workflow_id", nullable = false)
     private WorkflowManagerWF workflowId;
 
     public WorkItemId(String workitemName, WorkflowManagerWF workflowId) {

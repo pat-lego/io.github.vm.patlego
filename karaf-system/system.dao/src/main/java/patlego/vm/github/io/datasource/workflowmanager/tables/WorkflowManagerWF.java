@@ -12,11 +12,15 @@ package patlego.vm.github.io.datasource.workflowmanager.tables;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,11 +36,14 @@ public class WorkflowManagerWF implements Serializable {
     private static final long serialVersionUID = -3999590215790515470L;
 
     @Id
-    @Column(name = "workflow_id")
+    @Column(name = "workflow_id", nullable = false, unique = true)
     private String workflowId;
 
     @Column(name = "workflow_name", columnDefinition = "varchar(255)")
     private String workflowName;
+
+    @OneToMany(mappedBy = "id.workflowId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<WorkflowManagerWI> workItems;
 
     @Column(name = "success")
     private Boolean success;
@@ -97,5 +104,9 @@ public class WorkflowManagerWF implements Serializable {
 
     public void setSuccess(Boolean success) {
         this.success = success;
+    }
+
+    public List<WorkflowManagerWI> getWorkItems() {
+        return workItems;
     }
 }
