@@ -11,6 +11,7 @@
 package patlego.vm.github.io.workflow.utils;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -83,5 +84,11 @@ public interface WorkflowManagerResult {
      * @param successStatus - Boolean
      */
     public void setWorkflowSucceddedStatus(@Nonnull Boolean successStatus);
+
+    /**
+     * Returns the WorkItems that were executed by the Workflow
+     * @return
+     */
+    public List<WorkItemManagerResult> getWorkItems();
 
 }

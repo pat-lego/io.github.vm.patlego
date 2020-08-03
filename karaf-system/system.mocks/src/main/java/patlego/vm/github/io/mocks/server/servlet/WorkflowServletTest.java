@@ -1,6 +1,7 @@
 package patlego.vm.github.io.mocks.server.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -12,6 +13,10 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import patlego.vm.github.io.workflow.WorkflowExecutor;
+import patlego.vm.github.io.workflow.WorkflowManager;
+import patlego.vm.github.io.workflow.utils.WorkItemManagerResult;
+import patlego.vm.github.io.workflow.utils.WorkflowManagerResult;
+import patlego.vm.github.io.workflow.utils.WorkflowResult;
 
 @Component(property = {
     "alias=/mocks/linear-workflow", "servlet-name=Linear Workflow Servlet"
@@ -27,9 +32,17 @@ public class WorkflowServletTest extends HttpServlet implements Servlet {
     @Reference(target = "(&(EXECUTION_TYPE=LINEAR)(SYNCHRONOUS=TRUE))")
     private WorkflowExecutor workflowExecutor;
 
+    @Reference
+    private WorkflowManager workflowManager;
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        workflowExecutor.run("serverWorkflow1");
+        WorkflowResult result = workflowExecutor.run("serverWorkflow1");
+        String workflowId = result.getId();
+
+        WorkflowManagerResult managerResult = this.workflowManager.getWorklowInstanceInformation(workflowId);
+        List<WorkItemManagerResult> items =  managerResult.getWorkItems();
+
     }
     
 }

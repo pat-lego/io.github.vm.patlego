@@ -12,8 +12,11 @@ package patlego.vm.github.io.workflow.utils.impl;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import patlego.vm.github.io.datasource.workflowmanager.tables.WorkflowManagerWF;
+import patlego.vm.github.io.workflow.utils.WorkItemManagerResult;
 import patlego.vm.github.io.workflow.utils.WorkflowManagerResult;
 
 public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
@@ -23,6 +26,7 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     private LocalDateTime endTime;
     private String id;
     private Boolean successStatus;
+    private List<WorkItemManagerResult> workItems;
 
     public SimpleWorkflowManagerResult(String id) {
         this.id = id;
@@ -35,7 +39,7 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
 
     @Override
     public LocalDateTime getEndTime() {
-       return this.endTime;
+        return this.endTime;
     }
 
     @Override
@@ -52,7 +56,7 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     @Override
     public void addEndTime(LocalDateTime dt) {
         this.endTime = dt;
-        
+
     }
 
     @Override
@@ -67,14 +71,14 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
 
     @Override
     public Boolean getWorkflowSucceddedStatus() {
-       return this.successStatus;
+        return this.successStatus;
     }
 
     @Override
     public void setWorkflowSucceddedStatus(Boolean successStatus) {
-       this.successStatus = successStatus;
+        this.successStatus = successStatus;
     }
-    
+
     public static WorkflowManagerResult create(WorkflowManagerWF entity) {
         SimpleWorkflowManagerResult result = new SimpleWorkflowManagerResult(entity.getWorkflowId());
         result.setWorkflowSucceddedStatus(entity.getSuccess());
@@ -86,7 +90,15 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
         if (entity.getEndTime() != null) {
             result.addEndTime(entity.getEndTime().toLocalDateTime());
         }
-        
+
+        if (entity.getWorkItems() != null) {
+            List<WorkItemManagerResult> workItems = new ArrayList<WorkItemManagerResult>();
+            entity.getWorkItems().forEach(workItem -> {
+                workItems.add(SimpleWorkItemManagerResult.create(workItem));
+            });
+            result.setWorkItems(workItems);
+        }
+
         result.addWorkflowName(entity.getWorkflowName());
 
         return result;
@@ -102,10 +114,19 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
         if (entity.getStartTime() != null) {
             result.setStartTime(Timestamp.valueOf(entity.getStartTime()));
         }
-        
+
         result.setSuccess(entity.getWorkflowSucceddedStatus());
         result.setWorkflowName(entity.getWorkflowName());
 
         return result;
+    }
+
+    @Override
+    public List<WorkItemManagerResult> getWorkItems() {
+        return this.workItems;
+    }
+
+    public void setWorkItems(List<WorkItemManagerResult> workItems) {
+        this.workItems = workItems;
     }
 }
