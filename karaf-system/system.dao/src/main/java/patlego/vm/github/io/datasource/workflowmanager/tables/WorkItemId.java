@@ -30,9 +30,13 @@ public class WorkItemId implements Serializable {
     @Column(name = "workitem_name")
     private String workitemName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "workflow_id", nullable = false)
     private WorkflowManagerWF workflowId;
+
+    public WorkItemId() {
+        // Required for Hibernate
+    }
 
     public WorkItemId(String workitemName, WorkflowManagerWF workflowId) {
         this.workitemName = workitemName;

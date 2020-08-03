@@ -42,7 +42,7 @@ public class WorkflowManagerWF implements Serializable {
     @Column(name = "workflow_name", columnDefinition = "varchar(255)")
     private String workflowName;
 
-    @OneToMany(mappedBy = "id.workflowId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "id.workflowId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<WorkflowManagerWI> workItems;
 
     @Column(name = "success")
