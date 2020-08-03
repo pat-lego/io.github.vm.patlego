@@ -11,7 +11,6 @@
 package patlego.vm.github.io.workflow.utils;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
