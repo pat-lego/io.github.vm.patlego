@@ -15,6 +15,9 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Embeddable
 public class WorkItemId implements Serializable {
@@ -27,10 +30,11 @@ public class WorkItemId implements Serializable {
     @Column(name = "workitem_name")
     private String workitemName;
 
-    @Column(name = "workflow_id")
-    private String workflowId;
+    @ManyToOne
+    @JoinColumn(name = "workflow_id")
+    private WorkflowManagerWF workflowId;
 
-    public WorkItemId(String workitemName, String workflowId) {
+    public WorkItemId(String workitemName, WorkflowManagerWF workflowId) {
         this.workitemName = workitemName;
         this.workflowId = workflowId;
     }
@@ -43,11 +47,11 @@ public class WorkItemId implements Serializable {
         this.workitemName = workitemName;
     }
 
-    public String getWorkflowId() {
+    public WorkflowManagerWF getWorkflowId() {
         return workflowId;
     }
 
-    public void setWorkflowId(String workflowId) {
+    public void setWorkflowId(WorkflowManagerWF workflowId) {
         this.workflowId = workflowId;
     }
 

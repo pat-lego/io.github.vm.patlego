@@ -10,12 +10,10 @@
 
 package patlego.vm.github.io.workflow.utils.impl;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import patlego.vm.github.io.datasource.workflowmanager.tables.WorkflowManagerWF;
-import patlego.vm.github.io.workflow.utils.WorkItemManagerResult;
 import patlego.vm.github.io.workflow.utils.WorkflowManagerResult;
 
 public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
@@ -47,30 +45,18 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
 
     @Override
     public void addStartTime(LocalDateTime dt) {
-        if (dt == null) {
-            throw new IllegalArgumentException("Cannot supply a null start time for the workfow result manager object");
-        }
-
         this.startTime = dt;
 
     }
 
     @Override
     public void addEndTime(LocalDateTime dt) {
-        if (dt == null) {
-            throw new IllegalArgumentException("Cannot supply a null end time for the workfow result manager object");
-        }
-
         this.endTime = dt;
         
     }
 
     @Override
     public void addWorkflowName(String workflowName) {
-        if (workflowName == null || workflowName.isEmpty()) {
-            throw new IllegalArgumentException("Cannot supply a null or empty workflow name");
-        }
-
         this.workflowName = workflowName;
     }
 
@@ -86,19 +72,25 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
 
     @Override
     public void setWorkflowSucceddedStatus(Boolean successStatus) {
-       if (successStatus == null) {
-           throw new IllegalArgumentException("Cannot have a nulll success status in the workflow");
-       }
-
        this.successStatus = successStatus;
     }
     
-    public static SimpleWorkflowManagerResult create(WorkflowManagerWF entity) {
+    public static WorkflowManagerResult create(WorkflowManagerWF entity) {
         SimpleWorkflowManagerResult result = new SimpleWorkflowManagerResult(entity.getWorkflowId());
         result.setWorkflowSucceddedStatus(entity.getSuccess());
         result.addStartTime(entity.getStartTime().toLocalDateTime());
         result.addEndTime(entity.getEndTime().toLocalDateTime());
         result.addWorkflowName(entity.getWorkflowName());
+
+        return result;
+    }
+
+    public static WorkflowManagerWF create(WorkflowManagerResult entity) {
+        WorkflowManagerWF result = new WorkflowManagerWF(entity.getId());
+        result.setEndTime(Timestamp.valueOf(entity.getEndTime()));
+        result.setStartTime(Timestamp.valueOf(entity.getStartTime()));
+        result.setSuccess(entity.getWorkflowSucceddedStatus());
+        result.setWorkflowName(entity.getWorkflowName());
 
         return result;
     }

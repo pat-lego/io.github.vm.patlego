@@ -23,7 +23,7 @@ import javax.persistence.Table;
  * A regular JPA entity, using JPA annotations.
  */
 @Entity(name = "workflow_manager_wf")
-@Table(name = "workflow_manager_wf", schema = "patlegovm")
+@Table(name = "workflow_manager_wf")
 public class WorkflowManagerWF implements Serializable {
 
     /**

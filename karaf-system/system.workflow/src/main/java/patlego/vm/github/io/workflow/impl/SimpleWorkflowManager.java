@@ -144,7 +144,7 @@ public class SimpleWorkflowManager implements WorkflowManager {
             throw new IllegalArgumentException("Cannot have a null id or a nulll Work Item Manager Result");
         }
 
-        this.workflowManagerDS.createWorkItemInstance(SimpleWorkItemManagerResult.create(workItemManagerResult, id));
+        this.workflowManagerDS.createWorkItemInstance(SimpleWorkItemManagerResult.create(workItemManagerResult, this.getWorklowInstanceInformation(id)));
     }
 
     @Override

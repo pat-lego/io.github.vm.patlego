@@ -17,7 +17,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Table(name = "workflow_manager_wi", schema = "patlegovm")
+@Table(name = "workflow_manager_wi")
 @Entity(name =  "workflow_manager_wi")
 public class WorkflowManagerWI implements Serializable {
 
