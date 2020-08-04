@@ -42,6 +42,10 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public WorkflowManagerWF createWorflowInstance(final String id) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Workflow ID is null or empty, this cannot be used to create a workflow");
+        }
+
         final WorkflowManagerWF manager = new WorkflowManagerWF(id);
 
         this.jpaTemplate.tx(TransactionType.RequiresNew, entityManager -> {
@@ -54,6 +58,10 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public WorkflowManagerWF removeWorkflowInstance(final String id) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Workflow ID is null or empty, this cannot be used to delete a workflow");
+        }
+
         final WorkflowManagerWF manager = this.getWorkflowInstance(id);
 
         this.jpaTemplate.tx(TransactionType.RequiresNew, entityManager -> {
@@ -71,6 +79,10 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public WorkflowManagerWF getWorkflowInstance(final String id) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Workflow ID is null or empty, this cannot be used to retrieve a workflow");
+        }
+
         return this.jpaTemplate.txExpr(TransactionType.RequiresNew, emFunction -> {
             return emFunction.find(WorkflowManagerWF.class, id);
         });
@@ -78,6 +90,14 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public WorkflowManagerWF updateStartTime(String id, Timestamp startTime) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Workflow ID is null or empty, this cannot be used to retrieve a workflow");
+        }
+
+        if (startTime == null) {
+            throw new IllegalArgumentException("startTime is null, this cannot be used as an accurate timestamp");
+        }
+
         return this.jpaTemplate.txExpr(TransactionType.RequiresNew, emFunction -> {
             WorkflowManagerWF entity = emFunction.find(WorkflowManagerWF.class, id);
             entity.setStartTime(startTime);
@@ -87,6 +107,14 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public WorkflowManagerWF updateEndTime(String id, Timestamp endTime) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Workflow ID is null or empty, this cannot be used to retrieve a workflow");
+        }
+
+        if (endTime == null) {
+            throw new IllegalArgumentException("endTime is null, this cannot be used as an accurate timestamp");
+        }
+
         return this.jpaTemplate.txExpr(TransactionType.RequiresNew, emFunction -> {
             WorkflowManagerWF entity = emFunction.find(WorkflowManagerWF.class, id);
             entity.setEndTime(endTime);
@@ -96,6 +124,14 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public WorkflowManagerWF updateWorkflowName(String id, String name) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Workflow ID is null or empty, this cannot be used to retrieve a workflow");
+        }
+
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("workflow name is null or empty, this cannot be used as an accurate workflow name");
+        }
+
         return this.jpaTemplate.txExpr(TransactionType.RequiresNew, emFunction -> {
             WorkflowManagerWF entity = emFunction.find(WorkflowManagerWF.class, id);
             entity.setWorkflowName(name);
@@ -105,6 +141,14 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public WorkflowManagerWF updateWorkflowStatus(String id, Boolean status) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Workflow ID is null or empty, this cannot be used to retrieve a workflow");
+        }
+
+        if (status == null) {
+            throw new IllegalArgumentException("workflow status is null, this cannot be used as an accurate workflow status");
+        }
+
         return this.jpaTemplate.txExpr(TransactionType.RequiresNew, emFunction -> {
             WorkflowManagerWF entity = emFunction.find(WorkflowManagerWF.class, id);
             entity.setSuccess(status);
@@ -124,6 +168,18 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public WorkflowManagerWI createWorkItemInstance(WorkflowManagerWI workItem) {
+        if (workItem == null) {
+            throw new IllegalArgumentException("Cannot send in a null workItem object, this is an invalid workItem type");
+        }
+
+        if (workItem.getId() == null) {
+            throw new IllegalArgumentException("Cannot send in a null workItem ID object, this is an invalid workItem ID");
+        }
+
+        if (workItem.getId().getWorkitemName() == null || workItem.getId().getWorkitemName().isEmpty()) {
+            throw new IllegalArgumentException("Cannot send in a null or empty workItem name, this is an invalid workItem name");
+        }
+
         this.jpaTemplate.tx(TransactionType.RequiresNew, entityManager -> {
             entityManager.persist(workItem);
             entityManager.flush();
@@ -134,6 +190,9 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public List<WorkflowManagerWI> getWorkItemInstances(String workflowId) {
+        if (workflowId == null || workflowId.isEmpty()) {
+            throw new IllegalArgumentException("Cannot use a null or empty workflowID to retrieve the workItem instances of the workflow");
+        }
         return this.jpaTemplate.txExpr(TransactionType.RequiresNew, emFunction -> {
             CriteriaQuery<WorkflowManagerWI> criteriaQueryWorkflowManagerWI = emFunction.getCriteriaBuilder()
                                                                                             .createQuery(WorkflowManagerWI.class)
