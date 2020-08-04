@@ -13,6 +13,8 @@ package patlego.vm.github.io.datasource.workflowmanager.repo;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import patlego.vm.github.io.datasource.workflowmanager.tables.WorkflowManagerWF;
 import patlego.vm.github.io.datasource.workflowmanager.tables.WorkflowManagerWI;
 
@@ -24,7 +26,7 @@ public interface WorkflowManagerDS {
      * @param id - Representing the Workflow
      * @return Workflow Manager instance
      */
-    public WorkflowManagerWF createWorflowInstance(String id);
+    public @Nonnull WorkflowManagerWF createWorflowInstance(@Nonnull String id);
 
     /**
      * Used to remove a Workflow instance from the Database
@@ -32,7 +34,7 @@ public interface WorkflowManagerDS {
      * @param id - Representing the Workflow
      * @return Workflow Manager instance
      */
-    public WorkflowManagerWF removeWorkflowInstance(String id);
+    public @Nonnull WorkflowManagerWF removeWorkflowInstance(@Nonnull String id);
 
     /**
      * Used to remove a Workflow instance from the Database
@@ -40,7 +42,7 @@ public interface WorkflowManagerDS {
      * @param id - Representing the Workflow
      * @return Workflow Manager instance
      */
-    public WorkflowManagerWF getWorkflowInstance(String id);
+    public @Nonnull WorkflowManagerWF getWorkflowInstance(@Nonnull String id);
 
 
     /**
@@ -50,7 +52,7 @@ public interface WorkflowManagerDS {
      * @param startTime - Start time of the Workflow
      * @return Workflow Manager instance
      */
-    public WorkflowManagerWF  updateStartTime(String  id, Timestamp startTime);
+    public @Nonnull WorkflowManagerWF updateStartTime(@Nonnull String  id, @Nonnull Timestamp startTime);
 
     /**
      * Used to update the endtime Timestamp value of a workflow instance from the Database
@@ -59,7 +61,7 @@ public interface WorkflowManagerDS {
      * @param endTime - End time of the Workflow
      * @return Workflow Manager instance
      */
-    public WorkflowManagerWF updateEndTime(String  id, Timestamp endTime);
+    public @Nonnull WorkflowManagerWF updateEndTime(@Nonnull String  id, @Nonnull Timestamp endTime);
 
     /**
      * Used to update the workflow name value of a workflow instance from the Database
@@ -68,7 +70,7 @@ public interface WorkflowManagerDS {
      * @param name - Name representing the Workflow
      * @return Workflow Manager instance
      */
-    public WorkflowManagerWF updateWorkflowName(String  id, String name);
+    public @Nonnull WorkflowManagerWF updateWorkflowName(@Nonnull String  id, @Nonnull String name);
 
     /**
      * Used to update the workflow name value of a workflow instance from the Database
@@ -77,26 +79,26 @@ public interface WorkflowManagerDS {
      * @param status - Name representing the Workflow
      * @return Workflow Manager instance
      */
-    public WorkflowManagerWF updateWorkflowStatus(String  id, Boolean status);
+    public @Nonnull WorkflowManagerWF updateWorkflowStatus(@Nonnull String  id, @Nonnull Boolean status);
 
     /**
      * Used to retrievee all the Workflow instanes from the DB
      * 
      * @return List<WorkflowManagerWF>
      */
-    public List<WorkflowManagerWF> getAllWorkflowInstances();
+    public @Nonnull List<WorkflowManagerWF> getAllWorkflowInstances();
 
     /**
      * Usedd to insert a workItem instance in the DB
      * @param workItem
      * @return WorkflowManagerWI
      */
-    public WorkflowManagerWI createWorkItemInstance(WorkflowManagerWI workItem);
+    public @Nonnull WorkflowManagerWI createWorkItemInstance(@Nonnull WorkflowManagerWI workItem);
 
     /**
      * Usedd to insert a workItem instance in the DB
      * @param workItem
      * @return List<WorkflowManagerWI>
      */
-    public List<WorkflowManagerWI> getWorkItemInstances(String workflowId);
+    public @Nonnull List<WorkflowManagerWI> getWorkItemInstances(@Nonnull String workflowId);
 }

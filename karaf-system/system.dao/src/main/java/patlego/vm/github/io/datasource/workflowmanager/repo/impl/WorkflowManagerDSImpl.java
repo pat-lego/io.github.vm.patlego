@@ -54,10 +54,15 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Override
     public WorkflowManagerWF removeWorkflowInstance(final String id) {
-        final WorkflowManagerWF manager = new WorkflowManagerWF(id);
+        final WorkflowManagerWF manager = this.getWorkflowInstance(id);
 
         this.jpaTemplate.tx(TransactionType.RequiresNew, entityManager -> {
-            entityManager.remove(manager);
+            if (entityManager.contains(manager)) {
+                entityManager.remove(manager);
+            } else {
+                WorkflowManagerWF reference = entityManager.getReference(WorkflowManagerWF.class, id);
+                entityManager.remove(reference);
+            }
             entityManager.flush();
         });
 

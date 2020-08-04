@@ -43,6 +43,7 @@ public class WorkflowServletTest extends HttpServlet implements Servlet {
         WorkflowManagerResult managerResult = this.workflowManager.getWorklowInstanceInformation(workflowId);
         List<WorkItemManagerResult> items =  managerResult.getWorkItems();
 
+        this.workflowManager.removeWorkflow(workflowId);
     }
     
 }
