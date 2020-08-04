@@ -45,7 +45,7 @@ public class SimpleWorkItemManagerResult implements WorkItemManagerResult {
     }
 
     @Override
-    public Boolean hasSuccedded() {
+    public final Boolean hasSuccedded() {
        return this.hasSuccedded;
     }
 

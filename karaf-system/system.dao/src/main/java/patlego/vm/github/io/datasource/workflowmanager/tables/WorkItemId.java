@@ -35,18 +35,24 @@ public class WorkItemId implements Serializable {
     private WorkflowManagerWF workflowId;
 
     public String getWorkitemName() {
-        return workitemName;
+        return this.workitemName;
     }
 
     public void setWorkitemName(String workitemName) {
+        if (workitemName == null || workitemName.isEmpty()) {
+            throw new IllegalArgumentException("Cannot reference a null or empty workItemName, when workitem_name is a non nullable column");
+        }
         this.workitemName = workitemName;
     }
 
     public WorkflowManagerWF getWorkflowId() {
-        return workflowId;
+        return this.workflowId;
     }
 
     public void setWorkflowId(WorkflowManagerWF workflowId) {
+        if (workflowId == null) {
+            throw new IllegalArgumentException(String.format("Cannot reference a null %s when  workflowId is a non nullable column", WorkflowManagerWF.class.getName()));
+        }
         this.workflowId = workflowId;
     }
 

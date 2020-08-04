@@ -39,10 +39,13 @@ public class WorkflowManagerWI implements Serializable {
     private String workflowName;
 
     public WorkItemId getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(WorkItemId id) {
+        if (id == null) {
+            throw new IllegalArgumentException(String.format("Cannot reference a primary key %s with a nullable value", WorkItemId.class.getName()));
+        }
         this.id = id;
     }
 

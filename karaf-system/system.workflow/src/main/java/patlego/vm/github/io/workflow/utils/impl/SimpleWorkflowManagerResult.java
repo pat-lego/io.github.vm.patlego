@@ -37,17 +37,17 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     }
 
     @Override
-    public LocalDateTime getStartTime() {
+    public final LocalDateTime getStartTime() {
         return this.startTime;
     }
 
     @Override
-    public LocalDateTime getEndTime() {
+    public final LocalDateTime getEndTime() {
         return this.endTime;
     }
 
     @Override
-    public String getWorkflowName() {
+    public final String getWorkflowName() {
         return this.workflowName;
     }
 
@@ -66,12 +66,12 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     }
 
     @Override
-    public String getId() {
+    public final String getId() {
         return this.id;
     }
 
     @Override
-    public Boolean getWorkflowSucceddedStatus() {
+    public final Boolean getWorkflowSucceddedStatus() {
         return this.successStatus;
     }
 

@@ -13,6 +13,7 @@ package patlego.vm.github.io.workflow.utils;
 import javax.annotation.Nonnull;
 
 public interface WorkItemManagerResult {
+
     /**
      * Returns the WorkItem sequnce number
      * @return Integer - Representing the sequence number

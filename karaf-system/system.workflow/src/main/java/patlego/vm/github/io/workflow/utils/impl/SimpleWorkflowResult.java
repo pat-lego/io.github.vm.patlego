@@ -37,7 +37,7 @@ public class SimpleWorkflowResult implements WorkflowResult {
     }
 
     @Override
-    public Boolean hasSucceeded() {
+    public final Boolean hasSucceeded() {
         return this.succeded;
     }
 
@@ -50,7 +50,7 @@ public class SimpleWorkflowResult implements WorkflowResult {
     }
 
     @Override
-    public Exception getException() {
+    public final Exception getException() {
         return this.e;
     }
 
@@ -59,7 +59,7 @@ public class SimpleWorkflowResult implements WorkflowResult {
     }
 
     @Override
-    public String getFailedWorkItemName() {
+    public final String getFailedWorkItemName() {
        return this.failedWorkItemName;
     }
 
@@ -69,7 +69,7 @@ public class SimpleWorkflowResult implements WorkflowResult {
     }
 
     @Override
-    public String getId() {
+    public final String getId() {
         return this.id;
     }
 }
