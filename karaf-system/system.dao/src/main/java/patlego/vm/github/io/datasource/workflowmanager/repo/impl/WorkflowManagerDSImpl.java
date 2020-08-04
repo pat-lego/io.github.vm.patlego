@@ -193,18 +193,7 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
         if (workflowId == null || workflowId.isEmpty()) {
             throw new IllegalArgumentException("Cannot use a null or empty workflowID to retrieve the workItem instances of the workflow");
         }
-        return this.jpaTemplate.txExpr(TransactionType.RequiresNew, emFunction -> {
-            CriteriaQuery<WorkflowManagerWI> criteriaQueryWorkflowManagerWI = emFunction.getCriteriaBuilder()
-                                                                                            .createQuery(WorkflowManagerWI.class)
-                                                                                            .where(emFunction.getCriteriaBuilder().
-                                                                                                        equal(emFunction.getCriteriaBuilder()
-                                                                                                                    .createQuery(WorkflowManagerWI.class)
-                                                                                                                    .from(WorkflowManagerWI.class)
-                                                                                                                    .get("workflow_id"), 
-                                                                                                        workflowId));
-            TypedQuery<WorkflowManagerWI> typedQuery = emFunction.createQuery(criteriaQueryWorkflowManagerWI);
-            return typedQuery.getResultList();
-        });
+        return this.getWorkflowInstance(workflowId).getWorkItems();
     }
 
     @Activate
