@@ -12,6 +12,7 @@ package patlego.vm.github.io.datasource.workflowmanager.tables;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -99,6 +100,9 @@ public class WorkflowManagerWF implements Serializable {
     }
 
     public List<WorkflowManagerWI> getWorkItems() {
+        if (this.workItems == null) {
+            return new LinkedList<WorkflowManagerWI>();
+        }
         return workItems;
     }
 }

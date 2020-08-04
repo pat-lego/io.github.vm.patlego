@@ -30,6 +30,9 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
     private List<WorkItemManagerResult> workItems;
 
     public SimpleWorkflowManagerResult(String id) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException(String.format("Cannot create a %s with in an empty or null id", this.getClass().getName()));
+        }
         this.id = id;
     }
 
