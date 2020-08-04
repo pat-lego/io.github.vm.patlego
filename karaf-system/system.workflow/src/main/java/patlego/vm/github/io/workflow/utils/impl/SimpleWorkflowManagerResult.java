@@ -13,6 +13,7 @@ package patlego.vm.github.io.workflow.utils.impl;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import patlego.vm.github.io.datasource.workflowmanager.tables.WorkflowManagerWF;
@@ -79,6 +80,23 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
         this.successStatus = successStatus;
     }
 
+    @Override
+    public List<WorkItemManagerResult> getWorkItems() {
+        if (this.workItems == null) {
+            return new LinkedList<WorkItemManagerResult>();
+        }
+        return this.workItems;
+    }
+
+    public void setWorkItems(List<WorkItemManagerResult> workItems) {
+        this.workItems = workItems;
+    }
+
+    /**
+     * Convert a WorkflowManagerWF to a WorkflowManagerResult
+     * @param entity WorkflowManagerWF
+     * @return WorkflowManagerResult
+     */
     public static WorkflowManagerResult create(WorkflowManagerWF entity) {
         SimpleWorkflowManagerResult result = new SimpleWorkflowManagerResult(entity.getWorkflowId());
         result.setWorkflowSucceddedStatus(entity.getSuccess());
@@ -104,8 +122,15 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
         return result;
     }
 
+    /**
+     * Convert a WorkflowMangerResult object to a WorkflowMangerWF bean in order to perform passivation
+     * @param entity WorkflowManagerResult
+     * @return WorkflowManagerWF
+     */
     public static WorkflowManagerWF create(WorkflowManagerResult entity) {
-        WorkflowManagerWF result = new WorkflowManagerWF(entity.getId());
+        WorkflowManagerWF result = new WorkflowManagerWF();
+        
+        result.setWorkflowId(entity.getId());
 
         if (entity.getEndTime() != null) {
             result.setEndTime(Timestamp.valueOf(entity.getEndTime()));
@@ -119,14 +144,5 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
         result.setWorkflowName(entity.getWorkflowName());
 
         return result;
-    }
-
-    @Override
-    public List<WorkItemManagerResult> getWorkItems() {
-        return this.workItems;
-    }
-
-    public void setWorkItems(List<WorkItemManagerResult> workItems) {
-        this.workItems = workItems;
     }
 }

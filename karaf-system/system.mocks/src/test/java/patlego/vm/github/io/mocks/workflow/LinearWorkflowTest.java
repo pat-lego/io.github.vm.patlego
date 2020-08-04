@@ -46,7 +46,8 @@ public class LinearWorkflowTest {
     final static String workflowName = "testWorkflow1";
 
     public WorkflowManagerWF getMockWorkflowManagerWF() {
-        mock = new WorkflowManagerWF(UUID.randomUUID().toString());
+        mock = new WorkflowManagerWF();
+        mock.setWorkflowId(UUID.randomUUID().toString());
         mock.setSuccess(true);
         mock.setWorkflowName(UUID.randomUUID().toString());
         mock.setEndTime(Timestamp.valueOf(LocalDateTime.now()));

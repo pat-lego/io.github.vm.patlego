@@ -39,13 +39,13 @@ public class WorkflowManagerWF implements Serializable {
     @Column(name = "workflow_id", nullable = false, unique = true)
     private String workflowId;
 
-    @Column(name = "workflow_name", columnDefinition = "varchar(255)")
+    @Column(name = "workflow_name", nullable = true)
     private String workflowName;
 
     @OneToMany(mappedBy = "id.workflowId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<WorkflowManagerWI> workItems;
 
-    @Column(name = "success")
+    @Column(name = "success", nullable = true)
     private Boolean success;
     
     @Column(name = "start_time", nullable = true)
@@ -53,18 +53,6 @@ public class WorkflowManagerWF implements Serializable {
 
     @Column(name = "end_time", nullable = true)
     private Timestamp endTime;
-
-    public WorkflowManagerWF() {
-        // Required for Hibernate
-    }
-
-    public WorkflowManagerWF(String id) {
-        if (id  == null || id.isEmpty()) {
-            throw new RuntimeException("Workflow ID cannot be null or empty");
-        }
-
-        this.workflowId = id;
-    }
 
     public Timestamp getStartTime() {
         return startTime;
@@ -87,6 +75,10 @@ public class WorkflowManagerWF implements Serializable {
     }
 
     public void setWorkflowId(String workflowId) {
+        if (workflowId  == null || workflowId.isEmpty()) {
+            throw new RuntimeException("Workflow ID cannot be null or empty");
+        }
+
         this.workflowId = workflowId;
     }
 

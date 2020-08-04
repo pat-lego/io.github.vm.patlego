@@ -72,7 +72,4 @@ public class SimpleWorkflowResult implements WorkflowResult {
     public String getId() {
         return this.id;
     }
-
-
-    
 }

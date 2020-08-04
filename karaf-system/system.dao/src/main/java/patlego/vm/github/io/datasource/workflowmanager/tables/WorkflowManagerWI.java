@@ -38,10 +38,6 @@ public class WorkflowManagerWI implements Serializable {
     @Column(name = "workflow_name", nullable = true)
     private String workflowName;
 
-    public WorkflowManagerWI() {
-        // Required for Hibernate
-    }
-
     public WorkItemId getId() {
         return id;
     }

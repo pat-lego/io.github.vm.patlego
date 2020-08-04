@@ -27,21 +27,12 @@ public class WorkItemId implements Serializable {
      */
     private static final long serialVersionUID = 781601201317914017L;
 
-    @Column(name = "workitem_name")
+    @Column(name = "workitem_name", nullable = false)
     private String workitemName;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "workflow_id", nullable = false)
     private WorkflowManagerWF workflowId;
-
-    public WorkItemId() {
-        // Required for Hibernate
-    }
-
-    public WorkItemId(String workitemName, WorkflowManagerWF workflowId) {
-        this.workitemName = workitemName;
-        this.workflowId = workflowId;
-    }
 
     public String getWorkitemName() {
         return workitemName;

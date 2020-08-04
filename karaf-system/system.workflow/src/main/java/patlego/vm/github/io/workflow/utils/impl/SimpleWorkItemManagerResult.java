@@ -50,15 +50,24 @@ public class SimpleWorkItemManagerResult implements WorkItemManagerResult {
     }
 
     public static WorkflowManagerWI create(WorkItemManagerResult itemManagerResult, WorkflowManagerResult workflowId) {
+        WorkItemId id = new WorkItemId();
+        id.setWorkflowId(SimpleWorkflowManagerResult.create(workflowId));
+        id.setWorkitemName(itemManagerResult.getName());
+
         WorkflowManagerWI result = new WorkflowManagerWI();
         result.setSequenceNumber(itemManagerResult.getSequenceNumber());
         result.setSuccess(itemManagerResult.hasSuccedded());
         result.setWorkflowName(itemManagerResult.getWorkflowName());
-        result.setId(new WorkItemId(itemManagerResult.getName(), SimpleWorkflowManagerResult.create(workflowId)));
+        result.setId(id);
 
         return result;
     }
 
+    /**
+     * Convert a WorkflowManagerWI to a WorkItemManagerResult
+     * @param itemManagerResult WorkflowManagerWI
+     * @return WorkItemManagerResult
+     */
     public static WorkItemManagerResult create(WorkflowManagerWI itemManagerResult) {
         return new SimpleWorkItemManagerResult(itemManagerResult.getSequenceNumber(),
                                             itemManagerResult.getId().getWorkitemName(),

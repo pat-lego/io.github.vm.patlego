@@ -46,7 +46,8 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
             throw new IllegalArgumentException("Workflow ID is null or empty, this cannot be used to create a workflow");
         }
 
-        final WorkflowManagerWF manager = new WorkflowManagerWF(id);
+        WorkflowManagerWF manager = new WorkflowManagerWF();
+        manager.setWorkflowId(id);
 
         this.jpaTemplate.tx(TransactionType.RequiresNew, entityManager -> {
             entityManager.persist(manager);
