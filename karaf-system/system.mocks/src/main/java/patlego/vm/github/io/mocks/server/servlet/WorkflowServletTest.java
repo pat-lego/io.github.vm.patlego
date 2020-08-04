@@ -1,6 +1,7 @@
 package patlego.vm.github.io.mocks.server.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.Servlet;
@@ -37,13 +38,26 @@ public class WorkflowServletTest extends HttpServlet implements Servlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        WorkflowResult result = workflowExecutor.run("serverWorkflow1");
-        String workflowId = result.getId();
+        try(PrintWriter writer = response.getWriter()) {
+            WorkflowResult result = workflowExecutor.run("serverWorkflow1");
+            String workflowId = result.getId();
+            writer.write(String.format("Created workflow with ID %s \n", workflowId));
+           
+            WorkflowManagerResult managerResult = this.workflowManager.getWorklowInstanceInformation(workflowId);
+            writer.write(String.format("Workflow started at %s \n", managerResult.getStartTime().toString()));
+            writer.write(String.format("Workflow ended at %s \n", managerResult.getEndTime().toString()));
 
-        WorkflowManagerResult managerResult = this.workflowManager.getWorklowInstanceInformation(workflowId);
-        List<WorkItemManagerResult> items =  managerResult.getWorkItems();
+            writer.write(String.format("Workflow status is set to at %b \n", managerResult.getWorkflowSucceddedStatus()));
+            List<WorkItemManagerResult> items =  managerResult.getWorkItems();
 
-        this.workflowManager.removeWorkflow(workflowId);
+            writer.write(String.format("Workflow has %d work items within it \n", items.size()));
+    
+            this.workflowManager.removeWorkflow(workflowId);   
+
+            writer.write(String.format("Deleted workflow and items from the DB with ID %s \n", workflowId));
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
     
 }
