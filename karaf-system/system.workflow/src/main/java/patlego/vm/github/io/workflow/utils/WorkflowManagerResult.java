@@ -34,14 +34,6 @@ public interface WorkflowManagerResult {
     public @Nullable LocalDateTime getStartTime();
 
     /**
-     * Sets the time when the workflow started executing
-     * 
-     * @param dt - LocalDateTime
-     */
-    public void addStartTime(@Nonnull LocalDateTime dt);
-
-
-    /**
      * Returns the time when the workflow finished executing
      * 
      * This can be bull if the workflow has not completed excuting.
@@ -51,24 +43,11 @@ public interface WorkflowManagerResult {
     public @Nullable LocalDateTime getEndTime();
 
     /**
-     * Sets the time when the workflow finished executing
-     * 
-     * @param dt - LocalDateTime
-     */
-    public void addEndTime(@Nonnull LocalDateTime dt);
-
-    /**
      * Returns the name of the workflow
      * 
      * @return String - Name of the workflow
      */
     public @Nonnull String getWorkflowName();
-
-    /**
-     * Adds the name of the workflow
-     * @param String - workflow name
-     */
-    public void addWorkflowName(@Nonnull String workflowName);
 
     /**
      * Returns True if the workflow had completed successfully, False otherwise
@@ -78,12 +57,6 @@ public interface WorkflowManagerResult {
      * @return Boolean
      */
     public @Nullable Boolean getWorkflowSucceddedStatus();
-
-    /**
-     * Sets True if the workflow had completed successfully, False otherwise
-     * @param successStatus - Boolean
-     */
-    public void setWorkflowSucceddedStatus(@Nonnull Boolean successStatus);
 
     /**
      * Returns the WorkItems that were executed by the Workflow

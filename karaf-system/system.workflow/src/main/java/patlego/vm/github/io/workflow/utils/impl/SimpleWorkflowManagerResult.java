@@ -48,19 +48,16 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
         return this.workflowName;
     }
 
-    @Override
     public void addStartTime(LocalDateTime dt) {
         this.startTime = dt;
 
     }
 
-    @Override
     public void addEndTime(LocalDateTime dt) {
         this.endTime = dt;
 
     }
 
-    @Override
     public void addWorkflowName(String workflowName) {
         this.workflowName = workflowName;
     }
@@ -75,7 +72,6 @@ public class SimpleWorkflowManagerResult implements WorkflowManagerResult {
         return this.successStatus;
     }
 
-    @Override
     public void setWorkflowSucceddedStatus(Boolean successStatus) {
         this.successStatus = successStatus;
     }
