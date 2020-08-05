@@ -70,6 +70,9 @@
         <configuration>
           <excludes>
             <exclude>**/patlego/vm/github/io/mocks/**/*.class</exclude>
+            <exclude>**/patlego/vm/github/io/workflow/comparators/*.class</exclude>
+            <exclude>**/patlego/vm/github/io/workflow/enums/*.class</exclude>
+            <exclude>**/patlego/vm/github/io/workflow/exceptions/*.class</exclude>
           </excludes>
         </configuration>
         <executions>
