@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -55,11 +56,11 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Reference
-    private WorkflowManager workflowManager;
+    public WorkflowManager workflowManager;
 
     @Override
     public WorkflowResult run(String workflowName) {
-        return this.run(workflowName, null);
+        return this.run(workflowName, new HashMap<String, Object>());
     }
 
     @Override
@@ -99,7 +100,14 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
 
             this.workflowManager.addWorkflowEndTime(id, LocalDateTime.now());
             this.workflowManager.setWorkflowSucceddedStatus(id, true);
-            simpleWorkflowResult = new SimpleWorkflowResult(true, result.getParameters(), id);
+
+            // In the situation where an empty workflow (ie. no workitems) is being executed then the result will be empty
+            if (result == null) {
+                simpleWorkflowResult = new SimpleWorkflowResult(true, parameters, id);
+            } else {
+                simpleWorkflowResult = new SimpleWorkflowResult(true, result.getParameters(), id);
+            }
+            
             return simpleWorkflowResult;
         } catch (DuplicateSequenceNumberException e) {
             logger.error(String.format(
@@ -164,7 +172,7 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
     @Override
     public Integer getLength(String workflowName) {
         try {
-            return getWorkflow(workflowName).size();
+            return this.getWorkflow(workflowName).size();
         } catch (Exception e) {
             logger.error(String.format("Could not locate WorkFlow with name %s", workflowName), e);
             return -1;
@@ -206,8 +214,12 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
         }
 
         try {
-            return this.getWorkflow(workflowName).stream().filter(w -> w.getWorkItemName().equals(workItemName))
-                    .findFirst().orElse(null);
+            List<WorkItem> items = this.getWorkflow(workflowName);
+            WorkItem result = items.stream()
+                                .filter(w -> w.getWorkItemName().equals(workItemName))
+                                .findFirst()
+                                .orElse(null);
+            return result;
 
         } catch (InvalidSyntaxException e) {
             logger.error(String.format("Could not locate Workflow with name %s", workflowName), e);
@@ -347,7 +359,7 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
      * @throws InvalidSyntaxException workflowName does not exist
      * @throws DuplicateSequenceNumberException workflowName does not exist
      */
-    private List<WorkItem> getWorkflow(String workflowName)
+    public List<WorkItem> getWorkflow(String workflowName)
             throws InvalidSyntaxException, InvalidSequenceNumberException, DuplicateSequenceNumberException {
 
         Collection<ServiceReference<WorkItem>> serviceReferences = this.context.getServiceReferences(WorkItem.class,
@@ -371,9 +383,9 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
      * @return List<WorkItem> Sorted by the WorkItem.SEQUENCE_NUMBER property
      */
     private List<WorkItem> sortWorkflowBySequenceNumber(Collection<ServiceReference<WorkItem>> serviceReferences) {
-        if (serviceReferences == null || serviceReferences.isEmpty()) {
+        if (serviceReferences == null) {
             throw new IllegalArgumentException(
-                    "Failed to sort the WorkItems since the provided list is either null or empty");
+                    "Failed to sort the WorkItems since the provided list is either null");
         }
         List<WorkItem> sortedWorkflow = new ArrayList<WorkItem>();
 
