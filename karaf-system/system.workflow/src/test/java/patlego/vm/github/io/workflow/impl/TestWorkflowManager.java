@@ -142,8 +142,26 @@ public class TestWorkflowManager {
     }
 
     @Test
+    public void testRetrieveWorkItems_Exception() {
+        Mockito.when(this.workflowManagerDS.getWorkItemInstances(Mockito.anyString())).thenThrow(IllegalArgumentException.class);
+
+        assertThrows(Exception.class, () -> {
+            this.simpleWorkflowManager.getWorkItemResult(WORKFLOW_ID);
+        });
+    }
+
+    @Test
     public void testUpdateStartTime() {
         this.simpleWorkflowManager.addWorkflowStartTime(WORKFLOW_ID, LocalDateTime.now());
+    }
+
+    @Test
+    public void testUpdateStartTime_Exception() {
+        Mockito.when(this.workflowManagerDS.updateStartTime(Mockito.anyString(), Mockito.any())).thenThrow(IllegalArgumentException.class);
+        
+        assertThrows(Exception.class, () -> {
+            this.simpleWorkflowManager.addWorkflowStartTime(WORKFLOW_ID, LocalDateTime.now());
+        });
     }
 
     @Test
@@ -152,13 +170,40 @@ public class TestWorkflowManager {
     }
 
     @Test
+    public void testUpdateEndTime_Exception() {
+        Mockito.when(this.workflowManagerDS.updateEndTime(Mockito.anyString(), Mockito.any())).thenThrow(IllegalArgumentException.class);
+        
+        assertThrows(Exception.class, () -> {
+            this.simpleWorkflowManager.addWorkflowEndTime(WORKFLOW_ID, LocalDateTime.now());
+        });
+    }
+
+    @Test
     public void testUpdateWorkflowName() {
         this.simpleWorkflowManager.addWorkflowName(WORKFLOW_ID, WORKFLOW_ID);
     }
 
     @Test
+    public void testUpdateWorkflowName_Exception() {
+        Mockito.when(this.workflowManagerDS.updateWorkflowName(Mockito.anyString(), Mockito.anyString())).thenThrow(IllegalArgumentException.class);
+        
+        assertThrows(Exception.class, () -> {
+            this.simpleWorkflowManager.addWorkflowName(WORKFLOW_ID, WORKFLOW_ID);
+        });
+    }
+
+    @Test
     public void testUpdateWorkflowStatus() {
         this.simpleWorkflowManager.setWorkflowSucceddedStatus(WORKFLOW_ID, Boolean.TRUE);
+    }
+
+    @Test
+    public void testUpdateWorkflowStatus_Exception() {
+        Mockito.when(this.workflowManagerDS.updateWorkflowStatus(Mockito.anyString(), Mockito.anyBoolean())).thenThrow(IllegalArgumentException.class);
+        
+        assertThrows(Exception.class, () -> {
+            this.simpleWorkflowManager.setWorkflowSucceddedStatus(WORKFLOW_ID, Boolean.TRUE);
+        });
     }
 
     @Test
