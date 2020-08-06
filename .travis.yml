@@ -14,9 +14,7 @@ jobs:
           script:
             - cd karaf-system
             - mvn versions:set -DnewVersion=1.0.$TRAVIS_BUILD_NUMBER
-            - mvn clean install -Pdev-build
-          after_success:
-            - mvn clean test jacoco:report coveralls:report
+            - mvn clean install -Pdev-build jacoco:report coveralls:report
           name: "Build & Test"
 stages:
 - name: test
