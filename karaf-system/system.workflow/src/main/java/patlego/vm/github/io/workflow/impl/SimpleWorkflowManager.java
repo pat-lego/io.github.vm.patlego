@@ -41,7 +41,7 @@ import patlego.vm.github.io.workflow.utils.impl.SimpleWorkflowManagerResult;
 public class SimpleWorkflowManager implements WorkflowManager {
 
     @Reference
-    private WorkflowManagerDS workflowManagerDS;
+    public WorkflowManagerDS workflowManagerDS;
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -53,7 +53,6 @@ public class SimpleWorkflowManager implements WorkflowManager {
         }
         try {
             this.workflowManagerDS.createWorflowInstance(id);
-            // this.map.put(id, new SimpleWorkflowManagerResult(id));
         } catch (Exception e) {
             logger.error(String.format("Failed to add workflow using id %s", id), e);
             throw new FailedWorfklowAdditonException(String.format("Failed to add workflow using id %s", id), e);

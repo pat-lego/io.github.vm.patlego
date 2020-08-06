@@ -95,4 +95,8 @@ public class TestWorkflowExecutor {
         assertNull(result.getFailedWorkItemName());
     }
 
+    @Test
+    public void deactivate() throws Exception {
+        this.manager.deactivate();
+    }
 }
