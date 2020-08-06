@@ -1,6 +1,7 @@
 package patlego.vm.github.io.workflow.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,8 +16,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.osgi.framework.InvalidSyntaxException;
+import org.slf4j.Logger;
 
 import patlego.vm.github.io.workflow.WorkItem;
+import patlego.vm.github.io.workflow.exceptions.DuplicateSequenceNumberException;
+import patlego.vm.github.io.workflow.exceptions.FailedWorfklowAdditonException;
+import patlego.vm.github.io.workflow.exceptions.FailedWorfklowRemovalException;
+import patlego.vm.github.io.workflow.exceptions.InvalidSequenceNumberException;
 import patlego.vm.github.io.workflow.utils.WorkResult;
 import patlego.vm.github.io.workflow.utils.WorkflowResult;
 
@@ -37,6 +43,7 @@ public class TestMockWorkflowExecutor {
     public void setup() throws InvalidSyntaxException {
         this.manager = Mockito.mock(SimpleWorkflowManager.class);
         this.workflowExecutor = Mockito.mock(SimpleWorkflowExecutor.class);
+        this.workflowExecutor.logger = Mockito.mock(Logger.class);
         this.workItem1 = Mockito.mock(WorkItem.class);
         this.workItem2 = Mockito.mock(WorkItem.class);
         this.workResult = Mockito.mock(WorkResult.class);
@@ -68,6 +75,69 @@ public class TestMockWorkflowExecutor {
         assertTrue(result.hasSucceeded());
         assertNull(result.getException());
         assertNull(result.getFailedWorkItemName());
+    }
+
+    @Test
+    public void testWorkflowRunner_Fail() {
+        Mockito.when(this.workResult.hasSucceeded()).thenReturn(false);
+
+        workflowExecutor.workflowManager = this.manager;
+
+        WorkflowResult result = workflowExecutor.run(WORKFLOW_NAME);
+        assertFalse(result.hasSucceeded());
+        assertEquals(0, result.getParameters().size());
+    }
+
+    @Test
+    public void testWorkflowRunner_DuplicateSequenceNumberException() {
+        Mockito.when(this.workItem1.execute(Mockito.any())).thenThrow(DuplicateSequenceNumberException.class);
+
+        workflowExecutor.workflowManager = this.manager;
+
+        WorkflowResult result = workflowExecutor.run(WORKFLOW_NAME);
+        assertFalse(result.hasSucceeded());
+        assertEquals(0, result.getParameters().size());
+        assertEquals(WORKITEM_NAME_1, result.getFailedWorkItemName());
+        assertTrue(result.getException() instanceof DuplicateSequenceNumberException);
+    }
+
+    @Test
+    public void testWorkflowRunner_InvalidSequenceNumberException() {
+        Mockito.when(this.workItem1.execute(Mockito.any())).thenThrow(InvalidSequenceNumberException.class);
+
+        workflowExecutor.workflowManager = this.manager;
+
+        WorkflowResult result = workflowExecutor.run(WORKFLOW_NAME);
+        assertFalse(result.hasSucceeded());
+        assertEquals(0, result.getParameters().size());
+        assertEquals(WORKITEM_NAME_1, result.getFailedWorkItemName());
+        assertTrue(result.getException() instanceof InvalidSequenceNumberException);
+    }
+
+    @Test
+    public void testWorkflowRunner_FailedWorfklowAdditonException() {
+        Mockito.when(this.workItem1.execute(Mockito.any())).thenThrow(FailedWorfklowAdditonException.class);
+
+        workflowExecutor.workflowManager = this.manager;
+
+        WorkflowResult result = workflowExecutor.run(WORKFLOW_NAME);
+        assertFalse(result.hasSucceeded());
+        assertEquals(0, result.getParameters().size());
+        assertEquals(WORKITEM_NAME_1, result.getFailedWorkItemName());
+        assertTrue(result.getException() instanceof FailedWorfklowAdditonException);
+    }
+
+    @Test
+    public void testWorkflowRunner_FailedWorfklowRemovalException() {
+        Mockito.when(this.workItem1.execute(Mockito.any())).thenThrow(FailedWorfklowRemovalException.class);
+
+        workflowExecutor.workflowManager = this.manager;
+
+        WorkflowResult result = workflowExecutor.run(WORKFLOW_NAME);
+        assertFalse(result.hasSucceeded());
+        assertEquals(0, result.getParameters().size());
+        assertEquals(WORKITEM_NAME_1, result.getFailedWorkItemName());
+        assertTrue(result.getException() instanceof FailedWorfklowRemovalException);
     }
 
     @Test
