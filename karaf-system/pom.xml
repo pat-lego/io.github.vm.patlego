@@ -9,9 +9,9 @@
   <modules>
     <module>system.dao</module>
     <module>system.workflow</module>
-    <module>system.client</module>
     <module>system.ocr</module>
     <module>system.mocks</module>
+    <module>system.profile</module>
     <module>system.features</module>
     <module>system.core</module>
   </modules>

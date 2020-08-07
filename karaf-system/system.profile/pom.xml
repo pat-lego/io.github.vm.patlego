@@ -7,14 +7,14 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <groupId>patlego.vm.github.io</groupId>
-  <artifactId>system.client</artifactId>
+  <artifactId>system.profile</artifactId>
   <name>System Client</name>
   <packaging>bundle</packaging>
 
   <build>
     <resources>
       <resource>
-        <directory>src/main/resources/system.client/dist</directory>
+        <directory>src/main/resources/system.profile/dist</directory>
       </resource>
     </resources>
     <plugins>
@@ -57,7 +57,7 @@
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
         <configuration>
-          <workingDirectory>src/main/resources/system.client</workingDirectory>
+          <workingDirectory>src/main/resources/system.profile</workingDirectory>
         </configuration>
         <executions>
           <execution>
