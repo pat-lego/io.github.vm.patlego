@@ -38,7 +38,7 @@
     </feature>
 
     <feature name="patlego-vm-client" version="${project.version}">
-        <bundle>mvn:patlego.vm.github.io/system.client/${project.version}</bundle>
+        <bundle>mvn:patlego.vm.github.io/system.profile/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-ocr" version="${project.version}">
