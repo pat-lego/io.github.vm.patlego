@@ -28,6 +28,7 @@ import patlego.vm.github.io.mocks.unittests.workitem.WorkItemImpl5;
 import patlego.vm.github.io.mocks.unittests.workitem.WorkItemImpl6;
 import patlego.vm.github.io.mocks.unittests.workitem.WorkItemImpl7;
 import patlego.vm.github.io.mocks.unittests.workitem.WorkItemImpl8;
+import patlego.vm.github.io.mocks.unittests.workitem.WorkItemImpl9;
 import patlego.vm.github.io.workflow.WorkItem;
 import patlego.vm.github.io.workflow.WorkflowExecutor;
 import patlego.vm.github.io.workflow.WorkflowManager;
@@ -209,6 +210,42 @@ public class LinearWorkflowTest {
         context.registerInjectActivateService(w2);
         context.registerInjectActivateService(w1);
         context.registerInjectActivateService(w8);
+
+        List<WorkflowExecutor> workflowExecutorList = Arrays.asList(context.getServices(WorkflowExecutor.class, "(&(EXECUTION_TYPE=LINEAR)(SYNCHRONOUS=TRUE))"));
+        assertEquals(1, workflowExecutorList.size());
+
+        linearWorkflow = workflowExecutorList.get(0);
+        assertEquals(-1, linearWorkflow.getLength(workflowName));
+
+
+        WorkflowResult result = linearWorkflow.run(workflowName);
+        assertEquals(false, result.hasSucceeded());
+        assertNotNull(result.getId());
+
+        this.wfManager = context.getService(WorkflowManager.class);
+        WorkflowManagerResult workflowManagerResult = this.wfManager.getWorklowInstanceInformation(result.getId());
+        assertFalse(workflowManagerResult.getWorkflowSucceddedStatus());
+    }
+
+    @Test
+    public void validateInvalidSequenceNumber_NonExistingSequenceNumber(OsgiContext context) {
+        Mockito.when(this.wfManagerDS.getWorkflowInstance(Mockito.anyString())).thenReturn(getMockWorkflowManagerWF());
+        mock.setSuccess(false);
+        context.registerInjectActivateService(this.wfManagerDS);
+        context.registerInjectActivateService(this.wfManager);
+
+        WorkflowExecutor linearWorkflow = new SimpleWorkflowExecutor();
+        context.registerInjectActivateService(linearWorkflow);
+
+        WorkItem w1 = new WorkItemImpl1();
+        WorkItem w2 = new WorkItemImpl2();
+
+        // Invalid sequence nunmber
+        WorkItem w9 = new WorkItemImpl9();
+
+        context.registerInjectActivateService(w2);
+        context.registerInjectActivateService(w1);
+        context.registerInjectActivateService(w9);
 
         List<WorkflowExecutor> workflowExecutorList = Arrays.asList(context.getServices(WorkflowExecutor.class, "(&(EXECUTION_TYPE=LINEAR)(SYNCHRONOUS=TRUE))"));
         assertEquals(1, workflowExecutorList.size());
