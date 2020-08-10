@@ -323,10 +323,16 @@ public class SimpleWorkflowExecutor implements WorkflowExecutor {
             Iterator<ServiceReference<WorkItem>> iterator = serviceReferences.iterator();
 
             while (iterator.hasNext()) {
-                String serviceNumber = iterator.next().getProperty(WorkItem.SEQUENCE_NUMBER).toString();
+                String serviceNumber = null;
+
+                // Protect against a non-existing service number
+                if (iterator.next().getProperty(WorkItem.SEQUENCE_NUMBER) != null) {
+                    serviceNumber = iterator.next().getProperty(WorkItem.SEQUENCE_NUMBER).toString();
+                }
 
                 // Must exist
                 if (serviceNumber == null) {
+                    logger.warn("Sequence number is not defined within the given workflow, will not excute workflow as this must be resolved");
                     return false;
                 }
                 // Check if can be a number
