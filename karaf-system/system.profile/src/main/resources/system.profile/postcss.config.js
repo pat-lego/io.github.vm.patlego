@@ -21,6 +21,7 @@ module.exports = {
   plugins: [
     tailwindcss,
     autoprefixer,
-    purgecss
+    // If we do a PROD build then NODE_ENV will be correctly set https://cli.vuejs.org/guide/mode-and-env.html#modes
+    ...process.env.NODE_ENV === 'production' ? [purgecss] : []
   ],
 };
