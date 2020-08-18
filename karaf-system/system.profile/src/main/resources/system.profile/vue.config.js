@@ -6,7 +6,7 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.js',
-      title: 'System Client'
+      title: 'Overview'
     }
   }
 }
