@@ -41,7 +41,7 @@ export default {
       personal: {
         image: {
           imageUrl:
-            '/profile/images/me.jpg',
+            'profile.jpg',
           imageAlt: 'Patrique Legault',
           imageTitle: 'This is me'
         },

@@ -2,7 +2,7 @@
   <div class="w-64 rounded-lg bg-gray-100 border hover:shadow-lg duration-500">
     <div class="flex flex-col">
       <div class="p-4">
-        <img :src="card.imageUrl" :alt="card.imageAlt" />
+        <img :src="require('../assets/images/' + card.imageUrl)" :alt="card.imageAlt" />
       </div>
       <h4 class="font-bold">{{card.imageTitle}}</h4>
     </div>
