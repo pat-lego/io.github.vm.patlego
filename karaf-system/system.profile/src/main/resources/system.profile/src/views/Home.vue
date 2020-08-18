@@ -10,7 +10,12 @@
     </div>
     <div class='flex mb-4'>
       <div class='w-1/4 p-6'>
-        <Card :card="personal.profile" />
+        <Card :card='personal.image' />
+      </div>
+      <div>
+        <div class='p-6 w-3/4 flex'>
+          <Profile :profile='personal.profile' />
+        </div>
       </div>
     </div>
   </div>
@@ -21,21 +26,27 @@
 import Header from '@/components/Header.vue'
 import Icon from '@/components/Icon.vue'
 import Card from '@/components/Card.vue'
+import Profile from '@/components/Profile.vue'
 
 export default {
   name: 'Home',
   components: {
     Icon,
     Header,
-    Card
+    Card,
+    Profile
   },
   data: () => {
     return {
       personal: {
-        profile: {
-          imageUrl: 'https://drive.google.com/thumbnail?id=1kDBpd180V1WkBaoaRPunXG4w2PeSiZQO',
+        image: {
+          imageUrl:
+            '/profile/images/me.jpg',
           imageAlt: 'Patrique Legault',
           imageTitle: 'This is me'
+        },
+        profile: {
+          name: 'Patrique Legault'
         }
       }
     }
