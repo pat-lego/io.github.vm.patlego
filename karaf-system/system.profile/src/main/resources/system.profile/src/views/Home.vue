@@ -73,7 +73,8 @@ export default {
       footer: {
         github: 'https://github.com/pat-lego',
         twitter: 'https://twitter.com/_patlego',
-        linkedin: 'https://www.linkedin.com/in/patrique-legault/'
+        linkedin: 'https://www.linkedin.com/in/patrique-legault/',
+        stackoverflow: 'https://stackoverflow.com/users/8828583/patrique-legault'
       }
     }
   }

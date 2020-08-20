@@ -2,16 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-// Font Awesome
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 import './assets/styles/index.css'
 
-library.add(faGithub)
-library.add(faLinkedin)
-library.add(faTwitter)
+// Font Awesome
+import './font-awesome.js'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
