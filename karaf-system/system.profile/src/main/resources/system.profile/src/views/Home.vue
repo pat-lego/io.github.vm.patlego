@@ -18,7 +18,7 @@
     </div>
     <div class="relative h-40">
       <div class="absolute inset-x-0 bottom-0">
-        <Footer />
+        <Footer :footer='footer' />
       </div>
     </div>
   </div>
@@ -69,6 +69,11 @@ export default {
             }
           ]
         }
+      },
+      footer: {
+        github: 'https://github.com/pat-lego',
+        twitter: 'https://twitter.com/_patlego',
+        linkedin: 'https://www.linkedin.com/in/patrique-legault/'
       }
     }
   }
