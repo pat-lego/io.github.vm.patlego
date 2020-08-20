@@ -18,6 +18,12 @@
 </template>
 <script>
 export default {
+  /**
+    * @author pat-lego <patrique.legault@gmail.com>
+    * @version 1.0
+    * @description This is the footer for the site which displays specific icons only if the URL for the profile exists
+    * @memberof utils
+  */
   props: {
     footer: Object
   }

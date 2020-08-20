@@ -10,6 +10,12 @@
 </template>
 <script>
 export default {
+  /**
+   * @author pat-lego <patrique.legault@gmail.com>
+   * @version 1.0
+   * @description Displays an image within a given css frame
+   * @memberof home
+   */
   props: {
     card: Object
   }

@@ -30,14 +30,16 @@
 </template>
 <script>
 export default {
+  /**
+   * @author pat-lego <patrique.legault@gmail.com>
+   * @version 1.0
+   * @description This component is used to didplay user profile data
+   * @memberof home
+   */
   props: {
-    profile: Object
-  },
-  methods: {
-    getExperience: function (experience) {
-      if (experience) {
-        return experience.toString()
-      }
+    profile: {
+      type: Object,
+      note: 'This is the user profile'
     }
   }
 }
