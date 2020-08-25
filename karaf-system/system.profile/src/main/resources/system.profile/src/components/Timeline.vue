@@ -2,20 +2,8 @@
   <div class='flex'>
     <div class='timeline relative w-4/5 p-10 m-auto m-10'>
       <ul class='m-0 p-0'>
-        <li class='relative w-1/2 p-10'>
-          <timeline-card-component />
-        </li>
-        <li class='relative w-1/2 p-10'>
-          <timeline-card-component />
-        </li>
-        <li class='relative w-1/2 p-10'>
-          <timeline-card-component />
-        </li>
-        <li class='relative w-1/2 p-10'>
-          <timeline-card-component />
-        </li>
-        <li class='relative w-1/2 p-10'>
-          <timeline-card-component />
+        <li v-for="entry in sortTimeline" :key="entry.title" class='relative w-1/2 p-10'>
+          <timeline-card-component :card="entry"/>
         </li>
       </ul>
     </div>
@@ -35,6 +23,50 @@ export default {
   name: 'timeline-component',
   components: {
     'timeline-card-component': TimelineCard
+  },
+  props: {
+    timeline: {
+      type: Array,
+      required: false
+    },
+    sort: {
+      type: String,
+      required: false
+    }
+  },
+  computed: {
+    sortTimeline: function () {
+      if (!this.timeline) {
+        return undefined
+      }
+      if (!this.sort) {
+        return this.timeline
+      }
+      var copy = this.timeline
+      if (this.sort === 'asc') {
+        return copy.sort(function (a, b) {
+          if (a.year < b.year) {
+            return -1
+          }
+          if (a.year > b.year) {
+            return 1
+          }
+          return 0
+        })
+      } else if (this.sort === 'desc') {
+        return copy.sort(function (a, b) {
+          if (a.year > b.year) {
+            return -1
+          }
+          if (a.year < b.year) {
+            return 1
+          }
+          return 0
+        })
+      } else {
+        return this.timeline
+      }
+    }
   }
 }
 </script>

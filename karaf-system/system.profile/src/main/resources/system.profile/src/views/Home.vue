@@ -16,12 +16,14 @@
           <profile-component :profile='personal.profile' />
         </div>
     </div>
-    <div class='mt-6'>
-      <timeline-component />
+    <div class='flex flex-col mt-6'>
+      <timeline-component :timeline='personal.timeline' :sort='"asc"'/>
     </div>
-    <div class="relative h-40">
-      <div class="absolute inset-x-0 bottom-0">
-        <footer-component :footer='footer' />
+    <div class='flex'>
+      <div class="relative h-40">
+        <div class="absolute inset-x-0 bottom-0">
+          <footer-component :footer='footer' />
+        </div>
       </div>
     </div>
   </div>
@@ -54,6 +56,21 @@ export default {
           imageAlt: 'Patrique Legault',
           imageTitle: 'Patrique Legault'
         },
+        timeline: [
+          {
+            title: 'Software Developer',
+            description: '<div class=\'m-2\'>I developed an algorithm at Laurentian University to measure the energy of various chemical structures using Mathematica</div>\n' +
+                          '<div class=\'m-2\'>Deployed and tested the solution on a super computer made available by <a href=\'https://www.sharcnet.ca/my/front/\'>SharcNet</a></div>\n',
+            year: 2011
+          },
+          {
+            title: 'Technical Support Agent',
+            description: '<div class=\'m-2\'>I worked with many application servers and databases in order to install Adobe LiveCycle for clients. \n' +
+                                'This required me to work with various components of the organization to accomplish this task. </div>\n' +
+                          '<div class=\'m-2\'>Used the Adobe Workbench utility to help clients troubleshoot processes developed for Adobe LiveCycle</div>\n',
+            year: 2014
+          }
+        ],
         profile: {
           name: 'Patrique Legault',
           career: 'Developer',

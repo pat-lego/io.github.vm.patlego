@@ -11,6 +11,21 @@
             "request": "attach",
             "port": 5005,
              "hostName": "localhost"
+        },
+        {
+            "type": "chrome",
+            "name": "Debug (Attach) - Vue.js",
+            "request": "launch",
+            "url": "http://localhost:8080/profile",
+            "breakOnLoad": true,
+            "webRoot": "${workspaceFolder}/karaf-system/system.profile/src/main/resources/system.profile/src",
+            "sourceMapPathOverrides": {
+                "webpack:///./*": "${webRoot}/*",
+                "webpack:///src/*": "${webRoot}/*",
+                "webpack:///*": "*",
+                "webpack:///./~/*": "${webRoot}/node_modules/*",
+                "meteor://💻app/*": "${webRoot}/*"
+            }
         }
     ]
 }
