@@ -16,7 +16,7 @@
           <profile-component :profile='personal.profile' />
         </div>
     </div>
-    <div>
+    <div class='mt-6'>
       <timeline-component />
     </div>
     <div class="relative h-40">

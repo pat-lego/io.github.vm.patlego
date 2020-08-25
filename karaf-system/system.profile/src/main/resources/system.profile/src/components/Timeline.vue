@@ -23,6 +23,12 @@
 </template>
 
 <script>
+/**
+  * @author pat-lego <patrique.legault@gmail.com>
+  * @version 1.0
+  * @description This component is used to render a timeline of TimelineCard component in order to depict a history of items
+  * @memberof components
+*/
 import TimelineCard from '@/components/TimelineCard.vue'
 
 export default {

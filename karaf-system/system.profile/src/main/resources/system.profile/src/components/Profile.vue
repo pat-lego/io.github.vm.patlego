@@ -33,8 +33,8 @@ export default {
   /**
    * @author pat-lego <patrique.legault@gmail.com>
    * @version 1.0
-   * @description This component is used to didplay user profile data
-   * @memberof home
+   * @description This component is used to display user profile data
+   * @memberof components
    */
   name: 'profile-component',
   props: {

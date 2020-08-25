@@ -17,7 +17,7 @@ export default {
    * @author pat-lego <patrique.legault@gmail.com>
    * @version 1.0
    * @description This is the navbar component used within the site, it currently displays Home and Resume. Once the first page is complete then we will use the Contact us page
-   * @memberof utils
+   * @memberof components
    */
   name: 'nav-component'
 }
