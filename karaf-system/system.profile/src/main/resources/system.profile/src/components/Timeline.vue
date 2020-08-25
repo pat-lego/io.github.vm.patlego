@@ -1,12 +1,23 @@
 <template>
-  <div class='border-l-4 border-blue-600 border-l-8 p-4 timeline'>
-    <div>
-      <div class='timeline-card p-1'>
-        <timeline-card-component />
-      </div>
-      <div class='timeline-card p-1'>
-        <timeline-card-component />
-      </div>
+  <div class='flex'>
+    <div class='timeline relative w-4/5 p-10 m-auto m-10'>
+      <ul class='m-0 p-0'>
+        <li class='relative w-1/2 p-10'>
+          <timeline-card-component />
+        </li>
+        <li class='relative w-1/2 p-10'>
+          <timeline-card-component />
+        </li>
+        <li class='relative w-1/2 p-10'>
+          <timeline-card-component />
+        </li>
+        <li class='relative w-1/2 p-10'>
+          <timeline-card-component />
+        </li>
+        <li class='relative w-1/2 p-10'>
+          <timeline-card-component />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -21,17 +32,82 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang='scss' scoped>
   .timeline {
-    width: 100%;
-    max-width: 500px;
-    text-align: left;
-    .timeline-wrapper {
-      position: relative
+    ul {
+      li:nth-child(odd) {
+        float: left;
+        text-align: right;
+        clear: both;
+      }
+      li:nth-child(even) {
+        float: right;
+        text-align: left;
+        clear: both;
+      }
+      li:nth-child(odd):before {
+        content: '';
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        background-color: rgba(233,33,99,1);
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px rgba(233,33,9,0.2);
+        top: 4.5rem;
+        right: -0.6rem;
+      }
+      li:nth-child(even):before {
+        content: '';
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        background-color: rgba(233,33,99,1);
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px rgba(233,33,9,0.2);
+        top: 4.5rem;
+        left: -0.4rem;
+      }
     }
   }
-  .timeline-card {
-    display: flex;
-    justify-content: flex-start;
+  .timeline:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: #c5c5c5;
+  }
+</style>
+<!-- Share style with child component -->
+<style scoped>
+  .timeline ul li:nth-child(odd) >>> .time {
+    position: absolute;
+    top: 3.5rem;
+    right: -165px;
+    margin: 0px;
+    padding: 1rem 2rem;
+    background: rgba(233,33,99,1);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 18px;
+  }
+  .timeline ul li:nth-child(even) >>> .time {
+    position: absolute;
+    top: 3.5rem;
+    left: -165px;
+    margin: 0px;
+    padding: 1rem 2rem;
+    background: rgba(233,33,99,1);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 18px;
+  }
+  .timeline ul li >>> .title {
+    font-weight: bold;
+    margin: 2rem;
+  }
+
+  .timeline ul li >>> .content {
+    font-style: italic;
   }
 </style>

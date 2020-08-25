@@ -4,7 +4,7 @@
       <div class="p-4">
         <img :src="require('../assets/images/' + card.imageUrl)" :alt="card.imageAlt" />
       </div>
-      <h4 class="font-bold">{{card.imageTitle}}</h4>
+      <h4 class="font-bold text-center">{{card.imageTitle}}</h4>
     </div>
   </div>
 </template>
