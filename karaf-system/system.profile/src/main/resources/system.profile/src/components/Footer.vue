@@ -24,8 +24,11 @@ export default {
     * @description This is the footer for the site which displays specific icons only if the URL for the profile exists
     * @memberof utils
   */
+  name: 'footer-component',
   props: {
-    footer: Object
+    footer: {
+      type: Object
+    }
   }
 }
 </script>

@@ -2,23 +2,26 @@
   <div>
     <div class='flex mb-4'>
       <div class='w-1/4'>
-        <Icon />
+        <icon-component />
       </div>
       <div class='w-3/4'>
-        <Header />
+        <nav-component />
       </div>
     </div>
     <div class='flex flex-row'>
         <div class="w-1/2 flex justify-center items-center">
-          <Card :card='personal.image' />
+          <card-component :card='personal.image' />
         </div>
         <div class="w-1/2 flex items-center">
-          <Profile :profile='personal.profile' />
+          <profile-component :profile='personal.profile' />
         </div>
+    </div>
+    <div class='flex flex-col items-center h-40'>
+      <timeline-component />
     </div>
     <div class="relative h-40">
       <div class="absolute inset-x-0 bottom-0">
-        <Footer :footer='footer' />
+        <footer-component :footer='footer' />
       </div>
     </div>
   </div>
@@ -31,15 +34,17 @@ import Icon from '@/components/Icon.vue'
 import Card from '@/components/Card.vue'
 import Profile from '@/components/Profile.vue'
 import Footer from '@/components/Footer.vue'
+import Timeline from '@/components/Timeline'
 
 export default {
-  name: 'Home',
+  name: 'home-view',
   components: {
-    Icon,
-    Header,
-    Card,
-    Profile,
-    Footer
+    'icon-component': Icon,
+    'nav-component': Header,
+    'card-component': Card,
+    'profile-component': Profile,
+    'footer-component': Footer,
+    'timeline-component': Timeline
   },
   data: () => {
     return {
@@ -47,7 +52,7 @@ export default {
         image: {
           imageUrl: 'profile.jpg',
           imageAlt: 'Patrique Legault',
-          imageTitle: 'This is me'
+          imageTitle: 'Patrique Legault'
         },
         profile: {
           name: 'Patrique Legault',

@@ -16,8 +16,11 @@ export default {
    * @description Displays an image within a given css frame
    * @memberof home
    */
+  name: 'card-component',
   props: {
-    card: Object
+    card: {
+      type: Object
+    }
   }
 }
 </script>

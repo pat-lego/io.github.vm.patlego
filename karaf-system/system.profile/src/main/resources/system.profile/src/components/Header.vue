@@ -19,5 +19,6 @@ export default {
    * @description This is the navbar component used within the site, it currently displays Home and Resume. Once the first page is complete then we will use the Contact us page
    * @memberof utils
    */
+  name: 'nav-component'
 }
 </script>

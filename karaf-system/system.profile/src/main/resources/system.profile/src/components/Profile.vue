@@ -36,6 +36,7 @@ export default {
    * @description This component is used to didplay user profile data
    * @memberof home
    */
+  name: 'profile-component',
   props: {
     profile: {
       type: Object,

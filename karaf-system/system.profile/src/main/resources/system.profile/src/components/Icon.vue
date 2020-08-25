@@ -13,5 +13,6 @@ export default {
     * @description This component simply displays the name `Pat Lego` in red and when hovered over changs to blue
     * @memberof home
   */
+  name: 'icon-component'
 }
 </script>
