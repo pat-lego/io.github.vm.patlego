@@ -8,22 +8,20 @@
         <nav-component />
       </div>
     </div>
-    <div class='flex flex-col md:flex-row lg:flew-row xl:flew-row items-center w-full'>
+    <div class='flex flex-col sm:flex-row items-center w-full'>
         <div class="w-1/2 flex justify-center items-center">
           <card-component :card='personal.image' />
         </div>
-        <div class="sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 flex pt-4">
+        <div class="sm:w-1/2 sm:w-1/2 flex pt-4">
           <profile-component :profile='personal.profile' />
         </div>
     </div>
     <div class='flex flex-col mt-6'>
       <timeline-component :timeline='personal.timeline' :sort='"asc"'/>
     </div>
-    <div class='flex'>
-      <div class="relative h-40">
-        <div class="absolute inset-x-0 bottom-0">
-          <footer-component :footer='footer' />
-        </div>
+    <div class="relative h-40">
+      <div class="absolute inset-x-0 bottom-0">
+        <footer-component :footer='footer' />
       </div>
     </div>
   </div>

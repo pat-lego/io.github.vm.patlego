@@ -2,7 +2,7 @@
   <div class='flex'>
     <div class='timeline relative w-4/5 m-auto m-10'>
       <ul class='m-0 p-0'>
-        <li v-for="entry in sortTimeline" :key="entry.title" class='relative w-1/2 p-10'>
+        <li v-for="entry in sortTimeline" :key="entry.title" class='relative w-1/2 p-1 sm:p-10'>
           <timeline-card-component :card="entry"/>
         </li>
       </ul>
@@ -83,6 +83,7 @@ export default {
         text-align: left;
         clear: both;
       }
+      /** When the browser is 600px or more */
       @media only screen and (min-width: 600px) {
         li:nth-child(odd):before {
           content: '';
@@ -96,6 +97,7 @@ export default {
           right: -0.6rem;
         }
       }
+      /** When the browser is 600px or more */
       @media only screen and (min-width: 600px) {
         li:nth-child(even):before {
           content: '';
@@ -117,9 +119,8 @@ export default {
     left: 50%;
     width: 2px;
     height: 100%;
-    @media only screen and (min-width: 600px) {
-      background: #c5c5c5;
-    }
+    background: #c5c5c5;
+
   }
 </style>
 <!-- Share style with child component -->
