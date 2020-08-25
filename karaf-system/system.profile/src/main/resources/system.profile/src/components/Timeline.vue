@@ -1,8 +1,8 @@
 <template>
   <div class='flex'>
-    <div class='timeline relative w-4/5  m-auto m-10'>
+    <div class='timeline relative w-4/5 m-auto m-10'>
       <ul class='m-0 p-0'>
-        <li v-for="entry in sortTimeline" :key="entry.title" class='relative w-1/2 sm:p-6 md:p-10'>
+        <li v-for="entry in sortTimeline" :key="entry.title" class='relative w-1/2 p-10'>
           <timeline-card-component :card="entry"/>
         </li>
       </ul>

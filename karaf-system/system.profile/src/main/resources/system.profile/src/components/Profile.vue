@@ -1,7 +1,7 @@
 <template>
-  <div v-if="profile" class="flex flex-col mb-4 p-6">
+  <div v-if="profile" class="flex flex-col text-sm">
     <div v-if="profile.name" class="flex flex-row border-b-2">
-        <div class="pr-4">Name</div>
+        <div class="sm:text-sm pr-4">Name</div>
         <div class="font-bold m-auto mr-2">{{profile.name}}</div>
     </div>
     <div v-if="profile.career" class="flex flex-row pt-2">

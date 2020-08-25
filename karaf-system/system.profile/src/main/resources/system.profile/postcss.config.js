@@ -1,5 +1,3 @@
-const autoprefixer = require('autoprefixer');
-const tailwindcss = require('tailwindcss');
 const postcssPurgecss = require(`@fullhuman/postcss-purgecss`);
 const { purge } = require('./tailwind.config');
 
@@ -19,8 +17,9 @@ const purgecss = postcssPurgecss({
 
 module.exports = {
   plugins: [
-    tailwindcss,
-    autoprefixer,
+    require('postcss-import'),
+    require('tailwindcss'),
+    require('autoprefixer'),
     // If we do a PROD build then NODE_ENV will be correctly set https://cli.vuejs.org/guide/mode-and-env.html#modes
     ...process.env.NODE_ENV === 'production' ? [purgecss] : []
   ],

@@ -1,18 +1,18 @@
 <template>
   <div>
-    <div class='flex mb-4'>
+    <div class='flex mb-4 w-full'>
       <div class='w-1/4'>
         <icon-component />
       </div>
-      <div class='w-3/4'>
+      <div class='w-full'>
         <nav-component />
       </div>
     </div>
-    <div class='flex flex-row'>
+    <div class='flex flex-col md:flex-row lg:flew-row xl:flew-row items-center w-full'>
         <div class="w-1/2 flex justify-center items-center">
           <card-component :card='personal.image' />
         </div>
-        <div class="w-1/2 flex items-center">
+        <div class="sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 flex pt-4">
           <profile-component :profile='personal.profile' />
         </div>
     </div>
