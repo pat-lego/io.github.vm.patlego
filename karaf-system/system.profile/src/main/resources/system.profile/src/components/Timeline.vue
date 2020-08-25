@@ -1,6 +1,13 @@
 <template>
-  <div class="border-l-4 border-blue-600 min-h-full border-l-8">
-      <timeline-card-component />
+  <div class='border-l-4 border-blue-600 border-l-8 p-4 timeline'>
+    <div>
+      <div class='timeline-card p-1'>
+        <timeline-card-component />
+      </div>
+      <div class='timeline-card p-1'>
+        <timeline-card-component />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,3 +21,17 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+  .timeline {
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+    .timeline-wrapper {
+      position: relative
+    }
+  }
+  .timeline-card {
+    display: flex;
+    justify-content: flex-start;
+  }
+</style>

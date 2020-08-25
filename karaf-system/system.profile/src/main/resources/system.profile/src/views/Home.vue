@@ -16,7 +16,7 @@
           <profile-component :profile='personal.profile' />
         </div>
     </div>
-    <div class='flex flex-col items-center h-40'>
+    <div class='flex flex-col items-center'>
       <timeline-component />
     </div>
     <div class="relative h-40">
