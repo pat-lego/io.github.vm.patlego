@@ -53,8 +53,7 @@ export default {
       personal: {
         image: {
           imageUrl: 'profile.jpg',
-          imageAlt: 'Patrique Legault',
-          imageTitle: 'Patrique Legault'
+          imageAlt: 'Patrique Legault'
         },
         timeline: [
           {
@@ -69,6 +68,12 @@ export default {
                                 'This required me to work with various components of the organization to accomplish this task. </div>\n' +
                           '<div class=\'m-2\'>Used the Adobe Workbench utility to help clients troubleshoot processes developed for Adobe LiveCycle</div>\n',
             year: 2014
+          },
+          {
+            title: 'Senior Systems Analyst',
+            description: '<div class=\'m-2\'>Worked on various projects involving Adobe Experience Manager and Forms capabilities. </div>\n' +
+                          '<div class=\'m-2\'>Used the Adobe Workbench utility to help clients troubleshoot processes developed for Adobe LiveCycle</div>\n',
+            year: 2016
           }
         ],
         profile: {

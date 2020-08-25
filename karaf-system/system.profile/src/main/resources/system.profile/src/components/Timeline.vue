@@ -1,8 +1,8 @@
 <template>
   <div class='flex'>
-    <div class='timeline relative w-4/5 p-10 m-auto m-10'>
+    <div class='timeline relative w-4/5  m-auto m-10'>
       <ul class='m-0 p-0'>
-        <li v-for="entry in sortTimeline" :key="entry.title" class='relative w-1/2 p-10'>
+        <li v-for="entry in sortTimeline" :key="entry.title" class='relative w-1/2 sm:p-6 md:p-10'>
           <timeline-card-component :card="entry"/>
         </li>
       </ul>
@@ -83,27 +83,31 @@ export default {
         text-align: left;
         clear: both;
       }
-      li:nth-child(odd):before {
-        content: '';
-        position: absolute;
-        width: 1rem;
-        height: 1rem;
-        background-color: rgba(233,33,99,1);
-        border-radius: 50%;
-        box-shadow: 0 0 0 2px rgba(233,33,9,0.2);
-        top: 4.5rem;
-        right: -0.6rem;
+      @media only screen and (min-width: 600px) {
+        li:nth-child(odd):before {
+          content: '';
+          position: absolute;
+          width: 1rem;
+          height: 1rem;
+          background-color: rgba(233,33,99,1);
+          border-radius: 50%;
+          box-shadow: 0 0 0 2px rgba(233,33,9,0.2);
+          top: 4.5rem;
+          right: -0.6rem;
+        }
       }
-      li:nth-child(even):before {
-        content: '';
-        position: absolute;
-        width: 1rem;
-        height: 1rem;
-        background-color: rgba(233,33,99,1);
-        border-radius: 50%;
-        box-shadow: 0 0 0 2px rgba(233,33,9,0.2);
-        top: 4.5rem;
-        left: -0.4rem;
+      @media only screen and (min-width: 600px) {
+        li:nth-child(even):before {
+          content: '';
+          position: absolute;
+          width: 1rem;
+          height: 1rem;
+          background-color: rgba(233,33,99,1);
+          border-radius: 50%;
+          box-shadow: 0 0 0 2px rgba(233,33,9,0.2);
+          top: 4.5rem;
+          left: -0.4rem;
+        }
       }
     }
   }
@@ -113,7 +117,9 @@ export default {
     left: 50%;
     width: 2px;
     height: 100%;
-    background: #c5c5c5;
+    @media only screen and (min-width: 600px) {
+      background: #c5c5c5;
+    }
   }
 </style>
 <!-- Share style with child component -->

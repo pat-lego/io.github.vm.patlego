@@ -1,5 +1,5 @@
 <template>
-    <div class='p-4'>
+    <div class='sm:p-0 md:p-4'>
         <div class='title'>{{card.title}}</div>
         <p slot='description' v-html="card.description" class='content'></p>
         <p class='time'>{{card.year}}</p>
