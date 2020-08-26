@@ -28,6 +28,11 @@
 </template>
 
 <script>
+/**
+ * @author pat-lego <patrique.legault@gmail.com>
+ * @memberof views
+ * @description The landing page for the application
+ */
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import Icon from '@/components/Icon.vue'
