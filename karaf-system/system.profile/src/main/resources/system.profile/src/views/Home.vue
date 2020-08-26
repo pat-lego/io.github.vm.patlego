@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class='flex flex-col mt-6'>
-      <timeline-component :timeline='personal.timeline' :sort='"asc"'/>
+      <timeline-component :timeline='personal.timeline' :sort='"desc"'/>
     </div>
     <div class="relative h-40">
       <div class="absolute inset-x-0 bottom-0">
@@ -69,9 +69,23 @@ export default {
           },
           {
             title: 'Senior Systems Analyst',
-            description: '<div class=\'m-2\'>Worked on various projects involving Adobe Experience Manager and Forms capabilities. </div>\n' +
-                          '<div class=\'m-2\'>Used the Adobe Workbench utility to help clients troubleshoot processes developed for Adobe LiveCycle</div>\n',
+            description: '<div class=\'m-2\'>Worked on various projects involving Adobe Experience Manager and Forms</div>\n' +
+                          '<div class=\'m-2\'>Used tools such as Jira, Bitbucket, Maven and VS Code to develop OSGi services and AEM components</div>\n' +
+                          '<div class=\'m-2\'>Used various development tools to create integrations between client systems and Adobe Sign</div>\n',
             year: 2016
+          },
+          {
+            title: 'Senior Developer',
+            description: '<div class=\'m-2\'>Managed product development with a team of developers and used Agile methodologies to create a quick and iterative delivery cycle</div>\n' +
+                          '<div class=\'m-2\'>Used various tools to develop a deployment pipeline such as TravisCI, Ruby, Amazon ECS, Amazon ECR, Amazon RDS, Docker, Flyway DB Migration</div>\n' +
+                          '<div class=\'m-2\'>Used various tools to develop a testing pipeline such as TravisCI, Selenium, JUnit</div>\n' +
+                          '<div class=\'m-2\'>Worked as a full stack developer leveraging Angular, Java and Postgres as the main technologies for the application</div>\n',
+            year: 2018
+          },
+          {
+            title: 'Software Consultant',
+            description: '<div class=\'m-2\'>Leveraging Adobe Experience Manager to create web content for businesses</div>\n',
+            year: 2019
           }
         ],
         profile: {
