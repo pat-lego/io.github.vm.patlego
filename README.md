@@ -8,7 +8,7 @@ This a server that contains API's and systems that I always wanted to work with.
 
 # Required Software
 
-In order to start the system you will require the following
+In order to start the system you will require the following 
 
 1. Java 11.x 
 2. Maven 3.6.3
