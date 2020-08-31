@@ -6,7 +6,10 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.js',
-      title: 'System Client'
+      title: 'Personal Profile'
     }
+  },
+  configureWebpack: {
+    devtool: 'source-map'
   }
 }

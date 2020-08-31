@@ -4,6 +4,12 @@ import router from './router'
 
 import './assets/styles/index.css'
 
+// Font Awesome
+import './font-awesome.js'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 Vue.config.productionTip = false
 
 new Vue({
