@@ -3,7 +3,10 @@ services:
   karaf:
      environment:
        - TZ=America/Montreal
-     build: .
+     build:
+      context: ./
+      dockerfile: Karaf.Dockerfile
+     image: 525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego.vm.dev:karaf-vm
      restart: always
      ports:
          - "5005:5005"
@@ -21,7 +24,10 @@ services:
      networks: 
       - backend
   postgres-db:
-     image: postgres:13 
+     build:
+      context: ./
+      dockerfile: Postgres.Dockerfile
+     image: 525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego.vm.dev:karaf-db
      restart: always
      ports:
          - "5432:5432"
