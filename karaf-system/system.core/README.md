@@ -148,3 +148,9 @@ ecs-cli compose --project-name pat-lego-VM-Dev service down --cluster-config pat
 ```
 ecs-cli down --force --cluster-config pat-lego.vm.dev --ecs-profile pat-lego.vm.dev
 ```
+
+# Amazon VPC Endpoints
+
+VPC endpoints are like VPN's but they use the Amazon client specifically. In order to get this going the first thing you will need to do is [download](https://aws.amazon.com/vpn/client-vpn-download/) the AWS VPN Client. Once that is installed then users can create there endpoint following [this](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html) documentation.
+
+**Note:** My endpoint was configured to work with Mutual Certificate based authentication
