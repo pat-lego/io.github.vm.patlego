@@ -154,3 +154,35 @@ ecs-cli down --force --cluster-config pat-lego.vm.dev --ecs-profile pat-lego.vm.
 VPC endpoints are like VPN's but they use the Amazon client specifically. In order to get this going the first thing you will need to do is [download](https://aws.amazon.com/vpn/client-vpn-download/) the AWS VPN Client. Once that is installed then users can create there endpoint following [this](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html) documentation.
 
 **Note:** My endpoint was configured to work with Mutual Certificate based authentication
+
+## Configuring Internet Gateways
+
+Once the connection to the endpoint is built an internet connection will need to be added in order to use the VPN and other utilities at the sametime. Perform the following steps in order to allow for an internet gateway.
+
+1. Allow `0.0.0.0/0` for HTTP/HTTPS protocol in the security group for Ingress and Outgress 
+    - This is required since all VPC have a default Security Group
+2. Create an internet gateway (within VPC page) page and make sure that it is attached to your VPC
+3. Edit the Route Tables (within VPC page) and allow 0.0.0.0/0 and ::/0 on all Route Tables that are using your VPC
+    - Click on VPC
+    - Select Route Tables
+    - Select a Route Table
+    - Under Routes click Edit Routes
+    - Add Route
+    - Enter the information above (0.0.0.0/0 or ::/0) and associate it to an internet gateway
+    - Click Save Routes
+    - Do this for all Route Tables
+4. Edit the Authorization of the Client VPN Endpoints by allowing 0.0.0.0/0 as an Ingress rule on the VPN client
+    - Click on Client VPN Endpoints
+    - Select your Endpoint
+    - Allow Authorize Ingress
+    - Destination network to enable 0.0.0.0/0
+    - Click Add Authorization Rule
+5. Edit the Route Table of the Client VPN Endpoints by allowing 0.0.0.0/0 as a Route rule on the VPN client
+    - Click on Client VPN Endpoints
+    - Select your Endpoint
+    - Click Route Table
+    - Click Create Route
+    - In the Route Destination enter 0.0.0.0/0
+    - Select the subnet
+    - Click Create Route
+    - Once complete do this for all other subnets
