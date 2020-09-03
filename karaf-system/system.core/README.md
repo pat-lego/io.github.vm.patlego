@@ -73,10 +73,10 @@ ecs-cli configure profile --access-key ACCESS_KEY --secret-key SECRET_ACCESS-KEY
 
 ## Create Cluster
 
-Create the cluster using the previous configurations applied, I used `pat-lego.vm.dev` as my previous configuration names.
+Create the cluster using the previous configurations applied, I used `pat-lego.vm` as my previous configuration names.
 
 ```
-ecs-cli up --cluster-config pat-lego.vm.dev --ecs-profile pat-lego.vm.dev
+ecs-cli up --cluster-config pat-lego.vm --ecs-profile pat-lego.vm
 ```
 
 The desired output is as follows:
@@ -118,7 +118,7 @@ A sample file can be found [here](src/main/resources/ecs)
 Now that the cluster and the compose file are built users can now deploy containers into them, use the following command to deploy a container
 
 ```
-ecs-cli compose --project-name pat-lego-VM-Dev service up --create-log-groups --cluster-config pat-lego.vm.dev --ecs-profile pat-lego.vm.dev
+ecs-cli compose --project-name pat-lego-VM-Dev service up --create-log-groups --cluster-config pat-lego.vm --ecs-profile pat-lego.vm
 ```
 
 # ECS View Containers
@@ -126,7 +126,7 @@ ecs-cli compose --project-name pat-lego-VM-Dev service up --create-log-groups --
 To view the running containers execute the following command
 
 ```
-ecs-cli compose --project-name pat-lego-VM-Dev service ps --cluster-config pat-lego.vm.dev --ecs-profile pat-lego.vm.dev
+ecs-cli compose --project-name pat-lego-VM-Dev service ps --cluster-config pat-lego.vm --ecs-profile pat-lego.vm
 ```
 
 # ECS View Logs
@@ -134,7 +134,7 @@ ecs-cli compose --project-name pat-lego-VM-Dev service ps --cluster-config pat-l
 ECS allows users to view the logs within them, leverage the following to do so
 
 ```
-ecs-cli logs --task-id 0c2862e6e39e4eff92ca3e4f843c5b9a --follow --cluster-config pat-lego.vm.dev --ecs-profile pat-lego.vm.dev
+ecs-cli logs --task-id 0c2862e6e39e4eff92ca3e4f843c5b9a --follow --cluster-config pat-lego.vm --ecs-profile pat-lego.vm
 ```
 
 # ECS Cleanup
@@ -142,11 +142,11 @@ ecs-cli logs --task-id 0c2862e6e39e4eff92ca3e4f843c5b9a --follow --cluster-confi
 Once the testing and the fun is over cleanup by executing the following
 
 ```
-ecs-cli compose --project-name pat-lego-VM-Dev service down --cluster-config pat-lego.vm.dev --ecs-profile pat-lego.vm.dev
+ecs-cli compose --project-name pat-lego-VM-Dev service down --cluster-config pat-lego.vm --ecs-profile pat-lego.vm
 ```
 
 ```
-ecs-cli down --force --cluster-config pat-lego.vm.dev --ecs-profile pat-lego.vm.dev
+ecs-cli down --force --cluster-config pat-lego.vm --ecs-profile pat-lego.vm
 ```
 
 # Amazon VPC Endpoints

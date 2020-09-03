@@ -3,7 +3,7 @@ services:
   karaf:
      environment:
        - TZ=America/Montreal
-     image: 525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego.vm.dev:karaf-vm
+     image: 525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego.vm:karaf-vm
      ports:
          - "8181:8181"
          - "8101:8101"
@@ -12,6 +12,6 @@ services:
      logging:
       driver: awslogs
       options: 
-        awslogs-group: pat-lego-VM-Dev
+        awslogs-group: pat-lego-VM
         awslogs-region: ca-central-1
         awslogs-stream-prefix: karaf

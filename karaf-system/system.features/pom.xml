@@ -138,7 +138,7 @@
     </profile>
 
     <profile>
-      <id>prod-build</id>
+      <id>ecs-build</id>
       <build>
         <plugins>
           <plugin>

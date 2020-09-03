@@ -134,6 +134,67 @@
         </plugins>
       </build>
     </profile>
+
+    <profile>
+      <id>ecs-build</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-docker</id>
+                <!-- here the phase you need -->
+                <phase>verify</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${basedir}/target/assembly</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>src/main/resources/ecs</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>Remove Docker</id>
+                <goals>
+                  <goal>remove</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+              <execution>
+                <id>Build Docker</id>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <images>
+                <image>
+                  <name>525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego.vm:karaf-vm</name>
+                  <alias>dockerfile</alias>
+                  <build>
+                    <dockerFile>${project.build.directory}/assembly/Karaf.Dockerfile</dockerFile>
+                  </build>
+                </image>
+              </images>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 
   <dependencies>
