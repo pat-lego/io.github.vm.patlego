@@ -1,0 +1,24 @@
+name: Deploy Container
+
+on: 
+  push:
+    branches:
+      - master
+jobs: 
+  build_and_test:
+    name: Java Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Java 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          architecture: x64
+      - name: Run Maven
+        run: mvn clean install --file karaf-system/pom.xml -Pecs-build -Dmaven.test.skip=true -Dpostgres.ecs.password=$postgres.ecs.password
+        env:
+          postgres.ecs.password: ${{secrets.PAT_LEGO_DB_PWD}} 
+      - name: Login to AmazonECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
