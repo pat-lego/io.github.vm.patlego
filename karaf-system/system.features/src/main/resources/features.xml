@@ -23,7 +23,7 @@
             osgi.jdbc.driver.class=org.postgresql.Driver
             password=sXqANoEJT7zYKWGymypP
             user=karaf
-            url=jdbc:postgresql://karaf-db.ch5m6ge8f6p2.ca-central-1.rds.amazonaws.com:5432/karaf_db
+            url=jdbc:postgresql://pat-lego-db.ch5m6ge8f6p2.ca-central-1.rds.amazonaws.com:5432/karaf_db
             dataSourceName=karafdb
             databaseName=karaf_db
         </config>

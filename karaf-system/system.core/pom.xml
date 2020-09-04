@@ -183,7 +183,7 @@
             <configuration>
               <images>
                 <image>
-                  <name>525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego.vm:karaf-vm</name>
+                  <name>525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego-vm:karaf-vm</name>
                   <alias>dockerfile</alias>
                   <build>
                     <dockerFile>${project.build.directory}/assembly/Karaf.Dockerfile</dockerFile>
