@@ -121,6 +121,11 @@ Now that the cluster and the compose file are built users can now deploy contain
 ecs-cli compose --project-name pat-lego-vm service up --create-log-groups --cluster-config pat-lego.vm --ecs-profile pat-lego.vm
 ```
 
+**Note:** When doing deployments to ECS it is important to remember that a new task gets a new IP so it is important to assign an Application Load Balancer
+to the server in order to retain a static definition, to do that add the following three parameters to your deployment `--target-group-arn` `--container-name` `--container-port`
+
+
+
 # ECS View Containers
 
 To view the running containers execute the following command
