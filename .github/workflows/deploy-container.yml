@@ -35,3 +35,10 @@ jobs:
           IMAGE_TAG: karaf-vm
         run: |
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: Deploy to Amazon ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: taskdefinitions/pat-lego-vm.json
+          service: pat-lego-vm
+          cluster: pat-lego-vm
+          wait-for-service-stability: true

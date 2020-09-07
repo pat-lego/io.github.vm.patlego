@@ -1,0 +1,161 @@
+{
+    "ipcMode": null,
+    "executionRoleArn": "arn:aws:iam::525939336058:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "dnsSearchDomains": [],
+            "environmentFiles": null,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "secretOptions": null,
+                "options": {
+                    "awslogs-group": "pat-lego-vm",
+                    "awslogs-region": "ca-central-1",
+                    "awslogs-stream-prefix": "karaf"
+                }
+            },
+            "entryPoint": [],
+            "portMappings": [
+                {
+                    "hostPort": 8181,
+                    "protocol": "tcp",
+                    "containerPort": 8181
+                },
+                {
+                    "hostPort": 8101,
+                    "protocol": "tcp",
+                    "containerPort": 8101
+                },
+                {
+                    "hostPort": 1099,
+                    "protocol": "tcp",
+                    "containerPort": 1099
+                },
+                {
+                    "hostPort": 44444,
+                    "protocol": "tcp",
+                    "containerPort": 44444
+                }
+            ],
+            "command": [],
+            "linuxParameters": {
+                "capabilities": {
+                    "add": null,
+                    "drop": null
+                },
+                "sharedMemorySize": null,
+                "tmpfs": null,
+                "devices": [],
+                "maxSwap": null,
+                "swappiness": null,
+                "initProcessEnabled": null
+            },
+            "cpu": 0,
+            "environment": [
+                {
+                    "name": "TZ",
+                    "value": "America/Montreal"
+                }
+            ],
+            "resourceRequirements": null,
+            "ulimits": null,
+            "dnsServers": [],
+            "mountPoints": [],
+            "workingDirectory": null,
+            "secrets": null,
+            "dockerSecurityOptions": [],
+            "memory": null,
+            "memoryReservation": null,
+            "volumesFrom": [],
+            "stopTimeout": null,
+            "image": "525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego-vm:karaf-vm",
+            "startTimeout": null,
+            "firelensConfiguration": null,
+            "dependsOn": null,
+            "disableNetworking": null,
+            "interactive": null,
+            "healthCheck": null,
+            "essential": true,
+            "links": [],
+            "hostname": null,
+            "extraHosts": [],
+            "pseudoTerminal": false,
+            "user": null,
+            "readonlyRootFilesystem": false,
+            "dockerLabels": null,
+            "systemControls": null,
+            "privileged": false,
+            "name": "karaf"
+        }
+    ],
+    "placementConstraints": [],
+    "memory": "512",
+    "taskRoleArn": null,
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "taskDefinitionArn": "arn:aws:ecs:ca-central-1:525939336058:task-definition/pat-lego-vm:4",
+    "family": "pat-lego-vm",
+    "requiresAttributes": [
+        {
+            "targetId": null,
+            "targetType": null,
+            "value": null,
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "targetId": null,
+            "targetType": null,
+            "value": null,
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "targetId": null,
+            "targetType": null,
+            "value": null,
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "targetId": null,
+            "targetType": null,
+            "value": null,
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "targetId": null,
+            "targetType": null,
+            "value": null,
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+        },
+        {
+            "targetId": null,
+            "targetType": null,
+            "value": null,
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "targetId": null,
+            "targetType": null,
+            "value": null,
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "targetId": null,
+            "targetType": null,
+            "value": null,
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "pidMode": null,
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "revision": 4,
+    "status": "ACTIVE",
+    "inferenceAccelerators": null,
+    "proxyConfiguration": null,
+    "volumes": []
+}
