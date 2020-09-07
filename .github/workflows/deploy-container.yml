@@ -38,7 +38,7 @@ jobs:
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: taskdefinitions/pat-lego-vm.json
+          task-definition: karaf-system/system.core/src/main/resources/ecs/taskdefinitions/pat-lego-vm.json
           service: pat-lego-vm
           cluster: pat-lego-vm
           wait-for-service-stability: true
