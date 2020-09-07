@@ -23,7 +23,7 @@ jobs:
           java-version: '11'
           architecture: x64
       - name: Run Maven
-        run: mvn clean install --file karaf-system/pom.xml -Pecs-build -Dmaven.test.skip=true -Dpostgres.ecs.password=$postgres-ecs-password
+        run: mvn clean install --file karaf-system/pom.xml -Dmaven.test.skip=true -Pecs-build
         env:
           postgres-ecs-password: ${{secrets.PAT_LEGO_DB_PWD}} 
       - name: Configure AWS Credentials
