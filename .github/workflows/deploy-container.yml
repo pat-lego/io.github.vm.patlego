@@ -6,7 +6,7 @@ on:
       - master
 jobs: 
   build_and_test:
-    name: Java Build
+    name: Deploy new container to ECS
     runs-on: ubuntu-latest
     steps:
       - name: Cache local Maven repository
