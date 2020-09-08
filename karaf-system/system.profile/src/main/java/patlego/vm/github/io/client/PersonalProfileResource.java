@@ -2,6 +2,9 @@ package patlego.vm.github.io.client;
 
 import org.osgi.service.component.annotations.Component;
 
+/**
+ * This resource renders the Home page
+ */
 @Component(immediate = true, 
     service = PersonalProfileResource.class, 
     property = { 

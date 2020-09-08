@@ -61,35 +61,35 @@ export default {
         timeline: [
           {
             title: 'Software Developer',
-            description: '<div class=\'m-2\'>I developed an algorithm at Laurentian University to measure the energy of various chemical structures using Mathematica</div>\n' +
-                          '<div class=\'m-2\'>Deployed and tested the solution on a super computer made available by <a href=\'https://www.sharcnet.ca/my/front/\'>SharcNet</a></div>\n',
+            description: ['I developed an algorithm at Laurentian University to measure the energy of various chemical structures using Mathematica',
+              'Deployed and tested the solution on a super computer made available by <a href=\'https://www.sharcnet.ca/my/front/\'>SharcNet</a>'],
             year: 2011
           },
           {
             title: 'Technical Support Agent',
-            description: '<div class=\'m-2\'>I worked with many application servers and databases in order to install Adobe LiveCycle for clients. \n' +
-                                'This required me to work with various components of the organization to accomplish this task. </div>\n' +
-                          '<div class=\'m-2\'>Used the Adobe Workbench utility to help clients troubleshoot processes developed for Adobe LiveCycle</div>\n',
+            description: ['I worked with many application servers and databases in order to install Adobe LiveCycle for clients. \n' +
+                                'This required me to work with various components of the organization to accomplish this task.',
+            'Used the Adobe Workbench utility to help clients troubleshoot processes developed for Adobe LiveCycle'],
             year: 2014
           },
           {
             title: 'Senior Systems Analyst',
-            description: '<div class=\'m-2\'>Worked on various projects involving Adobe Experience Manager and Forms</div>\n' +
-                          '<div class=\'m-2\'>Used tools such as Jira, Bitbucket, Maven and VS Code to develop OSGi services and AEM components</div>\n' +
-                          '<div class=\'m-2\'>Used various development tools to create integrations between client systems and Adobe Sign</div>\n',
+            description: ['Worked on various projects involving Adobe Experience Manager and Forms',
+              'Used tools such as Jira, Bitbucket, Maven and VS Code to develop OSGi services and AEM components',
+              'Used various development tools to create integrations between client systems and Adobe Sign'],
             year: 2016
           },
           {
             title: 'Senior Developer',
-            description: '<div class=\'m-2\'>Managed product development with a team of developers and used Agile methodologies to create a quick and iterative delivery cycle</div>\n' +
-                          '<div class=\'m-2\'>Used various tools to develop a deployment pipeline such as TravisCI, Ruby, Amazon ECS, Amazon ECR, Amazon RDS, Docker, Flyway DB Migration</div>\n' +
-                          '<div class=\'m-2\'>Used various tools to develop a testing pipeline such as TravisCI, Selenium, JUnit</div>\n' +
-                          '<div class=\'m-2\'>Worked as a full stack developer leveraging Angular, Java and Postgres as the main technologies for the application</div>\n',
+            description: ['Managed product development with a team of developers and used Agile methodologies to create a quick and iterative delivery cycle',
+              'Used various tools to develop a deployment pipeline such as TravisCI, Ruby, Amazon ECS, Amazon ECR, Amazon RDS, Docker, Flyway DB Migration',
+              'Used various tools to develop a testing pipeline such as TravisCI, Selenium, JUnit',
+              'Worked as a full stack developer leveraging Angular, Java and Postgres as the main technologies for the application'],
             year: 2018
           },
           {
             title: 'Software Consultant',
-            description: '<div class=\'m-2\'>Leveraging Adobe Experience Manager to create web content for businesses</div>\n',
+            description: ['Leveraging Adobe Experience Manager to create web content for businesses'],
             year: 2019
           }
         ],
