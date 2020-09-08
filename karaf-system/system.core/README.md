@@ -122,8 +122,11 @@ ecs-cli compose --project-name pat-lego-vm service up --create-log-groups --clus
 ```
 
 **Note:** When doing deployments to ECS it is important to remember that a new task gets a new IP so it is important to assign an Application Load Balancer
-to the server in order to retain a static definition, to do that add the following three parameters to your deployment `--target-group-arn` `--container-name` `--container-port`
-
+to the server in order to retain a static definition, to do that add the following parameters to your deployment `--target-group-arn` `--container-name` `--container-port --health-check-grace-period-seconds`
+    - target-group-arn: The target group that will register the ECS containers
+    - container-name: The name of the container
+    - container-port: The port of the container
+    - health-check-grace-period-seconds: How long to wait before health check starts
 
 
 # ECS View Containers
