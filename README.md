@@ -1,22 +1,26 @@
 Master Build Status 
 
-[![Build Status](https://travis-ci.com/pat-lego/pat-lego.vm.github.io.svg?branch=master)](https://travis-ci.com/pat-lego/pat-lego.vm.github.io)
+![Container Deployments](https://github.com/pat-lego/pat-lego.vm.github.io/workflows/Deploy%20Container/badge.svg)
+
+![Build Status](https://github.com/pat-lego/pat-lego.vm.github.io/workflows/Build%20and%20Test/badge.svg)
+
+[![Coverage Status](https://coveralls.io/repos/github/pat-lego/pat-lego.vm.github.io/badge.svg?branch=master)](https://coveralls.io/github/pat-lego/pat-lego.vm.github.io?branch=feature/actions-coveralls)
 
 # My VM
 
-This a server that contains API's and systems that I always wanted to work with.
+Currently this VM allows users to create Worflows and deploy SPA's into a JVM that is hosted by docker compose.
 
 # Required Software
 
 In order to start the system you will require the following
 
 1. Java 11.x 
-2. Maven 3.6.3
+2. Maven 3.6.x
 3. Docker 19
 4. Docker Compose 1.25.5
 5. Node 12.x
-6. vue cli 4.x
-7. Visual Studio Code
+6. Vue 2.6
+8. Postgres 13
 
 ## How to start the server
 
