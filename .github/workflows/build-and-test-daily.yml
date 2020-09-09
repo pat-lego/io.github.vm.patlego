@@ -2,7 +2,7 @@ name: Scheduled Build and Test
 on: 
   schedule:
     # Runs every day at 6 AM
-    - cron: '*/5 * * * *'
+    - cron: '0 6 * * *'
 jobs: 
   build_and_test:
     name: Scheduled Java Build and Test
