@@ -136,6 +136,11 @@ export default {
     font-weight: bold;
     border-radius: 18px;
   }
+  @media only screen and (max-width: 640px) {
+    .timeline ul li:nth-child(odd) >>> .time {
+      top: 1.5rem;
+    }
+  }
   .timeline ul li:nth-child(even) >>> .time {
     position: absolute;
     top: 3.5rem;
@@ -147,6 +152,11 @@ export default {
     font-weight: bold;
     border-radius: 18px;
   }
+  @media only screen and (max-width: 640px) {
+    .timeline ul li:nth-child(even) >>> .time {
+      top: 1.5rem;
+    }
+  }
   .timeline ul li >>> .title {
     font-weight: bold;
     margin: 2rem;
@@ -154,5 +164,14 @@ export default {
 
   .timeline ul li >>> .content {
     font-style: italic;
+  }
+  @media only screen and (max-width: 768px) {
+    .timeline ul li >>> .line-clamp {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
   }
 </style>

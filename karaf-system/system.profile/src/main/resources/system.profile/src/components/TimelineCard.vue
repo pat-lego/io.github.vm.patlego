@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class='title'>{{card.title}}</div>
-    <div v-for='desc in card.description' :key='desc' class='content'>
-      <div class='m-1 md:m-2' v-html="desc"></div>
+    <div class='content'>
+      <div @click="e => e.target.classList.toggle('line-clamp')" class='tooltip line-clamp m-1 md:m-2' v-html='card.description'></div>
     </div>
     <p class='time'>{{card.year}}</p>
   </div>

@@ -61,35 +61,35 @@ export default {
         timeline: [
           {
             title: 'Software Developer',
-            description: ['I developed an algorithm at Laurentian University to measure the energy of various chemical structures using Mathematica',
-              'Deployed and tested the solution on a super computer made available by <a href=\'https://www.sharcnet.ca/my/front/\'>SharcNet</a>'],
+            description: 'I developed an algorithm at Laurentian University to measure the energy of various chemical structures using Mathematica. ' +
+              'Deployed and tested the solution on a super computer made available by <a href=\'https://www.sharcnet.ca/my/front/\'>SharcNet</a>.',
             year: 2011
           },
           {
             title: 'Technical Support Agent',
-            description: ['I worked with many application servers and databases in order to install Adobe LiveCycle for clients. \n' +
-                                'This required me to work with various components of the organization to accomplish this task.',
-            'Used the Adobe Workbench utility to help clients troubleshoot processes developed for Adobe LiveCycle'],
+            description: 'I worked with many application servers and databases in order to install Adobe LiveCycle for clients. \n' +
+                                'This required me to work with various components of the organization to accomplish this task. ' +
+            'Used the Adobe Workbench utility to help clients troubleshoot processes developed for Adobe LiveCycle.',
             year: 2014
           },
           {
             title: 'Senior Systems Analyst',
-            description: ['Worked on various projects involving Adobe Experience Manager and Forms',
-              'Used tools such as Jira, Bitbucket, Maven and VS Code to develop OSGi services and AEM components',
-              'Used various development tools to create integrations between client systems and Adobe Sign'],
+            description: 'Worked on various projects involving Adobe Experience Manager and Forms. ' +
+              'Used tools such as Jira, Bitbucket, Maven and VS Code to develop OSGi services and AEM components. ' +
+              'Used various development tools to create integrations between client systems and Adobe Sign.',
             year: 2016
           },
           {
             title: 'Senior Developer',
-            description: ['Managed product development with a team of developers and used Agile methodologies to create a quick and iterative delivery cycle',
-              'Used various tools to develop a deployment pipeline such as TravisCI, Ruby, Amazon ECS, Amazon ECR, Amazon RDS, Docker, Flyway DB Migration',
-              'Used various tools to develop a testing pipeline such as TravisCI, Selenium, JUnit',
-              'Worked as a full stack developer leveraging Angular, Java and Postgres as the main technologies for the application'],
+            description: 'Managed product development with a team of developers and used Agile methodologies to create a quick and iterative delivery cycle. ' +
+              'Used various tools to develop a deployment pipeline such as TravisCI, Ruby, Amazon ECS, Amazon ECR, Amazon RDS, Docker, Flyway DB Migration. ' +
+              'Used various tools to develop a testing pipeline such as TravisCI, Selenium, JUnit. ' +
+              'Worked as a full stack developer leveraging Angular, Java and Postgres as the main technologies for the application.',
             year: 2018
           },
           {
             title: 'Software Consultant',
-            description: ['Leveraging Adobe Experience Manager to create web content for businesses'],
+            description: 'Leveraging Adobe Experience Manager to create web content for businesses.',
             year: 2019
           }
         ],
