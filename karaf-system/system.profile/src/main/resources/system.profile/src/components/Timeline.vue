@@ -165,13 +165,4 @@ export default {
   .timeline ul li >>> .content {
     font-style: italic;
   }
-  @media only screen and (max-width: 768px) {
-    .timeline ul li >>> .line-clamp {
-      text-overflow: ellipsis;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-    }
-  }
 </style>

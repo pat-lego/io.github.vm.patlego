@@ -2,7 +2,7 @@
   <div>
     <div class='title'>{{card.title}}</div>
     <div class='content'>
-      <div @click="e => e.target.classList.toggle('line-clamp')" class='tooltip line-clamp m-1 md:m-2' v-html='card.description'></div>
+      <div class='m-1 md:m-2' v-html='card.description'></div>
     </div>
     <p class='time'>{{card.year}}</p>
   </div>
