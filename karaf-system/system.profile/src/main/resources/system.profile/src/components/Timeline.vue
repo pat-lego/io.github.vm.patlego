@@ -1,5 +1,5 @@
 <template>
-  <div class='flex'>
+  <div v-if="timeline" class='flex'>
     <div class='timeline relative w-4/5 m-auto m-10'>
       <ul class='m-0 p-0'>
         <li v-for="entry in sortTimeline" :key="entry.title" class='relative w-1/2 p-1 sm:p-10'>
