@@ -76,6 +76,7 @@
             <feature>pax-jdbc-postgresql</feature>
             <feature>patlego-vm-jdbc-datasource</feature>
             <feature>patlego-vm-jdbc</feature>
+            <feature>patlego-vm-graphql</feature>
             <feature>patlego-vm-client</feature>
             <feature>patlego-vm-ocr</feature>
             <feature>patlego-vm-workflow</feature>

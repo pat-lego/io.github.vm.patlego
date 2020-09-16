@@ -65,4 +65,14 @@
         <bundle>mvn:patlego.vm.github.io/system.workflow/${project.version}</bundle>
     </feature>
 
+    <feature name="patlego-vm-graphql" version="${project.version}">
+        <bundle start-level="80">mvn:org.antlr/antlr4-runtime/4.7.1</bundle>
+        <bundle start-level="80">mvn:com.graphql-java/java-dataloader/2.2.0</bundle>
+        <bundle start-level="80">mvn:org.reactivestreams/reactive-streams/1.0.2</bundle>
+        <bundle start-level="80">mvn:com.graphql-java/graphql-java/14.0</bundle>
+        <bundle start-level="80">mvn:javax.validation/validation-api/1.1.0.Final</bundle>
+        <bundle start-level="80">mvn:io.github.graphql-java/graphql-java-annotations/8.0</bundle>
+        <bundle start-level="80">wrap:mvn:com.graphql-java/graphql-java-extended-scalars/1.0</bundle>
+    </feature>
+
 </features>

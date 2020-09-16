@@ -37,6 +37,14 @@ Start the docker server and open a command prompt, once open execute the followi
 ssh -p 8101 karaf@localhost
 ```
 
+**Note:** The SSH key will continuously change everytime you destroy/create the server, I strongly recommend to set the following settings in the SSH client config.
+
+```
+Host localhost
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+```
+
 ## How to create a new submodule
 
 In order to create a new submodule open a terminal and run the following command in the karaf-system folder 
