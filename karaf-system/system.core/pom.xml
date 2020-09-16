@@ -98,7 +98,6 @@
             <executions>
               <execution>
                 <id>copy-docker</id>
-                <!-- here the phase you need -->
                 <phase>verify</phase>
                 <goals>
                   <goal>copy-resources</goal>
@@ -107,7 +106,7 @@
                   <outputDirectory>${basedir}/target/assembly</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/main/resources/dev/docker</directory>
+                      <directory>src/main/environments/dev/docker</directory>
                       <filtering>true</filtering>
                     </resource>
                   </resources>
@@ -124,7 +123,7 @@
                   <outputDirectory>${basedir}/target/assembly/patlego.vm/etc</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/main/resources/dev/features</directory>
+                      <directory>src/main/environments/dev/features</directory>
                       <filtering>true</filtering>
                     </resource>
                   </resources>
@@ -145,7 +144,6 @@
             <executions>
               <execution>
                 <id>copy-docker</id>
-                <!-- here the phase you need -->
                 <phase>verify</phase>
                 <goals>
                   <goal>copy-resources</goal>
@@ -154,7 +152,7 @@
                   <outputDirectory>${basedir}/target/assembly</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/main/resources/ecs</directory>
+                      <directory>src/main/environments/ecs</directory>
                       <filtering>true</filtering>
                     </resource>
                   </resources>

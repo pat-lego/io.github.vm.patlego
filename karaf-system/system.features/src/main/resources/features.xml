@@ -21,9 +21,9 @@
     <feature name="patlego-vm-jdbc-datasource" version="1.0-SNAPSHOT">
         <config name="org.ops4j.datasource-karafdb">
             osgi.jdbc.driver.class=org.postgresql.Driver
-            password=karaf_pwd
+            password=
             user=karaf
-            url=jdbc:postgresql://postgres-db:5432/karaf_db
+            url=jdbc:postgresql://pat-lego-db.ch5m6ge8f6p2.ca-central-1.rds.amazonaws.com:5432/karaf_db
             dataSourceName=karafdb
             databaseName=karaf_db
         </config>
