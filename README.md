@@ -50,7 +50,7 @@ Host localhost
 In order to create a new submodule open a terminal and run the following command in the karaf-system folder 
 
 ```
-mvn archetype:generate -DgroupId=patlego.vm.github.io -DartifactId=system.[__module-name__] -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn archetype:generate -DgroupId=io.github.vm.patlego -DartifactId=system.[__module-name__] -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 ```
 
 # Contributors

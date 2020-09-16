@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>patlego.vm.github.io</groupId>
+  <groupId>io.github.vm.patlego</groupId>
   <artifactId>karaf-system</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
@@ -9,12 +9,12 @@
   <modules>
     <module>system.dao</module>
     <module>system.workflow</module>
+    <module>system.graphql</module>
     <module>system.ocr</module>
     <module>system.mocks</module>
     <module>system.profile</module>
     <module>system.features</module>
     <module>system.core</module>
-    <module>system.graphql</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -99,10 +99,10 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <configuration>
           <excludes>
-            <exclude>**/patlego/vm/github/io/mocks/**/*.class</exclude>
-            <exclude>**/patlego/vm/github/io/workflow/comparators/*.class</exclude>
-            <exclude>**/patlego/vm/github/io/workflow/enums/*.class</exclude>
-            <exclude>**/patlego/vm/github/io/workflow/exceptions/*.class</exclude>
+            <exclude>**/io/github/vm/patlego/mocks/**/*.class</exclude>
+            <exclude>**/io/github/vm/patlego/workflow/comparators/*.class</exclude>
+            <exclude>**/io/github/vm/patlego/workflow/enums/*.class</exclude>
+            <exclude>**/io/github/vm/patlego/workflow/exceptions/*.class</exclude>
           </excludes>
         </configuration>
         <executions>
