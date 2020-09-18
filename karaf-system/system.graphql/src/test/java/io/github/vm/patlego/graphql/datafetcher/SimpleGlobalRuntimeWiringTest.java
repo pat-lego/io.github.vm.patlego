@@ -68,12 +68,12 @@ public class SimpleGlobalRuntimeWiringTest {
 
         @Override
         public String typename() {
-            return "Hero";
+            return "Query";
         }
 
         @Override
         public String fieldname() {
-            return "name";
+            return "hero";
         }
     }
 

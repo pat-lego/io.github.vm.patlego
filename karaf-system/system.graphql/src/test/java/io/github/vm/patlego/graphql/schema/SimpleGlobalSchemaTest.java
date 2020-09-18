@@ -34,7 +34,7 @@ public class SimpleGlobalSchemaTest {
     }
 
     @Test
-    public void testStitching() throws Exception {
+    public void testStitchingHero() throws Exception {
         SimpleGlobalSchema globalSchema = new SimpleGlobalSchema();
         globalSchema.bind(new SimpleGlobalSchemaTest.HeroSchema());
         globalSchema.bind(new SimpleGlobalSchemaTest.HelloSchema());
@@ -51,9 +51,30 @@ public class SimpleGlobalSchemaTest {
         ExecutionInput executionInput = ExecutionInput.newExecutionInput().query(query).build();
         ExecutionResult executionResult = graphQL.execute(executionInput);
         assertTrue(executionResult.isDataPresent());
-        System.out.println(executionResult.getData().toString());
         Gson gson = new Gson();
-        System.out.println(gson.toJson(executionResult.toSpecification()));
+        gson.toJson(executionResult.toSpecification());
+    }
+
+    @Test
+    public void testStitchingHello() throws Exception {
+        SimpleGlobalSchema globalSchema = new SimpleGlobalSchema();
+        globalSchema.bind(new SimpleGlobalSchemaTest.HeroSchema());
+        globalSchema.bind(new SimpleGlobalSchemaTest.HelloSchema());
+
+        SimpleGlobalRuntimeWiring globalRuntimeWiring = new SimpleGlobalRuntimeWiring();
+        globalRuntimeWiring.bind(new SimpleGlobalRuntimeWiringTest.HeroDataFetcher());
+        globalRuntimeWiring.bind(new SimpleGlobalRuntimeWiringTest.HelloWorldDataFetcher());
+
+        globalSchema.runtimeWiring = globalRuntimeWiring;
+
+        GraphQLSchema schema = globalSchema.build();
+        GraphQL graphQL = GraphQL.newGraphQL(schema).build();
+        String query = IOUtils.toString(this.getClass().getResourceAsStream("/queries/hello.graphql"), "UTF-8");
+        ExecutionInput executionInput = ExecutionInput.newExecutionInput().query(query).build();
+        ExecutionResult executionResult = graphQL.execute(executionInput);
+        assertTrue(executionResult.isDataPresent());
+        Gson gson = new Gson();
+        gson.toJson(executionResult.toSpecification());
     }
 
     public static class HeroSchema implements SchemaEntry {
