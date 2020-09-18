@@ -12,9 +12,9 @@ package io.github.vm.patlego.workflow;
 
 import java.util.Map;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import io.github.vm.patlego.workflow.utils.WorkflowResult;
 
@@ -65,7 +65,7 @@ public interface WorkflowExecutor {
      * @param parameters Default parameters to pass into the Workflow
      * @return WorkflowResult
      */
-    public @Nonnull WorkflowResult run(@Nonnull String workflowName, @Nullable Map<String, Object> parameters);
+    public @Nonnull WorkflowResult run(@Nonnull String workflowName, @CheckForNull Map<String, Object> parameters);
 
     /**
      * Returns the length of the Workflow which is measured by counting the number of WorkItems in the Workflow
@@ -87,7 +87,7 @@ public interface WorkflowExecutor {
      * @param index The index representing the WorkItem
      * @return WorkItem, null if the WorkItem index is not found
      */
-    public @Nullable WorkItem getWorkItem(@Nonnull String workflowName, @Nonnull @Nonnegative Integer index);
+    public @CheckForNull WorkItem getWorkItem(@Nonnull String workflowName, @Nonnull @Nonnegative Integer index);
 
     /**
      * Returns the WorkItem from the Workflow
@@ -95,5 +95,5 @@ public interface WorkflowExecutor {
      * @param workItemName The name of the WorkItem to be returned from the Workflow
      * @return WorkItem, null if the WorkItem name is not found
      */
-    public @Nullable WorkItem getWorkItem(@Nonnull String workflowName, @Nonnull String workItemName);
+    public @CheckForNull WorkItem getWorkItem(@Nonnull String workflowName, @Nonnull String workItemName);
 }

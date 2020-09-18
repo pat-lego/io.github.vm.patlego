@@ -12,8 +12,8 @@ package io.github.vm.patlego.workflow.utils;
 
 import java.util.Map;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public interface WorkflowResult {
 
@@ -27,13 +27,13 @@ public interface WorkflowResult {
      * Returns the exception that caused the Workflow failure
      * @return Exception
      */
-    public @Nullable Exception getException();
+    public @CheckForNull Exception getException();
 
     /**
      * Returns the failed WorkItem name
      * @return String The name of the WorkItem that caused the failure
      */
-    public @Nullable String getFailedWorkItemName();
+    public @CheckForNull String getFailedWorkItemName();
 
     /**
      * Returns the final parameter map that was used between all WorkItems

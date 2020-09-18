@@ -13,8 +13,8 @@ package io.github.vm.patlego.workflow.utils;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public interface WorkflowManagerResult {
 
@@ -31,7 +31,7 @@ public interface WorkflowManagerResult {
      * 
      * @return LocalDateTime
      */
-    public @Nullable LocalDateTime getStartTime();
+    public @CheckForNull LocalDateTime getStartTime();
 
     /**
      * Returns the time when the workflow finished executing
@@ -40,7 +40,7 @@ public interface WorkflowManagerResult {
      * 
      * @return LocalDateTime
      */
-    public @Nullable LocalDateTime getEndTime();
+    public @CheckForNull LocalDateTime getEndTime();
 
     /**
      * Returns the name of the workflow
@@ -56,7 +56,7 @@ public interface WorkflowManagerResult {
      * 
      * @return Boolean
      */
-    public @Nullable Boolean getWorkflowSucceddedStatus();
+    public @CheckForNull Boolean getWorkflowSucceddedStatus();
 
     /**
      * Returns the WorkItems that were executed by the Workflow

@@ -12,8 +12,8 @@ package io.github.vm.patlego.workflow.utils;
 
 import java.util.Map;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public interface WorkResult {
 
@@ -28,7 +28,7 @@ public interface WorkResult {
      * If an exception has occured then it will be stored in here and can be referred to upon a later time
      * @return Exception
      */
-    public @Nullable Exception getException();
+    public @CheckForNull Exception getException();
 
     /**
      * Returns the parameters that are part of the map upon completion of the WorkItem

@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import io.github.vm.patlego.workflow.exceptions.FailedWorfklowAdditonException;
 import io.github.vm.patlego.workflow.exceptions.FailedWorfklowRemovalException;
@@ -46,7 +46,7 @@ public interface WorkflowManager {
      * @return WorkflowManagerResult
      * @throws FailedWorkflowRetrievalException
      */
-    public @Nullable WorkflowManagerResult getWorklowInstanceInformation(@Nonnull String id) throws FailedWorkflowRetrievalException;
+    public @CheckForNull WorkflowManagerResult getWorklowInstanceInformation(@Nonnull String id) throws FailedWorkflowRetrievalException;
 
     /**
      * Returns the WorkItems that were invoked during the workkflow execution
