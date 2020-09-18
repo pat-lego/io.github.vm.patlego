@@ -12,11 +12,13 @@ import org.osgi.service.component.annotations.ReferencePolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import graphql.schema.DataFetcher;
 import graphql.schema.idl.RuntimeWiring;
-import graphql.schema.idl.TypeRuntimeWiring;
 import graphql.schema.idl.RuntimeWiring.Builder;
 import io.github.vm.patlego.graphql.datafetcher.DataFetcherEntry;
 import io.github.vm.patlego.graphql.datafetcher.GlobalRuntimeWiring;
+
+import static graphql.schema.idl.RuntimeWiring.newRuntimeWiring;
 
 @Component(immediate = true, service = GlobalRuntimeWiring.class)
 public class SimpleGlobalRuntimeWiring implements GlobalRuntimeWiring {
@@ -31,22 +33,21 @@ public class SimpleGlobalRuntimeWiring implements GlobalRuntimeWiring {
             return RuntimeWiring.newRuntimeWiring().build();
         }
 
-        Builder builder = RuntimeWiring.newRuntimeWiring();
-        for (DataFetcherEntry entry : datafetchers) {
-            builder.type(TypeRuntimeWiring.newTypeWiring(entry.typeName()).dataFetcher(entry.fieldName(), entry.get()));
+        Builder bulderManager = newRuntimeWiring();
+        for(DataFetcherEntry datafetcher : datafetchers) {
+            DataFetcher e = datafetcher.get();
+            bulderManager.type(datafetcher.typename(), builder -> builder.dataFetcher(datafetcher.fieldname(), e));
         }
-
-        return builder.build();
-
+        return bulderManager.build();
     }
     
     @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)
-    public void bind(DataFetcherEntry entry_1) {
+    public void bind(DataFetcherEntry datafetcher) {
         if (datafetchers == null) {
             datafetchers = new LinkedList<DataFetcherEntry>();
         }
 
-        datafetchers.add(entry_1);
+        datafetchers.add(datafetcher);
     }
     protected void unbind(DataFetcherEntry datafetcher) {
         datafetchers.remove(datafetcher);

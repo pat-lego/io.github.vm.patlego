@@ -8,20 +8,12 @@ public interface DataFetcherEntry<T> {
 
     /**
      * Creates a DataFetcher for a given object and can be incorporated within the{@link graphql.schema.idl.RuntimeWiring}
-     * @return Returns a {@link graphql.schema.DataFetcher} and can be incorporated within the Runtime envrionment
+     * @return Returns a {@link graphql.schema.idl.TypeRuntimeWiring.Builder} and can be incorporated within the Runtime envrionment
      * @throws Exception - Failed to create the necessary DataFetcher
      */
     public @Nonnull DataFetcher<T> get() throws Exception;
 
-    /**
-     * Maps the DataFetchers to a given field, i.e. this DataFetcher is responsible for a given field within the schema
-     * @return java.lang.String
-     */
-    public @Nonnull String fieldName();
+    public @Nonnull String typename();
 
-    /**
-     * Maps the DataFetcher to a given type 
-     * @return java.lang.String
-     */
-    public @Nonnull String typeName();
+    public @Nonnull String fieldname();
 }

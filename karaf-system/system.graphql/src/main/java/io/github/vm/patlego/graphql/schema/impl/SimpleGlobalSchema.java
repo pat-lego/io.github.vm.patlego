@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -41,8 +42,7 @@ public class SimpleGlobalSchema implements GlobalSchema {
        final SchemaGenerator schemaGenerator = new SchemaGenerator();
        final TypeDefinitionRegistry typeDefinitionRegistry = new TypeDefinitionRegistry();
        for(SchemaEntry entry : this.graphQLSchemas) {
-        InputStream schema = entry.get();
-        typeDefinitionRegistry.merge(schemaParser.parse(schema));
+        typeDefinitionRegistry.merge(schemaParser.parse(entry.get()));
        }
 
        return schemaGenerator.makeExecutableSchema(typeDefinitionRegistry, this.runtimeWiring.build());

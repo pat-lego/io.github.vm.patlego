@@ -1,13 +1,23 @@
 package io.github.vm.patlego.graphql.schema;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 import java.nio.charset.StandardCharsets;
+
+import com.google.gson.Gson;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import io.github.vm.patlego.graphql.datafetcher.GlobalRuntimeWiring;
+import graphql.ExecutionInput;
+import graphql.ExecutionResult;
+import graphql.GraphQL;
+import graphql.schema.GraphQLSchema;
+import io.github.vm.patlego.graphql.datafetcher.SimpleGlobalRuntimeWiringTest;
 import io.github.vm.patlego.graphql.datafetcher.impl.SimpleGlobalRuntimeWiring;
 import io.github.vm.patlego.graphql.schema.impl.SimpleGlobalSchema;
 
@@ -25,27 +35,32 @@ public class SimpleGlobalSchemaTest {
 
     @Test
     public void testStitching() throws Exception {
-        SchemaEntry entry_1 = new SchemaEntry1();
-        SchemaEntry entry_2 = new SchemaEntry2();
         SimpleGlobalSchema globalSchema = new SimpleGlobalSchema();
+        globalSchema.bind(new SimpleGlobalSchemaTest.HeroSchema());
+        globalSchema.bind(new SimpleGlobalSchemaTest.HelloSchema());
 
-        globalSchema.runtimeWiring = new SimpleGlobalRuntimeWiring();
+        SimpleGlobalRuntimeWiring globalRuntimeWiring = new SimpleGlobalRuntimeWiring();
+        globalRuntimeWiring.bind(new SimpleGlobalRuntimeWiringTest.HeroDataFetcher());
+        globalRuntimeWiring.bind(new SimpleGlobalRuntimeWiringTest.HelloWorldDataFetcher());
 
-        globalSchema.bind(entry_2);
-        globalSchema.bind(entry_1);
+        globalSchema.runtimeWiring = globalRuntimeWiring;
 
-        globalSchema.build();
+        GraphQLSchema schema = globalSchema.build();
+        GraphQL graphQL = GraphQL.newGraphQL(schema).build();
+        String query = IOUtils.toString(this.getClass().getResourceAsStream("/queries/hero.graphql"), "UTF-8");
+        ExecutionInput executionInput = ExecutionInput.newExecutionInput().query(query).build();
+        ExecutionResult executionResult = graphQL.execute(executionInput);
+        assertTrue(executionResult.isDataPresent());
+        System.out.println(executionResult.getData().toString());
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(executionResult.toSpecification()));
     }
 
-    public class SchemaEntry1 implements SchemaEntry {
+    public static class HeroSchema implements SchemaEntry {
 
         @Override
         public InputStream get() throws Exception {
-            return IOUtils.toInputStream(String.join("\n",
-                "type hero {",
-                  "name: String",
-                  "appearsIn: String",
-                "}"), StandardCharsets.UTF_8);
+            return this.getClass().getResourceAsStream("/schemas/hero.graphql");
         }
 
         @Override
@@ -60,14 +75,11 @@ public class SimpleGlobalSchemaTest {
 
     }
 
-    public class SchemaEntry2 implements SchemaEntry {
+    public static class HelloSchema implements SchemaEntry {
 
         @Override
         public InputStream get() throws Exception {
-            return IOUtils.toInputStream(String.join("\n",
-                "type Query {",
-                  "hello: String",
-                "}"), StandardCharsets.UTF_8);
+            return this.getClass().getResourceAsStream("/schemas/hello.graphql");
         }
 
         @Override
