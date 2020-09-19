@@ -73,6 +73,7 @@
         <bundle start-level="80">mvn:javax.validation/validation-api/1.1.0.Final</bundle>
         <bundle start-level="80">mvn:io.github.graphql-java/graphql-java-annotations/8.0</bundle>
         <bundle start-level="80">wrap:mvn:com.graphql-java/graphql-java-extended-scalars/1.0</bundle>
+        <bundle start-level="80">mvn:io.github.vm.patlego/system.graphql/${project.version}</bundle>
     </feature>
 
 </features>
