@@ -10,7 +10,6 @@ public interface GlobalRuntimeWiring {
      * Retrieves all of the DataFetchers from the OSGi runtime and builds a global {@link graphql.schema.idl.RuntimeWiring} containing all of the given 
      * {@link io.github.vm.patlego.graphql.datafetcher.DataFetcherEntryTest} classes
      * @return RutimeWiring - the {@link graphql.schema.idl.RuntimeWiring} is returned
-     * @throws Exception - Failed to parse build the RuntimeWiring or the creation of one of the DataFetcher classes from the DataFetcherEntry failed
      */
-    public @Nonnull RuntimeWiring build() throws Exception;
+    public @Nonnull RuntimeWiring build();
 }

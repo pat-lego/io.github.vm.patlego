@@ -36,10 +36,30 @@ public class SimpleGlobalRuntimeWiringTest {
         runtimeWiring.build();
     }
 
+    @Test
+    public void testActivate() {
+        SimpleGlobalRuntimeWiring runtimeWiring = new SimpleGlobalRuntimeWiring();
+        runtimeWiring.activate();
+    }
+
+    @Test
+    public void testDectivate() {
+        SimpleGlobalRuntimeWiring runtimeWiring = new SimpleGlobalRuntimeWiring();
+        runtimeWiring.deactivate();
+    }
+
+    @Test
+    public void testBind() {
+        DataFetcherEntry entry = Mockito.mock(DataFetcherEntry.class);
+        SimpleGlobalRuntimeWiring runtimeWiring = new SimpleGlobalRuntimeWiring();
+        runtimeWiring.bind(entry);
+        runtimeWiring.unbind(entry);
+    }
+
     public static class HelloWorldDataFetcher implements DataFetcherEntry {
 
         @Override
-        public DataFetcher get() throws Exception {
+        public DataFetcher get() {
             return new StaticDataFetcher("world");
         }
 
@@ -57,7 +77,7 @@ public class SimpleGlobalRuntimeWiringTest {
     public static class HeroDataFetcher implements DataFetcherEntry {
 
         @Override
-        public DataFetcher get() throws Exception {
+        public DataFetcher get() {
             return new DataFetcher<Hero>() {
 				@Override
 				public Hero get(DataFetchingEnvironment environment) throws Exception {

@@ -18,6 +18,7 @@ import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
+import graphql.schema.idl.errors.SchemaProblem;
 import io.github.vm.patlego.graphql.datafetcher.GlobalRuntimeWiring;
 import io.github.vm.patlego.graphql.schema.GlobalSchema;
 import io.github.vm.patlego.graphql.schema.SchemaEntry;
@@ -33,7 +34,7 @@ public class SimpleGlobalSchema implements GlobalSchema {
     public GlobalRuntimeWiring runtimeWiring;
 
     @Override
-    public GraphQLSchema build() throws Exception {
+    public GraphQLSchema build() {
        if (this.graphQLSchemas == null) {
            return null;
        }
@@ -56,18 +57,18 @@ public class SimpleGlobalSchema implements GlobalSchema {
 
         graphQLSchemas.add(schema);
     }
-    protected void unbind(SchemaEntry schema) {
+    public void unbind(SchemaEntry schema) {
         graphQLSchemas.remove(schema);
     }
     
     @Activate
-    protected void activate() {
+    public void activate() {
         this.graphQLSchemas = new LinkedList<SchemaEntry>();
         logger.info(String.format("The %s service is now active", this.getClass().getName()));
     }
 
     @Deactivate
-    protected void deactivate() {
+    public void deactivate() {
         this.graphQLSchemas = null;
         logger.info(String.format("The %s service has been deactivated", this.getClass().getName()));
     }

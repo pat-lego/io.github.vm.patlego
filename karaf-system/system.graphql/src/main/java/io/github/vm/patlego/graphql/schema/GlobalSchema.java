@@ -1,9 +1,9 @@
 package io.github.vm.patlego.graphql.schema;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
 
 import graphql.schema.GraphQLSchema;
+import graphql.schema.idl.errors.SchemaProblem;
 
 public interface GlobalSchema {
 
@@ -12,7 +12,8 @@ public interface GlobalSchema {
      * @return GraphQLSchema - can be null if there are no registered {@link io.github.vm.patlego.graphql.schema.SchemaEntry} within the OSGi runtime environment
      * otherwise the {@link graphql.schema.GraphQLSchema} is returned
      * @throws Exception - Can be a descendant from SchemaEntry or from within the implementation of the build function
+     * @throws SchemaProblem
      */
-    public @CheckForNull GraphQLSchema build() throws Exception;
+    public @CheckForNull GraphQLSchema build();
     
 }

@@ -9,9 +9,8 @@ public interface SchemaEntry {
     /**
      * Retrieves a GraphQL to be injected into the system runtime
      * @return java.io.InputStream
-     * @throws Exception - Failed to retrieve the GraphQL exception
      */
-    public @Nonnull InputStream get() throws Exception;
+    public @Nonnull InputStream get();
 
     /**
      * Returns a representative name for the given schema

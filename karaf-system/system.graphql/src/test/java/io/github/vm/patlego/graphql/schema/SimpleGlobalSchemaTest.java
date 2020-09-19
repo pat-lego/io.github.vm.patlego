@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
-import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,6 +19,7 @@ import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import io.github.vm.patlego.graphql.datafetcher.SimpleGlobalRuntimeWiringTest;
 import io.github.vm.patlego.graphql.datafetcher.impl.SimpleGlobalRuntimeWiring;
+import io.github.vm.patlego.graphql.executor.impl.SimpleGraphQLExecutor;
 import io.github.vm.patlego.graphql.schema.impl.SimpleGlobalSchema;
 
 public class SimpleGlobalSchemaTest {
@@ -45,14 +46,11 @@ public class SimpleGlobalSchemaTest {
 
         globalSchema.runtimeWiring = globalRuntimeWiring;
 
-        GraphQLSchema schema = globalSchema.build();
-        GraphQL graphQL = GraphQL.newGraphQL(schema).build();
-        String query = IOUtils.toString(this.getClass().getResourceAsStream("/queries/hero.graphql"), "UTF-8");
-        ExecutionInput executionInput = ExecutionInput.newExecutionInput().query(query).build();
-        ExecutionResult executionResult = graphQL.execute(executionInput);
-        assertTrue(executionResult.isDataPresent());
-        Gson gson = new Gson();
-        gson.toJson(executionResult.toSpecification());
+        SimpleGraphQLExecutor executor = new SimpleGraphQLExecutor();
+        executor.schema = globalSchema;
+        JsonObject result = executor.execute(this.getClass().getResourceAsStream("/queries/hero.graphql"));
+        assertNotNull(result);
+        assertTrue(result.toString().toLowerCase().contains("batman"));
     }
 
     @Test
@@ -67,20 +65,37 @@ public class SimpleGlobalSchemaTest {
 
         globalSchema.runtimeWiring = globalRuntimeWiring;
 
-        GraphQLSchema schema = globalSchema.build();
-        GraphQL graphQL = GraphQL.newGraphQL(schema).build();
-        String query = IOUtils.toString(this.getClass().getResourceAsStream("/queries/hello.graphql"), "UTF-8");
-        ExecutionInput executionInput = ExecutionInput.newExecutionInput().query(query).build();
-        ExecutionResult executionResult = graphQL.execute(executionInput);
-        assertTrue(executionResult.isDataPresent());
-        Gson gson = new Gson();
-        gson.toJson(executionResult.toSpecification());
+        SimpleGraphQLExecutor executor = new SimpleGraphQLExecutor();
+        executor.schema = globalSchema;
+        JsonObject result = executor.execute(this.getClass().getResourceAsStream("/queries/hello.graphql"));
+        assertNotNull(result);
+        assertTrue(result.toString().toLowerCase().contains("world"));
+    }
+
+    @Test
+    public void testActivate() {
+        SimpleGlobalSchema globalSchema = new SimpleGlobalSchema();
+        globalSchema.activate();
+    }
+
+    @Test
+    public void testDeactivate() {
+        SimpleGlobalSchema globalSchema = new SimpleGlobalSchema();
+        globalSchema.deactivate();
+    }
+
+    @Test
+    public void testBind() {
+        SchemaEntry entry = Mockito.mock(SchemaEntry.class);
+        SimpleGlobalSchema globalSchema = new SimpleGlobalSchema();
+        globalSchema.bind(entry);
+        globalSchema.unbind(entry);
     }
 
     public static class HeroSchema implements SchemaEntry {
 
         @Override
-        public InputStream get() throws Exception {
+        public InputStream get() {
             return this.getClass().getResourceAsStream("/schemas/hero.graphql");
         }
 
@@ -99,7 +114,7 @@ public class SimpleGlobalSchemaTest {
     public static class HelloSchema implements SchemaEntry {
 
         @Override
-        public InputStream get() throws Exception {
+        public InputStream get() {
             return this.getClass().getResourceAsStream("/schemas/hello.graphql");
         }
 

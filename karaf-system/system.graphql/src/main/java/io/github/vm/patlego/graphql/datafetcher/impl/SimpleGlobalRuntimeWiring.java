@@ -28,7 +28,7 @@ public class SimpleGlobalRuntimeWiring implements GlobalRuntimeWiring {
     private List<DataFetcherEntry> datafetchers;
 
 	@Override
-	public RuntimeWiring build() throws Exception {
+	public RuntimeWiring build() {
 		if (this.datafetchers == null) {
             return RuntimeWiring.newRuntimeWiring().build();
         }
@@ -49,18 +49,18 @@ public class SimpleGlobalRuntimeWiring implements GlobalRuntimeWiring {
 
         datafetchers.add(datafetcher);
     }
-    protected void unbind(DataFetcherEntry datafetcher) {
+    public void unbind(DataFetcherEntry datafetcher) {
         datafetchers.remove(datafetcher);
     }
     
     @Activate
-    protected void activate() {
+    public void activate() {
         this.datafetchers = new LinkedList<DataFetcherEntry>();
         logger.info(String.format("The %s service is now active", this.getClass().getName()));
     }
 
     @Deactivate
-    protected void deactivate() {
+    public void deactivate() {
         this.datafetchers = null;
         logger.info(String.format("The %s service has been deactivated", this.getClass().getName()));
     }
