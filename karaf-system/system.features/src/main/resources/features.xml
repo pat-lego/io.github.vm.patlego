@@ -21,9 +21,9 @@
     <feature name="patlego-vm-jdbc-datasource" version="1.0-SNAPSHOT">
         <config name="org.ops4j.datasource-karafdb">
             osgi.jdbc.driver.class=org.postgresql.Driver
-            password=
+            password=karaf_pwd
             user=karaf
-            url=jdbc:postgresql://pat-lego-db.ch5m6ge8f6p2.ca-central-1.rds.amazonaws.com:5432/karaf_db
+            url=jdbc:postgresql://postgres-db:5432/karaf_db
             dataSourceName=karafdb
             databaseName=karaf_db
         </config>
@@ -66,13 +66,15 @@
     </feature>
 
     <feature name="patlego-vm-graphql" version="1.0-SNAPSHOT">
-        <bundle start-level="80">mvn:org.antlr/antlr4-runtime/4.7.1</bundle>
-        <bundle start-level="80">mvn:com.graphql-java/java-dataloader/2.2.0</bundle>
-        <bundle start-level="80">mvn:org.reactivestreams/reactive-streams/1.0.2</bundle>
-        <bundle start-level="80">mvn:com.graphql-java/graphql-java/14.0</bundle>
-        <bundle start-level="80">mvn:javax.validation/validation-api/1.1.0.Final</bundle>
-        <bundle start-level="80">mvn:io.github.graphql-java/graphql-java-annotations/8.0</bundle>
-        <bundle start-level="80">wrap:mvn:com.graphql-java/graphql-java-extended-scalars/1.0</bundle>
+        <bundle>mvn:org.antlr/antlr4-runtime/4.7.1</bundle>
+        <bundle>mvn:com.graphql-java/java-dataloader/2.2.0</bundle>
+        <bundle>mvn:org.reactivestreams/reactive-streams/1.0.2</bundle>
+        <bundle>mvn:com.graphql-java/graphql-java/14.0</bundle>
+        <bundle>mvn:javax.validation/validation-api/1.1.0.Final</bundle>
+        <bundle>mvn:io.github.graphql-java/graphql-java-annotations/8.0</bundle>
+        <bundle>wrap:mvn:com.graphql-java/graphql-java-extended-scalars/1.0</bundle>
+        <bundle>mvn:io.github.vm.patlego/system.graphql/1.0-SNAPSHOT</bundle>
+        <bundle>mvn:com.google.code.gson/gson/2.8.6</bundle>
     </feature>
 
 </features>

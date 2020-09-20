@@ -6,10 +6,9 @@
     <artifactId>karaf-system</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-
   <groupId>io.github.vm.patlego</groupId>
   <artifactId>system.graphql</artifactId>
-
+  <packaging>bundle</packaging>
   <name>System GraphQL</name>
 
   <build>

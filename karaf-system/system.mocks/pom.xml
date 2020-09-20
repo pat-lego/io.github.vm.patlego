@@ -12,6 +12,14 @@
   <name>System Mocks</name>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.graphql</include>
+        </includes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.felix</groupId>
@@ -119,6 +127,11 @@
     <dependency>
       <groupId>io.github.vm.patlego</groupId>
       <artifactId>system.workflow</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.vm.patlego</groupId>
+      <artifactId>system.graphql</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
