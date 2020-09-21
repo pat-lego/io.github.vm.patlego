@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>patlego.vm.github.io</groupId>
+  <groupId>io.github.vm.patlego</groupId>
   <artifactId>karaf-system</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
@@ -9,6 +9,7 @@
   <modules>
     <module>system.dao</module>
     <module>system.workflow</module>
+    <module>system.graphql</module>
     <module>system.ocr</module>
     <module>system.mocks</module>
     <module>system.profile</module>
@@ -99,10 +100,10 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <configuration>
           <excludes>
-            <exclude>**/patlego/vm/github/io/mocks/**/*.class</exclude>
-            <exclude>**/patlego/vm/github/io/workflow/comparators/*.class</exclude>
-            <exclude>**/patlego/vm/github/io/workflow/enums/*.class</exclude>
-            <exclude>**/patlego/vm/github/io/workflow/exceptions/*.class</exclude>
+            <exclude>**/io/github/vm/patlego/mocks/**/*.class</exclude>
+            <exclude>**/io/github/vm/patlego/workflow/comparators/*.class</exclude>
+            <exclude>**/io/github/vm/patlego/workflow/enums/*.class</exclude>
+            <exclude>**/io/github/vm/patlego/workflow/exceptions/*.class</exclude>
           </excludes>
         </configuration>
         <executions>
@@ -110,8 +111,7 @@
             <goals>
               <goal>prepare-agent</goal>
             </goals>
-          </execution>
-          <!-- attached to Maven test phase -->
+          </execution> <!-- attached to Maven test phase -->
           <execution>
             <id>report</id>
             <phase>test</phase>
@@ -224,15 +224,13 @@
         <artifactId>mockito-junit-jupiter</artifactId>
         <version>3.4.4</version>
         <scope>test</scope>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+      </dependency> <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
         <version>3.4.4</version>
         <scope>test</scope>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
+      </dependency> <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-inline</artifactId>
@@ -308,26 +306,22 @@
         <artifactId>commons-lang3</artifactId>
         <version>3.9</version>
         <scope>provided</scope>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+      </dependency> <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
         <version>2.7</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+      </dependency> <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
       <dependency>
         <groupId>org.apache.pdfbox</groupId>
         <artifactId>pdfbox</artifactId>
         <version>2.0.20</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+      </dependency> <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
       <dependency>
         <groupId>org.apache.pdfbox</groupId>
         <artifactId>fontbox</artifactId>
         <version>2.0.20</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
+      </dependency> <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
       <dependency>
         <groupId>org.apache.tika</groupId>
         <artifactId>tika-core</artifactId>
@@ -337,25 +331,33 @@
         <groupId>org.apache.pdfbox</groupId>
         <artifactId>pdfbox-tools</artifactId>
         <version>2.0.20</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
+      </dependency> <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
       <dependency>
         <groupId>org.apache.tika</groupId>
         <artifactId>tika-parsers</artifactId>
         <version>1.24.1</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+      </dependency> <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
       <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-core</artifactId>
         <version>5.4.2.Final</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+      </dependency> <!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
       <dependency>
         <groupId>javax.persistence</groupId>
         <artifactId>javax.persistence-api</artifactId>
         <version>2.2</version>
       </dependency>
+      <dependency>
+        <groupId>com.graphql-java</groupId>
+        <artifactId>graphql-java</artifactId>
+        <version>14.0</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.8.6</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
-</project>
+</project> 

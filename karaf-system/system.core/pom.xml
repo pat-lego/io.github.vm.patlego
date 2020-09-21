@@ -2,13 +2,13 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>patlego.vm.github.io</groupId>
+    <groupId>io.github.vm.patlego</groupId>
     <artifactId>karaf-system</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
   <packaging>karaf-assembly</packaging>
-  <groupId>patlego.vm.github.io</groupId>
+  <groupId>io.github.vm.patlego</groupId>
   <artifactId>system.core</artifactId>
 
   <name>System Kernel</name>
@@ -76,6 +76,7 @@
             <feature>pax-jdbc-postgresql</feature>
             <feature>patlego-vm-jdbc-datasource</feature>
             <feature>patlego-vm-jdbc</feature>
+            <feature>patlego-vm-graphql</feature>
             <feature>patlego-vm-client</feature>
             <feature>patlego-vm-ocr</feature>
             <feature>patlego-vm-workflow</feature>
@@ -97,7 +98,6 @@
             <executions>
               <execution>
                 <id>copy-docker</id>
-                <!-- here the phase you need -->
                 <phase>verify</phase>
                 <goals>
                   <goal>copy-resources</goal>
@@ -106,7 +106,7 @@
                   <outputDirectory>${basedir}/target/assembly</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/main/resources/dev/docker</directory>
+                      <directory>src/main/environments/dev/docker</directory>
                       <filtering>true</filtering>
                     </resource>
                   </resources>
@@ -123,7 +123,7 @@
                   <outputDirectory>${basedir}/target/assembly/patlego.vm/etc</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/main/resources/dev/features</directory>
+                      <directory>src/main/environments/dev/features</directory>
                       <filtering>true</filtering>
                     </resource>
                   </resources>
@@ -144,7 +144,6 @@
             <executions>
               <execution>
                 <id>copy-docker</id>
-                <!-- here the phase you need -->
                 <phase>verify</phase>
                 <goals>
                   <goal>copy-resources</goal>
@@ -153,7 +152,7 @@
                   <outputDirectory>${basedir}/target/assembly</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/main/resources/ecs</directory>
+                      <directory>src/main/environments/ecs</directory>
                       <filtering>true</filtering>
                     </resource>
                   </resources>
@@ -236,7 +235,7 @@
       <version>3.3.3</version>
     </dependency>
     <dependency>
-      <groupId>patlego.vm.github.io</groupId>
+      <groupId>io.github.vm.patlego</groupId>
       <artifactId>system.features</artifactId>
       <type>xml</type>
       <scope>runtime</scope>
