@@ -1,5 +1,4 @@
-![Container Deployments](https://github.com/pat-lego/pat-lego.vm.github.io/workflows/Deploy%20Container/badge.svg) ![Build Status](https://github.com/pat-lego/pat-lego.vm.github.io/workflows/Build%20and%20Test/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/pat-lego/pat-lego.vm.github.io/badge.svg?branch=master)](https://coveralls.io/github/pat-lego/pat-lego.vm.github.io?branch=feature/actions-coveralls)
-
+![Container Deployments](https://github.com/pat-lego/pat-lego.vm.github.io/workflows/Deploy%20Container/badge.svg) ![Build Status](https://github.com/pat-lego/pat-lego.vm.github.io/workflows/Build%20and%20Test/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/pat-lego/io.github.vm.patlego/badge.svg?branch=master)](https://coveralls.io/github/pat-lego/io.github.vm.patlego?branch=master)
 # My VM
 
 Currently this VM allows users to create Worflows and deploy SPA's into a JVM that is hosted by docker compose.
