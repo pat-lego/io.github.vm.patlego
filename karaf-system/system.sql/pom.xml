@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.vm.patlego</groupId>
+    <artifactId>karaf-system</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>io.github.vm.patlego</groupId>
+  <artifactId>system.sql</artifactId>
+  <name>System SQL Manager</name>
+
+  <properties>
+    <changelog.file>src/main/resources/db-changelog-master.xml</changelog.file>
+    <postgres.dev.url>jdbc:postgresql://localhost:5432/</postgres.dev.url>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>dev-build</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <configuration>
+              <changeLogFile>${changelog.file}</changeLogFile>
+              <driver>${postgres.driver}</driver>
+              <url>${postgres.dev.url}${postgres.db}</url>  
+              <username>${postgres.dev.username}</username>
+              <password>${postgres.dev.password}</password>
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.2.8</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>ecs-build</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <configuration>
+              <changeLogFile>${changelog.file}</changeLogFile>
+              <driver>${postgres.driver}</driver>
+              <url>${postgres.ecs.url}${postgres.db}</url>  
+              <username>${postgres.ecs.username}</username>
+              <password>${postgres.ecs.password>}</password>
+              <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+              </dependency>
+            </dependencies>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

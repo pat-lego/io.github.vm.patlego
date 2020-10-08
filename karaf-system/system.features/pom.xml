@@ -12,20 +12,6 @@
   <packaging>pom</packaging>
   <name>System Features</name>
 
-  <properties>
-    <postgres.db>karaf_db</postgres.db>
-
-    <!-- PSQL DEV VALUES -->
-    <postgres.dev.url>jdbc:postgresql://postgres-db:5432</postgres.dev.url>
-    <postgres.dev.username>karaf</postgres.dev.username>
-    <postgres.dev.password>karaf_pwd</postgres.dev.password>
-
-    <!-- PSQL ECS VALUES -->
-    <postgres.ecs.url>jdbc:postgresql://pat-lego-db.ch5m6ge8f6p2.ca-central-1.rds.amazonaws.com:5432</postgres.ecs.url>
-    <postgres.ecs.username>karaf</postgres.ecs.username>
-    <postgres.ecs.password></postgres.ecs.password>
-  </properties>
-
   <build>
     <resources>
       <resource>

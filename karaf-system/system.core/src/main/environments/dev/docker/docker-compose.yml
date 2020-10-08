@@ -36,8 +36,6 @@ services:
       - POSTGRES_DB=karaf_db
       - POSTGRES_USER=karaf
       - POSTGRES_PASSWORD=karaf_pwd
-     volumes:
-       - ./sql/init-schema.sql:/docker-entrypoint-initdb.d/init-schema.sql
      networks: 
       - backend
 networks:
