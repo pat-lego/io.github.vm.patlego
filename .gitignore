@@ -20,6 +20,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+# eclipse property files
 target/
 .DS_Store
 .project
@@ -27,4 +28,9 @@ org.eclipse.core.resources.prefs
 org.eclipse.m2e.core.prefs
 org.eclipse.jdt.apt.core.prefs
 org.eclipse.jdt.core.prefs
+
+# templated features.xml
 karaf-system/system.features/src/main/resources/features.xml
+
+# node dependencies
+node_modules/

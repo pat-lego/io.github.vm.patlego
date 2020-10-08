@@ -1,0 +1,30 @@
+{
+  "name": "io.github.vm.patlego.installer",
+  "version": "1.0.0",
+  "description": "A CLI utility to build and destroy the VM locally",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pat-lego/io.github.vm.patlego.git"
+  },
+  "keywords": [
+    "java",
+    "node",
+    "karaf",
+    "postgres",
+    "docker"
+  ],
+  "author": "pat-lego",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pat-lego/io.github.vm.patlego/issues"
+  },
+  "homepage": "https://github.com/pat-lego/io.github.vm.patlego#readme",
+  "dependencies": {
+    "commander": "^6.1.0",
+    "shelljs": "^0.8.4"
+  }
+}
