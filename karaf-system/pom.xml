@@ -18,7 +18,7 @@
     <module>system.core</module>
   </modules>
   <properties>
-   <postgres.db>karaf_db</postgres.db>
+    <postgres.db>karaf_db</postgres.db>
 
     <!-- PSQL DEV VALUES -->
     <postgres.dev.url>jdbc:postgresql://postgres-db:5432</postgres.dev.url>
@@ -30,7 +30,7 @@
     <postgres.ecs.username>karaf</postgres.ecs.username>
     <postgres.ecs.password></postgres.ecs.password>
 
-    
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -39,6 +39,12 @@
   <build>
     <pluginManagement>
       <plugins>
+        <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-maven-plugin -->
+        <plugin>
+          <groupId>org.liquibase</groupId>
+          <artifactId>liquibase-maven-plugin</artifactId>
+          <version>4.1.0</version>
+        </plugin>
         <plugin>
           <groupId>io.fabric8</groupId>
           <artifactId>docker-maven-plugin</artifactId>

@@ -29,7 +29,7 @@
             <configuration>
               <changeLogFile>${changelog.file}</changeLogFile>
               <driver>${postgres.driver}</driver>
-              <url>${postgres.dev.url}${postgres.db}</url>  
+              <url>${postgres.dev.url}${postgres.db}</url>
               <username>${postgres.dev.username}</username>
               <password>${postgres.dev.password}</password>
             </configuration>
@@ -55,7 +55,7 @@
             <configuration>
               <changeLogFile>${changelog.file}</changeLogFile>
               <driver>${postgres.driver}</driver>
-              <url>${postgres.ecs.url}${postgres.db}</url>  
+              <url>${postgres.ecs.url}${postgres.db}</url>
               <username>${postgres.ecs.username}</username>
               <password>${postgres.ecs.password>}</password>
               <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
@@ -64,6 +64,7 @@
               <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
+                <version>42.2.8</version>
               </dependency>
             </dependencies>
           </plugin>
