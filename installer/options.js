@@ -10,10 +10,6 @@ const TASK_DESTROY = 'DESTROY';
 const REBUILD_SERVER = 'SERVER';
 const REBOULD_DATABSE = 'DATABASE';
 
-function parseEnvType(value, previousValue) {
-    return ENV_DEV;
-}
-
 function parseTaskType(value, previousValue) {
     if (value) {
         if (value.toLowerCase() === TASK_BUILD.toLowerCase()) {
@@ -45,9 +41,12 @@ function parseRebuildType(value, previousValue) {
 function programOptions() {
     program.version(PROGRAM_VERSION);
     program
-        .option('-s', '--system <type>', 'Environment Type to Build', parseEnvType)
-        .option('-t', '--task <task>',  'Task to perform on the server', parseTaskType)
-        .option('-r', '--rebuild <stack>', 'Rebuild a part of the application', parseRebuildType)
+        .command('system [env]')
+        .description('Environment Type to Build')
+            .option('-t', '--task <task>',  'Task to perform on the server', parseTaskType)
+            .option('-r', '--rebuild <stack>', 'Rebuild a part of the application', parseRebuildType);
+
+    return program.parse(process.argv);
 }
 
 module.exports.parse = programOptions;
