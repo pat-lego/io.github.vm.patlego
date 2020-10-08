@@ -11,7 +11,6 @@
 package io.github.vm.patlego.datasource.workflowmanager.repo.impl;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -20,11 +19,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.apache.aries.jpa.template.JpaTemplate;
 import org.apache.aries.jpa.template.TransactionType;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,10 +32,10 @@ import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWI;
 
 @Component(immediate = true, service = WorkflowManagerDS.class)
 public class WorkflowManagerDSImpl implements WorkflowManagerDS {
-
-    private final String JPA_TEMPLATE_NAME = "karafdb-hibernate";
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Reference(target = "(osgi.unit.name=karafdb-hibernate)")
     private JpaTemplate jpaTemplate;
 
     @Override
@@ -199,41 +197,11 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
 
     @Activate
     protected void activate(final BundleContext context) throws Exception {
-        this.jpaTemplate = this.getTemplate(context);
         this.logger.info(String.format("%s is now active", this.getClass().getName()));
     }
 
     @Deactivate
     protected void deactivate() {
-        this.jpaTemplate = null;
         this.logger.info(String.format("%s has been disactivated", this.getClass().getName()));
-    }
-
-    /**
-     * Retrieve the JPA template
-     * 
-     * @param context
-     * @return JpaTemplate
-     * @throws InvalidSyntaxException
-     */
-    private JpaTemplate getTemplate(final BundleContext context) throws InvalidSyntaxException {
-        if (context == null) {
-            throw new RuntimeException("Cannot retrieve the JPA template required to perform transactions");
-        }
-
-        final Collection<ServiceReference<JpaTemplate>> jpaTemplate = context.getServiceReferences(JpaTemplate.class,
-                String.format("(osgi.unit.name=%s)", JPA_TEMPLATE_NAME));
-
-        if (jpaTemplate == null || jpaTemplate.isEmpty()) {
-            throw new RuntimeException("Cannot retrieve the JPA template required to perform transactions");
-        }
-
-        if (jpaTemplate.size() > 1) {
-            throw new RuntimeException(String.format(
-                    "OSGi filter for JpaTemplate %s returned more then one result please rectify this in order to use the %s class",
-                    JPA_TEMPLATE_NAME, this.getClass().getName()));
-        }
-
-        return context.getService(jpaTemplate.iterator().next());
     }
 }
