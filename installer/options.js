@@ -42,7 +42,7 @@ function programOptions() {
     program.version(PROGRAM_VERSION);
     program
         .command('system [env]')
-        .description('Environment Type to Build')
+        .description('Environment type to build')
             .option('-t', '--task <task>',  'Task to perform on the server', parseTaskType)
             .option('-r', '--rebuild <stack>', 'Rebuild a part of the application', parseRebuildType);
 

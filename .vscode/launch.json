@@ -6,6 +6,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "node",
+            "name": "Debug CLI Utility",
+            "request": "launch",
+            "program": "${workspaceFolder}/index.js"
+        },
+        {
             "type": "java",
             "name": "Debug (Attach) - Karaf",
             "request": "attach",
