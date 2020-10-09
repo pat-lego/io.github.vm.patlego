@@ -15,7 +15,6 @@ function isInstalled(utility) {
     if(!shell.which(utility)) {
         return false;
     }
-
     return true;
 }
 
