@@ -7,6 +7,7 @@
     <groupId>io.github.vm.patlego</groupId>
     <artifactId>karaf-system</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>io.github.vm.patlego</groupId>
@@ -15,7 +16,8 @@
 
   <properties>
     <changelog.file>src/main/resources/db-changelog-master.xml</changelog.file>
-    <postgres.dev.url>jdbc:postgresql://localhost:5432/</postgres.dev.url>
+    <postgres.driver>org.postgresql.Driver</postgres.driver>
+    <postgres.dev.url>jdbc:postgresql://localhost:5432</postgres.dev.url>
   </properties>
 
   <profiles>
@@ -24,12 +26,19 @@
       <build>
         <plugins>
           <plugin>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>update</goal>
+                </goals>
+              </execution>
+            </executions>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
             <configuration>
               <changeLogFile>${changelog.file}</changeLogFile>
               <driver>${postgres.driver}</driver>
-              <url>${postgres.dev.url}${postgres.db}</url>
+              <url>${postgres.dev.url}/${postgres.db}</url>
               <username>${postgres.dev.username}</username>
               <password>${postgres.dev.password}</password>
             </configuration>

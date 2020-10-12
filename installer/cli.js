@@ -1,9 +1,4 @@
 const commander = require('commander');
-let program = require('commander');
-
-const PROGRAM_VERSION = '0.0.1';
-
-const ENV_DEV = 'DEV';
 
 const TASK_BUILD = 'BUILD';
 const TASK_DESTROY = 'DESTROY';
@@ -25,6 +20,11 @@ function parseTaskType(value, previousValue) {
     return undefined;
 }
 
+/**
+ * Function to parse the 
+ * @param {string} value - current CLI value 
+ * @param {string} previousValue - previous CLI value
+ */
 function parseRebuildType(value, previousValue) {
     if (value) {
         if (value.toLowerCase() === REBUILD_SERVER.toLowerCase()) {
@@ -52,11 +52,12 @@ function programOptions() {
     program
         .command('system')
         .arguments('[env]')
-        .description('Define the system environment')
+        .description('Define the system environment, curently only supported environment is DEV')
             .option('-t --task <task>',  'Task to perform on the server', parseTaskType)
             .option('-r --rebuild <stack>', 'Rebuild a part of the application', parseRebuildType)
+            .option('-f --compose-file <file>', 'The location of the docker-compose file')
+            .option('-p --pom-file <file>', 'The location of the pom.xml file')
         .parse(process.argv);
-        console.log(program.commands[0].task);
     return program;
 }
 

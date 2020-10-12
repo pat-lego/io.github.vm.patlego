@@ -18,4 +18,18 @@ function isInstalled(utility) {
     return true;
 }
 
+/**
+ * Performs a command line operation
+ * @param {string} cmd - CLI command to run
+ * @returns {number} - Represents the exit code value
+ */
+function exec(cmd) {
+    if(!cmd) {
+        throw Error('Please specify a command as a string prior to running this function');
+    }
+
+    return shell.exec(cmd).code;
+}
+
 module.exports.which = isInstalled;
+module.exports.exec = exec;

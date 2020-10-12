@@ -5,6 +5,7 @@
     <groupId>io.github.vm.patlego</groupId>
     <artifactId>karaf-system</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>io.github.vm.patlego</groupId>
   <artifactId>system.ocr</artifactId>

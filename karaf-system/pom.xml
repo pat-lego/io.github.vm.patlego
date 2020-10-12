@@ -39,7 +39,6 @@
   <build>
     <pluginManagement>
       <plugins>
-        <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-maven-plugin -->
         <plugin>
           <groupId>org.liquibase</groupId>
           <artifactId>liquibase-maven-plugin</artifactId>
@@ -120,7 +119,6 @@
         <artifactId>jacoco-maven-plugin</artifactId>
         <configuration>
           <excludes>
-            <exclude>**/io/github/vm/patlego/mocks/**/*.class</exclude>
             <exclude>**/io/github/vm/patlego/workflow/comparators/*.class</exclude>
             <exclude>**/io/github/vm/patlego/workflow/enums/*.class</exclude>
             <exclude>**/io/github/vm/patlego/workflow/exceptions/*.class</exclude>

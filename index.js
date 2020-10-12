@@ -1,6 +1,4 @@
-var options = require('./installer/options');
-var shell = require('./installer/shell');
+let system = require('./installer/system/system');
 
-// Retrieve the command line arguments
-const program = options.parse();
-shell.which('docker-compose');
+// Execute System Command
+system.execute();
