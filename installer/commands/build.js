@@ -1,4 +1,5 @@
 let shell = require('../shell');
+let console = require('../console');
 
 const CMD_BUILD = 'BUILD';
 const CLI_CMD_MSG = 'About to execute';
@@ -17,6 +18,7 @@ function execute(args) {
 
     // Validate that the build command was passed in
     if (args.commands[0].args[0].toLowerCase() === CMD_BUILD.toLowerCase()) {
+        console.log('Executing the build command'.underline.yellow);
         build(args);
     }
 
@@ -50,7 +52,7 @@ function mvnBuild(args) {
         throw Error('Maven is not installed please install java prior to running a build');
     }
 
-    console.log(`${CLI_CMD_MSG} ${cmd}`);
+    console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
     shell.exec(cmd);
 }
 
@@ -61,7 +63,7 @@ function composeDown(args) {
         throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
     }
 
-    console.log(`${CLI_CMD_MSG} ${cmd}`);
+    console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
     return shell.exec(cmd);
 }
 
@@ -72,7 +74,7 @@ function composeBuild(args) {
         throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
     }
 
-    console.log(`${CLI_CMD_MSG} ${cmd}`);
+    console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
     return shell.exec(cmd);
 }
 
@@ -83,7 +85,7 @@ function startDatabase(args) {
         throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
     }
 
-    console.log(`${CLI_CMD_MSG} ${cmd}`);
+    console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
     return shell.exec(cmd);
 }
 
@@ -101,7 +103,7 @@ function executeSQL(args) {
 
     console.log(`Wait ${time/1000} seconds, give time for the database to setup`);
     sleep(time).then(() => {
-        console.log(`${CLI_CMD_MSG} ${cmd}`);
+        console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
         return shell.exec(cmd);
     });
 }
@@ -113,7 +115,7 @@ function startServer(args) {
         throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
     }
     
-    console.log(`${CLI_CMD_MSG} ${cmd}`);
+    console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
     return shell.exec(cmd);
 }
 
