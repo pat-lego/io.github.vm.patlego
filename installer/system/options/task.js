@@ -18,10 +18,6 @@ const TASK_DESTROY = "DESTROY";
  *              }
  */
 function execute(options, args) {
-    if (!shell.which('docker-compose')) {
-        throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
-    }
-
     if (!options.system) {
         throw Error('Must provide the system to perform the operation on');
     }
@@ -50,11 +46,13 @@ function build(options, args) {
     if (!args.commands[0].composeFile) {
         throw Error('Must supply the location of the docker-compose file in order to perform the operation');
     }
+    
     mvnBuild(options, args);
     composeDown(options, args);
-    buildDatabase(options, args);
+    composeBuild(options, args);
+    startDatabase(options, args);
     executeSQL(options, args);
-    // TODO build karaf
+    startServer(options, args);
 }
 
 function mvnBuild(options, args) {
@@ -70,19 +68,26 @@ function mvnBuild(options, args) {
     shell.exec(`mvn -f ${args.commands[0].pomFile} clean install -Pdev-build`);
 }
 
-function destroy(options, args) {
-    if (!args.commands[0].composeFile) {
-        throw Error('Must supply the location of the docker-compose file in order to perform the operation');
-    }
-    composeDown(options, args);
-}
-
 function composeDown(options, args) {
+    if (!shell.which('docker-compose')) {
+        throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
+    }
+
     console.log(`About to execute docker-compose -f ${args.commands[0].composeFile} down`);
     return shell.exec(`docker-compose -f ${args.commands[0].composeFile} down`);
 }
 
-function buildDatabase(options, args) {
+function composeBuild(options, args) {
+    if (!shell.which('docker-compose')) {
+        throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
+    }
+
+    console.log(`About to execute docker-compose -f ${args.commands[0].composeFile} build`);
+    return shell.exec(`docker-compose -f ${args.commands[0].composeFile} build`);
+}
+
+function startDatabase(options, args) {
+    console.log(`About to execute docker-compose -f ${args.commands[0].composeFile} up -d postgres-db`);
     return shell.exec(`docker-compose -f ${args.commands[0].composeFile} up -d postgres-db`);
 }
 
@@ -94,8 +99,20 @@ function executeSQL(options, args) {
     });
 }
 
+function startServer(options, args) {
+    console.log(`About to execute docker-compose -f ${args.commands[0].composeFile} up -d karaf`);
+    return shell.exec(`docker-compose -f ${args.commands[0].composeFile} up -d karaf`);
+}
+
 async function sleep(time) {
     await new Promise(resolve => setTimeout(resolve, time));
+}
+
+function destroy(options, args) {
+    if (!args.commands[0].composeFile) {
+        throw Error('Must supply the location of the docker-compose file in order to perform the operation');
+    }
+    composeDown(options, args);
 }
 
 module.exports.execute = execute;

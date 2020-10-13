@@ -53,10 +53,9 @@ function programOptions() {
         .command('system')
         .arguments('[env]')
         .description('Define the system environment, curently only supported environment is DEV')
-            .option('-t --task <task>',  'Task to perform on the server', parseTaskType)
-            .option('-r --rebuild <stack>', 'Rebuild a part of the application', parseRebuildType)
-            .option('-f --compose-file <file>', 'The location of the docker-compose file')
-            .option('-p --pom-file <file>', 'The location of the pom.xml file')
+            .option('-t --task [task]',  'Task to perform on the server', parseTaskType)
+            .option('-f --compose-file [file]', 'The location of the docker-compose file')
+            .option('-p --pom-file [file]', 'The location of the pom.xml file')
         .parse(process.argv);
     return program;
 }

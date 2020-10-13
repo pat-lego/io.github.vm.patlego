@@ -24,10 +24,6 @@ function system() {
         }, args);
     }
 
-    if (args.commands[0].rebuild) {
-
-    }
-
 }
 
 function getSystemType() {
