@@ -7,4 +7,6 @@ let destroy = require('./installer/commands/destroy');
 
 // Execute Build Command
 build.execute(args);
+
+// Execute Destroy Command
 destroy.execute(args);
