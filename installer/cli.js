@@ -1,42 +1,9 @@
 const commander = require('commander');
 
-const TASK_BUILD = 'BUILD';
-const TASK_DESTROY = 'DESTROY';
+const CMD_BUILD = 'build';
+const CMD_DESTROY = 'destroy';
 
-const REBUILD_SERVER = 'SERVER';
-const REBOULD_DATABSE = 'DATABASE';
-
-function parseTaskType(value, previousValue) {
-    if (value) {
-        if (value.toLowerCase() === TASK_BUILD.toLowerCase()) {
-            return TASK_BUILD;
-        }
-
-        if (value.toLowerCase() === TASK_DESTROY.toLowerCase()) {
-            return TASK_DESTROY;
-        }
-    }
-
-    return undefined;
-}
-
-/**
- * Function to parse the 
- * @param {string} value - current CLI value 
- * @param {string} previousValue - previous CLI value
- */
-function parseRebuildType(value, previousValue) {
-    if (value) {
-        if (value.toLowerCase() === REBUILD_SERVER.toLowerCase()) {
-            return REBUILD_SERVER;
-        }
-
-        if (value.toLowerCase() === REBOULD_DATABSE.toLowerCase()) {
-            return REBOULD_DATABSE;
-        }
-    }
-    return undefined;
-}
+var cliArgs = {};
 
 /**
  * @returns program - Commander Program
@@ -49,13 +16,37 @@ function parseRebuildType(value, previousValue) {
 function programOptions() {
     // Create a new program to prevent clashes if ever wanting duplicates
     const program = new commander.Command();
-    program
-        .command('build')
-        .description('Builds the development environment')
-            .option('-f --compose-file [file]', 'The location of the docker-compose file')
-            .option('-p --pom-file [file]', 'The location of the pom.xml file')
-        .parse(process.argv);
-    return program;
+
+    program.addCommand(getBuildCommand());
+    program.addCommand(getDestroyCommand());
+    
+    program.parse();
+    return cliArgs;
+}
+
+function getBuildCommand() {
+    const build = new commander.Command(CMD_BUILD);
+    build
+        .description('Builds the DEV environment')
+        .requiredOption('-f --compose-file [file]', 'The location of the docker-compose file')
+        .requiredOption('-p --pom-file [file]', 'The location of the pom.xml file')
+        .action((command) => {
+            cliArgs['build'] = command;
+        });
+    return build;
+}
+
+function getDestroyCommand() {
+    const destroy = new commander.Command(CMD_DESTROY);
+    destroy
+        .description('Destroys the DEV environment')
+        .requiredOption('-f --compose-file [file]', 'The location of the docker-compose file')
+        .action((command) => {
+            cliArgs['destroy'] = command;
+        });
+    return destroy;
 }
 
 module.exports.parse = programOptions;
+module.exports.CMD_BUILD = CMD_BUILD;
+module.exports.CMD_DESTROY = CMD_DESTROY;

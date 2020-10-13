@@ -1,35 +1,35 @@
 let shell = require('../shell');
+let cli = require('../cli');
 let console = require('../console');
 
-const CMD_BUILD = 'BUILD';
 const CLI_CMD_MSG = 'About to execute';
 
 /**
  * Performs the build command offered by the CLI
- * @param {object} args - The cli args coming from commander.js
+ * @param {map} args - Each key is mapped to the command that executed it, for instance build is a command and in the map it will contain its parameters
  * 
  */
 function execute(args) {
    
-    // No args set nothing to do here
-    if (!args.commands[0].args[0]) {
+    // If not defined then exit
+    if (!args) {
         return;
     }
 
     // Validate that the build command was passed in
-    if (args.commands[0].args[0].toLowerCase() === CMD_BUILD.toLowerCase()) {
-        console.log('Executing the build command'.underline.yellow);
+    if (args.hasOwnProperty(cli.CMD_BUILD)) {
+        console.log('Executing the build command'.underline.red);
         build(args);
     }
 
 }
 
 function build(args) {
-    if (!args.commands[0].pomFile) {
+    if (!args[cli.CMD_BUILD].pomFile) {
         throw Error('Must supply the location of the pom file in order to perform the operation');
     }
 
-    if (!args.commands[0].composeFile) {
+    if (!args[cli.CMD_BUILD].composeFile) {
         throw Error('Must supply the location of the docker-compose file in order to perform the operation');
     }
 
@@ -37,12 +37,13 @@ function build(args) {
     composeDown(args);
     composeBuild(args);
     startDatabase(args);
-    executeSQL(args);
-    startServer(args);
+    executeSQL(args).then(() => {
+        startServer(args);
+    });
 }
 
 function mvnBuild(args) {
-    const cmd = `mvn -f ${args.commands[0].pomFile} clean install -Pdev-build`;
+    const cmd = `mvn -f ${args[cli.CMD_BUILD].pomFile} clean install -Pdev-build`;
 
     if (!shell.which('java')) {
         throw Error('Java is not installed please install java prior to running a build');
@@ -57,7 +58,7 @@ function mvnBuild(args) {
 }
 
 function composeDown(args) {
-    const cmd = `docker-compose -f ${args.commands[0].composeFile} down`;
+    const cmd = `docker-compose -f ${args[cli.CMD_BUILD].composeFile} down`;
 
     if (!shell.which('docker-compose')) {
         throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
@@ -67,8 +68,9 @@ function composeDown(args) {
     return shell.exec(cmd);
 }
 
+
 function composeBuild(args) {
-    const cmd = `docker-compose -f ${args.commands[0].composeFile} build`;
+    const cmd = `docker-compose -f ${args[cli.CMD_BUILD].composeFile} build`;
 
     if (!shell.which('docker-compose')) {
         throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
@@ -79,7 +81,7 @@ function composeBuild(args) {
 }
 
 function startDatabase(args) {
-    const cmd = `docker-compose -f ${args.commands[0].composeFile} up -d postgres-db`;
+    const cmd = `docker-compose -f ${args[cli.CMD_BUILD].composeFile} up -d postgres-db`;
     
     if (!shell.which('docker-compose')) {
         throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
@@ -89,8 +91,8 @@ function startDatabase(args) {
     return shell.exec(cmd);
 }
 
-function executeSQL(args) {
-    const cmd = `mvn -f ${args.commands[0].pomFile} liquibase:update -pl system.sql -Pdev-build`;
+async function executeSQL(args) {
+    const cmd = `mvn -f ${args[cli.CMD_BUILD].pomFile} liquibase:update -pl system.sql -Pdev-build`;
     const time = 5000;
 
     if (!shell.which('java')) {
@@ -102,14 +104,13 @@ function executeSQL(args) {
     }
 
     console.log(`Wait ${time/1000} seconds, give time for the database to setup`);
-    sleep(time).then(() => {
-        console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
-        return shell.exec(cmd);
-    });
+    await sleep(time);
+    console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
+    return shell.exec(cmd);
 }
 
 function startServer(args) {
-    const cmd = `docker-compose -f ${args.commands[0].composeFile} up -d karaf`;
+    const cmd = `docker-compose -f ${args[cli.CMD_BUILD].composeFile} up -d karaf`;
 
     if (!shell.which('docker-compose')) {
         throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
