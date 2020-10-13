@@ -6,12 +6,8 @@ const CMD_DESTROY = 'destroy';
 var cliArgs = {};
 
 /**
- * @returns program - Commander Program
+ * @returns map - Relates the command to the commander object (command, commander) => (build, comamnd)
  * 
- * @example
- *      To access task use `program.commands[0].task`
- *      To access system user `program.commands[0].args[1]`
- *          Note: `program.commands[0].args[0]` returns the value `system`
  */
 function programOptions() {
     // Create a new program to prevent clashes if ever wanting duplicates
