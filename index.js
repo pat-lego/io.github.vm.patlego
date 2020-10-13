@@ -1,4 +1,8 @@
-let system = require('./installer/system/system');
+let cli = require('./installer/cli');
+let build = require('./installer/commands/build');
 
-// Execute System Command
-system.execute();
+ // Get CLI params
+ const args = cli.parse();
+
+// Execute Build Command
+build.execute(args);
