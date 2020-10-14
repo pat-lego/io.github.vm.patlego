@@ -1,6 +1,6 @@
-let shell = require('../shell');
-let cli = require('../cli');
-let console = require('../console');
+const shell = require('../shell');
+const cli = require('../cli');
+const console = require('../console');
 
 const CLI_CMD_MSG = 'About to execute';
 
@@ -18,7 +18,7 @@ function execute(args) {
 
     // Validate that the build command was passed in
     if (args.hasOwnProperty(cli.CMD_BUILD)) {
-        console.log('Executing the build command'.underline.red);
+        console.log(`Executing the ${cli.CMD_BUILD} command`.underline.brightYellow);
         build(args);
     }
 

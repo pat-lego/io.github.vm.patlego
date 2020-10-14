@@ -1,4 +1,4 @@
-var shell = require('shelljs');
+const shell = require('shelljs');
 
 /**
  * Determine is the desired utility is available on the local system

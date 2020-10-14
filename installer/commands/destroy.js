@@ -1,6 +1,6 @@
-let console = require('../console');
-let shell = require('../shell');
-let cli = require('../cli');
+const console = require('../console');
+const shell = require('../shell');
+const cli = require('../cli');
 
 const CLI_CMD_MSG = 'About to execute';
 
@@ -12,7 +12,7 @@ function execute(args) {
 
     // Validate that the build command was passed in
     if (args.hasOwnProperty(cli.CMD_DESTROY)) {
-        console.log('Executing the destroy command'.underline.red);
+        console.log(`Executing the ${cli.CMD_DESTROY} command`.underline.brightGreen);
         composeDown(args);
     }
 }

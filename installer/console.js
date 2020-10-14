@@ -1,4 +1,5 @@
 const colors = require('colors');
+
 /**
  * Print information to the console
  * @param {string} - msg
