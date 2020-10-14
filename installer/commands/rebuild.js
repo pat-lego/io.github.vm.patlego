@@ -17,11 +17,11 @@ function execute(args) {
 
 function rebuild(args) {
     if (args[cli.CMD_REBUILD].stack === cli.DEV_SERVER) {
-        rebuildServer();
+        rebuildServer(args);
     }
 
     if (args[cli.CMD_REBUILD].stack === cli.DEV_DATABASE) {
-        rebuildDatabase();
+        rebuildDatabase(args);
     }
 }
 
@@ -64,7 +64,7 @@ function migrateSQL(args) {
         throw Error('Maven is not installed please install java prior to running a build');
     }
 
-    const cmd = `mvn -f ${args[cli.CMD_BUILD].pomFile} liquibase:update -pl system.sql -Pdev-build`;
+    const cmd = `mvn -f ${args[cli.CMD_REBUILD].pomFile} liquibase:update -pl system.sql -Pdev-build`;
 
     const time = 5000;
     console.log(`Sleeping ${time / 1000} in order to give the database container time to setup properly`);
@@ -83,7 +83,7 @@ function rebuildServer(args) {
     console.log('About to rebuild server'.underline.yellow);
 
     stopServerContainer(args);
-    rebuildServer(args);
+    rebuildServerContainer(args);
     upServer(args);
 }
 
@@ -94,7 +94,7 @@ function stopServerContainer(args) {
     shell.exec(cmd);
 }
 
-function rebuildServer(args) {
+function rebuildServerContainer(args) {
     const cmd = `mvn -f ${args[cli.CMD_REBUILD].pomFile} clean install -Pdev-build`;
 
     console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
