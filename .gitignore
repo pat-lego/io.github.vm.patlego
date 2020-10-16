@@ -28,9 +28,11 @@ org.eclipse.core.resources.prefs
 org.eclipse.m2e.core.prefs
 org.eclipse.jdt.apt.core.prefs
 org.eclipse.jdt.core.prefs
+.factorypath
 
 # templated features.xml
 karaf-system/system.features/src/main/resources/features.xml
 
 # node dependencies
 node_modules/
+karaf-system/system.sql/src/main/resources/org/postgres/jdbc.properties

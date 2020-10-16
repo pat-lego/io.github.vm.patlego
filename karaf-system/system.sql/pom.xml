@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.github.vm.patlego</groupId>
@@ -57,29 +55,102 @@
     <profile>
       <id>ecs-build</id>
       <build>
+        <resources>
+          <resource>
+            <directory>src/main/resources/</directory>
+            <excludes>
+              <exclude>templates/</exclude>
+            </excludes>
+          </resource>
+        </resources>
         <plugins>
           <plugin>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-maven-plugin</artifactId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-features</id>
+                <!-- here the phase you need -->
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${basedir}/src/main/resources/org/postgres</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>src/main/resources/templates/postgres</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                  <overwrite>true</overwrite>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.google.code.maven-replacer-plugin</groupId>
+            <artifactId>replacer</artifactId>
+            <executions>
+              <execution>
+                <phase>validate</phase>
+                <goals>
+                  <goal>replace</goal>
+                </goals>
+              </execution>
+            </executions>
             <configuration>
-              <changeLogFile>${changelog.file}</changeLogFile>
-              <driver>${postgres.driver}</driver>
-              <url>${postgres.ecs.url}${postgres.db}</url>
-              <username>${postgres.ecs.username}</username>
-              <password>${postgres.ecs.password>}</password>
-              <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
+              <includes>
+                <include>${basedir}/src/main/resources/org/postgres/jdbc.properties</include>
+              </includes>
+              <replacements>
+                <replacement>
+                  <token>%postgres.password%</token>
+                  <value>${postgres.ecs.password}</value>
+                </replacement>
+                <replacement>
+                  <token>%postgres.username%</token>
+                  <value>${postgres.ecs.username}</value>
+                </replacement>
+                <replacement>
+                  <token>%postgres.url%</token>
+                  <value>${postgres.ecs.url}</value>
+                </replacement>
+                <replacement>
+                  <token>%postgres.db%</token>
+                  <value>${postgres.db}</value>
+                </replacement>
+              </replacements>
             </configuration>
-            <dependencies>
-              <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>42.2.8</version>
-              </dependency>
-            </dependencies>
           </plugin>
         </plugins>
       </build>
     </profile>
   </profiles>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-lambda-java-core</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-lambda-java-events</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-lambda-java-log4j2</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>
