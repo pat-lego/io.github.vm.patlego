@@ -7,7 +7,15 @@ on:
     branches:
       - feature/*
 jobs: 
+  validate:
+    name: Validate a Theory
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Try to fail
+        run: exit 1
   build_and_test:
+    needs: [validate]
     name: Java Build and Test
     runs-on: ubuntu-latest
     steps:
