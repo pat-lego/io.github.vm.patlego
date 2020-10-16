@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.vm.patlego</groupId>
   <artifactId>karaf-system</artifactId>
@@ -38,6 +39,16 @@
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.2.2</version>
+        </plugin>
         <plugin>
           <groupId>org.liquibase</groupId>
           <artifactId>liquibase-maven-plugin</artifactId>
@@ -128,7 +139,7 @@
             <goals>
               <goal>prepare-agent</goal>
             </goals>
-          </execution> <!-- attached to Maven test phase -->
+          </execution>          <!-- attached to Maven test phase -->
           <execution>
             <id>report</id>
             <phase>test</phase>
@@ -209,7 +220,7 @@
         <version>${karaf.runtime.version}</version>
         <classifier>features</classifier>
         <type>xml</type>
-      </dependency> <!--https://mvnrepository.com/artifact/org.apache.cxf.karaf/apache-cxf-->
+      </dependency>      <!--https://mvnrepository.com/artifact/org.apache.cxf.karaf/apache-cxf-->
       <dependency>
         <groupId>org.apache.cxf.karaf</groupId>
         <artifactId>apache-cxf</artifactId>
@@ -217,19 +228,19 @@
         <classifier>features</classifier>
         <scope>runtime</scope>
         <version>3.3.3</version>
-      </dependency> <!--https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxrs-->
+      </dependency>      <!--https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxrs-->
       <dependency>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-frontend-jaxrs</artifactId>
         <version>3.3.2</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine-->
+      </dependency>      <!--https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine-->
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-engine</artifactId>
         <version>5.6.2</version>
         <scope>test</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.testing.osgi-mock.junit5-->
+      </dependency>      <!--https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.testing.osgi-mock.junit5-->
       <dependency>
         <groupId>org.apache.sling</groupId>
         <artifactId>org.apache.sling.testing.osgi-mock.junit5</artifactId>
@@ -241,13 +252,13 @@
         <artifactId>mockito-junit-jupiter</artifactId>
         <version>3.4.4</version>
         <scope>test</scope>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+      </dependency>      <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
         <version>3.4.4</version>
         <scope>test</scope>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
+      </dependency>      <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-inline</artifactId>
@@ -264,31 +275,31 @@
         <artifactId>servlet-api</artifactId>
         <version>2.5</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.postgresql/postgresql-->
+      </dependency>      <!--https://mvnrepository.com/artifact/org.postgresql/postgresql-->
       <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
         <version>42.2.8</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.ops4j.pax.logging/pax-logging-log4j2--> <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-api-->
+      </dependency>      <!--https://mvnrepository.com/artifact/org.ops4j.pax.logging/pax-logging-log4j2-->      <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-api-->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>1.7.30</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-simple-->
+      </dependency>      <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-simple-->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
         <version>1.7.30</version>
         <scope>test</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils-->
+      </dependency>      <!--https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils-->
       <dependency>
         <groupId>commons-dbutils</groupId>
         <artifactId>commons-dbutils</artifactId>
         <version>1.7</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305-->
+      </dependency>      <!--https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305-->
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
@@ -311,34 +322,34 @@
         <artifactId>javax.persistence-api</artifactId>
         <version>2.2</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.apache.aries.jpa/org.apache.aries.jpa.api-->
+      </dependency>      <!--https://mvnrepository.com/artifact/org.apache.aries.jpa/org.apache.aries.jpa.api-->
       <dependency>
         <groupId>org.apache.aries.jpa</groupId>
         <artifactId>org.apache.aries.jpa.api</artifactId>
         <version>2.7.2</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.apache.commons/commons-lang3-->
+      </dependency>      <!--https://mvnrepository.com/artifact/org.apache.commons/commons-lang3-->
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>3.9</version>
         <scope>provided</scope>
-      </dependency> <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+      </dependency>      <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
         <version>2.7</version>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+      </dependency>      <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
       <dependency>
         <groupId>org.apache.pdfbox</groupId>
         <artifactId>pdfbox</artifactId>
         <version>2.0.20</version>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+      </dependency>      <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
       <dependency>
         <groupId>org.apache.pdfbox</groupId>
         <artifactId>fontbox</artifactId>
         <version>2.0.20</version>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
+      </dependency>      <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
       <dependency>
         <groupId>org.apache.tika</groupId>
         <artifactId>tika-core</artifactId>
@@ -348,12 +359,12 @@
         <groupId>org.apache.pdfbox</groupId>
         <artifactId>pdfbox-tools</artifactId>
         <version>2.0.20</version>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
+      </dependency>      <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
       <dependency>
         <groupId>org.apache.tika</groupId>
         <artifactId>tika-parsers</artifactId>
         <version>1.24.1</version>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+      </dependency>      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
       <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-core</artifactId>
