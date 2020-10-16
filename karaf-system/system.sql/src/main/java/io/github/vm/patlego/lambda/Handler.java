@@ -19,7 +19,7 @@ public class Handler implements RequestHandler<InputStream, String> {
 
     final String UTF_8 = StandardCharsets.UTF_8.name();
     final String OK = "200 OK";
-    final String pg_ChangeLog = "/org/postgres/db.changelog-1.0.xml";
+    final String pg_ChangeLog = "/db-changelog-master.xml";
 
     @Override
     public String handleRequest(InputStream json, Context context) {
@@ -31,7 +31,7 @@ public class Handler implements RequestHandler<InputStream, String> {
             Properties props = new Properties();
             props.load(jdbcProps);
 
-            DBManager manager = new LiquibaseImpl("/db-changelog-master.xml");
+            DBManager manager = new LiquibaseImpl(pg_ChangeLog);
 
             manager.update(props);
         } catch (IOException e) {
