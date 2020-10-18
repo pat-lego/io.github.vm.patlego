@@ -15,7 +15,7 @@ import liquibase.resource.ClassLoaderResourceAccessor;
 public class LiquibaseImpl implements DBManager {
 
     final private String URL = "url";
-    final private String USERNAME = "username";
+    final private String USER = "user";
     final private String PASSWORD = "password";
 
     private String changeLog;
@@ -37,8 +37,8 @@ public class LiquibaseImpl implements DBManager {
             throw new RuntimeException(String.format("The properties file is missing the %s key and value", URL));
         }
 
-        if (getProperty(props, USERNAME) == null) {
-            throw new RuntimeException(String.format("The properties file is missing the %s key and value", USERNAME));
+        if (getProperty(props, USER) == null) {
+            throw new RuntimeException(String.format("The properties file is missing the %s key and value", USER));
         }
 
         if (getProperty(props, PASSWORD) == null) {

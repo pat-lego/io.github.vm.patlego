@@ -17,6 +17,10 @@
             <excludes>
                 <exclude>${project.groupId}:${project.artifactId}:jar:*</exclude>
             </excludes>
+            <includes>
+                <include>org.postgresql:postgresql:jar:*</include>
+                <include>*</include>
+            </includes>
         </dependencySet>
     </dependencySets>
 </assembly>

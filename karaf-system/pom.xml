@@ -280,7 +280,6 @@
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
         <version>42.2.8</version>
-        <scope>provided</scope>
       </dependency>      <!--https://mvnrepository.com/artifact/org.ops4j.pax.logging/pax-logging-log4j2-->      <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-api-->
       <dependency>
         <groupId>org.slf4j</groupId>
