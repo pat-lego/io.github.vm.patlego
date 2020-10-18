@@ -35,8 +35,11 @@ jobs:
           aws-access-key-id: ${{ secrets.LAMBDA_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.LAMBDA_AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-      - name: Deploy DB Lambda Function
-        run: aws lambda update-function-code --function-name karaf-vm-db-deployment --zip-file fileb://karaf-system/system.sql/target/system.sql.zip
+      - name: Deploy/Invoke DB Lambda Function
+        run: | 
+          aws lambda update-function-code --function-name karaf-vm-db-deployment --zip-file fileb://karaf-system/system.sql/target/system.sql.zip
+          aws lambda invoke --function-name karaf-vm-db-deployment --invocation-type RequestResponse db-deployment-response.json
+          cat db-deployment-response.json | grep FunctionError
   build_and_test:
     name: Java Build and Test
     runs-on: ubuntu-latest
