@@ -39,7 +39,6 @@ jobs:
         run: | 
           aws lambda update-function-code --function-name karaf-vm-db-deployment --zip-file fileb://karaf-system/system.sql/target/system.sql.zip
           aws lambda invoke --function-name karaf-vm-db-deployment --invocation-type RequestResponse db-deployment-response.json
-          cat db-deployment-response.json | grep FunctionError
   build_and_test:
     name: Java Build and Test
     runs-on: ubuntu-latest
