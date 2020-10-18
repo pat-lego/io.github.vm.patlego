@@ -1,9 +1,9 @@
 name: Deploy Container
-on: 
+on:
   push:
     branches:
       - master
-jobs: 
+jobs:
   build_and_test:
     name: Deploy new container to ECS
     runs-on: ubuntu-latest
@@ -20,17 +20,17 @@ jobs:
       - name: Setup Java 11
         uses: actions/setup-java@v1
         with:
-          java-version: '11'
+          java-version: "11"
           architecture: x64
       - name: Run Maven
         run: mvn clean install --file karaf-system/pom.xml -Dpostgres.ecs.password=$KARAF_DB_PWD -Dmaven.test.skip=true -Pecs-build
         env:
-          KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}} 
+          KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.ECS_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ECS_AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
       - name: Login to AmazonECR
         id: login-ecr
