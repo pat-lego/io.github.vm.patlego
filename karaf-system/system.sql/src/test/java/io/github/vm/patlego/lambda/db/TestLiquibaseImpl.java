@@ -27,6 +27,15 @@ public class TestLiquibaseImpl {
     }
 
     @Test
+    public void testGetNullKeyProperty() {
+        Properties props = new Properties();
+        props.setProperty("url", "https://www.google.com");
+
+        LiquibaseImpl liquibase = new LiquibaseImpl("my_path.xml");
+        Assertions.assertEquals(null, liquibase.getProperty(props, null));
+    }
+
+    @Test
     public void testGetEmptyProperty() {
         Properties props = new Properties();
         props.setProperty("web", "https://www.google.com");
@@ -39,6 +48,31 @@ public class TestLiquibaseImpl {
     public void testGetPropertyNullProps() {
         LiquibaseImpl liquibase = new LiquibaseImpl("my_path.xml");
         Assertions.assertEquals(null, liquibase.getProperty(null, "url"));
+    }
+
+    @Test
+    public void testRuntimeException() {
+        DBManager dbManager = new LiquibaseImpl("My Path");
+        Properties props = new Properties();
+
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            dbManager.update(null);
+        });
+
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            dbManager.update(props);
+        });
+
+        props.put("url", "dffg");
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            dbManager.update(props);
+        });
+
+        props.put("user", "dffg");
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            dbManager.update(props);
+        });
+
     }
 
     
