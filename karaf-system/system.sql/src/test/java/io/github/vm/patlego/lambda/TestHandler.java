@@ -8,6 +8,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,7 +21,18 @@ public class TestHandler {
     @Test
     public void testGetJDBCProps() throws IOException {
         Handler handler = new Handler();
-        Assertions.assertNotNull(handler.getPostgresJDBCProps());
+        Assertions.assertNotNull(handler.getPostgresJDBCProps("/templates/postgres/jdbc.properties"));
+    }
+
+    @Test
+    public void testGetJDBCPropsEmptyPath() throws IOException {
+        Handler handler = new Handler();
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            handler.getPostgresJDBCProps(null);
+        });
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            handler.getPostgresJDBCProps(StringUtils.EMPTY);
+        });
     }
 
     @Test

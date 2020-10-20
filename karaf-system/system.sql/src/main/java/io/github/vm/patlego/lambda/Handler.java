@@ -20,12 +20,13 @@ public class Handler implements RequestHandler<InputStream, String> {
     final String UTF_8 = StandardCharsets.UTF_8.name();
     final String OK = "200 OK";
     final String pg_ChangeLog = "/db-changelog-master.xml";
+    final String jdbcProperties = "/org/postgres/jdbc.properties";
 
     @Override
     public String handleRequest(InputStream json, Context context) {
         LambdaLogger logger = context.getLogger();
         try {
-            Properties props = this.getPostgresJDBCProps();
+            Properties props = this.getPostgresJDBCProps(jdbcProperties);
 
             this.performUpdate(this.pg_ChangeLog, props);
         } catch (IOException e) {
@@ -62,11 +63,15 @@ public class Handler implements RequestHandler<InputStream, String> {
      * Used to retrieve the Postgres JDBC properties file in the resource folder of
      * the maven project
      * 
+     * @param propsLocation - String location in the current archive of the JDBC properties file
      * @return Properties
      * @throws IOException - Failed to load the file
      */
-    public Properties getPostgresJDBCProps() throws IOException {
-        InputStream jdbcProps = this.getClass().getResourceAsStream("/org/postgres/jdbc.properties");
+    public Properties getPostgresJDBCProps(String propsLocation) throws IOException {
+        if (propsLocation == null || propsLocation.isEmpty()) {
+            throw new RuntimeException("Cannot provide a null or empty JDBC properties path");
+        }
+        InputStream jdbcProps = this.getClass().getResourceAsStream(propsLocation);
 
         Properties props = new Properties();
         props.load(jdbcProps);
