@@ -26,7 +26,7 @@
         <server>
             <id>patlego-website</id>
             <username>pat-lego</username>
-            <password>${env.PACKAGES_WEBSITE_TOKEN}</password>
+            <password>f686ea8a99b704c61c52021f91a2e7fbd56e000b</password>
         </server>
     </servers>
 </settings>
