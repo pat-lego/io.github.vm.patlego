@@ -19,12 +19,24 @@
                     <name>GitHub OWNER Apache Maven Packages</name>
                     <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego.website</url>
                 </repository>
+                 <repository>
+                    <id>patlego-core</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego</url>
+                </repository>
             </repositories>
         </profile>
     </profiles>
     <servers>
         <server>
             <id>patlego-website</id>
+            <username>pat-lego</username>
+            <password>${env.PACKAGES_WEBSITE_TOKEN}</password>
+        </server>
+    </servers>
+    <servers>
+        <server>
+            <id>patlego-core</id>
             <username>pat-lego</username>
             <password>${env.PACKAGES_WEBSITE_TOKEN}</password>
         </server>

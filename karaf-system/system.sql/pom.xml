@@ -18,6 +18,7 @@
     <changelog.file>src/main/resources/db-changelog-master.xml</changelog.file>
     <postgres.driver>org.postgresql.Driver</postgres.driver>
     <postgres.dev.url>jdbc:postgresql://localhost:5432</postgres.dev.url>
+    <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
 
   <profiles>
