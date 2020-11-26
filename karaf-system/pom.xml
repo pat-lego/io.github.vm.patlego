@@ -38,7 +38,18 @@
 
   <repositories>
     <repository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
       <id>patlego-website</id>
+      <name>GitHub OWNER Apache Maven Packages</name>
       <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego.website</url>
     </repository>
   </repositories>
@@ -407,11 +418,6 @@
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-core</artifactId>
         <version>4.1.0</version>
-      </dependency>
-      <dependency>
-        <groupId>io.github.vm.patlego</groupId>
-        <artifactId>website</artifactId>
-        <version>1.0-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

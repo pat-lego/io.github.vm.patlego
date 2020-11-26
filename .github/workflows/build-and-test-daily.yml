@@ -22,7 +22,7 @@ jobs:
           java-version: '11'
           architecture: x64
       - name: Run Maven
-        run: mvn clean install --file karaf-system/pom.xml -Pdev-build coveralls:report
+        run: mvn --settings settings.xml clean install --file karaf-system/pom.xml -Pdev-build coveralls:report
         env:
           COVERALLS_TOKEN: ${{secrets.COVERALLS_TOKEN}}
 
