@@ -32,3 +32,5 @@ jobs:
           architecture: x64
       - name: Run Maven
         run: mvn --settings settings.xml clean install --file karaf-system/pom.xml -Pdev-build
+        env:
+          PACKAGES_WEBSITE_TOKEN: ${{secrets.PACKAGES_WEBSITE_TOKEN}}

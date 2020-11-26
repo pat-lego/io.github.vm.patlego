@@ -25,4 +25,5 @@ jobs:
         run: mvn --settings settings.xml clean install --file karaf-system/pom.xml -Pdev-build coveralls:report
         env:
           COVERALLS_TOKEN: ${{secrets.COVERALLS_TOKEN}}
+          PACKAGES_WEBSITE_TOKEN: ${{secrets.PACKAGES_WEBSITE_TOKEN}}
 
