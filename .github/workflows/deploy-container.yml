@@ -59,6 +59,7 @@ jobs:
         run: mvn --settings settings.xml clean install --file karaf-system/pom.xml -Dpostgres.ecs.password=$KARAF_DB_PWD -Dmaven.test.skip=true -Pecs-build
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
+          PACKAGES_WEBSITE_TOKEN: ${{secrets.PACKAGES_WEBSITE_TOKEN}}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
