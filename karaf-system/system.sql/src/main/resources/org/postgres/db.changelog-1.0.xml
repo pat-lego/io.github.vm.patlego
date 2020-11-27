@@ -43,4 +43,21 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet author="pat-lego" id="1.1">
+        <createTable tableName="blogs" schemaName="patlegovm">
+            <column name="blog_id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="blog_title" type="VARCHAR">
+                <constraints nullable="true"/>
+            </column>
+            <column name="blog" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="blog_author" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
