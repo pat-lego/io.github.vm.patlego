@@ -24,8 +24,8 @@
         <!-- Only used when transaction-type=JTA -->
         <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=karafdb)</jta-data-source>
 
-        <!-- Only used when transaction-type=JTA -->
         <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=karafdb)</non-jta-data-source>
+        
         <class>io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWF</class>
         <class>io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWI</class>
         <properties>
