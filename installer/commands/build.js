@@ -93,7 +93,7 @@ function startDatabase(args) {
 
 async function executeSQL(args) {
     const cmd = `mvn -f ${args[cli.CMD_BUILD].pomFile} liquibase:update -pl system.sql -Pdev-build`;
-    const time = 5000;
+    const time = 10000;
 
     if (!shell.which('java')) {
         throw Error('Java is not installed please install java prior to running a build');

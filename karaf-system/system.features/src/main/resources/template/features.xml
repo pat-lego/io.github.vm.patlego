@@ -16,19 +16,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<features name="io.github.vm.patlego-{project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
+<features name="io.github.vm.patlego-{project.version}"
+    xmlns="http://karaf.apache.org/xmlns/features/v1.3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
 
     <feature name="patlego-vm-jdbc-datasource" version="${project.version}">
-        <config name="org.ops4j.datasource-karafdb">
-            osgi.jdbc.driver.class=org.postgresql.Driver
-            password=%postgres.password%
-            user=%postgres.username%
-            url=%postgres.url%/%postgres.db%
-            dataSourceName=karafdb
-            databaseName=%postgres.db%
+        <config name="org.ops4j.datasource-karafdb"> osgi.jdbc.driver.class=org.postgresql.Driver password=%postgres.password% user=%postgres.username% url=%postgres.url%/%postgres.db% dataSourceName=karafdb databaseName=%postgres.db%
         </config>
-        <capability>
-            osgi.service;objectClass=javax.sql.DataSource;effective:=active;osgi.jndi.service.name=karafdb
+        <capability> osgi.service;objectClass=javax.sql.DataSource;effective:=active;osgi.jndi.service.name=karafdb
         </capability>
     </feature>
 
@@ -38,6 +33,7 @@
     </feature>
 
     <feature name="patlego-vm-client" version="${project.version}">
+        <bundle>mvn:io.github.vm.patlego/website.dao/1.0-SNAPSHOT</bundle>
         <bundle>mvn:io.github.vm.patlego/website.ui/1.0-SNAPSHOT</bundle>
     </feature>
 
