@@ -36,6 +36,8 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <karaf.runtime.version>4.3.0.RC1</karaf.runtime.version>
+
+    <jackson.version>2.11.3</jackson.version>
   </properties>
 
   <repositories>

@@ -72,8 +72,8 @@
 
             <feature>transaction</feature>
             <feature>jndi</feature>
-            <feature>jdbc</feature>
-            <feature>pax-jdbc</feature>
+            <feature prerequisite="true">jdbc</feature>
+            <feature prerequisite="true">pax-jdbc</feature>
             <feature>pax-jdbc-spec</feature>
             <feature>pax-jdbc-config</feature>
             <feature>pax-jdbc-pool-dbcp2</feature>
