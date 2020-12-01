@@ -35,7 +35,7 @@ public class WorkflowManagerDSImpl implements WorkflowManagerDS {
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Reference(target = "(osgi.unit.name=karafdb-hibernate)")
+    @Reference(target = "(osgi.unit.name=karafdb-hibernate-system)")
     private JpaTemplate jpaTemplate;
 
     @Override
