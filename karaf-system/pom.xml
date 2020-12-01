@@ -38,6 +38,8 @@
     <karaf.runtime.version>4.3.0.RC1</karaf.runtime.version>
 
     <jackson.version>2.11.3</jackson.version>
+    <cxf.version>3.3.3</cxf.version>
+    <website.version>1.0-SNAPSHOT</website.version>
   </properties>
 
   <repositories>
@@ -263,7 +265,7 @@
       <dependency>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-        <version>3.3.2</version>
+        <version>3.3.3</version>
         <scope>provided</scope>
       </dependency>      <!--https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine-->
       <dependency>
