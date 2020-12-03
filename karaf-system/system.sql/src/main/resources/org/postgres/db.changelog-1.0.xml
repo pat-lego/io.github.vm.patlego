@@ -24,7 +24,6 @@
                 <constraints nullable="true" primaryKey="false"/>
             </column>
         </createTable>
-
         <createTable tableName="workflow_manager_wi" schemaName="patlegovm">
             <column name="workitem_name" type="VARCHAR">
                 <constraints nullable="false" primaryKey="true" unique="false" primaryKeyName="PK_workItemId"/>
@@ -60,4 +59,17 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet author="pat-lego" id="1.2">
+        <insert
+            catalogName='karaf_db'
+            dbms='postgresql'
+            schemaName='patlegovm'
+            tableName='blogs'>
+            <column name='blog_title' value='Welcome' />
+            <column name='blog' value='Welcome to my blog' />
+            <column name='blog_author' value='Patrique' />
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
