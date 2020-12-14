@@ -17,12 +17,27 @@ In order to start the system you will require the following
 
 ## How to start the server
 
-Build the project using `mvn clean install -Pdev-build` and navigate to the `karaf-system` module and navigate to the `target/assembly` folder. Within the assembly folder run the following commands.
+In order to start the entire system leverage the startup script called `setup.js` in the root of the project. Make sure to have `node & npm` installed, versions 12.x or higher.
 
-1. `docker-compose build`
-2. `docker-compose up`
+In order to setup the system run the following commands
 
-To validate that the server is active nagivate to the following URL: `http://localhost:8181/system/console`
+```
+node setup.js build --pom-file ./karaf-system/pom.xml --compose-file ./karaf-system/system.core/target/assembly/docker-compose.yml
+```
+
+This will build the server, create the database, merge the existing database state into the active RDBS and start the server. Once complete the server will be accessible @ `http://localhost:8181`
+
+## How to destroy the server
+
+In order to destroy the local enviroment leverage the startup script called `setup.js` in the root of the project. Make sure to have `node & npm` installed, versions 12.x or higher.
+
+In order to destroy the system run the following commands
+
+```
+node setup.js destroy --compose-file ./karaf-system/system.core/target/assembly/docker-compose.yml
+```
+
+All of the containers will be destroyed. 
 
 ## Debug Karaf
 
