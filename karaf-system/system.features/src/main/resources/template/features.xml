@@ -70,6 +70,10 @@
         <bundle>wrap:mvn:xerces/xercesImpl/2.12.0</bundle>
     </feature>
 
+    <feature name="patlego-vm-email" version="${project.version}">
+        <bundle>mvn:io.github.vm.patlego/system.email/${project.version}</bundle>
+    </feature>
+
     <feature name="patlego-vm-workflow" version="${project.version}">
         <bundle>mvn:io.github.vm.patlego/system.workflow/${project.version}</bundle>
     </feature>

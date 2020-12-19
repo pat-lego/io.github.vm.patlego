@@ -1,0 +1,27 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0"
+           xmlns:enc="http://karaf.apache.org/xmlns/jasypt/v1.0.0">
+
+  <!-- Configuration via ConfigAdmin property-placeholder -->
+  <!-- the etc/*.cfg can contain encrypted values with ENC() function -->
+  <cm:property-placeholder persistent-id="io.github.vm.patlego.email.impl.EmailServiceImpl" update-strategy="reload">
+    <cm:default-properties>
+      <cm:property name="encoded" value="ENC(${foo})"/>
+    </cm:default-properties>
+  </cm:property-placeholder>
+
+  <enc:property-placeholder>
+    <enc:encryptor class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+      <property name="config">
+        <bean class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+          <property name="algorithm" value="PBEWithMD5AndDES"/>
+          <property name="passwordEnvName" value="ENCRYPTION_PASSWORD"/>
+        </bean>
+      </property>
+    </enc:encryptor>
+  </enc:property-placeholder>
+
+  <!-- ... -->
+
+</blueprint>
