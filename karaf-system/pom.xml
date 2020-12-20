@@ -15,6 +15,7 @@
     <module>system.ocr</module>
     <module>system.features</module>
     <module>system.core</module>
+    <module>system.encryption</module>
   </modules>
   <properties>
     <postgres.db>karaf_db</postgres.db> <!-- PSQL DEV VALUES -->
@@ -31,6 +32,7 @@
     <jackson.version>2.11.3</jackson.version>
     <cxf.version>3.3.3</cxf.version>
     <website.version>1.0-SNAPSHOT</website.version>
+    <jasypt.version>1.9.3</jasypt.version>
   </properties>
   <repositories>
     <repository>
@@ -417,6 +419,11 @@
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-core</artifactId>
         <version>4.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jasypt</groupId>
+        <artifactId>jasypt</artifactId>
+        <version>${jasypt.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -5,13 +5,13 @@
     <artifactId>karaf-system</artifactId>
     <groupId>io.github.vm.patlego</groupId>
     <version>1.0-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>io.github.vm.patlego</groupId>
-  <artifactId>system.email</artifactId>
+  <artifactId>system.encryption</artifactId>
   <packaging>bundle</packaging>
-  <name>System Email</name>
+
+  <name>System Encryption</name>
 
   <build>
     <plugins>
@@ -93,10 +93,10 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.jasypt/jasypt -->
     <dependency>
-      <groupId>io.github.vm.patlego</groupId>
-      <artifactId>system.encryption</artifactId>
-      <version>${project.version}</version>
+      <groupId>org.jasypt</groupId>
+      <artifactId>jasypt</artifactId>
     </dependency>
   </dependencies>
 </project>
