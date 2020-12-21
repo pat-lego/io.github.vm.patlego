@@ -42,8 +42,10 @@
         <configuration>
           <exportScr>true</exportScr>
           <instructions>
+            <Karaf-Commands>*</Karaf-Commands>
             <Import-Package>
               !javax.annotation,
+              org.apache.karaf.shell.*;version="[4,5)",
               *
             </Import-Package>
             <!-- Enable processing of OSGI DS component annotations -->
@@ -103,7 +105,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.karaf.shell</groupId>
-      <artifactId>org.apache.karaf.shell.console</artifactId>
+      <artifactId>org.apache.karaf.shell.core</artifactId>
     </dependency>
   </dependencies>
 </project>
