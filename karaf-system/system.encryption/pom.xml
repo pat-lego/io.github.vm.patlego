@@ -98,5 +98,9 @@
       <groupId>org.jasypt</groupId>
       <artifactId>jasypt</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.karaf.shell</groupId>
+      <artifactId>org.apache.karaf.shell.console</artifactId>
+    </dependency>
   </dependencies>
 </project>
