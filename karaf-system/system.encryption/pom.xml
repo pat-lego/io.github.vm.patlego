@@ -42,7 +42,10 @@
         <configuration>
           <exportScr>true</exportScr>
           <instructions>
-            <Import-Package>!javax.annotation, *</Import-Package>
+            <Import-Package>
+              !javax.annotation,
+              *
+            </Import-Package>
             <!-- Enable processing of OSGI DS component annotations -->
             <_dsannotations>*</_dsannotations>
             <!-- Enable processing of OSGI metatype annotations -->
