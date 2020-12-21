@@ -45,7 +45,6 @@
             <Karaf-Commands>*</Karaf-Commands>
             <Import-Package>
               !javax.annotation,
-              org.apache.karaf.shell.*;version="[4,5)",
               *
             </Import-Package>
             <!-- Enable processing of OSGI DS component annotations -->
