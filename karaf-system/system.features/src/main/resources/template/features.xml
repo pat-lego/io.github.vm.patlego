@@ -16,9 +16,19 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<features name="io.github.vm.patlego-{project.version}"
-    xmlns="http://karaf.apache.org/xmlns/features/v1.3.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
+<features name="io.github.vm.patlego-{project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
+
+    <feature name="patlego-vm" version="${project.version}">
+        <feature>patlego-vm-encryption</feature>
+        <feature>pax-jdbc-postgresql</feature>
+        <feature>patlego-vm-jdbc-datasource</feature>
+        <feature>patlego-vm-jdbc</feature>
+        <feature>patlego-vm-workflow</feature>
+        <feature>patlego-vm-graphql</feature>
+        <feature>patlego-vm-client</feature>
+        <feature>patlego-vm-ocr</feature>
+        <feature>patlego-vm-email</feature>
+    </feature>
 
     <feature name="patlego-vm-jdbc-datasource" version="${project.version}">
         <config name="org.ops4j.datasource-karafdb">
@@ -71,6 +81,8 @@
     </feature>
 
     <feature name="patlego-vm-encryption" version="${project.version}">
+        <!-- Jasypt Encryption service used to encrypt passwords -->
+        <feature>jasypt-encryption</feature>
         <bundle>mvn:io.github.vm.patlego/system.encryption/${project.version}</bundle>
     </feature>
 

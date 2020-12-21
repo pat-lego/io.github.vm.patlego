@@ -63,9 +63,6 @@
             <feature>webconsole</feature>
             <feature>shell-compat</feature>
 
-            <!-- Jasypt Encryption service used to encrypt passwords -->
-            <feature>jasypt-encryption</feature>
-
             <feature>cxf</feature>
             <feature>scr</feature>
             <feature>http</feature>
@@ -84,17 +81,8 @@
             <feature version="[2,3)">jpa</feature>
             <feature version="[5,6)">hibernate</feature>
             
-            <feature>patlego-vm-encryption</feature>
+            <feature>patlego-vm</feature>
 
-            <feature>pax-jdbc-postgresql</feature>
-            <feature>patlego-vm-jdbc-datasource</feature>
-            <feature>patlego-vm-jdbc</feature>
-            <feature>patlego-vm-workflow</feature>
-            <feature>patlego-vm-graphql</feature>
-            <feature>patlego-vm-client</feature>
-            <feature>patlego-vm-ocr</feature>
-
-            <feature>patlego-vm-email</feature>
           </bootFeatures>
           <workDirectory>${project.build.directory}/assembly/patlego.vm</workDirectory>
           <pathPrefix>patlego.vm</pathPrefix>
