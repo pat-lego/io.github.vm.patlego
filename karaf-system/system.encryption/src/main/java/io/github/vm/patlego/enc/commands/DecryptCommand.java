@@ -18,10 +18,10 @@ public class DecryptCommand implements Action {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Reference
-    private Security security;
+    public Security security;
 
     @Argument(index = 0, name = "input", description = "Input string to be deencrypted", required = true, multiValued = false)
-    String input = StringUtils.EMPTY;
+    public String input = StringUtils.EMPTY;
 
 
     @Override
