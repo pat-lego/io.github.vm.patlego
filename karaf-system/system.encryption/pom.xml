@@ -16,6 +16,10 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-services-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
         <extensions>true</extensions>
@@ -42,11 +46,17 @@
         <configuration>
           <exportScr>true</exportScr>
           <instructions>
-            <Karaf-Commands>*</Karaf-Commands>
+            <Private-Package>
+              io.github.vm.patlego.enc.commands.*
+            </Private-Package>
             <Import-Package>
               !javax.annotation,
+              org.apache.karaf.shell*;version="[4,5)",
               *
             </Import-Package>
+            <Export-Package>
+              io.github.vm.patlego.enc.*
+            </Export-Package>
             <!-- Enable processing of OSGI DS component annotations -->
             <_dsannotations>*</_dsannotations>
             <!-- Enable processing of OSGI metatype annotations -->
