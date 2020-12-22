@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import io.github.vm.patlego.email.EmailService;
 import io.github.vm.patlego.email.bean.EmailConfig;
+import io.github.vm.patlego.email.template.Templater;
 import io.github.vm.patlego.enc.Security;
+
 public class EmailServiceImpl implements EmailService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -40,8 +42,8 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void send() {
-        // TODO send email
-    }
+    public void send(Templater template) {
+        // TODO Auto-generated method stub
 
+    }
 }
