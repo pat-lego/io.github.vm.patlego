@@ -1,9 +1,11 @@
 package io.github.vm.patlego.email;
 
+import io.github.vm.patlego.email.bean.EmailContent;
+import io.github.vm.patlego.email.bean.EmailRecipient;
 import io.github.vm.patlego.email.template.Templater;
 
 public interface EmailService {
 
-    public void send(Templater template);
+    public void send(EmailRecipient recipients, Templater template, EmailContent content);
     
 }

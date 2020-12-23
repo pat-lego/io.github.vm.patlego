@@ -1,24 +1,43 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0" xmlns:enc="http://karaf.apache.org/xmlns/jasypt/v1.0.0">
 
-  <cm:property-placeholder persistent-id="io.github.vm.patlego.email.EmailService" update-strategy="reload">
+  <cm:property-placeholder persistent-id="io.github.vm.patlego.email.SmtpAuthentication.default" placeholder-prefix="$(" placeholder-suffix=")" update-strategy="reload">
     <cm:default-properties>
       <cm:property name="email.username" value="" />
       <cm:property name="email.password" value="" />
     </cm:default-properties>
   </cm:property-placeholder>
 
+  <bean id="defaultSmtpAuthentication" class="io.github.vm.patlego.email.bean.SmtpAuthentication">
+    <property name="username" value="$(email.username)" />
+    <property name="password" value="$(email.password)" />
+  </bean>
+
+  <cm:property-placeholder persistent-id="io.github.vm.patlego.email.SmtpServer.default" update-strategy="reload">
+    <cm:default-properties>
+      <cm:property name="email.host" value="" />
+      <cm:property name="email.port" value="" />
+      <cm:property name="email.protocol" value="" />
+    </cm:default-properties>
+  </cm:property-placeholder>
+
+  <bean id="defaultSmtpServer" class="io.github.vm.patlego.email.bean.SmtpServer">
+    <property name="smtpHost" value="${email.host}" />
+    <property name="smtpPort" value="${email.port}" />
+    <property name="smtpProtocol" value="${email.protocol}" />
+  </bean>
+
   <bean id="emailservice" class="io.github.vm.patlego.email.impl.EmailServiceImpl" init-method="init" destroy-method="destroy">
-    <property name="emailConfig" ref="emailconfig" />
-    <property name="security" ref="securityRef"/>
+    <property name="smtpServer" ref="defaultSmtpServer" />
+    <property name="smtpAuthentication" ref="defaultSmtpAuthentication" />
+    <property name="security" ref="securityRef" />
   </bean>
 
-  <bean id="emailconfig" class="io.github.vm.patlego.email.bean.EmailConfig">
-    <property name="username" value="${email.username}" />
-    <property name="password" value="${email.password}" />
-  </bean>
+  <reference id="securityRef" interface="io.github.vm.patlego.enc.Security" />
 
-  <reference id="securityRef" interface="io.github.vm.patlego.enc.Security"/>
-
-  <service ref="emailservice" interface="io.github.vm.patlego.email.EmailService"/>
+  <service ref="emailservice" interface="io.github.vm.patlego.email.EmailService">
+    <service-properties>
+      <entry key="INSTANCE" value="DEFAULT" />
+    </service-properties>
+  </service>
 
 </blueprint>

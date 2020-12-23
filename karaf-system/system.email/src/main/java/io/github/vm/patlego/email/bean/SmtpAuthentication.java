@@ -1,5 +1,5 @@
 package io.github.vm.patlego.email.bean;
-public class EmailConfig {
+public class SmtpAuthentication {
 
     private String username;
     private String password;

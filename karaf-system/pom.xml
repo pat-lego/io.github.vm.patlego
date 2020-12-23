@@ -36,6 +36,7 @@
     <cxf.version>3.3.3</cxf.version>
     <website.version>1.0-SNAPSHOT</website.version>
     <jasypt.version>1.9.3</jasypt.version>
+    <javax.mail.version>1.4.7</javax.mail.version>
   </properties>
 
   <repositories>
@@ -450,6 +451,11 @@
         <groupId>org.apache.karaf.shell</groupId>
         <artifactId>org.apache.karaf.shell.core</artifactId>
         <version>${karaf.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.mail</groupId>
+        <artifactId>mail</artifactId>
+        <version>${javax.mail.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
