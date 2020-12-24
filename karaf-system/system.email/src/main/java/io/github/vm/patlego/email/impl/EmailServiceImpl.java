@@ -33,8 +33,6 @@ public class EmailServiceImpl implements EmailService {
 
     public void init() {
         logger.info(String.format("Starting the %s bean", this.getClass().getName()));
-        logger.info("smtpServer set to " + this.smtpAuthentication.getUsername());
-        logger.info("smtpServer set to " + this.smtpServer.getSmtpPort());
     }
 
     public void destroy() {
