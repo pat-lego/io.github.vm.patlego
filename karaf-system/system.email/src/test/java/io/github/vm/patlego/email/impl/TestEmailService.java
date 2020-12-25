@@ -143,6 +143,19 @@ public class TestEmailService {
     }
 
     @Test
+    public void testSetTo_v1_Error() throws MessagingException {
+        EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
+        Message message = Mockito.mock(Message.class);
+
+        EmailContent.Builder builder = new EmailContent.Builder();
+        EmailContent content = builder.build();
+
+        Assertions.assertThrows(MessagingException.class, () -> {
+            emailServiceImpl.setTo(message, content);
+        });
+    }
+
+    @Test
     public void testSetTo_v2() throws MessagingException {
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
         Message message = Mockito.mock(Message.class);
@@ -257,6 +270,65 @@ public class TestEmailService {
         Multipart multipart = Mockito.mock(Multipart.class);
 
         emailServiceImpl.setContent(multipart, content, null);
+    }
+
+    @Test
+    public void testSend() throws MessagingException, IOException {
+        EmailServiceImpl emailServiceImpl = Mockito.mock(EmailServiceImpl.class);
+        Mockito.doCallRealMethod().when(emailServiceImpl).send(Mockito.any(), Mockito.any(), Mockito.any());
+
+        EmailRecipient recipients = Mockito.mock(EmailRecipient.class);
+        Mockito.when(recipients.getFrom()).thenReturn(new InternetAddress("patrique.pat@pat.com"));
+
+        EmailContent.Builder builder = new EmailContent.Builder();
+        EmailContent content = builder
+            .addTo(new InternetAddress("ma@ma.com"))
+            .addMessage("This is my message")
+            .addAttachment(new EmailAttachment(IOUtils.toInputStream("Hello World", "UTF-8"), "text/plain"))
+            .build();
+
+        emailServiceImpl.send(recipients, null, content);
+        
+    }
+
+    @Test
+    public void testSend_Unique() throws MessagingException {
+        EmailServiceImpl emailServiceImpl = Mockito.mock(EmailServiceImpl.class);
+        Mockito.doCallRealMethod().when(emailServiceImpl).send(Mockito.any(), Mockito.any(), Mockito.any());
+
+        EmailRecipient recipients = Mockito.mock(EmailRecipient.class);
+        Mockito.when(recipients.getFrom()).thenReturn(new InternetAddress("patrique.pat@pat.com"));
+
+        EmailContent.Builder builder = new EmailContent.Builder();
+        EmailContent content = builder
+            .addTo(new InternetAddress("ma@ma.com"))
+            .addTo(new InternetAddress("ma2@ma.com"))
+            .addMessage("This is my message")
+            .setSendIndependently()
+            .build();
+
+        emailServiceImpl.send(recipients, null, content);
+        
+    }
+
+    @Test
+    public void testSend_Fail_No_To() throws MessagingException {
+        EmailContent.Builder builder = new EmailContent.Builder();
+        EmailContent content = builder
+            .addMessage("This is my message")
+            .build();
+        
+        EmailServiceImpl emailServiceImpl = Mockito.mock(EmailServiceImpl.class);
+        Mockito.doCallRealMethod().when(emailServiceImpl).send(Mockito.any(), Mockito.any(), Mockito.any());
+        Mockito.doCallRealMethod().when(emailServiceImpl).setTo(Mockito.any(), Mockito.any(EmailContent.class));
+
+        EmailRecipient recipients = Mockito.mock(EmailRecipient.class);
+        Mockito.when(recipients.getFrom()).thenReturn(new InternetAddress("patrique.pat@pat.com"));
+
+        Assertions.assertThrows(MessagingException.class, () -> {
+            emailServiceImpl.send(recipients, null, content);
+        });
+        
     }
 
     @Test

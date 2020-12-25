@@ -1,6 +1,8 @@
 package io.github.vm.patlego.email.impl;
 
+import java.util.Iterator;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.activation.DataHandler;
 import javax.mail.Address;
@@ -10,9 +12,11 @@ import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -104,14 +108,45 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void send(EmailRecipient recipients, Templater template, EmailContent content) {
+    public void send(EmailRecipient recipients, Templater templater, EmailContent content) throws MessagingException {
         Session session = this.setupSession(recipients);
 
         Message message = new MimeMessage(session);
+        Multipart part = new MimeMultipart();
 
+        Set<EmailAttachment> attachments = content.getAttachments();
+        Iterator<EmailAttachment> attachmentIterator = attachments.iterator();
+
+        while (attachmentIterator.hasNext()) {
+            this.setAttachment(part, attachmentIterator.next());
+        }
+
+        this.setBCC(message, content);
+        this.setCC(message, content);
+        this.setContent(part, content, templater);
+        this.setFrom(message, recipients);
+
+        if (content.isUniqueTo()) {
+            Iterator<InternetAddress> to = content.getTo().iterator();
+            while (to.hasNext()) {
+                this.setTo(message, to.next());
+                this.send(message);
+            }
+        } else {
+            this.setTo(message, content);
+            this.send(message);
+        }
+    }
+
+    public void send(Message msg) throws MessagingException {
+        Transport.send(msg);
     }
 
     public void setTo(Message message, EmailContent content) throws MessagingException {
+        if (content.getTo().isEmpty()) {
+            throw new MessagingException("No recipients defined in th email");
+        }
+        
         Address[] to = new Address[content.getTo().size()];
         to = content.getTo().toArray(to);
 
@@ -119,7 +154,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     public void setTo(Message message, InternetAddress toIA) throws MessagingException {
-        Address[] to = {toIA};
+        Address[] to = { toIA };
 
         message.setRecipients(Message.RecipientType.TO, to);
     }
@@ -151,7 +186,8 @@ public class EmailServiceImpl implements EmailService {
         String message = content.getMessage();
 
         if (message == null) {
-            throw new MessagingException("Email message has not been defined please define the message prior to sending the email");
+            throw new MessagingException(
+                    "Email message has not been defined please define the message prior to sending the email");
         }
 
         if (templater != null) {
@@ -170,9 +206,9 @@ public class EmailServiceImpl implements EmailService {
     }
 
     public void setAttachment(Multipart multipart, EmailAttachment attachment) throws MessagingException {
-		BodyPart messageBodyPart = new MimeBodyPart();        
-		messageBodyPart.setDataHandler(new DataHandler(attachment));
-		messageBodyPart.setFileName(attachment.getName());
-		multipart.addBodyPart(messageBodyPart);
-	}
+        BodyPart messageBodyPart = new MimeBodyPart();
+        messageBodyPart.setDataHandler(new DataHandler(attachment));
+        messageBodyPart.setFileName(attachment.getName());
+        multipart.addBodyPart(messageBodyPart);
+    }
 }
