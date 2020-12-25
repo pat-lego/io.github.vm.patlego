@@ -99,7 +99,7 @@ public final class EmailContent {
             emailContent.attachments = this.attachments;
             emailContent.to = this.to;
             emailContent.sendIndependently = this.sendIndependently;
-            emailContent
+            emailContent.message = this.content;
 
             return emailContent;
         }
