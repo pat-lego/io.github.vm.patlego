@@ -131,7 +131,7 @@ public class TestEmailService {
     }
 
     @Test
-    public void testSetTo() throws MessagingException {
+    public void testSetTo_v1() throws MessagingException {
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
         Message message = Mockito.mock(Message.class);
 
@@ -140,6 +140,14 @@ public class TestEmailService {
                 .addTo(new InternetAddress("test.test2@test.com")).build();
 
         emailServiceImpl.setTo(message, content);
+    }
+
+    @Test
+    public void testSetTo_v2() throws MessagingException {
+        EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
+        Message message = Mockito.mock(Message.class);
+
+        emailServiceImpl.setTo(message, new InternetAddress("pat@pat.com"));
     }
 
     @Test

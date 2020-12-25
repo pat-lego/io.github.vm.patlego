@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
@@ -113,6 +114,12 @@ public class EmailServiceImpl implements EmailService {
     public void setTo(Message message, EmailContent content) throws MessagingException {
         Address[] to = new Address[content.getTo().size()];
         to = content.getTo().toArray(to);
+
+        message.setRecipients(Message.RecipientType.TO, to);
+    }
+
+    public void setTo(Message message, InternetAddress toIA) throws MessagingException {
+        Address[] to = {toIA};
 
         message.setRecipients(Message.RecipientType.TO, to);
     }
