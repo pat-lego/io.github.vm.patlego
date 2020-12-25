@@ -50,11 +50,20 @@ public class EmailServiceImpl implements EmailService {
 
 
     public String getUsername() {
-        return this.smtpAuthentication.getUsername();
+        try {
+            return this.smtpAuthentication.getUsername();
+        } catch (Exception e) {
+            return null;
+        }  
     }
 
     public String getPassword() {
-        return this.security.decrypt(this.smtpAuthentication.getPassword());
+        try {
+            return this.security.decrypt(this.smtpAuthentication.getPassword());
+        } catch (Exception e) {
+            return null;
+        }
+        
     }
 
     public Session setupSession(EmailRecipient recipient) {
@@ -64,7 +73,7 @@ public class EmailServiceImpl implements EmailService {
         properties.put("mail.smtp.auth", "true");
 
         if (recipient.getBounce() != null && !recipient.getBounce().toString().trim().equals(StringUtils.EMPTY)) {
-            properties.put("mail.smtp.from", recipient.getBounce());
+            properties.put("mail.smtp.from", recipient.getBounce().toString());
         }
 
         if (this.smtpServer.getSmtpProtocol().equalsIgnoreCase("TLS")) {
