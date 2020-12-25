@@ -1,5 +1,11 @@
 package io.github.vm.patlego.email.impl;
 
+import java.util.Properties;
+
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +37,7 @@ public class EmailServiceImpl implements EmailService {
         this.smtpAuthentication = smtpAuthentication;
     }
 
+
     public void init() {
         logger.info(String.format("Starting the %s bean", this.getClass().getName()));
     }
@@ -41,6 +48,7 @@ public class EmailServiceImpl implements EmailService {
         logger.info(String.format("destroyed the %s service", this.getClass().getName()));
     }
 
+
     public String getUsername() {
         return this.smtpAuthentication.getUsername();
     }
@@ -49,6 +57,34 @@ public class EmailServiceImpl implements EmailService {
         return this.security.decrypt(this.smtpAuthentication.getPassword());
     }
 
+    public Session setupSession(EmailRecipient recipient) {
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", this.smtpServer.getSmtpHost());
+        properties.put("mail.smtp.port", this.smtpServer.getSmtpPort().toString());
+        properties.put("mail.smtp.auth", "true");
+
+        if (recipient.getBounce() != null && !recipient.getBounce().toString().trim().equals(StringUtils.EMPTY)) {
+            properties.put("mail.smtp.from", recipient.getBounce());
+        }
+
+        if (this.smtpServer.getSmtpProtocol().equalsIgnoreCase("TLS")) {
+            properties.put("mail.smtp.starttls.enable", "true");
+        }
+
+        String username = this.getUsername();
+        String password = this.getPassword();
+        if (username == null || password == null || username.equals(StringUtils.EMPTY) || password.equals(StringUtils.EMPTY)) {
+            properties.put("mail.smtp.auth", "false");
+            return Session.getInstance(properties);
+        }
+
+        return Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+    }
+    
     @Override
     public void send(EmailRecipient recipients, Templater template, EmailContent content) {
         // TODO Auto-generated method stub
