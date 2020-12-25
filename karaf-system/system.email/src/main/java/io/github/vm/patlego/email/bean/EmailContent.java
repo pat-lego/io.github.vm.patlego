@@ -47,13 +47,13 @@ public final class EmailContent {
 
     public final static class Builder {
 
-        public Set<InternetAddress> to = new LinkedHashSet<InternetAddress>();
-        public Boolean isHTML = Boolean.TRUE;
-        public Set<InternetAddress> cc = new LinkedHashSet<InternetAddress>();
-        public Set<InternetAddress> bcc = new LinkedHashSet<InternetAddress>();
-        public Set<EmailAttachment> attachments = new LinkedHashSet<EmailAttachment>();
-        public Boolean sendIndependently = Boolean.FALSE;
-        public String content = StringUtils.EMPTY;
+        private Set<InternetAddress> to = new LinkedHashSet<InternetAddress>();
+        private Boolean isHTML = Boolean.TRUE;
+        private Set<InternetAddress> cc = new LinkedHashSet<InternetAddress>();
+        private Set<InternetAddress> bcc = new LinkedHashSet<InternetAddress>();
+        private Set<EmailAttachment> attachments = new LinkedHashSet<EmailAttachment>();
+        private Boolean sendIndependently = Boolean.FALSE;
+        private String content = StringUtils.EMPTY;
 
         public Builder addMessage(String content) {
             this.content = content;

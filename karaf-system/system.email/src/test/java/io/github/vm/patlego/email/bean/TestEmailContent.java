@@ -65,4 +65,11 @@ public class TestEmailContent {
         assertEquals(1, content.getAttachments().size());
     }
 
+    @Test
+    public void testGetMessage() {
+        EmailContent.Builder email = new EmailContent.Builder();
+        EmailContent content = email.addMessage("Hello World").build();
+        assertEquals("Hello World", content.getMessage());
+    }
+
 }
