@@ -53,7 +53,7 @@ public final class EmailContent {
         private Set<InternetAddress> bcc = new LinkedHashSet<InternetAddress>();
         private Set<EmailAttachment> attachments = new LinkedHashSet<EmailAttachment>();
         private Boolean sendIndependently = Boolean.FALSE;
-        private String content = StringUtils.EMPTY;
+        private String content = null;
 
         public Builder addMessage(String content) {
             this.content = content;

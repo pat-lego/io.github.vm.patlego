@@ -14,8 +14,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import io.github.vm.patlego.email.bean.EmailAttachment;
@@ -177,6 +177,19 @@ public class TestEmailService {
     }
 
     @Test
+    public void testSetFrom_Error() throws MessagingException {
+        EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
+        Message message = Mockito.mock(Message.class);
+        EmailRecipient recipient = Mockito.mock(EmailRecipient.class);
+        Mockito.when(recipient.getFrom()).thenReturn(null);
+
+        Assertions.assertThrows(MessagingException.class, () -> {
+            emailServiceImpl.setFrom(message, recipient);
+        });
+        
+    }
+
+    @Test
     public void testSetAttachment() throws MessagingException, IOException {
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
 
@@ -211,6 +224,22 @@ public class TestEmailService {
     }
 
     @Test
+    public void testSetContent_Plain() throws MessagingException {
+        EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
+
+        EmailContent.Builder builder = new EmailContent.Builder();
+        EmailContent content = builder.addMessage("This is my content").setHTML(Boolean.FALSE).build();
+
+        Templater templater = Mockito.mock(Templater.class);
+        Multipart multipart = Mockito.mock(Multipart.class);
+
+        Mockito.when(templater.templateString()).thenReturn("This is my templated content");
+
+        emailServiceImpl.setContent(multipart, content, templater);
+    }
+
+
+    @Test
     public void testSetContentNull() throws MessagingException {
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
 
@@ -220,5 +249,20 @@ public class TestEmailService {
         Multipart multipart = Mockito.mock(Multipart.class);
 
         emailServiceImpl.setContent(multipart, content, null);
+    }
+
+    @Test
+    public void testSetContentNull_Error() throws MessagingException {
+        EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
+
+        EmailContent.Builder builder = new EmailContent.Builder();
+        EmailContent content = builder.build();
+
+        Multipart multipart = Mockito.mock(Multipart.class);
+
+        Assertions.assertThrows(MessagingException.class, () -> {
+            emailServiceImpl.setContent(multipart, content, null);
+        });
+        
     }
 }
