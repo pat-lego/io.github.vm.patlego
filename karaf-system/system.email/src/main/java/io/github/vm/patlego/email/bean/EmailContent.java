@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
 
+import org.apache.commons.lang3.StringUtils;
+
 public final class EmailContent {
 
     private Set<InternetAddress> to;
@@ -12,6 +14,12 @@ public final class EmailContent {
     private Set<InternetAddress> cc;
     private Set<InternetAddress> bcc;
     private Set<EmailAttachment> attachments;
+    private String message;
+    private Boolean sendIndependently;
+
+    public final String getMessage() {
+        return this.message;
+    }
 
     public final Set<InternetAddress> getTo() {
         return this.to;
@@ -33,6 +41,10 @@ public final class EmailContent {
         return this.isHTML;
     }
 
+    public final Boolean isUniqueTo() {
+        return this.sendIndependently;
+    }
+
     public final static class Builder {
 
         public Set<InternetAddress> to = new LinkedHashSet<InternetAddress>();
@@ -40,6 +52,13 @@ public final class EmailContent {
         public Set<InternetAddress> cc = new LinkedHashSet<InternetAddress>();
         public Set<InternetAddress> bcc = new LinkedHashSet<InternetAddress>();
         public Set<EmailAttachment> attachments = new LinkedHashSet<EmailAttachment>();
+        public Boolean sendIndependently = Boolean.FALSE;
+        public String content = StringUtils.EMPTY;
+
+        public Builder addMessage(String content) {
+            this.content = content;
+            return this;
+        }
 
         public Builder addTo(InternetAddress to) {
             this.to.add(to);
@@ -66,6 +85,11 @@ public final class EmailContent {
             return this;
         }
 
+        public Builder setSendIndependently() {
+            this.sendIndependently = Boolean.TRUE;
+            return this;
+        }
+
         public final EmailContent build() {
             EmailContent emailContent = new EmailContent();
 
@@ -74,6 +98,8 @@ public final class EmailContent {
             emailContent.isHTML = this.isHTML;
             emailContent.attachments = this.attachments;
             emailContent.to = this.to;
+            emailContent.sendIndependently = this.sendIndependently;
+            emailContent
 
             return emailContent;
         }
