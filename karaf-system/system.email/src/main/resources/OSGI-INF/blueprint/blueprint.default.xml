@@ -36,7 +36,7 @@
 
   <service ref="emailservice" interface="io.github.vm.patlego.email.EmailService">
     <service-properties>
-      <entry key="INSTANCE" value="DEFAULT" />
+      <entry key="patlego.email" value="default" />
     </service-properties>
   </service>
 
