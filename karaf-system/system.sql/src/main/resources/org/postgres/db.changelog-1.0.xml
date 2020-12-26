@@ -71,4 +71,18 @@
             <column name='blog_author' value='Patrique' />
         </insert>
     </changeSet>
+
+    <changeSet author="pat-lego" id="1.3">
+        <createTable tableName="subscribe" schemaName="patlegovm">
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="firstName" type="VARCHAR">
+                <constraints nullable="true"/>
+            </column>
+            <column name="lastName" type="VARCHAR">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

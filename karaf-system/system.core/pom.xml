@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.github.vm.patlego</groupId>
@@ -82,13 +80,9 @@
             <feature dependency="true">aries-blueprint</feature>
             <feature version="[2,3)">jpa</feature>
             <feature version="[5,6)">hibernate</feature>
-            <feature>pax-jdbc-postgresql</feature>
-            <feature>patlego-vm-jdbc-datasource</feature>
-            <feature>patlego-vm-jdbc</feature>
-            <feature>patlego-vm-workflow</feature>
-            <feature>patlego-vm-graphql</feature>
-            <feature>patlego-vm-client</feature>
-            <feature>patlego-vm-ocr</feature>
+            
+            <feature>patlego-vm</feature>
+
           </bootFeatures>
           <workDirectory>${project.build.directory}/assembly/patlego.vm</workDirectory>
           <pathPrefix>patlego.vm</pathPrefix>
@@ -161,7 +155,24 @@
                   <outputDirectory>${basedir}/target/assembly</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>src/main/environments/ecs</directory>
+                      <directory>src/main/environments/ecs/docker</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-features</id>
+                <!-- here the phase you need -->
+                <phase>verify</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${basedir}/target/assembly/patlego.vm/etc</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>src/main/environments/ecs/features</directory>
                       <filtering>true</filtering>
                     </resource>
                   </resources>
