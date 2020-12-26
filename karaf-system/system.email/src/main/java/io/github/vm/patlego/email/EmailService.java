@@ -1,5 +1,7 @@
 package io.github.vm.patlego.email;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.mail.MessagingException;
 
 import io.github.vm.patlego.email.bean.EmailContent;
@@ -8,6 +10,6 @@ import io.github.vm.patlego.email.template.Templater;
 
 public interface EmailService {
 
-    public void send(EmailRecipient recipients, Templater template, EmailContent content) throws MessagingException;
+    public void send(EmailRecipient recipients, Templater template, EmailContent content) throws MessagingException, UnsupportedEncodingException;
     
 }

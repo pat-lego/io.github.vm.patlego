@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 
 import javax.mail.Message;
@@ -207,7 +208,7 @@ public class TestEmailService {
         Assertions.assertThrows(MessagingException.class, () -> {
             emailServiceImpl.setFrom(message, recipient);
         });
-        
+
     }
 
     @Test
@@ -217,8 +218,7 @@ public class TestEmailService {
         EmailContent.Builder builder = new EmailContent.Builder();
         EmailContent content = builder
                 .addAttachment(new EmailAttachment(IOUtils.toInputStream("Test 1", "UTF-8"), "text/plain"))
-                .addAttachment(new EmailAttachment(IOUtils.toInputStream("Test 2", "UTF-8"), "text/plain"))
-                .build();
+                .addAttachment(new EmailAttachment(IOUtils.toInputStream("Test 2", "UTF-8"), "text/plain")).build();
 
         Multipart multipart = Mockito.mock(Multipart.class);
 
@@ -259,7 +259,6 @@ public class TestEmailService {
         emailServiceImpl.setContent(multipart, content, templater);
     }
 
-
     @Test
     public void testSetContentNull() throws MessagingException {
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
@@ -274,51 +273,50 @@ public class TestEmailService {
 
     @Test
     public void testSend() throws MessagingException, IOException {
+        Multipart multipart = Mockito.mock(Multipart.class);
         EmailServiceImpl emailServiceImpl = Mockito.mock(EmailServiceImpl.class);
         Mockito.doCallRealMethod().when(emailServiceImpl).send(Mockito.any(), Mockito.any(), Mockito.any());
+        
+        EmailRecipient recipients = Mockito.mock(EmailRecipient.class);
+        Mockito.when(recipients.getFrom()).thenReturn(new InternetAddress("patrique.pat@pat.com"));
+        Mockito.when(emailServiceImpl.setContent(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(multipart);
 
+        EmailContent.Builder builder = new EmailContent.Builder();
+        EmailContent content = builder.addTo(new InternetAddress("ma@ma.com")).addMessage("This is my message")
+                .addAttachment(new EmailAttachment(IOUtils.toInputStream("Hello World", "UTF-8"), "text/plain"))
+                .build();
+
+        emailServiceImpl.send(recipients, null, content);
+
+    }
+
+    @Test
+    public void testSend_Unique() throws MessagingException, UnsupportedEncodingException {
+        Multipart multipart = Mockito.mock(Multipart.class);
+
+        EmailServiceImpl emailServiceImpl = Mockito.mock(EmailServiceImpl.class);
+        Mockito.doCallRealMethod().when(emailServiceImpl).send(Mockito.any(), Mockito.any(), Mockito.any());
+        Mockito.when(emailServiceImpl.setContent(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(multipart);
         EmailRecipient recipients = Mockito.mock(EmailRecipient.class);
         Mockito.when(recipients.getFrom()).thenReturn(new InternetAddress("patrique.pat@pat.com"));
 
         EmailContent.Builder builder = new EmailContent.Builder();
-        EmailContent content = builder
-            .addTo(new InternetAddress("ma@ma.com"))
-            .addMessage("This is my message")
-            .addAttachment(new EmailAttachment(IOUtils.toInputStream("Hello World", "UTF-8"), "text/plain"))
-            .build();
+        EmailContent content = builder.addTo(new InternetAddress("ma@ma.com")).addTo(new InternetAddress("ma2@ma.com"))
+                .addMessage("This is my message").setSendIndependently().build();
 
         emailServiceImpl.send(recipients, null, content);
-        
+
     }
 
     @Test
-    public void testSend_Unique() throws MessagingException {
-        EmailServiceImpl emailServiceImpl = Mockito.mock(EmailServiceImpl.class);
-        Mockito.doCallRealMethod().when(emailServiceImpl).send(Mockito.any(), Mockito.any(), Mockito.any());
-
-        EmailRecipient recipients = Mockito.mock(EmailRecipient.class);
-        Mockito.when(recipients.getFrom()).thenReturn(new InternetAddress("patrique.pat@pat.com"));
-
+    public void testSend_Fail_No_To() throws MessagingException, UnsupportedEncodingException {
+        Multipart multipart = Mockito.mock(Multipart.class);
         EmailContent.Builder builder = new EmailContent.Builder();
-        EmailContent content = builder
-            .addTo(new InternetAddress("ma@ma.com"))
-            .addTo(new InternetAddress("ma2@ma.com"))
-            .addMessage("This is my message")
-            .setSendIndependently()
-            .build();
+        EmailContent content = builder.addMessage("This is my message").build();
 
-        emailServiceImpl.send(recipients, null, content);
-        
-    }
-
-    @Test
-    public void testSend_Fail_No_To() throws MessagingException {
-        EmailContent.Builder builder = new EmailContent.Builder();
-        EmailContent content = builder
-            .addMessage("This is my message")
-            .build();
-        
         EmailServiceImpl emailServiceImpl = Mockito.mock(EmailServiceImpl.class);
+
+        Mockito.when(emailServiceImpl.setContent(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(multipart);
         Mockito.doCallRealMethod().when(emailServiceImpl).send(Mockito.any(), Mockito.any(), Mockito.any());
         Mockito.doCallRealMethod().when(emailServiceImpl).setTo(Mockito.any(), Mockito.any(EmailContent.class));
 
@@ -328,7 +326,7 @@ public class TestEmailService {
         Assertions.assertThrows(MessagingException.class, () -> {
             emailServiceImpl.send(recipients, null, content);
         });
-        
+
     }
 
     @Test
@@ -343,6 +341,6 @@ public class TestEmailService {
         Assertions.assertThrows(MessagingException.class, () -> {
             emailServiceImpl.setContent(multipart, content, null);
         });
-        
+
     }
 }

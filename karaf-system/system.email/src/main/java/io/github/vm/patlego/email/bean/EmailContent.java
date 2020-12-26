@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.lang3.StringUtils;
-
 public final class EmailContent {
 
     private Set<InternetAddress> to;
@@ -16,6 +15,7 @@ public final class EmailContent {
     private Set<EmailAttachment> attachments;
     private String message;
     private Boolean sendIndependently;
+    private String subject;
 
     public final String getMessage() {
         return this.message;
@@ -45,6 +45,10 @@ public final class EmailContent {
         return this.sendIndependently;
     }
 
+    public final String getSubject() {
+        return this.subject;
+    }
+
     public final static class Builder {
 
         private Set<InternetAddress> to = new LinkedHashSet<InternetAddress>();
@@ -54,6 +58,7 @@ public final class EmailContent {
         private Set<EmailAttachment> attachments = new LinkedHashSet<EmailAttachment>();
         private Boolean sendIndependently = Boolean.FALSE;
         private String content = null;
+        private String subject = StringUtils.EMPTY;
 
         public Builder addMessage(String content) {
             this.content = content;
@@ -62,6 +67,13 @@ public final class EmailContent {
 
         public Builder addTo(InternetAddress to) {
             this.to.add(to);
+            return this;
+        }
+
+        public Builder addSubject(String subject) {
+            if (subject != null) {
+                this.subject = subject;
+            }
             return this;
         }
 
@@ -100,7 +112,8 @@ public final class EmailContent {
             emailContent.to = this.to;
             emailContent.sendIndependently = this.sendIndependently;
             emailContent.message = this.content;
-
+            emailContent.subject = this.subject;
+            
             return emailContent;
         }
 

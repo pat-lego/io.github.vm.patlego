@@ -1,5 +1,6 @@
 package io.github.vm.patlego.email.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
@@ -13,6 +14,7 @@ import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -78,8 +80,9 @@ public class EmailServiceImpl implements EmailService {
 
     }
 
-    public Session setupSession(EmailRecipient recipient) {
+    public Session setupSession(EmailRecipient recipient) throws AddressException {
         Properties properties = new Properties();
+        properties.put("mail.transport.protocol", "smtp");
         properties.put("mail.smtp.host", this.smtpServer.getSmtpHost());
         properties.put("mail.smtp.port", this.smtpServer.getSmtpPort().toString());
         properties.put("mail.smtp.auth", "true");
@@ -108,7 +111,8 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void send(EmailRecipient recipients, Templater templater, EmailContent content) throws MessagingException {
+    public void send(EmailRecipient recipients, Templater templater, EmailContent content)
+            throws MessagingException, UnsupportedEncodingException {
         Session session = this.setupSession(recipients);
 
         Message message = new MimeMessage(session);
@@ -123,8 +127,9 @@ public class EmailServiceImpl implements EmailService {
 
         this.setBCC(message, content);
         this.setCC(message, content);
-        this.setContent(part, content, templater);
+        message.setContent(this.setContent(part, content, templater));
         this.setFrom(message, recipients);
+        this.setSubject(message, content);
 
         if (content.isUniqueTo()) {
             Iterator<InternetAddress> to = content.getTo().iterator();
@@ -142,11 +147,15 @@ public class EmailServiceImpl implements EmailService {
         Transport.send(msg);
     }
 
+    public void setSubject(Message message, EmailContent content) throws MessagingException {
+        message.setSubject(content.getSubject());
+    }
+
     public void setTo(Message message, EmailContent content) throws MessagingException {
         if (content.getTo().isEmpty()) {
             throw new MessagingException("No recipients defined in th email");
         }
-        
+
         Address[] to = new Address[content.getTo().size()];
         to = content.getTo().toArray(to);
 
