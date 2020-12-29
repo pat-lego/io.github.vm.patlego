@@ -239,7 +239,7 @@ public class TestEmailService {
         Templater templater = Mockito.mock(Templater.class);
         Multipart multipart = Mockito.mock(Multipart.class);
 
-        Mockito.when(templater.templateString()).thenReturn("This is my templated content");
+        Mockito.when(templater.templateString(Mockito.anyString())).thenReturn("This is my templated content");
 
         emailServiceImpl.setContent(multipart, content, templater);
     }
@@ -254,7 +254,7 @@ public class TestEmailService {
         Templater templater = Mockito.mock(Templater.class);
         Multipart multipart = Mockito.mock(Multipart.class);
 
-        Mockito.when(templater.templateString()).thenReturn("This is my templated content");
+        Mockito.when(templater.templateString(Mockito.anyString())).thenReturn("This is my templated content");
 
         emailServiceImpl.setContent(multipart, content, templater);
     }

@@ -6,6 +6,6 @@ public interface Templater {
      * Returns a templated string
      * @return String
      */
-    public String templateString();
+    public String templateString(String content);
     
 }

@@ -200,7 +200,7 @@ public class EmailServiceImpl implements EmailService {
         }
 
         if (templater != null) {
-            message = templater.templateString();
+            message = templater.templateString(content.getMessage());
         }
 
         BodyPart bodyPart = new MimeBodyPart();

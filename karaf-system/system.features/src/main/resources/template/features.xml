@@ -20,6 +20,7 @@
 
     <feature name="patlego-vm" version="${project.version}">
         <feature>patlego-vm-encryption</feature>
+        <feature>patlego-vm-settings</feature>
         <feature>pax-jdbc-postgresql</feature>
         <feature>patlego-vm-jdbc-datasource</feature>
         <feature>patlego-vm-jdbc</feature>
@@ -87,6 +88,7 @@
     </feature>
 
     <feature name="patlego-vm-email" version="${project.version}">
+        <bundle>mvn:org.apache.commons/commons-text/1.9</bundle>
         <bundle>mvn:io.github.vm.patlego/system.email/${project.version}</bundle>
     </feature>
 
@@ -104,6 +106,10 @@
         <bundle>wrap:mvn:com.graphql-java/graphql-java-extended-scalars/1.0</bundle>
         <bundle>mvn:io.github.vm.patlego/system.graphql/${project.version}</bundle>
         <bundle>mvn:com.google.code.gson/gson/2.8.6</bundle>
+    </feature>
+
+    <feature name="patlego-vm-settings" version="${project.version}">
+        <bundle>mvn:io.github.vm.patlego/system.settings/${project.version}</bundle>
     </feature>
 
 </features>
