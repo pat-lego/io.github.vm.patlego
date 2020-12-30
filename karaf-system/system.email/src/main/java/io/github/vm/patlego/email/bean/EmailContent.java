@@ -1,5 +1,6 @@
 package io.github.vm.patlego.email.bean;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -67,6 +68,11 @@ public final class EmailContent {
 
         public Builder addTo(InternetAddress to) {
             this.to.add(to);
+            return this;
+        }
+
+        public Builder resetTo() {
+            this.to = new LinkedHashSet<InternetAddress>();
             return this;
         }
 
