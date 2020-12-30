@@ -6,6 +6,10 @@ public class SmtpServer {
     private Integer smtpPort;
     private String smtpProtocol;
 
+    /**
+     * This class will be populated using Apache Blueprint. Properties will be
+     * placed within /etc in order to provide the requested properties into the bean
+     */
     public String getSmtpHost() {
         return smtpHost;
     }
@@ -30,6 +34,4 @@ public class SmtpServer {
         this.smtpProtocol = smtpProtocol;
     }
 
-    
-    
 }

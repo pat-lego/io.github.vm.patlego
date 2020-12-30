@@ -1,7 +1,9 @@
 package io.github.vm.patlego.runmodes;
 
+import javax.annotation.Nonnull;
+
 public interface RunMode {
 
-    public RunModes getRunMode();
+    public @Nonnull RunModes getRunMode();
     
 }

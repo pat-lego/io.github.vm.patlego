@@ -1,4 +1,9 @@
 package io.github.vm.patlego.email.bean;
+
+/**
+ * This class will be populated using Apache Blueprint. Properties will be
+ * placed within /etc in order to provide the requested properties into the bean
+ */
 public class SmtpAuthentication {
 
     private String username;
