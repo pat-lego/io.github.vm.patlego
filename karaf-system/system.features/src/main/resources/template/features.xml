@@ -31,6 +31,11 @@
         <feature>patlego-vm-email</feature>
     </feature>
 
+    <!-- This is to be deleted when we migrate to 4.3.1 -->
+    <feature name="jetty" description="Transition feature for backward compatibility" version="9.4.35.v20201120">
+        <feature>pax-jetty</feature>
+    </feature>
+
     <feature name="patlego-vm-jdbc-datasource" version="${project.version}">
         <config name="org.ops4j.datasource-karafdb">
             osgi.jdbc.driver.class=org.postgresql.Driver
