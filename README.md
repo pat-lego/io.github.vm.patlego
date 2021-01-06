@@ -51,7 +51,7 @@ Start the docker server and open a command prompt, once open execute the followi
 ssh -p 8101 karaf@localhost
 ```
 
-**Note:** The SSH key will continuously change everytime you destroy/create the server, I strongly recommend to set the following settings in the SSH client config.
+**Note:** The SSH key will continuously change everytime you destroy/create the server, I strongly recommend to set the following settings in the SSH client config (~/.ssh/config).
 
 ```
 Host localhost

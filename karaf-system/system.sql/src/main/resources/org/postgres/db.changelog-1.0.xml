@@ -85,4 +85,112 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet author="pat-lego" id="1.4">
+        <insert
+            catalogName='karaf_db'
+            dbms='postgresql'
+            schemaName='patlegovm'
+            tableName='blogs'>
+            <column name='blog_title' value='Why Karaf?' />
+            <column name='blog'><![CDATA[<!-- <html>
+                <head>
+                    <style>
+                        .prgrph {
+                            padding: 0.4rem;
+                        }
+                    </style>
+                </head>
+                <body> -->
+                    <div>
+                        <h2>Introduction</h2>
+                        <div class="prgrph">
+                            I have been working on my software during the holiday break, experimenting with various technologies and developing new pieces of functionality. While I was doing that I was continuously thinking about what my next blog needs to be. Then I realized I should do a blog that gives credit to the team of engineers who designed the software that I work with, <i>Apacke Karaf</i>. This blog is going to be the top reasons why I love working with Karaf. 
+                        </div>
+                        <h2>Reason #5 - Easy to Debug</h2>
+                        <div class="prgrph">
+                            When developers have to fight to debug/step through their own code you know that this not going to be a fun work environment. Let's be honest developers are both the crime scene investigators and the murderers. So when a blood bath appears you need to be able to quickly dig into the <b>Why?</b>. In Karaf one environment variable in the work environment and you can now connect your debugger to the system.
+            
+                            <div style="display: flex; justify-content: center"><pre><code>ENV EXTRA_JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</code></pre></div>
+            
+                            All I did was place the above environment variable in my Dockerfile and the system was debuggable on port 5005. Of course you need to create a local debug configuration in your IDE, for me that would be <code>VS Code</code>. A sample configuration file would like the following.
+                            
+                            <pre><code>
+                                {
+                                    // Use IntelliSense to learn about possible attributes.
+                                    // Hover to view descriptions of existing attributes.
+                                    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+                                    "version": "0.2.0",
+                                    "configurations": [
+                                        {
+                                            "type": "java",
+                                            "name": "Debug (Attach) - Karaf",
+                                            "request": "attach",
+                                            "port": 5005,
+                                             "hostName": "localhost"
+                                        }
+                                    ]
+                                }
+                            </code></pre>
+                        </div>
+                        <h2>Reason #4 - Wrap</h2>
+                        <div class="prgrph">
+                            Okay so this one is for the developers who have worked with OSGi, if you have not feel free to skip. The wrap command solves the problem I like to call <b>OSGi Hell</b>, essentially the problem is this. You need to develop a certain microservice so you start building your bundle and then you notice that there is a nice open source library that you can use in your project. So you do what any developer would do (well in my mind anyway) you simply try to deploy it in the /system/console window so that other projects can refer to it. You click the nice big button that says <b>Install</b> and what do you get.... a <b>500</b> error saying your library is not a true bundle. Now you have to pretty much have to embed the dependency into your own project or deploy individual bundles that expose classes that allow developers to interact with the bundle. 
+                        </div>
+                        <div class="prgrph">
+                            In Karaf that does not happen, because when you build your bundles they get installed through a <i>feature</i>, essentially a fancy XML file that knows how to read a maven repo. Let's say you wanted to install your library with a feature you would simply place <code>&lt;bundle&gt;mvn:groupId/artifactId/version&lt;/bundle&gt;</code> and when the feature is read then this artifact would be queried locally and remotely. Well if we are referring to our previous library then this would fail to install since it is a not a true bundle. No problem one slight alteration to the bundle tag <code>&lt;bundle&gt;wrap:mvn:groupId/artifactId/version&lt;/bundle&gt;</code>. Now the library is dynamically converted to an OSGi bundle prior to being installed into the repository allowing other bundles to reference the library at runtime.
+                        </div>
+                        <h2>Reason #3 - Features</h2>
+                        <div class="prgrph">
+                            Features are how you deploy bundles to the Karaf container. Developers can create features by creating an XML file that follows the Apache Karaf feature <u><a href="http://karaf.apache.org/xmlns/features/v1.3.0" target="_blank">schema</a></u>. The features XML file can define multiple features within it. Each feature represents a collection of JAR files. Not all of the JAR files need to be OSGi bundles since the <i>wrap</i> command can dynamically convert it to a OSGi bundle. 
+                        </div>
+                        <div class="prgrph">
+                            Now this concept might not sound super impressive since developers still need to define all of the features in order to leverage various services. This would be true, if there was not already a list of prebuilt features to streamline development. 
+                            Some of the prebuilt features for developers include:
+                            <ul>
+                                <li>JDBC Drivers for various databases</li>
+                                <li>Hibernate and OpenJPA</li>
+                                <li>Spring Framework</li>
+                                <li>Apache CXF</li>
+                                <li>WebContainer - Static HTML or SPA</li>
+                                <li>war - Deploy WAR based projects</li>
+                            </ul>
+                            These prebuilt projects streamline development and allow developers to simply include the necessary dependencies within the project and start leveraging the frameworks.
+                        </div>
+                        <div class="prgrph">
+                            If ever there is a feature that you need but does not exist, feel free to develop it and contribute it to the community. This is how the community will get more prebuilt services helping developers quickly develop new core functionality without spending as much time setting up systems.
+                        </div>
+                        <h2>Reason #2 - bundle:watch</h2>
+                        <div class="prgrph">
+                            Karaf exposes an SSH server, any developer can connect to the server by using any SSH client and connecting to the server with the correct credentials. Once connected to the server developers can type this one command that will change everything <code>bundle:watch *</code>. This command puts the server in a <i>watch</i> mode, if any of the bundles that were deployed from a feature get rebuilt <b>and</b> are a <i>-SNAPSHOT</i> version then Karaf will automatically redeploy this bundle into the container. For instance let's say one of your local projects is part of a feature, specifically <i>mvn:io.github.vm.patlego/patlego-api/1.0.0-SNAPSHOT</i>. Now when the <code>bundle:watch *</code> command is executed on the server, then the next time the <i>patlego-api</i> project is rebuilt the Karaf container will automatically pull in the artifact from the maven repository and redeploy it into the container. This means that developers can develop new features and services and only have to run a build in order to deploy new functionality into the container. This functionality helps developers build and quickly validate functionality of services without having to manually perform deployments.
+                        </div>
+                        <h2>Reason #1 - Karaf Shell</h2>
+                        <div class="prgrph">
+                            The Karaf shell is a very powerful feature of the Karaf system, it is an extensible shell that also contains many prebuilt commands to help developers troubleshoot services as well as perform DevOps operations and tasks.
+                        </div>
+                        <div class="prgrph">
+                            Some of the out of the box capabilities that Karaf possesses are as follow
+                            <ul>
+                                <li>stop, start bundles</li>
+                                <li>deploy and undeploy entire features</li>
+                                <li>list OSGi services</li>
+                                <li>list servlet paths</li>
+                                <li>view JDBC connections</li>
+                                <li>tail logs</li>
+                            </ul>
+                            This is a small subset of all prebuilt commands, many more can be seen on the Apache Karaf <u><a href="https://karaf.apache.org/manual/latest/#_overview" target="_blank">documentation</a></u>.
+                        </div>
+                        <div class="prgrph">
+                            Now not only is the Shell packed with feature rich commands, it also extensible. With one maven plugin and a few annotations developers can inject there own commands into the Karaf container. This allows developers to create commands that can be used in various phases of the project lifecycle, from DevOps to exposing new functionality.
+                        </div>
+                        <h2>Conclusion</h2>
+                        <div class="prgrph">
+                            I hope that after reading this you are interested in trying to built something with Apache Karaf. If you do please feel free to join the <u><a href="https://karaf.apache.org/community" target="_blank">community</a></u> and ask questions. The community is extremely friendly and quick to respond to any of your Karaf questions
+                        </div>
+                    </div>
+                <!-- </body>
+            </html> -->]]></column>
+            <column name='blog_author' value='Patrique' />
+        </insert>
+    </changeSet>
 </databaseChangeLog>
