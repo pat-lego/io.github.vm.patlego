@@ -38,6 +38,7 @@
     <website.version>1.0-SNAPSHOT</website.version>
     <jasypt.version>1.9.3</jasypt.version>
     <javax.mail.version>1.4.7</javax.mail.version>
+    <aws.sdk.version>2.15.69</aws.sdk.version>
   </properties>
 
   <repositories>
