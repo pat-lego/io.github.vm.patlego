@@ -119,13 +119,21 @@
     </feature>
 
     <feature name="patlego-vm-s3" version="${project.version}">
-        <bundle>wrap:mvn:software.amazon.awssdk/s3/${aws.sdk.version}</bundle>
-        <bundle>wrap:mvn:software.amazon.awssdk/protocol-core/${aws.sdk.version}</bundle>
-        <bundle>wrap:mvn:software.amazon.awssdk/sdk-core/${aws.sdk.version}</bundle>
-        <bundle>wrap:mvn:software.amazon.awssdk/utils/${aws.sdk.version}</bundle>
-        <bundle>wrap:mvn:software.amazon.awssdk/http-client-spi/${aws.sdk.version}</bundle>
-        <bundle>wrap:mvn:software.amazon.awssdk/annotations/${aws.sdk.version}</bundle>
-        <bundle>wrap:mvn:org.reactivestreams/reactive-streams/1.0.3</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/s3/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-s3&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.services.s3.*;version=&quot;${aws.sdk.version}&quot;</bundle>   
+        <bundle>wrap:mvn:software.amazon.awssdk/protocol-core/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-protocol-core&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.protocols.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/sdk-core/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-core&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.core.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/utils/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-utils&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.utils.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/http-client-spi/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-http-client-spi&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.http.*;version=&quot;${aws.sdk.version}&quot;,software.amazon.awssdk.internal.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/annotations/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-annotations&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.annotations.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/aws-core/${aws.sdk.version}/$Bundle-SymbolicName=aws-core&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.awscore.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/regions/${aws.sdk.version}/$Bundle-SymbolicName=aws-regions&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.regions.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/auth/${aws.sdk.version}/$Bundle-SymbolicName=aws-auth&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.auth.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/apache-client/${aws.sdk.version}/$Bundle-SymbolicName=aws-apache-client&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.http.apache.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/metrics-spi/${aws.sdk.version}/$Bundle-SymbolicName=aws-metrics-spi&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.metrics.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/aws-xml-protocol/${aws.sdk.version}/$Bundle-SymbolicName=aws-xml-protocol&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.protocols.xml.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/aws-query-protocol/${aws.sdk.version}/$Bundle-SymbolicName=aws-query-protocol&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.protocols.query.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>wrap:mvn:software.amazon.awssdk/profiles/${aws.sdk.version}/$Bundle-SymbolicName=aws-profiles&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.profiles.*;version=&quot;${aws.sdk.version}&quot;</bundle>
+        <bundle>mvn:io.github.vm.patlego/system.aws/${project.version}</bundle>
     </feature>
 
 </features>
