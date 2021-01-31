@@ -264,12 +264,5 @@
       <scope>runtime</scope>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>io.github.vm.patlego.html</groupId>
-      <artifactId>html.features</artifactId>
-      <type>xml</type>
-      <scope>runtime</scope>
-      <version>${project.version}</version>
-    </dependency>
   </dependencies>
 </project>

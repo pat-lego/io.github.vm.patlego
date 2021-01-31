@@ -110,4 +110,8 @@
         <bundle>mvn:org.apache.httpcomponents/httpclient-osgi/4.5.13</bundle>
     </feature>
 
+    <feature name="patlego-vm-html" version="${project.version}">
+        <bundle>mvn:io.github.vm.patlego.html/html.core/${html.version}</bundle>
+    </feature>
+
 </features>
