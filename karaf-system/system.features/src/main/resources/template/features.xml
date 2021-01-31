@@ -28,6 +28,7 @@
         <feature>patlego-vm-client</feature>
         <feature>patlego-vm-email</feature>
         <feature>patlego-vm-aws</feature>
+        <feature>patlego-vm-html</feature>
     </feature>
 
     <!-- This is to be deleted when we migrate to 4.3.1 -->

@@ -60,6 +60,8 @@ jobs:
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           PACKAGES_WEBSITE_TOKEN: ${{secrets.PACKAGES_WEBSITE_TOKEN}}
+          PACKAGES_HTML_TOKEN: ${{secrets.PACKAGES_HTML_TOKEN}}
+          PACKAGES_CORE_TOKEN: ${{secrets.PACKAGES_CORE_TOKEN}}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:

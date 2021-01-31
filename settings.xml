@@ -2,7 +2,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
     <profiles>
         <profile>
-            <id>patlego-website</id>
+            <id>patlego-core</id>
             <repositories>
                 <repository>
                     <id>central</id>
@@ -20,6 +20,11 @@
                     <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego.website</url>
                 </repository>
                 <repository>
+                    <id>patlego-html</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego.html</url>
+                </repository>
+                <repository>
                     <id>patlego-core</id>
                     <name>GitHub OWNER Apache Maven Packages</name>
                     <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego</url>
@@ -34,9 +39,14 @@
             <password>${env.PACKAGES_WEBSITE_TOKEN}</password>
         </server>
         <server>
+            <id>patlego-html</id>
+            <username>pat-lego</username>
+            <password>${env.PACKAGES_HTML_TOKEN}</password>
+        </server>
+        <server>
             <id>patlego-core</id>
             <username>pat-lego</username>
-            <password>${env.PACKAGES_WEBSITE_TOKEN}</password>
+            <password>${env.PACKAGES_CORE_TOKEN}</password>
         </server>
     </servers>
 </settings>

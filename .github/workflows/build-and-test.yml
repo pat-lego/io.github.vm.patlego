@@ -28,3 +28,5 @@ jobs:
         run: mvn --settings settings.xml clean install --file karaf-system/pom.xml -Pdev-build
         env:
           PACKAGES_WEBSITE_TOKEN: ${{secrets.PACKAGES_WEBSITE_TOKEN}}
+          PACKAGES_HTML_TOKEN: ${{secrets.PACKAGES_HTML_TOKEN}}
+          PACKAGES_CORE_TOKEN: ${{secrets.PACKAGES_CORE_TOKEN}}
