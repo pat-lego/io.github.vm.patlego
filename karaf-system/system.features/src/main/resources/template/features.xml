@@ -111,6 +111,7 @@
     </feature>
 
     <feature name="patlego-vm-html" version="${project.version}">
+        <bundle>wrap:mvn:com.github.spullara.mustache.java/compiler/0.9.7/$Bundle-SymbolicName=mustachejava-compiler&amp;Bundle-Version=${mustache.compiler.version}&amp;Export-Package=com.github.mustachejava.*;version=&quot;${mustache.compiler.version}&quot;</bundle>
         <bundle>mvn:io.github.vm.patlego.html/html.core/${html.version}</bundle>
     </feature>
 

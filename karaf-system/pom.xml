@@ -39,6 +39,7 @@
     <jasypt.version>1.9.3</jasypt.version>
     <javax.mail.version>1.4.7</javax.mail.version>
     <aws.sdk.version>2.15.69</aws.sdk.version>
+    <mustache.compiler.version>0.9.7</mustache.compiler.version>
   </properties>
 
   <repositories>
