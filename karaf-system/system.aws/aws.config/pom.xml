@@ -51,7 +51,7 @@
             <configuration>
               <artifacts>
                 <artifact>
-                  <file>${project.build.directory}/io.github.vm.patlego.aws.s3.bucket.cfg</file>
+                  <file>${project.build.directory}/io.github.vm.patlego.aws.s3.bucket-patlegovm.cfg</file>
                   <type>cfg</type>
                   <classifier>default</classifier>
                 </artifact>

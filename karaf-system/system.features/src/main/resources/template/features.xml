@@ -102,7 +102,7 @@
         <bundle>wrap:mvn:software.amazon.awssdk/aws-xml-protocol/${aws.sdk.version}/$Bundle-SymbolicName=aws-xml-protocol&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.protocols.xml.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/aws-query-protocol/${aws.sdk.version}/$Bundle-SymbolicName=aws-query-protocol&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.protocols.query.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/profiles/${aws.sdk.version}/$Bundle-SymbolicName=aws-profiles&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.profiles.*;version=&quot;${aws.sdk.version}&quot;</bundle>
-        <configfile finalname="${karaf.etc}/io.github.vm.patlego.aws.s3.bucket.cfg">mvn:io.github.vm.patlego/aws.config/${project.version}/cfg/default</configfile>
+        <configfile finalname="${karaf.etc}/io.github.vm.patlego.aws.s3.bucket-patlegovm.cfg">mvn:io.github.vm.patlego/aws.config/${project.version}/cfg/default</configfile>
         <bundle>mvn:io.github.vm.patlego/aws.core/${project.version}</bundle>
     </feature>
 
