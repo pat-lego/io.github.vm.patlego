@@ -1,108 +1,17 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>io.github.vm.patlego</groupId>
     <artifactId>karaf-system</artifactId>
+    <groupId>io.github.vm.patlego</groupId>
     <version>1.0-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>io.github.vm.patlego</groupId>
   <artifactId>system.workflow</artifactId>
-  <packaging>bundle</packaging>
+  <packaging>pom</packaging>
   <name>System Workflow</name>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <extensions>true</extensions>
-        <executions>
-          <execution>
-            <id>generate-osgi-metadata-for-unittests</id>
-            <goals>
-              <goal>manifest</goal>
-            </goals>
-            <phase>process-classes</phase>
-          </execution>
-          <!-- Configure extra execution of 'manifest' in process-classes phase 
-						to make sure SCR metadata is generated before unit test runs -->
-          <execution>
-            <id>scr-metadata</id>
-            <goals>
-              <goal>manifest</goal>
-            </goals>
-            <configuration>
-              <supportIncrementalBuild>true</supportIncrementalBuild>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <exportScr>true</exportScr>
-          <instructions>
-            <Import-Package>!javax.annotation, *</Import-Package>
-            <!-- Enable processing of OSGI DS component annotations -->
-            <_dsannotations>*</_dsannotations>
-            <!-- Enable processing of OSGI metatype annotations -->
-            <_metatypeannotations>*</_metatypeannotations>
-          </instructions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>osgi.core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>osgi.cmpn</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>osgi.annotation</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.testing.osgi-mock.junit5 -->
-    <dependency>
-      <groupId>org.apache.sling</groupId>
-      <artifactId>org.apache.sling.testing.osgi-mock.junit5</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-junit-jupiter</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>jsr305</artifactId>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.github.vm.patlego</groupId>
-      <artifactId>system.dao</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
+  <modules>
+    <module>workflow.core</module>
+    <module>workflow.dao</module>
+  </modules>
 </project>

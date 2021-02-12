@@ -49,9 +49,9 @@
     </feature>
 
     <feature name="patlego-vm-client" version="${website.version}">
-        <feature>patlego-vm-config</feature>
+        <!-- <feature>patlego-vm-config</feature>
         <feature>patlego-vm-mail</feature>
-        <feature>patlego-vm-encryption</feature>
+        <feature>patlego-vm-encryption</feature> -->
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
@@ -75,13 +75,13 @@
         <configfile finalname="${karaf.etc}/io.github.vm.patlego.mail.smtp-patlegovm.cfg">mvn:io.github.vm.patlego/mail.cfg/${project.version}/cfg/default</configfile>
         <feature>patlego-vm-encryption</feature>
         <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
-        <bundle>mvn:javax.mail/mail/${javax.mail.version}</bundle>
+        <bundle>wrap:mvn:javax.mail/mail/${javax.mail.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/mail.core/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-workflow" version="${project.version}">
-        <bundle>mvn:io.github.vm.patlego/system.dao/${project.version}</bundle>
-        <bundle>mvn:io.github.vm.patlego/system.workflow/${project.version}</bundle>
+        <bundle>mvn:io.github.vm.patlego/workflow.dao/${project.version}</bundle>
+        <bundle>mvn:io.github.vm.patlego/workflow.core/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-config" version="${project.version}">
