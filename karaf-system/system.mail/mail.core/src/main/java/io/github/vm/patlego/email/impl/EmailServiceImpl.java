@@ -28,7 +28,6 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
 
 import io.github.vm.patlego.email.EmailService;
 import io.github.vm.patlego.email.bean.SmtpAuthentication;

@@ -23,7 +23,6 @@
         <feature>patlego-vm-config</feature>
         <feature>pax-jdbc-postgresql</feature>
         <feature>patlego-vm-jdbc-datasource</feature>
-        <feature>patlego-vm-jdbc</feature>
         <feature>patlego-vm-workflow</feature>
         <feature>patlego-vm-client</feature>
         <feature>patlego-vm-mail</feature>
@@ -49,18 +48,18 @@
         </capability>
     </feature>
 
-    <feature name="patlego-vm-jdbc" version="${project.version}">
-        <bundle>mvn:io.github.vm.patlego/system.dao/${project.version}</bundle>
-    </feature>
-
     <feature name="patlego-vm-client" version="${website.version}">
+        <feature>patlego-vm-config</feature>
+        <feature>patlego-vm-mail</feature>
+        <feature>patlego-vm-encryption</feature>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.module/jackson-module-jaxb-annotations/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${jackson.version}</bundle>
-        <bundle>mvn:commons-io/commons-io/2.8.0</bundle>
+        <bundle>mvn:commons-io/commons-io/${commons-io.version}</bundle>
+        <bundle>mvn:org.apache.commons/commons-text/${commons-text.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/website.dao/${website.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/website.ui/${website.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/website.core/${website.version}</bundle>
@@ -69,21 +68,24 @@
     <feature name="patlego-vm-encryption" version="${project.version}">
         <!-- Jasypt Encryption service used to encrypt passwords -->
         <feature>jasypt-encryption</feature>
+        <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/system.encryption/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-mail" version="${project.version}">
         <configfile finalname="${karaf.etc}/io.github.vm.patlego.mail.smtp-patlegovm.cfg">mvn:io.github.vm.patlego/mail.cfg/${project.version}/cfg/default</configfile>
-        <bundle>mvn:org.apache.commons/commons-text/1.9</bundle>
+        <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
         <bundle>mvn:javax.mail/mail/${javax.mail.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/mail.core/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-workflow" version="${project.version}">
+        <bundle>mvn:io.github.vm.patlego/system.dao/${project.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/system.workflow/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-config" version="${project.version}">
+        <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
         <configfile finalname="${karaf.etc}/io.github.vm.patlego.runmodes.runmode.cfg">mvn:io.github.vm.patlego/config.cfg/${project.version}/cfg/default</configfile>
         <bundle>mvn:io.github.vm.patlego/config.core/${project.version}</bundle>
     </feature>
