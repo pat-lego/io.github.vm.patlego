@@ -75,6 +75,7 @@
     <feature name="patlego-vm-mail" version="${project.version}">
         <configfile finalname="${karaf.etc}/io.github.vm.patlego.mail.smtp-patlegovm.cfg">mvn:io.github.vm.patlego/mail.cfg/${project.version}/cfg/default</configfile>
         <bundle>mvn:org.apache.commons/commons-text/1.9</bundle>
+        <bundle>mvn:javax.mail/mail/${javax.mail.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/mail.core/${project.version}</bundle>
     </feature>
 
