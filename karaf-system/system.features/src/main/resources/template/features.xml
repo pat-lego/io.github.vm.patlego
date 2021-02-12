@@ -66,7 +66,6 @@
     </feature>
 
     <feature name="patlego-vm-encryption" version="${project.version}">
-        <!-- Jasypt Encryption service used to encrypt passwords -->
         <feature>jasypt-encryption</feature>
         <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/system.encryption/${project.version}</bundle>
@@ -74,6 +73,7 @@
 
     <feature name="patlego-vm-mail" version="${project.version}">
         <configfile finalname="${karaf.etc}/io.github.vm.patlego.mail.smtp-patlegovm.cfg">mvn:io.github.vm.patlego/mail.cfg/${project.version}/cfg/default</configfile>
+        <feature>patlego-vm-encryption</feature>
         <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
         <bundle>mvn:javax.mail/mail/${javax.mail.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/mail.core/${project.version}</bundle>
@@ -85,12 +85,14 @@
     </feature>
 
     <feature name="patlego-vm-config" version="${project.version}">
-        <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
         <configfile finalname="${karaf.etc}/io.github.vm.patlego.runmodes.runmode.cfg">mvn:io.github.vm.patlego/config.cfg/${project.version}/cfg/default</configfile>
+        <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/config.core/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-aws" version="${project.version}">
+        <configfile finalname="${karaf.etc}/io.github.vm.patlego.aws.s3.bucket-patlegovm.cfg">mvn:io.github.vm.patlego/aws.config/${project.version}/cfg/default</configfile>
+        <feature>patlego-vm-apache-httpclient</feature>
         <bundle>wrap:mvn:software.amazon.awssdk/s3/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-s3&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.services.s3.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/protocol-core/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-protocol-core&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.protocols.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/sdk-core/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-core&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.core.*;version=&quot;${aws.sdk.version}&quot;</bundle>
@@ -100,13 +102,11 @@
         <bundle>wrap:mvn:software.amazon.awssdk/aws-core/${aws.sdk.version}/$Bundle-SymbolicName=aws-core&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.awscore.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/regions/${aws.sdk.version}/$Bundle-SymbolicName=aws-regions&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.regions.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/auth/${aws.sdk.version}/$Bundle-SymbolicName=aws-auth&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.auth.*;version=&quot;${aws.sdk.version}&quot;</bundle>
-        <feature>patlego-vm-apache-httpclient</feature>
         <bundle>wrap:mvn:software.amazon.awssdk/apache-client/${aws.sdk.version}/$Bundle-SymbolicName=aws-apache-client&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.http.apache.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/metrics-spi/${aws.sdk.version}/$Bundle-SymbolicName=aws-metrics-spi&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.metrics.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/aws-xml-protocol/${aws.sdk.version}/$Bundle-SymbolicName=aws-xml-protocol&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.protocols.xml.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/aws-query-protocol/${aws.sdk.version}/$Bundle-SymbolicName=aws-query-protocol&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.protocols.query.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/profiles/${aws.sdk.version}/$Bundle-SymbolicName=aws-profiles&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.profiles.*;version=&quot;${aws.sdk.version}&quot;</bundle>
-        <configfile finalname="${karaf.etc}/io.github.vm.patlego.aws.s3.bucket-patlegovm.cfg">mvn:io.github.vm.patlego/aws.config/${project.version}/cfg/default</configfile>
         <bundle>mvn:io.github.vm.patlego/aws.core/${project.version}</bundle>
     </feature>
 
