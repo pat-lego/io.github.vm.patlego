@@ -13,7 +13,7 @@
     <module>system.email</module>
     <module>system.encryption</module>
     <module>system.aws</module>
-    <module>system.settings</module>
+    <module>system.config</module>
     <module>system.features</module>
     <module>system.core</module>
   </modules>

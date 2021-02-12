@@ -20,7 +20,7 @@
 
     <feature name="patlego-vm" version="${project.version}">
         <feature>patlego-vm-encryption</feature>
-        <feature>patlego-vm-settings</feature>
+        <feature>patlego-vm-config</feature>
         <feature>pax-jdbc-postgresql</feature>
         <feature>patlego-vm-jdbc-datasource</feature>
         <feature>patlego-vm-jdbc</feature>
@@ -82,12 +82,13 @@
         <bundle>mvn:io.github.vm.patlego/system.workflow/${project.version}</bundle>
     </feature>
 
-    <feature name="patlego-vm-settings" version="${project.version}">
-        <bundle>mvn:io.github.vm.patlego/system.settings/${project.version}</bundle>
+    <feature name="patlego-vm-config" version="${project.version}">
+        <configfile finalname="${karaf.etc}/io.github.vm.patlego.runmodes.RunModeBean.cfg">mvn:io.github.vm.patlego/config.cfg/${project.version}/cfg/default</configfile>
+        <bundle>mvn:io.github.vm.patlego/config.core/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-aws" version="${project.version}">
-        <bundle>wrap:mvn:software.amazon.awssdk/s3/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-s3&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.services.s3.*;version=&quot;${aws.sdk.version}&quot;</bundle>   
+        <bundle>wrap:mvn:software.amazon.awssdk/s3/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-s3&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.services.s3.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/protocol-core/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-protocol-core&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.protocols.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/sdk-core/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-core&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.core.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/utils/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-utils&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.utils.*;version=&quot;${aws.sdk.version}&quot;</bundle>
@@ -95,7 +96,7 @@
         <bundle>wrap:mvn:software.amazon.awssdk/annotations/${aws.sdk.version}/$Bundle-SymbolicName=aws-sdk-annotations&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.annotations.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/aws-core/${aws.sdk.version}/$Bundle-SymbolicName=aws-core&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.awscore.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/regions/${aws.sdk.version}/$Bundle-SymbolicName=aws-regions&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.regions.*;version=&quot;${aws.sdk.version}&quot;</bundle>
-        <bundle>wrap:mvn:software.amazon.awssdk/auth/${aws.sdk.version}/$Bundle-SymbolicName=aws-auth&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.auth.*;version=&quot;${aws.sdk.version}&quot;</bundle>    
+        <bundle>wrap:mvn:software.amazon.awssdk/auth/${aws.sdk.version}/$Bundle-SymbolicName=aws-auth&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.auth.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <feature>patlego-vm-apache-httpclient</feature>
         <bundle>wrap:mvn:software.amazon.awssdk/apache-client/${aws.sdk.version}/$Bundle-SymbolicName=aws-apache-client&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.http.apache.*;version=&quot;${aws.sdk.version}&quot;</bundle>
         <bundle>wrap:mvn:software.amazon.awssdk/metrics-spi/${aws.sdk.version}/$Bundle-SymbolicName=aws-metrics-spi&amp;Bundle-Version=${aws.sdk.version}&amp;Export-Package=software.amazon.awssdk.metrics.*;version=&quot;${aws.sdk.version}&quot;</bundle>

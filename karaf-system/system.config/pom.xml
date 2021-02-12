@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
   <parent>
     <artifactId>karaf-system</artifactId>
     <groupId>io.github.vm.patlego</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>io.github.vm.patlego</groupId>
-  <artifactId>system.aws</artifactId>
-  <packaging>pom</packaging>
   
-  <name>System AWS</name>
+  <groupId>io.github.vm.patlego</groupId>
+  <artifactId>system.config</artifactId>
+  <packaging>pom</packaging>
 
+  <name>System Config</name>
+  
   <modules>
-    <module>aws.core</module>
-    <module>aws.cfg</module>
+    <module>config.core</module>
+    <module>config.cfg</module>
   </modules>
 </project> 
