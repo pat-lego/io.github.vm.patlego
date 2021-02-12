@@ -26,7 +26,7 @@
         <feature>patlego-vm-jdbc</feature>
         <feature>patlego-vm-workflow</feature>
         <feature>patlego-vm-client</feature>
-        <feature>patlego-vm-email</feature>
+        <feature>patlego-vm-mail</feature>
         <feature>patlego-vm-aws</feature>
         <feature>patlego-vm-html</feature>
     </feature>
@@ -51,7 +51,6 @@
 
     <feature name="patlego-vm-jdbc" version="${project.version}">
         <bundle>mvn:io.github.vm.patlego/system.dao/${project.version}</bundle>
-        <bundle>mvn:commons-dbutils/commons-dbutils/1.7</bundle>
     </feature>
 
     <feature name="patlego-vm-client" version="${website.version}">
@@ -73,9 +72,10 @@
         <bundle>mvn:io.github.vm.patlego/system.encryption/${project.version}</bundle>
     </feature>
 
-    <feature name="patlego-vm-email" version="${project.version}">
+    <feature name="patlego-vm-mail" version="${project.version}">
+        <configfile finalname="${karaf.etc}/io.github.vm.patlego.mail.smtp-patlegovm.cfg">mvn:io.github.vm.patlego/mail.cfg/${project.version}/cfg/default</configfile>
         <bundle>mvn:org.apache.commons/commons-text/1.9</bundle>
-        <bundle>mvn:io.github.vm.patlego/system.email/${project.version}</bundle>
+        <bundle>mvn:io.github.vm.patlego/mail.core/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-workflow" version="${project.version}">
@@ -83,7 +83,7 @@
     </feature>
 
     <feature name="patlego-vm-config" version="${project.version}">
-        <configfile finalname="${karaf.etc}/io.github.vm.patlego.runmodes.RunModeBean.cfg">mvn:io.github.vm.patlego/config.cfg/${project.version}/cfg/default</configfile>
+        <configfile finalname="${karaf.etc}/io.github.vm.patlego.runmodes.runmode.cfg">mvn:io.github.vm.patlego/config.cfg/${project.version}/cfg/default</configfile>
         <bundle>mvn:io.github.vm.patlego/config.core/${project.version}</bundle>
     </feature>
 

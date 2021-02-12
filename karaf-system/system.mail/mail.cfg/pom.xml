@@ -2,18 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>system.config</artifactId>
+    <artifactId>system.mail</artifactId>
     <groupId>io.github.vm.patlego</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
   <groupId>io.github.vm.patlego</groupId>
-  <artifactId>config.cfg</artifactId>
- 
+  <artifactId>mail.cfg</artifactId>
+  
   <packaging>pom</packaging>
 
-  <name>System Config</name>
-
+  <name>Mail Config</name>
+ 
   <build>
     <plugins>
       <plugin>
@@ -51,7 +51,7 @@
             <configuration>
               <artifacts>
                 <artifact>
-                  <file>${project.build.directory}/io.github.vm.patlego.runmodes.runmode.cfg</file>
+                  <file>${project.build.directory}/io.github.vm.patlego.mail.smtp-patlegovm.cfg</file>
                   <type>cfg</type>
                   <classifier>default</classifier>
                 </artifact>
@@ -62,4 +62,5 @@
       </plugin>
     </plugins>
   </build>
+
 </project>

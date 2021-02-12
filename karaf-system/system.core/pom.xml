@@ -164,23 +164,6 @@
                   </resources>
                 </configuration>
               </execution>
-              <execution>
-                <id>copy-features</id>
-                <!-- here the phase you need -->
-                <phase>verify</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${basedir}/target/assembly/patlego.vm/etc</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/main/environments/ecs/features</directory>
-                      <filtering>true</filtering>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
             </executions>
           </plugin>
           <plugin>

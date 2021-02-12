@@ -5,18 +5,21 @@
   <artifactId>karaf-system</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+
   <name>Karaf System</name>
+  
   <modules>
     <module>system.sql</module>
     <module>system.dao</module>
     <module>system.workflow</module>
-    <module>system.email</module>
     <module>system.encryption</module>
+    <module>system.mail</module>
     <module>system.aws</module>
     <module>system.config</module>
     <module>system.features</module>
     <module>system.core</module>
   </modules>
+
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -38,6 +41,7 @@
     <aws.sdk.version>2.15.69</aws.sdk.version>
     <handlebars.compiler.version>4.2.0</handlebars.compiler.version>
   </properties>
+
   <repositories>
     <repository>
       <id>central</id>
@@ -60,6 +64,7 @@
       <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego.html</url>
     </repository>
   </repositories>
+  
   <distributionManagement>
     <repository>
       <id>patlego-core</id>
@@ -67,6 +72,7 @@
       <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego</url>
     </repository>
   </distributionManagement>
+
   <build>
     <pluginManagement>
       <plugins>
