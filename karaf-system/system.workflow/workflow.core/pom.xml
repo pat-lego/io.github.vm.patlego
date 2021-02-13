@@ -100,7 +100,7 @@
     </dependency>
     <dependency>
       <groupId>io.github.vm.patlego</groupId>
-      <artifactId>system.dao</artifactId>
+      <artifactId>workflow.dao</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
