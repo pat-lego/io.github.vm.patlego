@@ -13,7 +13,6 @@ import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 @Component(service = BucketService.class, immediate = true, configurationPid = "io.github.vm.patlego.aws.s3.bucket")
 public class SimpleBucketService implements BucketService {
@@ -23,10 +22,9 @@ public class SimpleBucketService implements BucketService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public PutObjectResponse putObject(String key, RequestBody body) {
+    public void putObject(String key, RequestBody body) {
         PutObjectRequest objectRequest = PutObjectRequest.builder().bucket("io.github.vm.patlego.test.bucket").key(key)
                 .build();
-        return s3.putObject(objectRequest, RequestBody.fromString("Pat was here"));
     }
 
     @Activate
