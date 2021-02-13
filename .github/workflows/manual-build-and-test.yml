@@ -36,3 +36,27 @@ jobs:
           PACKAGES_WEBSITE_TOKEN: ${{secrets.PACKAGES_WEBSITE_TOKEN}}
           PACKAGES_HTML_TOKEN: ${{secrets.PACKAGES_HTML_TOKEN}}
           PACKAGES_CORE_TOKEN: ${{secrets.PACKAGES_CORE_TOKEN}}
+  build_and_deploy:
+    name: Deploy to Github Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - uses: actions/checkout@v2
+      - name: Setup Java 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: "11"
+          architecture: x64
+      - name: Run Maven
+        run: mvn --settings settings.xml clean deploy --file karaf-system/pom.xml -Dpostgres.ecs.password=$KARAF_DB_PWD -Pecs-build
+        env:
+          KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
+          PACKAGES_WEBSITE_TOKEN: ${{secrets.PACKAGES_WEBSITE_TOKEN}}
+          PACKAGES_HTML_TOKEN: ${{secrets.PACKAGES_HTML_TOKEN}}
+          PACKAGES_CORE_TOKEN: ${{secrets.PACKAGES_CORE_TOKEN}}
