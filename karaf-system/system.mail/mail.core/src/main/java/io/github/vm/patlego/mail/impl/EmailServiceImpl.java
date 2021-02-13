@@ -60,9 +60,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Activate
-    public void activate(ComponentContext context)
-            throws UnsupportedEncodingException, MessagingException, InvalidAddressException,
-            EmailTransmissionException {
+    public void activate(ComponentContext context) {
         SmtpServer server = new SmtpServer();
         server.setSmtpHost(context.getProperties().get("email.host").toString());
         server.setSmtpPort(Integer.parseInt(context.getProperties().get("email.port").toString()));
@@ -76,34 +74,6 @@ public class EmailServiceImpl implements EmailService {
 
         logger.info("The email service has been configured and is ready to communicate to {} smtp server",
                 this.smtpServer.getSmtpHost());
-
-        EmailRecipient e = new EmailRecipient() {
-
-            @Override
-            public String getFrom() {
-                return "patrique.legalt@gmail.com";
-            }
-
-            @Override
-            public String getBounce() {
-                return "patrique.legalt@gmail.com";
-            }
-
-        };
-
-        Templater t = new Templater() {
-
-            @Override
-            public String templateString(String content) {
-                return "pat was here";
-            }
-
-        };
-
-        EmailContent content = new EmailContent.Builder().setHTML(true).addTo("patrique.legault@gmail.com")
-                .addMessage("pat was here").build();
-
-        this.send(e, t, content);
     }
 
     @Deactivate
