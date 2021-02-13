@@ -1,4 +1,4 @@
-package io.github.vm.patlego.email.bean;
+package io.github.vm.patlego.mail.bean;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,37 +10,39 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
+import io.github.vm.patlego.mail.exceptions.InvalidAddressException;
+
 public class TestEmailContent {
 
     @Test
-    public void testEmailContent_addBcc() throws AddressException {
+    public void testEmailContent_addBcc() throws InvalidAddressException {
         EmailContent.Builder email = new EmailContent.Builder();
-        EmailContent content = email.addBcc(new InternetAddress("patrique.legault@gmail.com"))
-                .addBcc(new InternetAddress("patrique.legault2@gmail.com")).build();
+        EmailContent content = email.addBcc("patrique.legault@gmail.com")
+                .addBcc("patrique.legault2@gmail.com").build();
         assertEquals(2, content.getBcc().size());
     }
 
     @Test
-    public void testEmailContent_addCc() throws AddressException {
+    public void testEmailContent_addCc() throws InvalidAddressException {
         EmailContent.Builder email = new EmailContent.Builder();
-        EmailContent content = email.addCc(new InternetAddress("patrique.legault@gmail.com"))
-                .addCc(new InternetAddress("patrique.legault2@gmail.com")).build();
+        EmailContent content = email.addCc("patrique.legault@gmail.com")
+                .addCc("patrique.legault2@gmail.com").build();
         assertEquals(2, content.getCc().size());
     }
 
     @Test
-    public void testEmailContent_addTo() throws AddressException {
+    public void testEmailContent_addTo() throws InvalidAddressException {
         EmailContent.Builder email = new EmailContent.Builder();
-        EmailContent content = email.addTo(new InternetAddress("patrique.legault@gmail.com"))
-                .addTo(new InternetAddress("patrique.legault2@gmail.com")).build();
+        EmailContent content = email.addTo("patrique.legault@gmail.com")
+                .addTo("patrique.legault2@gmail.com").build();
         assertEquals(2, content.getTo().size());
     }
 
     @Test
-    public void testEmailContent_addToUnique() throws AddressException {
+    public void testEmailContent_addToUnique() throws InvalidAddressException {
         EmailContent.Builder email = new EmailContent.Builder();
-        EmailContent content = email.addTo(new InternetAddress("patrique.legault@gmail.com"))
-                .addTo(new InternetAddress("patrique.legault@gmail.com")).build();
+        EmailContent content = email.addTo("patrique.legault@gmail.com")
+                .addTo("patrique.legault@gmail.com").build();
         assertEquals(1, content.getTo().size());
     }
 

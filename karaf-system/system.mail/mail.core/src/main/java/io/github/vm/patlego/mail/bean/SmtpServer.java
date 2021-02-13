@@ -1,4 +1,4 @@
-package io.github.vm.patlego.email.bean;
+package io.github.vm.patlego.mail.bean;
 
 public class SmtpServer {
 

@@ -1,4 +1,4 @@
-package io.github.vm.patlego.email.bean;
+package io.github.vm.patlego.mail.bean;
 
 import java.io.IOException;
 import java.io.InputStream;

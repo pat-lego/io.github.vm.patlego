@@ -1,11 +1,15 @@
-package io.github.vm.patlego.email.bean;
+package io.github.vm.patlego.mail.bean;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.lang3.StringUtils;
+
+import io.github.vm.patlego.mail.exceptions.InvalidAddressException;
+
 public final class EmailContent {
 
     private Set<InternetAddress> to;
@@ -65,9 +69,13 @@ public final class EmailContent {
             return this;
         }
 
-        public Builder addTo(InternetAddress to) {
-            this.to.add(to);
-            return this;
+        public Builder addTo(String to) throws InvalidAddressException {
+            try {
+                this.to.add(new InternetAddress(to));
+                return this;
+            } catch (AddressException e) {
+                throw new InvalidAddressException(e.getMessage(), e);
+            }
         }
 
         public Builder resetTo() {
@@ -82,14 +90,23 @@ public final class EmailContent {
             return this;
         }
 
-        public Builder addCc(InternetAddress cc) {
-            this.cc.add(cc);
-            return this;
+        public Builder addCc(String cc) throws InvalidAddressException {
+            try {
+                this.cc.add(new InternetAddress(cc));
+                return this;
+            } catch (AddressException e) {
+                throw new InvalidAddressException(e.getMessage(), e);
+            }
+
         }
 
-        public Builder addBcc(InternetAddress bcc) {
-            this.bcc.add(bcc);
-            return this;
+        public Builder addBcc(String bcc) throws InvalidAddressException {
+            try {
+                this.bcc.add(new InternetAddress(bcc));
+                return this;
+            } catch (AddressException e) {
+                throw new InvalidAddressException(e.getMessage(), e);
+            }
         }
 
         public Builder addAttachment(EmailAttachment attachment) {
@@ -118,7 +135,7 @@ public final class EmailContent {
             emailContent.sendIndependently = this.sendIndependently;
             emailContent.message = this.content;
             emailContent.subject = this.subject;
-            
+
             return emailContent;
         }
 

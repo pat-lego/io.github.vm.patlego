@@ -43,11 +43,19 @@
         <configuration>
           <exportScr>true</exportScr>
           <instructions>
-            <Import-Package>!javax.annotation, *</Import-Package>
+            <Import-Package>!javax.annotation, !sun.security.util, *</Import-Package>
             <!-- Enable processing of OSGI DS component annotations -->
             <_dsannotations>*</_dsannotations>
             <!-- Enable processing of OSGI metatype annotations -->
             <_metatypeannotations>*</_metatypeannotations>
+            <Embed-Dependency>mail, activation</Embed-Dependency>
+            <Private-Package>javax.mail.*</Private-Package>
+            <Export-Package>io.github.vm.patlego.mail.*, 
+              io.github.vm.patlego.mail.bean.*,
+              io.github.vm.patlego.mail.exceptions.*,
+              io.github.vm.patlego.mail.impl.*,
+              io.github.vm.patlego.mail.template.*
+            </Export-Package>
           </instructions>
         </configuration>
       </plugin>
@@ -71,12 +79,10 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
@@ -89,7 +95,6 @@
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
@@ -102,6 +107,10 @@
     <dependency>
       <groupId>javax.mail</groupId>
       <artifactId>mail</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>

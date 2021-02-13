@@ -19,10 +19,10 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <postgres.db>karaf_db</postgres.db> <!-- PSQL DEV VALUES -->
+    <postgres.db>karaf_db</postgres.db> 
     <postgres.dev.url>jdbc:postgresql://postgres-db:5432</postgres.dev.url>
     <postgres.dev.username>karaf</postgres.dev.username>
-    <postgres.dev.password>karaf_pwd</postgres.dev.password> <!-- PSQL ECS VALUES -->
+    <postgres.dev.password>karaf_pwd</postgres.dev.password>
     <postgres.ecs.url>jdbc:postgresql://pat-lego-db.ch5m6ge8f6p2.ca-central-1.rds.amazonaws.com:5432</postgres.ecs.url>
     <postgres.ecs.username>karaf</postgres.ecs.username>
     <postgres.ecs.password />
@@ -112,7 +112,7 @@
           <groupId>org.eluder.coveralls</groupId>
           <artifactId>coveralls-maven-plugin</artifactId>
           <version>4.3.0</version>
-          <dependencies> <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+          <dependencies>
             <dependency>
               <groupId>javax.xml.bind</groupId>
               <artifactId>jaxb-api</artifactId>
@@ -213,7 +213,7 @@
         <version>${karaf.runtime.version}</version>
         <classifier>features</classifier>
         <type>xml</type>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.apache.cxf.karaf/apache-cxf -->
+      </dependency>
       <dependency>
         <groupId>org.apache.cxf.karaf</groupId>
         <artifactId>apache-cxf</artifactId>
@@ -221,19 +221,19 @@
         <classifier>features</classifier>
         <scope>runtime</scope>
         <version>3.4.2</version>
-      </dependency> <!--https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxrs-->
+      </dependency> 
       <dependency>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-frontend-jaxrs</artifactId>
         <version>3.4.2</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine-->
+      </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-engine</artifactId>
         <version>5.6.2</version>
         <scope>test</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.testing.osgi-mock.junit5-->
+      </dependency>
       <dependency>
         <groupId>org.apache.sling</groupId>
         <artifactId>org.apache.sling.testing.osgi-mock.junit5</artifactId>
@@ -245,13 +245,13 @@
         <artifactId>mockito-junit-jupiter</artifactId>
         <version>3.4.4</version>
         <scope>test</scope>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+      </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
         <version>3.4.4</version>
         <scope>test</scope>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
+      </dependency> 
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-inline</artifactId>
@@ -268,24 +268,24 @@
         <artifactId>servlet-api</artifactId>
         <version>2.5</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.postgresql/postgresql-->
+      </dependency>
       <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
         <version>42.2.8</version>
-      </dependency> <!--https://mvnrepository.com/artifact/org.ops4j.pax.logging/pax-logging-log4j2--> <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-api-->
+      </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>1.7.30</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.slf4j/slf4j-simple-->
+      </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
         <version>1.7.30</version>
         <scope>test</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils-->
+      </dependency> 
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
@@ -308,24 +308,24 @@
         <artifactId>javax.persistence-api</artifactId>
         <version>2.2</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.apache.aries.jpa/org.apache.aries.jpa.api-->
+      </dependency>
       <dependency>
         <groupId>org.apache.aries.jpa</groupId>
         <artifactId>org.apache.aries.jpa.api</artifactId>
         <version>${aries.jpa.version}</version>
         <scope>provided</scope>
-      </dependency> <!--https://mvnrepository.com/artifact/org.apache.commons/commons-lang3-->
+      </dependency> 
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>${commons-lang3.version}</version>
         <scope>provided</scope>
-      </dependency> <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+      </dependency> 
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
         <version>${commons-io.version}</version>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+      </dependency> 
       <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-core</artifactId>
@@ -350,7 +350,7 @@
         <groupId>com.amazonaws</groupId>
         <artifactId>aws-lambda-java-log4j2</artifactId>
         <version>1.2.0</version>
-      </dependency> <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
+      </dependency>
       <dependency>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-core</artifactId>
@@ -370,6 +370,11 @@
         <groupId>javax.mail</groupId>
         <artifactId>mail</artifactId>
         <version>${javax.mail.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.activation</groupId>
+        <artifactId>activation</artifactId>
+        <version>1.1.1</version>
       </dependency>
       <dependency>
         <groupId>software.amazon.awssdk</groupId>

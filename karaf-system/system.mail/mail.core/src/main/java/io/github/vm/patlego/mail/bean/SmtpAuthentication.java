@@ -1,4 +1,4 @@
-package io.github.vm.patlego.email.bean;
+package io.github.vm.patlego.mail.bean;
 
 /**
  * This class will be populated using Apache Blueprint. Properties will be

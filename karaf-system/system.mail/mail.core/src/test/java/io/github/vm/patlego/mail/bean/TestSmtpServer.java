@@ -1,4 +1,4 @@
-package io.github.vm.patlego.email.bean;
+package io.github.vm.patlego.mail.bean;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

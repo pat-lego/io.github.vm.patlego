@@ -1,12 +1,10 @@
-package io.github.vm.patlego.email.impl;
+package io.github.vm.patlego.mail.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Dictionary;
-import java.util.Hashtable;
 import java.util.Iterator;
 
 import javax.mail.Message;
@@ -20,14 +18,15 @@ import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.osgi.service.component.ComponentContext;
 
-import io.github.vm.patlego.email.bean.EmailAttachment;
-import io.github.vm.patlego.email.bean.EmailContent;
-import io.github.vm.patlego.email.bean.EmailRecipient;
-import io.github.vm.patlego.email.bean.SmtpAuthentication;
-import io.github.vm.patlego.email.bean.SmtpServer;
-import io.github.vm.patlego.email.template.Templater;
+import io.github.vm.patlego.mail.bean.EmailAttachment;
+import io.github.vm.patlego.mail.bean.EmailContent;
+import io.github.vm.patlego.mail.bean.EmailRecipient;
+import io.github.vm.patlego.mail.bean.SmtpAuthentication;
+import io.github.vm.patlego.mail.bean.SmtpServer;
+import io.github.vm.patlego.mail.exceptions.EmailTransmissionException;
+import io.github.vm.patlego.mail.exceptions.InvalidAddressException;
+import io.github.vm.patlego.mail.template.Templater;
 import io.github.vm.patlego.enc.impl.SimpleSecurity;
 
 public class TestEmailService {
@@ -77,35 +76,11 @@ public class TestEmailService {
         assertEquals("test", emailServiceImpl.getPassword());
     }
 
-    // @Test
-    // public void testEmailService() throws UnsupportedEncodingException, MessagingException {
-    //     EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
-
-    //     emailServiceImpl.security = getSecurity();
-        
-    //     ComponentContext context = Mockito.mock(ComponentContext.class);
-    //     Dictionary<String, Object> props = new Hashtable<>();
-    //     props.put("email.host", "myhost");
-    //     props.put("email.port", "12");
-    //     props.put("email.protocol", "TLS");
-
-    //     props.put("email.password", "ckClJXHGxUnVjJcR2LOFyg==");
-    //     props.put("email.username", "username");
-       
-    //     Mockito.when(context.getProperties()).thenReturn(props);
-    //     emailServiceImpl.activate(context);
-
-    //     assertEquals("test", emailServiceImpl.getPassword());
-    //     assertEquals("username", emailServiceImpl.getUsername());
-
-    //     emailServiceImpl.deactivate();
-    // }
-
     @Test
     public void testSetupSession() throws AddressException {
         EmailRecipient recipient = Mockito.mock(EmailRecipient.class);
 
-        Mockito.when(recipient.getBounce()).thenReturn(new InternetAddress("test@test.com"));
+        Mockito.when(recipient.getBounce()).thenReturn("test@test.com");
 
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
         emailServiceImpl.setSmtpAuthentication(getSmtpAuthentication());
@@ -123,7 +98,7 @@ public class TestEmailService {
     public void testSetupSession_unauthenticated() throws AddressException {
         EmailRecipient recipient = Mockito.mock(EmailRecipient.class);
 
-        Mockito.when(recipient.getBounce()).thenReturn(new InternetAddress("test@test.com"));
+        Mockito.when(recipient.getBounce()).thenReturn("test@test.com");
 
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
         emailServiceImpl.setSmtpServer(getSmtpServer());
@@ -139,13 +114,12 @@ public class TestEmailService {
     }
 
     @Test
-    public void testSetTo_v1() throws MessagingException {
+    public void testSetTo_v1() throws MessagingException, InvalidAddressException {
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
         Message message = Mockito.mock(Message.class);
 
         EmailContent.Builder builder = new EmailContent.Builder();
-        EmailContent content = builder.addTo(new InternetAddress("test.test@test.com"))
-                .addTo(new InternetAddress("test.test2@test.com")).build();
+        EmailContent content = builder.addTo("test.test@test.com").addTo("test.test2@test.com").build();
 
         emailServiceImpl.setTo(message, content);
     }
@@ -172,25 +146,23 @@ public class TestEmailService {
     }
 
     @Test
-    public void testSetBcc() throws MessagingException {
+    public void testSetBcc() throws MessagingException, InvalidAddressException {
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
         Message message = Mockito.mock(Message.class);
 
         EmailContent.Builder builder = new EmailContent.Builder();
-        EmailContent content = builder.addBcc(new InternetAddress("test.test@test.com"))
-                .addBcc(new InternetAddress("test.test2@test.com")).build();
+        EmailContent content = builder.addBcc("test.test@test.com").addBcc("test.test2@test.com").build();
 
         emailServiceImpl.setBCC(message, content);
     }
 
     @Test
-    public void testSetCc() throws MessagingException {
+    public void testSetCc() throws InvalidAddressException, MessagingException {
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
         Message message = Mockito.mock(Message.class);
 
         EmailContent.Builder builder = new EmailContent.Builder();
-        EmailContent content = builder.addCc(new InternetAddress("test.test@test.com"))
-                .addCc(new InternetAddress("test.test2@test.com")).build();
+        EmailContent content = builder.addCc("test.test@test.com").addCc("test.test2@test.com").build();
 
         emailServiceImpl.setCC(message, content);
     }
@@ -200,7 +172,7 @@ public class TestEmailService {
         EmailServiceImpl emailServiceImpl = new EmailServiceImpl();
         Message message = Mockito.mock(Message.class);
         EmailRecipient recipient = Mockito.mock(EmailRecipient.class);
-        Mockito.when(recipient.getFrom()).thenReturn(new InternetAddress("test.test@test.com"));
+        Mockito.when(recipient.getFrom()).thenReturn("test.test@test.com");
 
         emailServiceImpl.setFrom(message, recipient);
     }
@@ -279,17 +251,17 @@ public class TestEmailService {
     }
 
     @Test
-    public void testSend() throws MessagingException, IOException {
+    public void testSend() throws MessagingException, IOException, InvalidAddressException, EmailTransmissionException {
         Multipart multipart = Mockito.mock(Multipart.class);
         EmailServiceImpl emailServiceImpl = Mockito.mock(EmailServiceImpl.class);
         Mockito.doCallRealMethod().when(emailServiceImpl).send(Mockito.any(), Mockito.any(), Mockito.any());
         
         EmailRecipient recipients = Mockito.mock(EmailRecipient.class);
-        Mockito.when(recipients.getFrom()).thenReturn(new InternetAddress("patrique.pat@pat.com"));
+        Mockito.when(recipients.getFrom()).thenReturn("patrique.pat@pat.com");
         Mockito.when(emailServiceImpl.setContent(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(multipart);
 
         EmailContent.Builder builder = new EmailContent.Builder();
-        EmailContent content = builder.addTo(new InternetAddress("ma@ma.com")).addMessage("This is my message")
+        EmailContent content = builder.addTo("ma@ma.com").addMessage("This is my message")
                 .addAttachment(new EmailAttachment(IOUtils.toInputStream("Hello World", "UTF-8"), "text/plain"))
                 .build();
 
@@ -298,17 +270,18 @@ public class TestEmailService {
     }
 
     @Test
-    public void testSend_Unique() throws MessagingException, UnsupportedEncodingException {
+    public void testSend_Unique() throws MessagingException, UnsupportedEncodingException, InvalidAddressException,
+            EmailTransmissionException {
         Multipart multipart = Mockito.mock(Multipart.class);
 
         EmailServiceImpl emailServiceImpl = Mockito.mock(EmailServiceImpl.class);
         Mockito.doCallRealMethod().when(emailServiceImpl).send(Mockito.any(), Mockito.any(), Mockito.any());
         Mockito.when(emailServiceImpl.setContent(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(multipart);
         EmailRecipient recipients = Mockito.mock(EmailRecipient.class);
-        Mockito.when(recipients.getFrom()).thenReturn(new InternetAddress("patrique.pat@pat.com"));
+        Mockito.when(recipients.getFrom()).thenReturn("patrique.pat@pat.com");
 
         EmailContent.Builder builder = new EmailContent.Builder();
-        EmailContent content = builder.addTo(new InternetAddress("ma@ma.com")).addTo(new InternetAddress("ma2@ma.com"))
+        EmailContent content = builder.addTo("ma@ma.com").addTo("ma2@ma.com")
                 .addMessage("This is my message").setSendIndependently().build();
 
         emailServiceImpl.send(recipients, null, content);
@@ -316,7 +289,8 @@ public class TestEmailService {
     }
 
     @Test
-    public void testSend_Fail_No_To() throws MessagingException, UnsupportedEncodingException {
+    public void testSend_Fail_No_To() throws MessagingException, UnsupportedEncodingException,
+            EmailTransmissionException {
         Multipart multipart = Mockito.mock(Multipart.class);
         EmailContent.Builder builder = new EmailContent.Builder();
         EmailContent content = builder.addMessage("This is my message").build();
@@ -328,9 +302,9 @@ public class TestEmailService {
         Mockito.doCallRealMethod().when(emailServiceImpl).setTo(Mockito.any(), Mockito.any(EmailContent.class));
 
         EmailRecipient recipients = Mockito.mock(EmailRecipient.class);
-        Mockito.when(recipients.getFrom()).thenReturn(new InternetAddress("patrique.pat@pat.com"));
+        Mockito.when(recipients.getFrom()).thenReturn("patrique.pat@pat.com");
 
-        Assertions.assertThrows(MessagingException.class, () -> {
+        Assertions.assertThrows(EmailTransmissionException.class, () -> {
             emailServiceImpl.send(recipients, null, content);
         });
 

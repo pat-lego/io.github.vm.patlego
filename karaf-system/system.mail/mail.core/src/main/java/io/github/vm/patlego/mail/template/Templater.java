@@ -1,4 +1,4 @@
-package io.github.vm.patlego.email.template;
+package io.github.vm.patlego.mail.template;
 
 import javax.annotation.Nonnull;
 

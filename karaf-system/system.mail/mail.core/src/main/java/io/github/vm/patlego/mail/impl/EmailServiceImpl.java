@@ -1,4 +1,4 @@
-package io.github.vm.patlego.email.impl;
+package io.github.vm.patlego.mail.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
@@ -29,13 +29,15 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.github.vm.patlego.email.EmailService;
-import io.github.vm.patlego.email.bean.SmtpAuthentication;
-import io.github.vm.patlego.email.bean.SmtpServer;
-import io.github.vm.patlego.email.bean.EmailAttachment;
-import io.github.vm.patlego.email.bean.EmailContent;
-import io.github.vm.patlego.email.bean.EmailRecipient;
-import io.github.vm.patlego.email.template.Templater;
+import io.github.vm.patlego.mail.EmailService;
+import io.github.vm.patlego.mail.bean.SmtpAuthentication;
+import io.github.vm.patlego.mail.bean.SmtpServer;
+import io.github.vm.patlego.mail.exceptions.EmailTransmissionException;
+import io.github.vm.patlego.mail.exceptions.InvalidAddressException;
+import io.github.vm.patlego.mail.bean.EmailAttachment;
+import io.github.vm.patlego.mail.bean.EmailContent;
+import io.github.vm.patlego.mail.bean.EmailRecipient;
+import io.github.vm.patlego.mail.template.Templater;
 import io.github.vm.patlego.enc.Security;
 
 @Component(service = EmailService.class, immediate = true, configurationPid = "io.github.vm.patlego.mail.smtp")
@@ -58,7 +60,9 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Activate
-    public void activate(ComponentContext context) throws UnsupportedEncodingException, MessagingException {
+    public void activate(ComponentContext context)
+            throws UnsupportedEncodingException, MessagingException, InvalidAddressException,
+            EmailTransmissionException {
         SmtpServer server = new SmtpServer();
         server.setSmtpHost(context.getProperties().get("email.host").toString());
         server.setSmtpPort(Integer.parseInt(context.getProperties().get("email.port").toString()));
@@ -69,33 +73,35 @@ public class EmailServiceImpl implements EmailService {
         auth.setPassword(context.getProperties().get("email.password").toString());
         auth.setUsername(context.getProperties().get("email.username").toString());
         this.setSmtpAuthentication(auth);
-        
-        logger.info("The email service has been configured and is ready to communicate to {} smtp server", this.smtpServer.getSmtpHost());
 
-        EmailRecipient e = new EmailRecipient(){
+        logger.info("The email service has been configured and is ready to communicate to {} smtp server",
+                this.smtpServer.getSmtpHost());
+
+        EmailRecipient e = new EmailRecipient() {
 
             @Override
-            public InternetAddress getFrom() throws AddressException {
-                return new InternetAddress("patrique.legalt@gmail.com");
+            public String getFrom() {
+                return "patrique.legalt@gmail.com";
             }
 
             @Override
-            public InternetAddress getBounce() throws AddressException {
-                return new InternetAddress("patrique.legalt@gmail.com");
+            public String getBounce() {
+                return "patrique.legalt@gmail.com";
             }
-            
+
         };
 
         Templater t = new Templater() {
 
-			@Override
-			public String templateString(String content) {
-				return "pat was here";
-			}
+            @Override
+            public String templateString(String content) {
+                return "pat was here";
+            }
 
         };
 
-        EmailContent content = new EmailContent.Builder().setHTML(true).addTo(new InternetAddress("patrique.legault@gmail.com")).addMessage("pat was here").build();
+        EmailContent content = new EmailContent.Builder().setHTML(true).addTo("patrique.legault@gmail.com")
+                .addMessage("pat was here").build();
 
         this.send(e, t, content);
     }
@@ -157,35 +163,40 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void send(EmailRecipient recipients, Templater templater, EmailContent content)
-            throws MessagingException, UnsupportedEncodingException {
-        Session session = this.setupSession(recipients);
+            throws UnsupportedEncodingException, EmailTransmissionException {
+        try {
+            Session session = this.setupSession(recipients);
 
-        Message message = new MimeMessage(session);
-        Multipart part = new MimeMultipart();
+            Message message = new MimeMessage(session);
+            Multipart part = new MimeMultipart();
 
-        Set<EmailAttachment> attachments = content.getAttachments();
-        Iterator<EmailAttachment> attachmentIterator = attachments.iterator();
+            Set<EmailAttachment> attachments = content.getAttachments();
+            Iterator<EmailAttachment> attachmentIterator = attachments.iterator();
 
-        while (attachmentIterator.hasNext()) {
-            this.setAttachment(part, attachmentIterator.next());
-        }
+            while (attachmentIterator.hasNext()) {
+                this.setAttachment(part, attachmentIterator.next());
+            }
 
-        this.setBCC(message, content);
-        this.setCC(message, content);
-        message.setContent(this.setContent(part, content, templater));
-        this.setFrom(message, recipients);
-        this.setSubject(message, content);
+            this.setBCC(message, content);
+            this.setCC(message, content);
+            message.setContent(this.setContent(part, content, templater));
+            this.setFrom(message, recipients);
+            this.setSubject(message, content);
 
-        if (content.isUniqueTo()) {
-            Iterator<InternetAddress> to = content.getTo().iterator();
-            while (to.hasNext()) {
-                this.setTo(message, to.next());
+            if (content.isUniqueTo()) {
+                Iterator<InternetAddress> to = content.getTo().iterator();
+                while (to.hasNext()) {
+                    this.setTo(message, to.next());
+                    this.send(message);
+                }
+            } else {
+                this.setTo(message, content);
                 this.send(message);
             }
-        } else {
-            this.setTo(message, content);
-            this.send(message);
+        } catch (MessagingException e) {
+            throw new EmailTransmissionException(e.getMessage(), e);
         }
+
     }
 
     public void send(Message msg) throws MessagingException {
@@ -233,7 +244,7 @@ public class EmailServiceImpl implements EmailService {
                     "Cannot have a null or empty from address please set the FMC Ford Email Service service to resolve this issue");
         }
 
-        message.setFrom(recipients.getFrom());
+        message.setFrom(new InternetAddress(recipients.getFrom()));
     }
 
     public Multipart setContent(Multipart multi, EmailContent content, Templater templater) throws MessagingException {
