@@ -1,12 +1,13 @@
-name: Scheduled Build and Test
-on: 
-  schedule:
-    # Runs every day at 6 AM
-    - cron: '0 6 * * *'
-jobs: 
-  build_and_test:
-    name: Scheduled Java Build and Test
+name: Deploy Container
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build_and_deploy:
+    name: Deploy new container to ECS
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
     steps:
       - name: Cache local Maven repository
         uses: actions/cache@v2
@@ -19,12 +20,12 @@ jobs:
       - name: Setup Java 11
         uses: actions/setup-java@v1
         with:
-          java-version: '11'
+          java-version: "11"
           architecture: x64
       - name: Run Maven
-        run: mvn --settings settings.xml clean install --file karaf-system/pom.xml -Pdev-build coveralls:report
+        run: mvn --settings settings.xml clean deploy --file karaf-system/pom.xml -Dpostgres.ecs.password=$KARAF_DB_PWD -Dmaven.test.skip=true -Pecs-build
         env:
-          COVERALLS_TOKEN: ${{secrets.COVERALLS_TOKEN}}
+          KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           PACKAGES_WEBSITE_TOKEN: ${{secrets.PACKAGES_WEBSITE_TOKEN}}
           PACKAGES_HTML_TOKEN: ${{secrets.PACKAGES_HTML_TOKEN}}
           PACKAGES_CORE_TOKEN: ${{secrets.PACKAGES_CORE_TOKEN}}
