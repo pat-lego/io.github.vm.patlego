@@ -13,13 +13,12 @@
     <module>system.mail</module>
     <module>system.aws</module>
     <module>system.config</module>
-    <module>system.features</module>
     <module>system.core</module>
   </modules>
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <postgres.db>karaf_db</postgres.db> 
+    <postgres.db>karaf_db</postgres.db>
     <postgres.dev.url>jdbc:postgresql://postgres-db:5432</postgres.dev.url>
     <postgres.dev.username>karaf</postgres.dev.username>
     <postgres.dev.password>karaf_pwd</postgres.dev.password>
@@ -221,7 +220,7 @@
         <classifier>features</classifier>
         <scope>runtime</scope>
         <version>3.4.2</version>
-      </dependency> 
+      </dependency>
       <dependency>
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-frontend-jaxrs</artifactId>
@@ -251,7 +250,7 @@
         <artifactId>mockito-core</artifactId>
         <version>3.4.4</version>
         <scope>test</scope>
-      </dependency> 
+      </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-inline</artifactId>
@@ -285,7 +284,7 @@
         <artifactId>slf4j-simple</artifactId>
         <version>1.7.30</version>
         <scope>test</scope>
-      </dependency> 
+      </dependency>
       <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
@@ -314,18 +313,18 @@
         <artifactId>org.apache.aries.jpa.api</artifactId>
         <version>${aries.jpa.version}</version>
         <scope>provided</scope>
-      </dependency> 
+      </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>${commons-lang3.version}</version>
         <scope>provided</scope>
-      </dependency> 
+      </dependency>
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
         <version>${commons-io.version}</version>
-      </dependency> 
+      </dependency>
       <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-core</artifactId>
