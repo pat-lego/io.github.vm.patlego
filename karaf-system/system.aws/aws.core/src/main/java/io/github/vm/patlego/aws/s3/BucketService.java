@@ -1,9 +1,15 @@
 package io.github.vm.patlego.aws.s3;
 
 import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 public interface BucketService {
     
-    public void putObject(String key, RequestBody body);
+    public PutObjectResponse putObject(String key, RequestBody body);
+
+    public Region getRegion();
+
+    public String getBucket();
 
 }

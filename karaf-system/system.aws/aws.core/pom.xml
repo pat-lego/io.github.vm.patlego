@@ -95,5 +95,10 @@
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>apache-client</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.github.vm.patlego</groupId>
+      <artifactId>system.encryption</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 </project>
