@@ -28,6 +28,7 @@
         <feature>patlego-vm-mail</feature>
         <feature>patlego-vm-aws</feature>
         <feature>patlego-vm-html</feature>
+        <feature>patlego-vm-html-samples</feature>
     </feature>
 
     <!-- This is to be deleted when we migrate to 4.3.1 -->
@@ -118,6 +119,11 @@
     <feature name="patlego-vm-html" version="${project.version}">
         <bundle>mvn:com.github.jknack/handlebars/${handlebars.compiler.version}</bundle>
         <bundle>mvn:io.github.vm.patlego.html/html.core/${html.version}</bundle>
+    </feature>
+
+    <feature name="patlego-vm-html-samples" version="${project.version}">
+        <feature>patlego-vm-html</feature>
+        <bundle>mvn:io.github.vm.patlego.html/examples.simple/${html.version}</bundle>
     </feature>
 
 </features>
