@@ -1,5 +1,6 @@
 package io.github.vm.patlego.aws.s3.impl;
 
+
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -12,11 +13,16 @@ import io.github.vm.patlego.enc.Security;
 import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
+import software.amazon.awssdk.services.s3.model.DeleteObjectResponse;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
@@ -30,12 +36,23 @@ public class SimpleBucketService implements BucketService {
 
     @Reference
     Security security;
-  
+
     @Override
     public PutObjectResponse putObject(String key, RequestBody body) {
-        PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(this.getBucket()).key(key)
-                .build();
+        PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(this.getBucket()).key(key).build();
         return s3.putObject(objectRequest, body);
+    }
+
+    @Override
+    public ResponseInputStream<GetObjectResponse> getObject(String key) {
+        GetObjectRequest objectRequest = GetObjectRequest.builder().bucket(this.getBucket()).key(key).build();
+        return s3.getObject(objectRequest);
+    }
+
+    @Override
+    public DeleteObjectResponse deleteObject(String key) {
+        DeleteObjectRequest objectRequest = DeleteObjectRequest.builder().bucket(this.getBucket()).key(key).build();
+        return s3.deleteObject(objectRequest);
     }
 
     @Override
@@ -72,7 +89,7 @@ public class SimpleBucketService implements BucketService {
     }
 
     private AwsCredentials getCredentials(String accessKey, String seretKey) {
-        String decodedKey= this.security.decrypt(seretKey);
+        String decodedKey = this.security.decrypt(seretKey);
         
         return new AwsCredentials(){
 
