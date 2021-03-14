@@ -51,7 +51,7 @@
             <configuration>
               <artifacts>
                 <artifact>
-                  <file>${project.build.directory}/io.github.vm.patlego.runmodes.runmode.cfg</file>
+                  <file>${project.build.directory}/io.github.vm.patlego.config.runmodes.runmode.cfg</file>
                   <type>cfg</type>
                   <classifier>default</classifier>
                 </artifact>

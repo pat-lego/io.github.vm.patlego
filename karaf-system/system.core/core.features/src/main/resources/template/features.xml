@@ -26,7 +26,7 @@
         <feature>patlego-vm-jdbc-datasource</feature>
         <feature>patlego-vm-hibernate-types</feature>
         <feature>patlego-vm-workflow</feature>
-        <feature>patlego-vm-client</feature>
+        <!-- <feature>patlego-vm-client</feature> -->
         <feature>patlego-vm-mail</feature>
         <feature>patlego-vm-aws</feature>
         <feature>patlego-vm-html</feature>
@@ -95,7 +95,7 @@
     </feature>
 
     <feature name="patlego-vm-config" version="${project.version}">
-        <configfile finalname="${karaf.etc}/io.github.vm.patlego.runmodes.runmode.cfg">mvn:io.github.vm.patlego/config.cfg/${project.version}/cfg/default</configfile>
+        <configfile finalname="${karaf.etc}/io.github.vm.patlego.config.runmodes.runmode.cfg">mvn:io.github.vm.patlego/config.cfg/${project.version}/cfg/default</configfile>
         <bundle>mvn:org.apache.commons/commons-lang3/${commons-lang3.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/config.core/${project.version}</bundle>
     </feature>
