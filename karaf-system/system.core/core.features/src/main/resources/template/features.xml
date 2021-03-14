@@ -72,7 +72,7 @@
         <bundle>mvn:org.apache.commons/commons-text/${commons-text.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/website.dao/${website.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/website.ui/${website.version}</bundle>
-        <!-- <bundle>mvn:io.github.vm.patlego/website.core/${website.version}</bundle> -->
+        <bundle>mvn:io.github.vm.patlego/website.core/${website.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-encryption" version="${project.version}">
