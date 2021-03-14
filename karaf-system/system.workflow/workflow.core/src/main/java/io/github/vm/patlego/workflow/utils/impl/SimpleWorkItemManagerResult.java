@@ -10,8 +10,8 @@
 
 package io.github.vm.patlego.workflow.utils.impl;
 
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkItemId;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWI;
+import io.github.vm.patlego.workflow.datasource.tables.WorkItemId;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWI;
 import io.github.vm.patlego.workflow.utils.WorkItemManagerResult;
 import io.github.vm.patlego.workflow.utils.WorkflowManagerResult;
 

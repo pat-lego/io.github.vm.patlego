@@ -1,4 +1,4 @@
-package io.github.vm.patlego.urls;
+package io.github.vm.patlego.config.urls;
 
 public class DevSystemURL implements SystemURL {
 

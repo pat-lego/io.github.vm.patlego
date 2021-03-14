@@ -8,7 +8,7 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package io.github.vm.patlego.datasource.workflowmanager.tables;
+package io.github.vm.patlego.workflow.datasource.tables;
 
 import java.io.Serializable;
 

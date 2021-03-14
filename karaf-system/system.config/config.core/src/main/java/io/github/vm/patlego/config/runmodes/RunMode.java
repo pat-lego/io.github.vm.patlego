@@ -1,4 +1,4 @@
-package io.github.vm.patlego.runmodes;
+package io.github.vm.patlego.config.runmodes;
 
 import javax.annotation.Nonnull;
 

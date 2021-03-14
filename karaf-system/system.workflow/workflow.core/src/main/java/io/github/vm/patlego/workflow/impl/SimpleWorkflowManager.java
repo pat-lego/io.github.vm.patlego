@@ -24,10 +24,11 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.github.vm.patlego.datasource.workflowmanager.repo.WorkflowManagerDS;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWF;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWI;
+
 import io.github.vm.patlego.workflow.WorkflowManager;
+import io.github.vm.patlego.workflow.datasource.repo.WorkflowManagerDS;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWF;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWI;
 import io.github.vm.patlego.workflow.exceptions.FailedWorfklowAdditonException;
 import io.github.vm.patlego.workflow.exceptions.FailedWorfklowRemovalException;
 import io.github.vm.patlego.workflow.exceptions.FailedWorkflowRetrievalException;

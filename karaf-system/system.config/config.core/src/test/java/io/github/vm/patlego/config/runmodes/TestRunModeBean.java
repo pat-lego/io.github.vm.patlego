@@ -1,4 +1,4 @@
-package io.github.vm.patlego.runmodes;
+package io.github.vm.patlego.config.runmodes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

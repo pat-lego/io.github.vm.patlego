@@ -8,7 +8,7 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package io.github.vm.patlego.datasource.workflowmanager.repo.impl;
+package io.github.vm.patlego.workflow.datasource.repo.impl;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -26,9 +26,10 @@ import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.github.vm.patlego.datasource.workflowmanager.repo.WorkflowManagerDS;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWF;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWI;
+import io.github.vm.patlego.workflow.datasource.repo.WorkflowManagerDS;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWF;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWI;
+
 
 @Component(immediate = true, service = WorkflowManagerDS.class)
 public class WorkflowManagerDSImpl implements WorkflowManagerDS {

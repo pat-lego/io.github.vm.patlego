@@ -12,10 +12,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import io.github.vm.patlego.datasource.workflowmanager.repo.WorkflowManagerDS;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkItemId;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWF;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWI;
+import io.github.vm.patlego.workflow.datasource.repo.WorkflowManagerDS;
+import io.github.vm.patlego.workflow.datasource.tables.WorkItemId;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWF;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWI;
 import io.github.vm.patlego.workflow.exceptions.FailedWorfklowAdditonException;
 import io.github.vm.patlego.workflow.exceptions.FailedWorfklowRemovalException;
 import io.github.vm.patlego.workflow.utils.WorkItemManagerResult;

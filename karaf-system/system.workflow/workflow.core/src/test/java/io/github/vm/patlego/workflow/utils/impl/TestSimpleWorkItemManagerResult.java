@@ -8,9 +8,9 @@ import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkItemId;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWF;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWI;
+import io.github.vm.patlego.workflow.datasource.tables.WorkItemId;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWF;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWI;
 import io.github.vm.patlego.workflow.utils.WorkItemManagerResult;
 import io.github.vm.patlego.workflow.utils.WorkflowManagerResult;
 

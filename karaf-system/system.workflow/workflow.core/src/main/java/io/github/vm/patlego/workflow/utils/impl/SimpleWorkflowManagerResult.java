@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWF;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWF;
 import io.github.vm.patlego.workflow.utils.WorkItemManagerResult;
 import io.github.vm.patlego.workflow.utils.WorkflowManagerResult;
 

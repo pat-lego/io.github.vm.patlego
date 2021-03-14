@@ -1,4 +1,4 @@
-package io.github.vm.patlego.runmodes;
+package io.github.vm.patlego.config.runmodes;
 
 /**
  * This class will be populated using Apache Blueprint. Properties will be

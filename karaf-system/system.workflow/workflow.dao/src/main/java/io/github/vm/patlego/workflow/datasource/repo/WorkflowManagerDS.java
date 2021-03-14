@@ -8,15 +8,15 @@
  * Copyright (c) 2020 LegoTech
  */
 
-package io.github.vm.patlego.datasource.workflowmanager.repo;
+package io.github.vm.patlego.workflow.datasource.repo;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWF;
-import io.github.vm.patlego.datasource.workflowmanager.tables.WorkflowManagerWI;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWF;
+import io.github.vm.patlego.workflow.datasource.tables.WorkflowManagerWI;
 
 public interface WorkflowManagerDS {
 
