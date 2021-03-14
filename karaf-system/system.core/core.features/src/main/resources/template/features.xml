@@ -19,14 +19,14 @@
 <features name="io.github.vm.patlego-{project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
 
     <feature name="patlego-vm" version="${project.version}">
+        <feature>patlego-vm-ioutils</feature>
         <feature>patlego-vm-gson</feature>
         <feature>patlego-vm-encryption</feature>
         <feature>patlego-vm-config</feature>
         <feature>pax-jdbc-postgresql</feature>
         <feature>patlego-vm-jdbc-datasource</feature>
-        <feature>patlego-vm-hibernate-types</feature>
         <feature>patlego-vm-workflow</feature>
-        <!-- <feature>patlego-vm-client</feature> -->
+        <feature>patlego-vm-client</feature>
         <feature>patlego-vm-mail</feature>
         <feature>patlego-vm-aws</feature>
         <feature>patlego-vm-html</feature>
@@ -51,12 +51,12 @@
         </capability>
     </feature>
 
-    <feature name="patlego-vm-hibernate-types">
-        <bundle>wrap:mvn:com.vladmihalcea/hibernate-types-52/${hibernate-types.version}/$Bundle-SymbolicName=hibernate-types&amp;Bundle-Version=${hibernate-types.version}&amp;Export-Package=com.vladmihalcea.hibernate.type.*;version=&quot;${hibernate-types.version}&quot;</bundle>
-    </feature>
-
     <feature name="patlego-vm-gson">
         <bundle>mvn:com.google.code.gson/gson/${google-gson.version}</bundle>
+    </feature>
+
+    <feature name="patlego-vm-ioutils" version="${commons-io.version}">
+        <bundle>mvn:commons-io/commons-io/${commons-io.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-client" version="${website.version}">
@@ -69,11 +69,10 @@
         <bundle dependency="true">mvn:com.fasterxml.jackson.module/jackson-module-jaxb-annotations/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${jackson.version}</bundle>
-        <bundle>mvn:commons-io/commons-io/${commons-io.version}</bundle>
         <bundle>mvn:org.apache.commons/commons-text/${commons-text.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/website.dao/${website.version}</bundle>
         <bundle>mvn:io.github.vm.patlego/website.ui/${website.version}</bundle>
-        <bundle>mvn:io.github.vm.patlego/website.core/${website.version}</bundle>
+        <!-- <bundle>mvn:io.github.vm.patlego/website.core/${website.version}</bundle> -->
     </feature>
 
     <feature name="patlego-vm-encryption" version="${project.version}">

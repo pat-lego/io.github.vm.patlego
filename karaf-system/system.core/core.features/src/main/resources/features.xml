@@ -19,14 +19,14 @@
 <features name="io.github.vm.patlego-{project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
 
     <feature name="patlego-vm" version="1.0-SNAPSHOT">
+        <feature>patlego-vm-ioutils</feature>
         <feature>patlego-vm-gson</feature>
         <feature>patlego-vm-encryption</feature>
         <feature>patlego-vm-config</feature>
         <feature>pax-jdbc-postgresql</feature>
         <feature>patlego-vm-jdbc-datasource</feature>
-        <feature>patlego-vm-hibernate-types</feature>
         <feature>patlego-vm-workflow</feature>
-        <!-- <feature>patlego-vm-client</feature> -->
+        <feature>patlego-vm-client</feature>
         <feature>patlego-vm-mail</feature>
         <feature>patlego-vm-aws</feature>
         <feature>patlego-vm-html</feature>
@@ -51,12 +51,12 @@
         </capability>
     </feature>
 
-    <feature name="patlego-vm-hibernate-types">
-        <bundle>wrap:mvn:com.vladmihalcea/hibernate-types-52/2.10.3/$Bundle-SymbolicName=hibernate-types&amp;Bundle-Version=2.10.3&amp;Export-Package=com.vladmihalcea.hibernate.type.*;version=&quot;2.10.3&quot;</bundle>
-    </feature>
-
     <feature name="patlego-vm-gson">
         <bundle>mvn:com.google.code.gson/gson/2.8.6</bundle>
+    </feature>
+
+    <feature name="patlego-vm-ioutils" version="2.8.0">
+        <bundle>mvn:commons-io/commons-io/2.8.0</bundle>
     </feature>
 
     <feature name="patlego-vm-client" version="1.0-SNAPSHOT">
@@ -69,11 +69,10 @@
         <bundle dependency="true">mvn:com.fasterxml.jackson.module/jackson-module-jaxb-annotations/2.11.3</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.11.3</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.11.3</bundle>
-        <bundle>mvn:commons-io/commons-io/2.8.0</bundle>
         <bundle>mvn:org.apache.commons/commons-text/1.9</bundle>
         <bundle>mvn:io.github.vm.patlego/website.dao/1.0-SNAPSHOT</bundle>
         <bundle>mvn:io.github.vm.patlego/website.ui/1.0-SNAPSHOT</bundle>
-        <bundle>mvn:io.github.vm.patlego/website.core/1.0-SNAPSHOT</bundle>
+        <!-- <bundle>mvn:io.github.vm.patlego/website.core/1.0-SNAPSHOT</bundle> -->
     </feature>
 
     <feature name="patlego-vm-encryption" version="1.0-SNAPSHOT">
