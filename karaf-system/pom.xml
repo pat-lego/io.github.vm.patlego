@@ -26,7 +26,7 @@
     <postgres.ecs.username>karaf</postgres.ecs.username>
     <postgres.ecs.password />
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <karaf.runtime.version>4.3.0</karaf.runtime.version>
+    <karaf.runtime.version>4.3.1</karaf.runtime.version>
     <jackson.version>2.11.3</jackson.version>
     <cxf.version>3.3.3</cxf.version>
     <website.version>1.0-SNAPSHOT</website.version>

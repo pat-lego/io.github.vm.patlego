@@ -18,8 +18,8 @@
 -->
 <features name="io.github.vm.patlego-{project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
 
-    <!-- <repository>mvn:org.apache.karaf.features/spring-legacy/4.3.0/xml/features</repository>
-    <repository>mvn:org.apache.activemq/activemq-karaf/[5.14,6)/xml/features</repository> -->
+    <repository>mvn:org.apache.karaf.features/spring-legacy/4.3.1/xml/features</repository>
+    <repository>mvn:org.apache.activemq/activemq-karaf/[5.14,6)/xml/features</repository> 
 
     <feature name="patlego-vm" version="${project.version}">
         <feature>patlego-vm-ioutils</feature>
@@ -34,11 +34,6 @@
         <feature>patlego-vm-aws</feature>
         <feature>patlego-vm-html</feature>
         <feature>patlego-vm-html-samples</feature>
-    </feature>
-
-    <!-- This is to be deleted when we migrate to 4.3.1 -->
-    <feature name="jetty" description="Transition feature for backward compatibility" version="9.4.35.v20201120">
-        <feature>pax-jetty</feature>
     </feature>
 
     <feature name="patlego-vm-jdbc-datasource" version="${project.version}">
@@ -136,12 +131,6 @@
     <feature name="patlego-vm-html-samples" version="${project.version}">
         <feature>patlego-vm-html</feature>
         <bundle>mvn:io.github.vm.patlego.html/examples.simple/${html.version}</bundle>
-    </feature>
-
-    <feature name="patlego-vm-example-activemq" version="${project.version}">
-        <feature version="[4,5)">spring</feature>
-        <feature>aries-blueprint</feature>
-        <feature>shell-compat</feature>
     </feature>
 
     <feature name="patlego-vm-example-jms-connectionfactory" version="${project.version}">
