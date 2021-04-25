@@ -34,6 +34,8 @@
         <feature>patlego-vm-aws</feature>
         <feature>patlego-vm-html</feature>
         <feature>patlego-vm-html-samples</feature>
+        <feature>patlego-vm-jms-activemq</feature>
+        <feature>patlego-vm-jms-connectionfactory</feature>
     </feature>
 
     <feature name="patlego-vm-jdbc-datasource" version="${project.version}">
@@ -133,7 +135,14 @@
         <bundle>mvn:io.github.vm.patlego.html/examples.simple/${html.version}</bundle>
     </feature>
 
-    <feature name="patlego-vm-example-jms-connectionfactory" version="${project.version}">
+    <feature name="patlego-vm-jms-activemq" version="${project.version}">
+        <feature version="[4,5)">spring</feature>
+        <feature>aries-blueprint</feature>
+        <feature>shell-compat</feature>
+        <feature>activemq-broker</feature>
+    </feature>
+
+    <feature name="patlego-vm-jms-connectionfactory" version="${project.version}">
         <feature>activemq-client</feature>
         <feature>jms</feature>
         <feature>pax-jms-activemq</feature>

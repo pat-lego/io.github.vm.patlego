@@ -63,9 +63,6 @@
             <feature>webconsole</feature>
             <feature>shell-compat</feature>
 
-            <!-- This is to be deleted when we migrate to 4.3.1 -->
-            <feature>jetty</feature>
-
             <feature>scr</feature>
             <feature>http</feature>
             <feature>http-whiteboard</feature>
@@ -80,13 +77,11 @@
             <feature>pax-jdbc-spec</feature>
             <feature>pax-jdbc-config</feature>
             <feature>pax-jdbc-pool-dbcp2</feature>
-            <feature dependency="true">aries-blueprint</feature>
-            <feature version="[2,3)">jpa</feature>
-            <feature version="[5,6)">hibernate</feature>
+            <feature >aries-blueprint</feature>
+            <feature>jpa</feature>
+            <feature>hibernate</feature>
 
             <feature>patlego-vm</feature>
-            <!-- <feature>patlego-vm-example-activemq</feature> -->
-            <feature>patlego-vm-example-jms-connectionfactory</feature>
           </bootFeatures>
 
           <workDirectory>${project.build.directory}/assembly/patlego.vm</workDirectory>
