@@ -85,8 +85,18 @@
             <feature version="[5,6)">hibernate</feature>
 
             <feature>patlego-vm</feature>
-
           </bootFeatures>
+
+          <installedRepositories>
+            <repository>mvn:org.apache.karaf.features/spring-legacy/4.3.0/xml/features</repository>
+            <repository>mvn:org.apache.activemq/activemq-karaf/[5.14,6)/xml/features</repository>
+          </installedRepositories>
+
+          <installedFeatures>
+            <feature>patlego-vm-example-activemq</feature>
+            <feature>patlego-vm-example-jms-connectionfactory</feature>
+          </installedFeatures>
+
           <workDirectory>${project.build.directory}/assembly/patlego.vm</workDirectory>
           <pathPrefix>patlego.vm</pathPrefix>
         </configuration>
