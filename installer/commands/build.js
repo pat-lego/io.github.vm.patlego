@@ -58,10 +58,10 @@ function mvnBuild(args) {
 }
 
 function composeDown(args) {
-    const cmd = `docker-compose -f ${args[cli.CMD_BUILD].composeFile} down`;
+    const cmd = `docker compose -f ${args[cli.CMD_BUILD].composeFile} down`;
 
-    if (!shell.which('docker-compose')) {
-        throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
+    if (!shell.which('docker')) {
+        throw Error('docker is not installed on the system, please install it prior to executing the installer');
     }
 
     console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
@@ -70,10 +70,10 @@ function composeDown(args) {
 
 
 function composeBuild(args) {
-    const cmd = `docker-compose -f ${args[cli.CMD_BUILD].composeFile} build`;
+    const cmd = `docker compose -f ${args[cli.CMD_BUILD].composeFile} build`;
 
-    if (!shell.which('docker-compose')) {
-        throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
+    if (!shell.which('docker')) {
+        throw Error('docker is not installed on the system, please install it prior to executing the installer');
     }
 
     console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
@@ -81,10 +81,10 @@ function composeBuild(args) {
 }
 
 function startDatabase(args) {
-    const cmd = `docker-compose -f ${args[cli.CMD_BUILD].composeFile} up -d postgres-db`;
+    const cmd = `docker compose -f ${args[cli.CMD_BUILD].composeFile} up -d postgres-db`;
     
-    if (!shell.which('docker-compose')) {
-        throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
+    if (!shell.which('docker')) {
+        throw Error('docker is not installed on the system, please install it prior to executing the installer');
     }
 
     console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
@@ -110,10 +110,10 @@ async function executeSQL(args) {
 }
 
 function startServer(args) {
-    const cmd = `docker-compose -f ${args[cli.CMD_BUILD].composeFile} up -d karaf`;
+    const cmd = `docker compose -f ${args[cli.CMD_BUILD].composeFile} up -d karaf`;
 
-    if (!shell.which('docker-compose')) {
-        throw Error('docker-compose is not installed on the system, please install it prior to executing the installer');
+    if (!shell.which('docker')) {
+        throw Error('docker is not installed on the system, please install it prior to executing the installer');
     }
     
     console.log(`${CLI_CMD_MSG} ${cmd}`.underline.yellow);
