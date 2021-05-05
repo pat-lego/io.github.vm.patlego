@@ -9,11 +9,26 @@
   <groupId>io.github.vm.patlego</groupId>
   <artifactId>system.aws</artifactId>
   <packaging>pom</packaging>
-  
+
   <name>System AWS</name>
 
   <modules>
     <module>aws.core</module>
     <module>aws.cfg</module>
   </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>s3</artifactId>
+        <version>${aws.sdk.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>apache-client</artifactId>
+        <version>${aws.sdk.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project> 

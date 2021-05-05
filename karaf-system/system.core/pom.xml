@@ -10,9 +10,40 @@
   <artifactId>system.core</artifactId>
 
   <packaging>pom</packaging>
-  
+
   <modules>
     <module>core.features</module>
     <module>core.kernel</module>
   </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>io.fabric8</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>0.33.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.cxf.karaf</groupId>
+        <artifactId>apache-cxf</artifactId>
+        <type>xml</type>
+        <classifier>features</classifier>
+        <scope>runtime</scope>
+        <version>3.4.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        <version>3.4.2</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project> 
