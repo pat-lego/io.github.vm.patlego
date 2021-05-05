@@ -36,6 +36,7 @@
         <feature>patlego-vm-html-samples</feature>
         <feature>patlego-vm-jms-activemq</feature>
         <feature>patlego-vm-jms-connectionfactory</feature>
+        <feature>patlego-vm-sms</feature>
     </feature>
 
     <feature name="patlego-vm-jdbc-datasource" version="${project.version}">
@@ -149,6 +150,11 @@
             url=tcp://localhost:61616
             user=karaf
         </config>
+    </feature>
+
+    <feature name="patlego-vm-sms" version="${project.version}">
+        <bundle>mvn:io.jsonwebtoken/jjwt-api/0.11.2</bundle>
+        <bundle>mvn:io.jsonwebtoken/jjwt-impl/0.11.2</bundle>
     </feature>
 
 </features>

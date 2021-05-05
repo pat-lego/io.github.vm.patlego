@@ -16,6 +16,7 @@
     <module>system.aws</module>
     <module>system.config</module>
     <module>system.core</module>
+    <module>system.sms</module>
   </modules>
   
   <properties>
