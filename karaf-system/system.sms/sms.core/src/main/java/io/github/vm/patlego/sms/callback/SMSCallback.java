@@ -2,37 +2,37 @@ package io.github.vm.patlego.sms.callback;
 
 import com.twilio.rest.api.v2010.account.Message;
 
-public class SMSCallback {
+public interface SMSCallback {
 
-    public void sending(Message message) {
+    public default void sending(Message message) {
         // Do nothing because it is meant to be overriden
     }
 
-    public void sent(Message message) {
+    public default void sent(Message message) {
         // Do nothing because it is meant to be overriden
     }
 
-    public void failed(Message message) {
+    public default void failed(Message message) {
         // Do nothing because it is meant to be overriden
     }
 
-    public void delivered(Message message) {
+    public default void delivered(Message message) {
         // Do nothing because it is meant to be overriden
     }
 
-    public void undelivered(Message message) {
+    public default void undelivered(Message message) {
         // Do nothing because it is meant to be overriden
     }
 
-    public void receiving(Message message) {
+    public default void receiving(Message message) {
         // Do nothing because it is meant to be overriden
     }
 
-    public void received(Message message) {
+    public default void received(Message message) {
         // Do nothing because it is meant to be overriden
     }
 
-    public void read(Message message) {
+    public default void read(Message message) {
         // Do nothing because it is meant to be overriden
     }
 }
