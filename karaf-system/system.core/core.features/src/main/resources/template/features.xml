@@ -155,6 +155,8 @@
     <feature name="patlego-vm-sms" version="${project.version}">
         <bundle>mvn:io.jsonwebtoken/jjwt-api/0.11.2</bundle>
         <bundle>mvn:io.jsonwebtoken/jjwt-impl/0.11.2</bundle>
+        <configfile finalname="${karaf.etc}/io.github.vm.patlego.sms.SMSService-patlegovm.cfg">mvn:io.github.vm.patlego/sms.cfg/${project.version}/cfg/default</configfile>
+        <bundle>mvn:io.github.vm.patlego/sms.core/${project.version}</bundle>
     </feature>
 
 </features>
