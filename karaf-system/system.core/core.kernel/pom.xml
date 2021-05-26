@@ -16,6 +16,7 @@
 
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
+    <karaf.pwd/>
   </properties>
 
   <build>
@@ -147,7 +148,7 @@
             <executions>
               <execution>
                 <id>copy-docker</id>
-                <phase>verify</phase>
+                <phase>package</phase>
                 <goals>
                   <goal>copy-resources</goal>
                 </goals>
@@ -161,7 +162,46 @@
                   </resources>
                 </configuration>
               </execution>
+              <execution>
+                <id>copy-features</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${basedir}/target/assembly/patlego.vm/etc</outputDirectory>
+                  <resources>
+                    <resource>
+                      <directory>src/main/environments/ecs/features</directory>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.google.code.maven-replacer-plugin</groupId>
+            <artifactId>replacer</artifactId>
+            <executions>
+              <execution>
+                <phase>install</phase>
+                <goals>
+                  <goal>replace</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <includes>
+                <include>${basedir}/target/assembly/patlego.vm/etc/users.properties</include>
+              </includes>
+              <replacements>
+                <replacement>
+                  <token>%karaf.pwd%</token>
+                  <value>${karaf.pwd}</value>
+                </replacement>
+              </replacements>
+            </configuration>
           </plugin>
           <plugin>
             <groupId>io.fabric8</groupId>
@@ -172,14 +212,14 @@
                 <goals>
                   <goal>remove</goal>
                 </goals>
-                <phase>verify</phase>
+                <phase>install</phase>
               </execution>
               <execution>
                 <id>Build Docker</id>
                 <goals>
                   <goal>build</goal>
                 </goals>
-                <phase>verify</phase>
+                <phase>install</phase>
               </execution>
             </executions>
             <configuration>
