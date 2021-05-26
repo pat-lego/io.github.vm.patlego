@@ -32,8 +32,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <karaf.runtime.version>4.3.2</karaf.runtime.version>
     <cxf.version>3.3.3</cxf.version>
-    <website.version>1.0-SNAPSHOT</website.version>
-    <html.version>1.0-SNAPSHOT</html.version>
     <jasypt.version>1.9.3</jasypt.version>
     <javax.mail.version>1.4.7</javax.mail.version>
     <aws.sdk.version>2.15.69</aws.sdk.version>
