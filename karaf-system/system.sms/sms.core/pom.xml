@@ -33,7 +33,7 @@
               !javax.annotation, 
               org.apache.karaf.shell*;version="[4,5)",
               *</Import-Package>
-            <Export-Package>io.github.vm.patlego.sms.*</Export-Package>
+            <Export-Package>io.github.vm.patlego.sms.sender.*</Export-Package>
             <Embed-Dependency>twilio,
               jackson-core,
               jackson-annotations,
