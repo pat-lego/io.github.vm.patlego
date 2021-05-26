@@ -12,11 +12,11 @@
     <module>system.sql</module>
     <module>system.workflow</module>
     <module>system.encryption</module>
+    <module>system.sms</module>
     <module>system.mail</module>
     <module>system.aws</module>
     <module>system.config</module>
     <module>system.core</module>
-    <module>system.sms</module>
   </modules>
   
   <properties>
