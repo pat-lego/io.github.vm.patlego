@@ -33,7 +33,6 @@ import io.github.vm.patlego.mail.EmailService;
 import io.github.vm.patlego.mail.bean.SmtpAuthentication;
 import io.github.vm.patlego.mail.bean.SmtpServer;
 import io.github.vm.patlego.mail.exceptions.EmailTransmissionException;
-import io.github.vm.patlego.mail.exceptions.InvalidAddressException;
 import io.github.vm.patlego.mail.bean.EmailAttachment;
 import io.github.vm.patlego.mail.bean.EmailContent;
 import io.github.vm.patlego.mail.bean.EmailRecipient;
@@ -108,8 +107,8 @@ public class EmailServiceImpl implements EmailService {
         properties.put("mail.smtp.port", this.smtpServer.getSmtpPort().toString());
         properties.put("mail.smtp.auth", "true");
 
-        if (!recipient.getBounce().toString().trim().equals(StringUtils.EMPTY)) {
-            properties.put("mail.smtp.from", recipient.getBounce().toString());
+        if (!recipient.getBounce().trim().equals(StringUtils.EMPTY)) {
+            properties.put("mail.smtp.from", recipient.getBounce());
         }
 
         if (this.smtpServer.getSmtpProtocol().equalsIgnoreCase("TLS")) {
@@ -153,7 +152,7 @@ public class EmailServiceImpl implements EmailService {
             this.setFrom(message, recipients);
             this.setSubject(message, content);
 
-            if (content.isUniqueTo()) {
+            if (Boolean.TRUE.equals(content.isUniqueTo())) {
                 Iterator<InternetAddress> to = content.getTo().iterator();
                 while (to.hasNext()) {
                     this.setTo(message, to.next());
@@ -209,7 +208,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     public void setFrom(Message message, EmailRecipient recipients) throws MessagingException {
-        if (recipients.getFrom() == null || recipients.getFrom().toString().isEmpty()) {
+        if (recipients.getFrom() == null || recipients.getFrom().isEmpty()) {
             throw new MessagingException(
                     "Cannot have a null or empty from address please set the FMC Ford Email Service service to resolve this issue");
         }
@@ -230,7 +229,7 @@ public class EmailServiceImpl implements EmailService {
         }
 
         BodyPart bodyPart = new MimeBodyPart();
-        if (content.getHtml()) {
+        if (Boolean.TRUE.equals(content.getHtml())) {
             bodyPart.setContent(message, "text/html; charset=UTF-8");
         } else {
             bodyPart.setText(message);

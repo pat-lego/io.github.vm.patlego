@@ -16,13 +16,23 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-services-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
         <extensions>true</extensions>
         <configuration>
           <exportScr>true</exportScr>
           <instructions>
-            <Import-Package>!javax.annotation, *</Import-Package>
+            <Private-Package>
+              io.github.vm.patlego.sms.sender.commands.*
+            </Private-Package>
+            <Import-Package>
+              !javax.annotation, 
+              org.apache.karaf.shell*;version="[4,5)",
+              *</Import-Package>
             <Export-Package>io.github.vm.patlego.sms.*</Export-Package>
             <Embed-Dependency>twilio,
               jackson-core,
@@ -42,13 +52,25 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.cmpn</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.annotation</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.twilio.sdk</groupId>
       <artifactId>twilio</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-   </dependency>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
@@ -60,6 +82,19 @@
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.karaf.shell</groupId>
+      <artifactId>org.apache.karaf.shell.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.github.vm.patlego</groupId>
+      <artifactId>system.encryption</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 

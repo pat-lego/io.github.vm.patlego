@@ -30,7 +30,7 @@ function build(args) {
     }
 
     if (!args[cli.CMD_BUILD].composeFile) {
-        throw Error('Must supply the location of the docker-compose file in order to perform the operation');
+        throw Error('Must supply the location of the docker compose file in order to perform the operation');
     }
 
     mvnBuild(args);

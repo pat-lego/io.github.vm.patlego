@@ -1,11 +1,11 @@
 package io.github.vm.patlego.sms.sender.bean;
 
-import java.util.List;
+import java.util.Set;
 
 public interface SMSMessage {
 
     public String getMessage();
 
-    public List<String> getNumbers();
+    public Set<String> getNumbers();
 
 }
