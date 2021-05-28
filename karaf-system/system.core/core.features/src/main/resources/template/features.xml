@@ -154,8 +154,9 @@
     </feature>
 
     <feature name="jwt" version="${project.version}">
-        <bundle>mvn:io.jsonwebtoken/jjwt-api/0.11.2</bundle>
-        <bundle>mvn:io.jsonwebtoken/jjwt-impl/0.11.2</bundle>
+        <bundle>mvn:io.jsonwebtoken/jjwt-api/${jjwt.version}</bundle>
+        <bundle>mvn:io.jsonwebtoken/jjwt-impl/${jjwt.version}</bundle>
+        <bundle>mvn:io.jsonwebtoken/jjwt-jackson/${jjwt.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-sms" version="${project.version}">
@@ -167,5 +168,6 @@
     <feature name="patlego-vm-iot" version="${iot.version}">
         <feature>jwt</feature>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.dao/${iot.version}</bundle>
+        <bundle>mvn:io.github.vm.patlego.iot.server/server.core/${iot.version}</bundle>
     </feature>
 </features>
