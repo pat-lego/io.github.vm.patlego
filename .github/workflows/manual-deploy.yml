@@ -81,6 +81,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: karaf-system/system.core/core.kernel/src/main/environments/ecs/docker/taskdefinitions/pat-lego-vm.json
-          service: pat-lego-vm
+          service: karaf-service
           cluster: pat-lego-vm
           wait-for-service-stability: true
