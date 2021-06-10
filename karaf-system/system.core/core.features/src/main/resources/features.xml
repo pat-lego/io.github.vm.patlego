@@ -167,7 +167,9 @@
 
     <feature name="patlego-vm-iot" version="1.0-SNAPSHOT">
         <feature>jwt</feature>
+        <feature>patlego-vm-gson</feature>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.dao/1.0-SNAPSHOT</bundle>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.core/1.0-SNAPSHOT</bundle>
+        <bundle>mvn:io.github.vm.patlego.iot.server/server.web/1.0-SNAPSHOT</bundle>
     </feature>
 </features>

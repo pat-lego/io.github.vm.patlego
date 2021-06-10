@@ -167,7 +167,10 @@
 
     <feature name="patlego-vm-iot" version="${iot.version}">
         <feature>jwt</feature>
+        <feature>patlego-vm-gson</feature>
+        <feature>patlego-vm-ioutils</feature>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.dao/${iot.version}</bundle>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.core/${iot.version}</bundle>
+        <bundle>mvn:io.github.vm.patlego.iot.server/server.web/${iot.version}</bundle>
     </feature>
 </features>
