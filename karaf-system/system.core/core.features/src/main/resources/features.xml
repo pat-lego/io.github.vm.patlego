@@ -163,7 +163,7 @@
         <feature>patlego-vm-gson</feature>
         <feature>patlego-vm-ioutils</feature>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.dao/1.0-SNAPSHOT</bundle>
-        <!-- <bundle>mvn:io.github.vm.patlego.iot.server/server.core/1.0-SNAPSHOT</bundle>
-        <bundle>mvn:io.github.vm.patlego.iot.server/server.web/1.0-SNAPSHOT</bundle> -->
+        <bundle>mvn:io.github.vm.patlego.iot.server/server.core/1.0-SNAPSHOT</bundle>
+        <bundle>mvn:io.github.vm.patlego.iot.server/server.web/1.0-SNAPSHOT</bundle>
     </feature>
 </features>
