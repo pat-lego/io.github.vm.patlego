@@ -37,7 +37,7 @@
         <feature>patlego-vm-jms-activemq</feature>
         <feature>patlego-vm-jms-connectionfactory</feature>
         <feature>patlego-vm-sms</feature>
-        <!-- <feature>patlego-vm-iot</feature> -->
+        <feature>patlego-vm-iot</feature>
     </feature>
 
     <feature name="patlego-vm-jdbc-datasource" version="1.0-SNAPSHOT">
@@ -153,24 +153,17 @@
         </config>
     </feature>
 
-    <!-- <feature name="jwt" version="1.0-SNAPSHOT">
-        <bundle>mvn:io.jsonwebtoken/jjwt-api/0.11.2</bundle>
-        <bundle>mvn:io.jsonwebtoken/jjwt-impl/0.11.2</bundle>
-        <bundle>mvn:io.jsonwebtoken/jjwt-jackson/0.11.2</bundle>
-    </feature> -->
 
     <feature name="patlego-vm-sms" version="1.0-SNAPSHOT">
-        <!-- <feature>jwt</feature> -->
         <configfile finalname="${karaf.etc}/io.github.vm.patlego.sms.SMSService-patlegovm.cfg">mvn:io.github.vm.patlego/sms.cfg/1.0-SNAPSHOT/cfg/default</configfile>
         <bundle>mvn:io.github.vm.patlego/sms.core/1.0-SNAPSHOT</bundle>
     </feature>
 
-    <!-- <feature name="patlego-vm-iot" version="1.0-SNAPSHOT">
-        <feature>jwt</feature>
+    <feature name="patlego-vm-iot" version="1.0-SNAPSHOT">
         <feature>patlego-vm-gson</feature>
         <feature>patlego-vm-ioutils</feature>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.dao/1.0-SNAPSHOT</bundle>
-        <bundle>mvn:io.github.vm.patlego.iot.server/server.core/1.0-SNAPSHOT</bundle>
-        <bundle>mvn:io.github.vm.patlego.iot.server/server.web/1.0-SNAPSHOT</bundle>
-    </feature> -->
+        <!-- <bundle>mvn:io.github.vm.patlego.iot.server/server.core/1.0-SNAPSHOT</bundle>
+        <bundle>mvn:io.github.vm.patlego.iot.server/server.web/1.0-SNAPSHOT</bundle> -->
+    </feature>
 </features>
