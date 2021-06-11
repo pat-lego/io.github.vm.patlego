@@ -153,24 +153,17 @@
         </config>
     </feature>
 
-    <feature name="jwt" version="${project.version}">
-        <bundle>mvn:io.jsonwebtoken/jjwt-api/${jjwt.version}</bundle>
-        <bundle>mvn:io.jsonwebtoken/jjwt-impl/${jjwt.version}</bundle>
-        <bundle>mvn:io.jsonwebtoken/jjwt-jackson/${jjwt.version}</bundle>
-    </feature>
 
     <feature name="patlego-vm-sms" version="${project.version}">
-        <feature>jwt</feature>
         <configfile finalname="${karaf.etc}/io.github.vm.patlego.sms.SMSService-patlegovm.cfg">mvn:io.github.vm.patlego/sms.cfg/${project.version}/cfg/default</configfile>
         <bundle>mvn:io.github.vm.patlego/sms.core/${project.version}</bundle>
     </feature>
 
     <feature name="patlego-vm-iot" version="${iot.version}">
-        <feature>jwt</feature>
         <feature>patlego-vm-gson</feature>
         <feature>patlego-vm-ioutils</feature>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.dao/${iot.version}</bundle>
-        <bundle>mvn:io.github.vm.patlego.iot.server/server.core/${iot.version}</bundle>
-        <bundle>mvn:io.github.vm.patlego.iot.server/server.web/${iot.version}</bundle>
+        <!-- <bundle>mvn:io.github.vm.patlego.iot.server/server.core/${iot.version}</bundle>
+        <bundle>mvn:io.github.vm.patlego.iot.server/server.web/${iot.version}</bundle> -->
     </feature>
 </features>

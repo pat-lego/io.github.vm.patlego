@@ -15,6 +15,7 @@
   <properties>
     <twillio.version>8.11.0</twillio.version>
     <jackson.version>2.12.3</jackson.version>
+    <jjwt.version>0.11.0</jjwt.version>
   </properties>
 
   <modules>
@@ -49,6 +50,21 @@
         <artifactId>jackson-datatype-jsr310</artifactId>
         <version>${jackson.version}</version>
       </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>${jjwt.version}</version>
+    </dependency>
     </dependencies>
   </dependencyManagement>
 </project> 
