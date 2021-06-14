@@ -16,7 +16,7 @@
 
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
-    <karaf.pwd/>
+    <karaf.pwd />
   </properties>
 
   <build>
@@ -65,6 +65,7 @@
             <feature>shell-compat</feature>
 
             <feature>scr</feature>
+            <feature>scheduler</feature>
             <feature>http</feature>
             <feature>http-whiteboard</feature>
             <feature>cxf</feature>
@@ -78,7 +79,7 @@
             <feature>pax-jdbc-spec</feature>
             <feature>pax-jdbc-config</feature>
             <feature>pax-jdbc-pool-dbcp2</feature>
-            <feature >aries-blueprint</feature>
+            <feature>aries-blueprint</feature>
             <feature>jpa</feature>
             <feature>hibernate</feature>
 
