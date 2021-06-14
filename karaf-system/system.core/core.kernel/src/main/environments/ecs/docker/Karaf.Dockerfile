@@ -1,6 +1,8 @@
 FROM openjdk:11
 ENV KARAF_INSTALL_PATH /opt
 ENV KARAF_HOME $KARAF_INSTALL_PATH/patlego.vm
+ENV TZ="America/Montreal"
+
 
 WORKDIR $KARAF_HOME
 ADD patlego.vm/ .
