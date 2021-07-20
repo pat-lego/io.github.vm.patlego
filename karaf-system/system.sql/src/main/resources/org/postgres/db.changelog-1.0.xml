@@ -226,4 +226,15 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet author="pat-lego" id="1.8">
+        <createTable tableName="sensor_configs" schemaName="patlegovm">
+            <column name="sensor_config_id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="config" type="JSONB">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
