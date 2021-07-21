@@ -235,9 +235,13 @@
             <column name="sensor_config" type="JSONB">
                 <constraints nullable="false" />
             </column>
+            <column name="sensor_key" type="VARCHAR">
+                <constraints nullable="false" />
+            </column>
         </createTable>
         <insert catalogName='karaf_db' dbms='postgresql' schemaName='patlegovm' tableName='sensor_configs'>
            <column name='sensor_config' value='{ &quot;module&quot;: &quot;Basement Living Room&quot;, &quot;thread&quot;: &quot;io.github.vm.patlego.iot.basement.livingroom.PIRSensor&quot;, &quot;enable&quot;: true, &quot;system&quot;: { &quot;url&quot;: &quot;https://www.pat-lego.com/cxf/sensors/events&quot;, &quot;hasAuth&quot;: true, &quot;auth&quot;: { &quot;token&quot;: &quot;&quot;, &quot;isEncrypted&quot;: true }, &quot;configRelay&quot;: { &quot;type&quot;: &quot;POST&quot;, &quot;clazz&quot;: &quot;io.github.vm.patlego.iot.basement.livingroom.SensorRelay&quot; } } }' />
+           <column name='sensor_key' value='basement_living_room' />
         </insert>
     </changeSet>
 </databaseChangeLog>
