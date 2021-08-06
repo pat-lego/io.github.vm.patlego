@@ -162,8 +162,16 @@
     <feature name="patlego-vm-iot" version="${iot.version}">
         <feature>patlego-vm-gson</feature>
         <feature>patlego-vm-ioutils</feature>
+        <feature>patlego-vm-jsonpath</feature>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.dao/${iot.version}</bundle>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.core/${iot.version}</bundle>
         <bundle>mvn:io.github.vm.patlego.iot.server/server.web/${iot.version}</bundle>
+    </feature>
+
+    <feature name="patlego-vm-jsonpath" version="${jsonpath.version}">
+        <bundle>mvn:com.jayway.jsonpath/json-path/${jsonpath.version}</bundle>
+        <bundle>mvn:net.minidev/json-smart/2.4.7</bundle>
+        <bundle>mvn:net.minidev/accessors-smart/2.4.7</bundle>
+        <bundle>mvn:org.ow2.asm/asm/8.0</bundle>
     </feature>
 </features>

@@ -244,4 +244,13 @@
            <column name='sensor_key' value='basement_living_room' />
         </insert>
     </changeSet>
+
+    <changeSet author="pat-lego" id="1.9">
+        <update catalogName='karaf_db' dbms='postgresql' schemaName='patlegovm' tableName='sensor_configs'>
+            <column name="sensor_config">
+                { "module": "Basement Living Room", "thread": "io.github.vm.patlego.iot.basement.livingroom.PIRSensor", "logEntry": true, "enableSms": true, "system": { "url": "https://www.pat-lego.com/cxf/sensors/events", "hasAuth": true, "auth": { "token": "", "isEncrypted": true }, "configRelay": { "type": "POST", "clazz": "io.github.vm.patlego.iot.basement.livingroom.SensorRelay" } } }
+            </column>
+            <where>sensor_config_id = 1</where>
+        </update>
+    </changeSet>
 </databaseChangeLog>
