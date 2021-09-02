@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>system.libs</artifactId>
+    <groupId>io.github.vm.patlego</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>io.github.vm.patlego</groupId>
+  <artifactId>jsonpath.wrapper</artifactId>
+  <version>${jsonpath.version}</version>
+  <packaging>bundle</packaging>
+
+  <name>JsonPath Wrapper</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>generate-osgi-metadata-for-unittests</id>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+            <phase>process-classes</phase>
+          </execution>
+          <!-- Configure extra execution of 'manifest' in process-classes phase 
+						to make sure SCR metadata is generated before unit test runs -->
+          <execution>
+            <id>scr-metadata</id>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+            <configuration>
+              <supportIncrementalBuild>true</supportIncrementalBuild>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <exportScr>true</exportScr>
+          <instructions>
+            <Import-Package>!javax.annotation, !sun.security.util, !org.apache.tapestry5.json, !org.json</Import-Package>
+            <!-- Enable processing of OSGI DS component annotations -->
+            <_dsannotations>*</_dsannotations>
+            <!-- Enable processing of OSGI metatype annotations -->
+            <_metatypeannotations>*</_metatypeannotations>
+            <Embed-Dependency>json-path, json-smart, accessors-smart, asm</Embed-Dependency>
+            <Export-Package>com.jayway.jsonpath.*</Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path</artifactId>
+      <version>${jsonpath.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/net.minidev/json-smart -->
+    <dependency>
+      <groupId>net.minidev</groupId>
+      <artifactId>json-smart</artifactId>
+      <version>2.4.7</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/net.minidev/accessors-smart -->
+    <dependency>
+      <groupId>net.minidev</groupId>
+      <artifactId>accessors-smart</artifactId>
+      <version>2.4.7</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>8.0</version>
+    </dependency>
+  </dependencies>
+
+
+</project>

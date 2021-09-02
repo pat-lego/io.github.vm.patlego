@@ -5,11 +5,10 @@
   <artifactId>karaf-system</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-
   <name>Karaf System</name>
-  
   <modules>
     <module>system.sql</module>
+    <module>system.libs</module>
     <module>system.workflow</module>
     <module>system.encryption</module>
     <module>system.sms</module>
@@ -44,7 +43,6 @@
     <hibernate-types.version>2.10.3</hibernate-types.version>
     <jsonpath.version>2.5.0</jsonpath.version>
   </properties>
-  
   <repositories>
     <repository>
       <id>central</id>
@@ -72,7 +70,6 @@
       <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego.iot</url>
     </repository>
   </repositories>
-
   <distributionManagement>
     <repository>
       <id>patlego-core</id>
@@ -80,7 +77,6 @@
       <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego</url>
     </repository>
   </distributionManagement>
-
   <build>
     <pluginManagement>
       <plugins>
@@ -160,7 +156,6 @@
       </plugins>
     </pluginManagement>
   </build>
-  
   <dependencyManagement>
     <dependencies>
       <dependency>
