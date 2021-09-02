@@ -9,7 +9,6 @@
 
   <groupId>io.github.vm.patlego</groupId>
   <artifactId>jsonpath.wrapper</artifactId>
-  <version>${jsonpath.version}</version>
   <packaging>bundle</packaging>
 
   <name>JsonPath Wrapper</name>
@@ -50,6 +49,7 @@
             <_metatypeannotations>*</_metatypeannotations>
             <Embed-Dependency>json-path, json-smart, accessors-smart, asm</Embed-Dependency>
             <Export-Package>com.jayway.jsonpath.*</Export-Package>
+            <Bundle-Version>${jsonpath.version}</Bundle-Version>
           </instructions>
         </configuration>
       </plugin>
