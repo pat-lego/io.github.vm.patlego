@@ -1,4 +1,4 @@
-name: Manual Deploy to ECS
+name: Manual Deploy to ECS Updates
 on:
   workflow_dispatch
 jobs:
