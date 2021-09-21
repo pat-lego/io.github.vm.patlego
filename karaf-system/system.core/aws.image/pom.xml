@@ -14,7 +14,7 @@
 
   <profiles>
     <profile>
-      <id>aws-build</id>
+      <id>ecs-build</id>
       <build>
         <plugins>
           <plugin>

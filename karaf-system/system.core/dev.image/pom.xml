@@ -44,7 +44,7 @@
                   <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${maven.multiModuleProjectDirectory}/system.core/core.kernel/target/assembly/target/assembly/patlego.vm/etc</outputDirectory>
+                  <outputDirectory>${maven.multiModuleProjectDirectory}/system.core/core.kernel/target/assembly/patlego.vm/etc</outputDirectory>
                   <resources>
                     <resource>
                       <directory>src/main/environments/dev/features</directory>

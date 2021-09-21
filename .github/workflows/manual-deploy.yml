@@ -75,7 +75,7 @@ jobs:
 
           ls
       - name: Prep Image
-        run: mvn clean install --file karaf-system/system.core/pom.xml --projects aws.image -Paws-build -Dkaraf.pwd=$KARAF_PWD
+        run: mvn clean install --file karaf-system/system.core/pom.xml --projects aws.image -Pecs-build -Dkaraf.pwd=$KARAF_PWD
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           KARAF_PWD: ${{secrets.KARAF_PWD}}
