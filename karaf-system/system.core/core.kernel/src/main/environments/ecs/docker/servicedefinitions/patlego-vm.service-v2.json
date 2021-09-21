@@ -1,0 +1,26 @@
+{
+    "serviceName": "karaf-service-v2",
+    "taskDefinition": "pat-legovm-taskdef2:1",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:ca-central-1:525939336058:targetgroup/pat-lego-vm/f9d5c90481c39bbe",
+            "containerName": "karaf-container",
+            "containerPort": 8181
+        }
+    ],
+    "desiredCount": 1,
+    "healthCheckGracePeriodSeconds": 600,
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": [
+                "subnet-0a1dd2dd5c3635ba3",
+                "subnet-0722478414ed72692"
+            ],
+            "securityGroups": [
+                "sg-0af77ac9fdd777983"
+            ],
+            "assignPublicIp": "ENABLED"
+        }
+    },
+    "launchType": "FARGATE"
+}
