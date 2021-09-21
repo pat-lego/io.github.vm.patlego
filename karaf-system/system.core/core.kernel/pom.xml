@@ -15,7 +15,6 @@
   <name>Core Kernel</name>
 
   <properties>
-    <maven.deploy.skip>true</maven.deploy.skip>
     <karaf.pwd />
   </properties>
 

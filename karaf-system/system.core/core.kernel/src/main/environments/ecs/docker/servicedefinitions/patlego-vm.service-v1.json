@@ -1,5 +1,6 @@
 {
-    "serviceName": "karaf-service",
+    "cluster": "pat-lego-vm",
+    "serviceName": "karaf-service-v1",
     "taskDefinition": "pat-legovm-taskdef2:1",
     "loadBalancers": [
         {

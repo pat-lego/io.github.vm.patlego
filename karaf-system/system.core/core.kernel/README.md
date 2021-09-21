@@ -194,3 +194,15 @@ Once the connection to the endpoint is built an internet connection will need to
     - Select the subnet
     - Click Create Route
     - Once complete do this for all other subnets
+
+## ECS Create Service
+
+There are many reasons as to why you would want to update a service, add a new load balancer, change health-check-grace period timeout. You need to create a new a service which can be done by executing the following command.
+
+```
+aws ecs create-service --cli-input-json file://./patlego-vm.service-vX.json
+```
+
+**Note:** Make sure that the serviceName parameter in the JSON matches the file name
+
+Then you can update the manual-deploy.yml workflow in order to reflect the new service to register and deploy
