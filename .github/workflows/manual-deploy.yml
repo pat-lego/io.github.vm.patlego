@@ -19,8 +19,20 @@ jobs:
         with:
           java-version: "11"
           architecture: x64
-      - name: Run Maven
+      - name: Get System
         run: mvn dependency:get -DgroupId=io.github.vm.patlego -DartifactId=core.kernel -Dversion=1.0-SNAPSHOT -Dpackaging=zip -DremoteRepositories=patlego-core::::https://maven.pkg.github.com/pat-lego/io.github.vm.patlego -Ddest=.
+        env:
+          KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
+          KARAF_PWD: ${{secrets.KARAF_PWD}}
+          PACKAGES_WEBSITE_TOKEN: ${{secrets.PACKAGES_WEBSITE_TOKEN}}
+          PACKAGES_HTML_TOKEN: ${{secrets.PACKAGES_HTML_TOKEN}}
+          PACKAGES_CORE_TOKEN: ${{secrets.PACKAGES_CORE_TOKEN}}
+          PACKAGES_IOT_TOKEN: ${{secrets.PACKAGES_IOT_TOKEN}}
+      - name: Shell Script 1
+        run: | 
+          ls
+          pwd
+          unzip core.kernel-1.0-SNAPSHOT.zip
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           KARAF_PWD: ${{secrets.KARAF_PWD}}
