@@ -77,37 +77,6 @@
               </replacements>
             </configuration>
           </plugin>
-          <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>Remove Docker</id>
-                <goals>
-                  <goal>remove</goal>
-                </goals>
-                <phase>install</phase>
-              </execution>
-              <execution>
-                <id>Build Docker</id>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-                <phase>install</phase>
-              </execution>
-            </executions>
-            <configuration>
-              <images>
-                <image>
-                  <name>525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego-vm:karaf-vm</name>
-                  <alias>dockerfile</alias>
-                  <build>
-                    <dockerFile>/home/runner/work/io.github.vm.patlego/io.github.vm.patlego/Karaf.Dockerfile</dockerFile>
-                  </build>
-                </image>
-              </images>
-            </configuration>
-          </plugin>
         </plugins>
       </build>
     </profile>

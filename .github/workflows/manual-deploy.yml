@@ -42,7 +42,7 @@ jobs:
           cd /home/runner/work/io.github.vm.patlego/io.github.vm.patlego
 
           ls
-      - name: Build Image
+      - name: Prep Image
         run: mvn clean install --file karaf-system/system.core/pom.xml --projects aws.image -Paws-build -Dkaraf.pwd=$KARAF_PWD
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
@@ -51,3 +51,6 @@ jobs:
           PACKAGES_HTML_TOKEN: ${{secrets.PACKAGES_HTML_TOKEN}}
           PACKAGES_CORE_TOKEN: ${{secrets.PACKAGES_CORE_TOKEN}}
           PACKAGES_IOT_TOKEN: ${{secrets.PACKAGES_IOT_TOKEN}}
+      - name: Build Image
+        run: |
+          docker build -f Karaf.Dockerfile -t 525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego-vm:karaf-vm .
