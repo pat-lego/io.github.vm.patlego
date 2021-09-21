@@ -2,43 +2,10 @@ name: Manual Deploy to ECS
 on:
   workflow_dispatch
 jobs:
-  migrate_db:
-    name: Migrate DB
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'ci skip')"
-    steps:
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      - uses: actions/checkout@v2
-      - name: Setup Java 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: "11"
-          architecture: x64
-      - name: Run Maven
-        run: mvn clean install --projects system.sql --file karaf-system/pom.xml -Dpostgres.ecs.password=$KARAF_DB_PWD -Dmaven.test.skip=true -Pecs-build
-        env:
-          KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.LAMBDA_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.LAMBDA_AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-      - name: Deploy/Invoke DB Lambda Function
-        run: |
-          aws lambda update-function-code --function-name karaf-vm-db-deployment --zip-file fileb://karaf-system/system.sql/target/system.sql.zip
-          aws lambda invoke --function-name karaf-vm-db-deployment --invocation-type RequestResponse db-deployment-response.json | grep 200
   build_and_deploy:
     needs: migrate_db
     name: Deploy new container to ECS
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'ci skip')"
     steps:
       - name: Cache local Maven repository
         uses: actions/cache@v2
@@ -54,7 +21,7 @@ jobs:
           java-version: "11"
           architecture: x64
       - name: Run Maven
-        run: mvn --settings settings.xml clean deploy --file karaf-system/pom.xml -Dpostgres.ecs.password=$KARAF_DB_PWD -Dkaraf.pwd=$KARAF_PWD -Dmaven.test.skip=true -Pecs-build
+        run: mvn dependency:get -DgroupId=io.github.vm.patlego -DartifactId=core.kernel -Dversion=1.0-SNAPSHOT -Dpackaging=zip -DremoteRepositories=patlego-core::::https://maven.pkg.github.com/pat-lego/io.github.vm.patlego -Ddest=.
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           KARAF_PWD: ${{secrets.KARAF_PWD}}
@@ -62,26 +29,3 @@ jobs:
           PACKAGES_HTML_TOKEN: ${{secrets.PACKAGES_HTML_TOKEN}}
           PACKAGES_CORE_TOKEN: ${{secrets.PACKAGES_CORE_TOKEN}}
           PACKAGES_IOT_TOKEN: ${{secrets.PACKAGES_IOT_TOKEN}}
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.ECS_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.ECS_AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-      - name: Push image to Amazon ECR
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: pat-lego-vm
-          IMAGE_TAG: karaf-vm
-        run: |
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      - name: Deploy to Amazon ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          task-definition: karaf-system/system.core/core.kernel/src/main/environments/ecs/docker/taskdefinitions/pat-lego-vm-v1.json
-          service: karaf-service-v2
-          cluster: pat-lego-vm
-          wait-for-service-stability: true

@@ -43,6 +43,7 @@
     <hibernate-types.version>2.10.3</hibernate-types.version>
     <jsonpath.version>2.5.0</jsonpath.version>
   </properties>
+
   <repositories>
     <repository>
       <id>central</id>
@@ -70,6 +71,7 @@
       <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego.iot</url>
     </repository>
   </repositories>
+  
   <distributionManagement>
     <repository>
       <id>patlego-core</id>
@@ -77,6 +79,7 @@
       <url>https://maven.pkg.github.com/pat-lego/io.github.vm.patlego</url>
     </repository>
   </distributionManagement>
+
   <build>
     <pluginManagement>
       <plugins>
