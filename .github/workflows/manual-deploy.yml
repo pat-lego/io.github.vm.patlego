@@ -43,7 +43,7 @@ jobs:
 
           ls
       - name: Build Image
-        run: mvn clean install --file karaf-system/aws.image/pom.xml --projects aws.image -Pprofile aws-build
+        run: mvn clean install --file karaf-system/system.core/pom.xml --projects aws.image -Pprofile aws-build
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           KARAF_PWD: ${{secrets.KARAF_PWD}}
