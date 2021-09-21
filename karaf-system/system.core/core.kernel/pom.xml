@@ -92,54 +92,6 @@
     </plugins>
   </build>
 
-  <profiles>
-    <profile>
-      <id>dev-build</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy-docker</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${basedir}/target/assembly</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/main/environments/dev/docker</directory>
-                      <filtering>true</filtering>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-              <execution>
-                <id>copy-features</id>
-                <!-- here the phase you need -->
-                <phase>verify</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${basedir}/target/assembly/patlego.vm/etc</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/main/environments/dev/features</directory>
-                      <filtering>true</filtering>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
   <dependencies>
     <dependency>
       <groupId>org.apache.karaf.features</groupId>

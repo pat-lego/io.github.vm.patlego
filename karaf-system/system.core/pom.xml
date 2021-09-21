@@ -18,6 +18,7 @@
     <module>core.features</module>
     <module>core.kernel</module>
     <module>aws.image</module>
+    <module>dev.image</module>
   </modules>
   <build>
     <pluginManagement>
