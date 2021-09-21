@@ -54,3 +54,26 @@ jobs:
       - name: Build Image
         run: |
           docker build -f Karaf.Dockerfile -t 525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego-vm:karaf-vm .
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.ECS_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ECS_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: pat-lego-vm
+          IMAGE_TAG: karaf-vm
+        run: |
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: Deploy to Amazon ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: karaf-system/system.core/aws.image/src/main/environments/ecs/docker/taskdefinitions/pat-lego-vm-v1.json
+          service: karaf-service-v2
+          cluster: pat-lego-vm
+          wait-for-service-stability: true
