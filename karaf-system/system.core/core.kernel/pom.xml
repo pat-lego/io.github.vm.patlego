@@ -140,7 +140,7 @@
     </profile>
 
     <profile>
-      <id>ecs-build</id>
+      <id>aws-build</id>
       <build>
         <plugins>
           <plugin>
@@ -153,7 +153,7 @@
                   <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${basedir}/target/assembly</outputDirectory>
+                  <outputDirectory>/home/runner/work/io.github.vm.patlego/io.github.vm.patlego</outputDirectory>
                   <resources>
                     <resource>
                       <directory>src/main/environments/ecs/docker</directory>
@@ -169,7 +169,7 @@
                   <goal>copy-resources</goal>
                 </goals>
                 <configuration>
-                  <outputDirectory>${basedir}/target/assembly/patlego.vm/etc</outputDirectory>
+                  <outputDirectory>/home/runner/work/io.github.vm.patlego/io.github.vm.patlego/patlego.vm/etc</outputDirectory>
                   <resources>
                     <resource>
                       <directory>src/main/environments/ecs/features</directory>
@@ -193,7 +193,7 @@
             </executions>
             <configuration>
               <includes>
-                <include>${basedir}/target/assembly/patlego.vm/etc/users.properties</include>
+                <include>/home/runner/work/io.github.vm.patlego/io.github.vm.patlego/patlego.vm/etc/users.properties</include>
               </includes>
               <replacements>
                 <replacement>
@@ -228,7 +228,7 @@
                   <name>525939336058.dkr.ecr.ca-central-1.amazonaws.com/pat-lego-vm:karaf-vm</name>
                   <alias>dockerfile</alias>
                   <build>
-                    <dockerFile>${project.build.directory}/assembly/Karaf.Dockerfile</dockerFile>
+                    <dockerFile>/home/runner/work/io.github.vm.patlego/io.github.vm.patlego/Karaf.Dockerfile</dockerFile>
                   </build>
                 </image>
               </images>

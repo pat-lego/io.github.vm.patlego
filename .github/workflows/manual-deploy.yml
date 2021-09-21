@@ -20,7 +20,7 @@ jobs:
           java-version: "11"
           architecture: x64
       - name: Get System
-        run: mvn dependency:get -DgroupId=io.github.vm.patlego -DartifactId=core.kernel -Dversion=1.0-SNAPSHOT -Dpackaging=zip -DremoteRepositories=patlego-core::::https://maven.pkg.github.com/pat-lego/io.github.vm.patlego -Ddest=.
+        run: mvn --settings settings.xml dependency:get -DgroupId=io.github.vm.patlego -DartifactId=core.kernel -Dversion=1.0-SNAPSHOT -Dpackaging=zip -DremoteRepositories=patlego-core::::https://maven.pkg.github.com/pat-lego/io.github.vm.patlego -Ddest=.
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           KARAF_PWD: ${{secrets.KARAF_PWD}}
@@ -28,11 +28,22 @@ jobs:
           PACKAGES_HTML_TOKEN: ${{secrets.PACKAGES_HTML_TOKEN}}
           PACKAGES_CORE_TOKEN: ${{secrets.PACKAGES_CORE_TOKEN}}
           PACKAGES_IOT_TOKEN: ${{secrets.PACKAGES_IOT_TOKEN}}
-      - name: Shell Script 1
+      - name: Unzip and Prepare
         run: | 
-          ls
-          pwd
+          # /home/runner/work/io.github.vm.patlego/io.github.vm.patlego
+
+          # Unzip Karaf
           unzip core.kernel-1.0-SNAPSHOT.zip
+
+          # Move unzipped folder
+          mv /home/runner/work/io.github.vm.patlego/io.github.vm.patlego/patlego.vm /home/runner/work/io.github.vm.patlego/io.github.vm.patlego/patlego.vm-wrapper
+          cd /home/runner/work/io.github.vm.patlego/io.github.vm.patlego/patlego.vm-wrapper
+          mv patlego.vm /home/runner/work/io.github.vm.patlego/io.github.vm.patlego
+          cd /home/runner/work/io.github.vm.patlego/io.github.vm.patlego
+
+          ls
+      - name: Build Image
+        run: mvn -pl core.kernel -Pprofile aws-build
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           KARAF_PWD: ${{secrets.KARAF_PWD}}
