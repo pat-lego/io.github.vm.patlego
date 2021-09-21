@@ -3,7 +3,6 @@ on:
   workflow_dispatch
 jobs:
   build_and_deploy:
-    needs: migrate_db
     name: Deploy new container to ECS
     runs-on: ubuntu-latest
     steps:
