@@ -43,7 +43,7 @@ jobs:
 
           ls
       - name: Build Image
-        run: mvn -pl core.kernel -Pprofile aws-build
+        run: mvn --projects core.kernel -Pprofile aws-build
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           KARAF_PWD: ${{secrets.KARAF_PWD}}
