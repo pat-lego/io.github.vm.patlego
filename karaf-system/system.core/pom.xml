@@ -8,20 +8,17 @@
   </parent>
   <groupId>io.github.vm.patlego</groupId>
   <artifactId>system.core</artifactId>
-
   <packaging>pom</packaging>
-
   <properties>
     <website.version>1.0-SNAPSHOT</website.version>
     <html.version>1.0-SNAPSHOT</html.version>
     <iot.version>1.0-SNAPSHOT</iot.version>
   </properties>
-
   <modules>
     <module>core.features</module>
     <module>core.kernel</module>
+    <module>aws.image</module>
   </modules>
-
   <build>
     <pluginManagement>
       <plugins>
@@ -33,7 +30,6 @@
       </plugins>
     </pluginManagement>
   </build>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
