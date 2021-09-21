@@ -23,7 +23,7 @@ jobs:
           java-version: "11"
           architecture: x64
       - name: Run Maven
-        run: mvn --settings settings.xml clean deploy --file karaf-system/pom.xml -pl -system.core/aws.image -Dpostgres.ecs.password=$KARAF_DB_PWD -Dkaraf.pwd=$KARAF_PWD -Dmaven.test.skip=true -Pecs-build
+        run: mvn --settings settings.xml clean deploy --file karaf-system/pom.xml -pl -io.github.vm.patlego:aws.image -Dpostgres.ecs.password=$KARAF_DB_PWD -Dkaraf.pwd=$KARAF_PWD -Dmaven.test.skip=true -Pecs-build
         env:
           KARAF_DB_PWD: ${{secrets.KARAF_DB_PWD}}
           KARAF_PWD: ${{secrets.KARAF_PWD}}
