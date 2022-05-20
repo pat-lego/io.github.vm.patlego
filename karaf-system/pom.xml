@@ -39,7 +39,7 @@
     <commons-io.version>2.8.0</commons-io.version>
     <commons-text.version>1.9</commons-text.version>
     <aries.jpa.version>2.7.2</aries.jpa.version>
-    <google-gson.version>2.8.6</google-gson.version>
+    <google-gson.version>2.8.9</google-gson.version>
     <hibernate-types.version>2.10.3</hibernate-types.version>
     <jsonpath.version>2.5.0</jsonpath.version>
   </properties>
